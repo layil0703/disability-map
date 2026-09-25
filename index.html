@@ -1,0 +1,2141 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>勞保失能給付標準｜互動人體圖 — 安欣理賠顧問</title>
+<meta name="description" content="勞保失能給付標準 221 項互動查詢：點人體部位看失能等級、給付日數與試算金額，附關節角度、手指足趾切斷等示範。安欣理賠顧問製作。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F7F9FB; --card:#FFFFFF; --ink:#1E2B38; --sub:#5A6B7A;
+  --line:#DCE4EB; --navy:#234E70; --navy-soft:#EAF1F7;
+  --seal:#C0392B; --seal-soft:#FBEEEC;
+  --g1:#B02A21; --g2:#C2571A; --g3:#A8790A; --g4:#2F6B8F; --g5:#6B7684;
+  --radius:14px;
+  font-size:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:'Noto Sans TC',"Microsoft JhengHei",sans-serif;line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 16px 64px}
+
+header.top{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 16px;border-bottom:3px double var(--navy);padding-bottom:14px;margin-bottom:16px}
+.brand{font-size:.8rem;letter-spacing:.35em;color:var(--seal);font-weight:700}
+h1{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(1.4rem,3.2vw,2rem);color:var(--navy)}
+.law-ref{font-size:.78rem;color:var(--sub);margin-left:auto}
+
+.controls{display:grid;grid-template-columns:1fr auto auto;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;align-items:end}
+@media(max-width:640px){.controls{grid-template-columns:1fr}}
+.ctl label{display:block;font-size:.75rem;font-weight:700;color:var(--sub);letter-spacing:.08em;margin-bottom:4px}
+.ctl input[type=number]{width:100%;min-width:180px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;font-size:1rem;font-family:inherit}
+.ctl input[type=number]:focus{outline:2px solid var(--navy);border-color:var(--navy)}
+.seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{padding:9px 16px;background:#fff;border:0;font:inherit;font-size:.9rem;cursor:pointer;color:var(--sub)}
+.seg button.on{background:var(--navy);color:#fff;font-weight:700}
+.seg button:focus-visible{outline:2px solid var(--seal);outline-offset:-2px}
+.day-salary{font-size:.78rem;color:var(--sub);grid-column:1/-1}
+.day-salary b{color:var(--seal)}
+
+.searchbar{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.searchbar input[type=search]{flex:1;min-width:220px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}
+.searchbar input:focus{outline:2px solid var(--navy);border-color:var(--navy)}
+
+/* 類別卡片選單 */
+.cat-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:8px;margin-bottom:16px;transition:opacity .15s}
+.cat-cards.hidden{display:none}
+.cat-card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px 10px;background:var(--card);border:1px solid var(--line);border-radius:12px;cursor:pointer;text-align:center;transition:border-color .15s,background .15s,transform .1s}
+.cat-card:hover{border-color:var(--seal);background:var(--seal-soft)}
+.cat-card:active{transform:scale(.97)}
+.cat-card:focus-visible{outline:2px solid var(--navy);outline-offset:1px}
+.cat-card.sel{border-color:var(--seal);background:var(--seal-soft);box-shadow:0 0 0 1px var(--seal) inset}
+.cat-card svg{width:26px;height:26px;color:var(--navy);flex-shrink:0}
+.cat-card.sel svg{color:var(--seal)}
+.cat-card .cc-name{font-size:.78rem;font-weight:700;color:var(--ink);line-height:1.25}
+.cat-card .cc-count{font-size:.66rem;color:var(--sub)}
+.cat-card.sel .cc-count{color:var(--seal)}
+.icon-inline{width:1em;height:1em;vertical-align:-.15em;display:inline-block}
+
+/* 長條圖速查 */
+.bar-chart{width:100%;height:auto;display:block;font-family:inherit}
+.bar-row rect.track{fill:#EEF2F6}
+.bar-row rect.fill{transition:width .25s ease}
+.bar-row text{font-size:11px;fill:var(--ink)}
+.bar-row text.glabel{font-weight:700;text-anchor:end}
+.bar-row text.gval{font-size:10.5px;fill:var(--sub)}
+.bar-row:hover rect.fill{filter:brightness(1.08)}
+.searchbar select{padding:10px 12px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}
+
+.panel{min-width:0}
+
+/* 更多對照表（摺疊區） */
+.more-toggle{width:100%;display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);cursor:pointer;font:inherit;font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:0}
+.more-toggle:hover{border-color:var(--navy)}
+.more-toggle svg{width:18px;height:18px;transition:transform .2s;flex-shrink:0;margin-left:auto}
+.more-toggle.open svg{transform:rotate(180deg)}
+.more-toggle .mt-sub{font-weight:400;color:var(--sub);font-size:.78rem}
+@media(max-width:520px){.more-toggle .mt-sub{display:none}.more-toggle svg{margin-left:auto}}
+.more-body{overflow:hidden;max-height:0;transition:max-height .25s ease}
+.more-body.open{max-height:6000px}
+.more-body-inner{padding-top:14px}
+.cat-block{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:16px;overflow:hidden}
+.cat-head{display:flex;align-items:baseline;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line);background:var(--navy-soft)}
+.cat-no{font-family:'Noto Serif TC',serif;font-weight:900;color:var(--seal);font-size:1.05rem}
+.cat-head h3{font-family:'Noto Serif TC',serif;font-size:1.15rem;color:var(--navy)}
+.cat-head .cnt{margin-left:auto;font-size:.75rem;color:var(--sub)}
+.notes{padding:10px 18px;background:#FCFDFE;border-bottom:1px solid var(--line);font-size:.8rem;color:var(--sub)}
+.notes summary{cursor:pointer;font-weight:700;color:var(--navy);font-size:.8rem}
+.notes ul{margin:8px 0 4px 1.2em}
+.notes li{margin-bottom:3px}
+.grp-title{padding:10px 18px 4px;font-size:.8rem;font-weight:700;color:var(--seal);letter-spacing:.15em}
+/* 失能項目卡片列（取代表格，避免手機橫向被裁切） */
+.items-list{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:2px}
+.item-row{padding:11px 14px;border-bottom:1px solid #EEF2F6;background:#fff}
+.item-row:last-child{border-bottom:0}
+.item-row:hover{background:#FCFDFE}
+.item-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.item-id{font-weight:700;color:var(--navy);font-size:.82rem;font-variant-numeric:tabular-nums}
+.item-stats{margin-left:auto;display:flex;align-items:baseline;gap:10px;font-size:.82rem;white-space:nowrap}
+.item-days{color:var(--sub);font-variant-numeric:tabular-nums}
+.item-amt{color:var(--navy);font-weight:700;font-variant-numeric:tabular-nums}
+.item-desc{font-size:.88rem;color:var(--ink);line-height:1.55}
+.item-extra{margin-top:6px}
+.tag-cali{display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:5px;font-size:.75rem;padding:3px 9px;border-radius:999px;background:var(--navy-soft);color:var(--navy);font-weight:600}
+.tag-cali i{font-style:normal;font-weight:400;color:var(--sub)}
+.tag-cali.none{background:#F1F2F4;color:var(--sub);font-weight:400}
+
+/* 動畫示範 */
+.demo-btn{display:inline-flex;align-items:center;gap:5px;margin-left:6px;padding:3px 10px;border:1px solid var(--navy);border-radius:999px;background:#fff;color:var(--navy);font:inherit;font-size:.75rem;font-weight:700;cursor:pointer;vertical-align:middle}
+.demo-btn:hover{background:var(--navy);color:#fff}
+.demo-btn:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+.demo-btn svg{width:11px;height:11px}
+.demo-modal{position:fixed;inset:0;background:rgba(20,32,44,.55);display:none;align-items:center;justify-content:center;z-index:50;padding:14px}
+.demo-modal.open{display:flex}
+.demo-box{background:#fff;border-radius:16px;width:100%;max-width:540px;max-height:94vh;overflow:auto;padding:16px 18px 18px;box-shadow:0 18px 50px rgba(20,32,44,.3)}
+.demo-head{display:flex;align-items:flex-start;gap:10px}
+.demo-head h3{font-family:'Noto Serif TC',serif;color:var(--navy);font-size:1.08rem;line-height:1.4}
+.demo-close{margin-left:auto;border:0;background:#F1F4F7;border-radius:999px;width:32px;height:32px;font-size:1.2rem;line-height:1;cursor:pointer;color:var(--ink);flex-shrink:0}
+.demo-close:focus-visible{outline:2px solid var(--seal)}
+.demo-sub{font-size:.78rem;color:var(--sub);margin:4px 0 10px}
+.demo-seg{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.demo-seg button{padding:8px 4px;border:0;border-left:1px solid var(--line);background:#fff;font:inherit;font-size:.78rem;color:var(--sub);cursor:pointer;line-height:1.3}
+.demo-seg button:first-child{border-left:0}
+.demo-seg button.on{background:var(--navy);color:#fff;font-weight:700}
+.demo-seg button:focus-visible{outline:2px solid var(--seal);outline-offset:-2px}
+.demo-stage{margin:10px 0 4px;background:linear-gradient(180deg,#F7F9FB,#EDF2F6);border-radius:12px;border:1px solid var(--line)}
+.demo-svg{width:100%;height:auto;display:block}
+.demo-info{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;background:var(--navy-soft);font-size:.84rem}
+.demo-info .di-desc{flex-basis:100%;color:var(--ink)}
+.demo-info .di-num{margin-left:auto;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums}
+.demo-disc{font-size:.72rem;color:var(--sub);margin-top:8px}
+
+.g-legend{display:flex;flex-wrap:wrap;gap:10px;font-size:.7rem;color:var(--sub);margin-bottom:8px}.g-legend span{display:flex;align-items:center;gap:4px}.g-legend i{width:10px;height:10px;border-radius:3px}
+.g-acts{grid-column:1/-1;display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.g-act{display:flex;flex-direction:column;align-items:center;gap:1px;font-size:.62rem;line-height:1.2;text-align:center}
+.g-act svg{width:30px;height:30px;padding:4px;border-radius:9px;border:1.5px solid}.g-act em{font-style:normal;color:var(--ink)}.g-act b{font-weight:700;font-size:.58rem}
+.g-extra{grid-column:1/-1;font-size:.68rem;color:#B02A21;font-weight:700}
+.g-panels{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:8px}.g-panels svg{width:150px!important;max-width:47%!important;margin:0!important;background:rgba(255,255,255,.04);border-radius:8px}
+
+.demo-seg.dim{opacity:.4;pointer-events:none}
+.demo-meas{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;margin-top:8px}.demo-meas .g-num input{width:64px}.g-hint{font-style:normal;font-size:.7rem;color:var(--sub)}
+.g-calc{background:#fff;border:1px dashed var(--navy);border-radius:8px;padding:6px 8px;margin-bottom:4px}
+.d3-lbl.gh{color:#2F6B8F;font-weight:500;font-size:11px}
+.ic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}@media(max-width:560px){.ic-grid{grid-template-columns:1fr}}
+.ic{border:1px solid var(--line);border-radius:10px;padding:9px 11px;background:#fff;font-size:.76rem;line-height:1.55;color:var(--ink)}
+.ic h4{font-size:.78rem;color:var(--navy);margin-bottom:4px}.ic-my{background:#FFF7E6;border-color:#E8C468}.ic-my h4{color:#8A5A00}.ic ul{margin-left:1.1em}
+.ic-tl{position:relative;height:30px;margin:2px 0 4px}.ic-tlbar{position:absolute;left:0;right:0;top:6px;height:6px;border-radius:3px;background:#E3E9EF;overflow:hidden}.ic-tlbar i{display:block;height:100%;background:var(--seal)}
+.ic-tl span{position:absolute;top:15px;transform:translateX(-50%);font-size:.64rem;color:var(--sub);white-space:nowrap}.ic-tl span.on{color:var(--seal);font-weight:700}
+
+.g-row{display:flex;align-items:center;gap:6px 10px;flex-wrap:wrap;margin:6px 0;font-size:.8rem}
+.g-lab{color:var(--sub);font-weight:700;min-width:60px}
+.g-seg{display:flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.g-seg button{border:0;border-left:1px solid var(--line);background:#fff;padding:6px 9px;font:inherit;font-size:.74rem;color:var(--sub);cursor:pointer}
+.g-seg button:first-child{border-left:0}.g-seg button.on{background:var(--navy);color:#fff;font-weight:700}
+.g-chk{display:inline-flex;align-items:flex-start;gap:5px;font-size:.78rem;margin:3px 10px 3px 0;cursor:pointer;line-height:1.4}
+.g-rng input{flex:1;min-width:120px;accent-color:var(--seal)}.g-rng b{color:var(--seal);font-size:1rem;min-width:70px;text-align:right;font-variant-numeric:tabular-nums}
+.g-num{display:inline-flex;align-items:center;gap:5px;font-size:.78rem;margin:3px 8px 3px 0}.g-num input{width:72px;padding:5px 7px;border:1px solid var(--line);border-radius:8px;font:inherit}.g-num select{padding:5px 7px;border:1px solid var(--line);border-radius:8px;font:inherit;background:#fff}.g-num i{font-style:normal;color:var(--sub);font-size:.72rem}
+.g-tgs{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0}
+.g-tg{border:1px solid var(--line);border-radius:10px;background:#fff;padding:5px 9px;font:inherit;font-size:.74rem;cursor:pointer;color:var(--ink);text-align:left;line-height:1.35}
+.g-tg.on{border-color:var(--seal);background:var(--seal-soft);color:var(--seal);font-weight:700}
+.g-vis{background:linear-gradient(180deg,#F7F9FB,#EDF2F6);border:1px solid var(--line);border-radius:12px;margin:10px 0 4px;padding:10px}
+.g-vis.dark{background:radial-gradient(ellipse at 50% 40%,#2A3B4B,#141D26);border-color:#2A3B4B}.g-vis.dark .g-cap{color:#C9D6E2}
+.g-vis svg{display:block;width:100%;max-width:380px;margin:0 auto;height:auto}
+.g-cap{font-size:.72rem;color:var(--sub);text-align:center;margin-top:6px}
+.g-ladder{display:flex;flex-direction:column;gap:6px}
+.g-lrow{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:center;text-align:left;border:1px solid var(--line);border-radius:10px;background:#fff;padding:8px 10px;cursor:pointer;font:inherit}
+.g-lrow.on{border-color:var(--seal);background:var(--seal-soft);box-shadow:0 0 0 1px var(--seal) inset}
+.g-ln{font-weight:700;font-size:.84rem;color:var(--ink)}.g-ln small{display:block;font-weight:400;font-size:.7rem;color:var(--sub)}
+.g-bars{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr;gap:3px 8px;font-size:.66rem;color:var(--sub);align-items:center}
+.g-bars i{font-style:normal}.g-bars em{height:6px;background:#E3E9EF;border-radius:4px;overflow:hidden;display:block}.g-bars s{display:block;height:100%;background:#2E7D4F;text-decoration:none}
+.g-eyes{display:grid;grid-template-columns:1fr 1fr;gap:10px}.g-eye{text-align:center;font-size:.78rem}.g-eye i{font-style:normal;color:var(--sub);font-size:.72rem}
+.g-chart{background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 4px;margin:4px 0;position:relative;overflow:hidden;font-family:Georgia,serif;font-weight:700;color:#111;line-height:1.3}
+.g-chart span{display:block}.g-chart .l1{font-size:30px}.g-chart .l2{font-size:21px}.g-chart .l3{font-size:15px}.g-chart .l4{font-size:11px}.g-chart .l5{font-size:8px}
+.g-chart.blind{background:#111}.g-chart.blind div{visibility:hidden}
+.g-chart.hemi::after{content:'';position:absolute;top:0;bottom:0;left:50%;right:0;background:#1a1a1a}
+.g-chart.dip div{text-shadow:7px 3px 0 rgba(0,0,0,.35)}.g-chart.glare::before{content:'';position:absolute;inset:0;background:radial-gradient(circle,rgba(255,255,235,.95),rgba(255,255,235,.3));z-index:1}
+.g-organ svg{max-width:300px}.g-organ .ozone{pointer-events:none}
+@keyframes gwob{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}.g-wob{animation:gwob 1.6s ease-in-out infinite}
+@keyframes gpip{0%,100%{transform:rotate(0)}50%{transform:rotate(55deg)}}.g-pip{transform-origin:108px 84px;animation:gpip 2.4s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.g-wob,.g-pip{animation:none}}
+
+.fg-stage.xray{background:radial-gradient(ellipse at 50% 40%,#2A3B4B,#141D26);border-color:#2A3B4B}
+.fg-stage.xray text{fill-opacity:1}
+
+.d3-hint{top:auto!important;bottom:8px}
+.demo-stage.xray{background:radial-gradient(ellipse at 50% 40%,#2A3B4B,#141D26)}
+.demo-stage.xray .d3-read b{color:#fff}.demo-stage.xray .d3-read span,.demo-stage.xray .d3-hint,.demo-stage.xray .d3-lbl.el{color:#C9D6E2}
+
+.demo-scope{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:8px 0 0;font-size:.76rem}
+.demo-scope>span{color:var(--sub);font-weight:700}
+.demo-scope>div{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.demo-scope button{border:0;background:#fff;padding:5px 10px;font:inherit;font-size:.74rem;color:var(--sub);cursor:pointer}
+.demo-scope button.on{background:var(--navy);color:#fff;font-weight:700}
+.demo-scope.dim{opacity:.45}
+.demo-poserow{display:flex;align-items:flex-start;gap:10px;margin-top:8px}
+.demo-poserow .demo-pose{margin:0;flex:1}
+.xr-toggle{display:flex;align-items:center;gap:5px;font-size:.76rem;font-weight:700;color:var(--navy);white-space:nowrap;cursor:pointer}
+.d3-lbl.deg{color:var(--navy);background:rgba(255,255,255,.92);font-size:11.5px}
+.d3-read span{display:block;max-width:190px}
+
+.ll-ctl{display:flex;align-items:center;gap:10px;font-size:.84rem;margin-top:4px}
+.ll-ctl label{color:var(--sub);white-space:nowrap}
+.ll-ctl input{flex:1;accent-color:var(--seal)}
+.ll-ctl b{font-size:1.2rem;color:var(--seal);font-variant-numeric:tabular-nums}
+.ll-marks{position:relative;height:14px;margin:0 52px 0 96px;font-size:.66rem;color:var(--sub)}
+.ll-marks span{position:absolute;transform:translateX(-50%)}
+
+.fg-stage{background:linear-gradient(180deg,#F7F9FB,#EDF2F6);border:1px solid var(--line);border-radius:12px;margin:10px 0 8px}
+#fgSvg,#tfSvg,#llSvg{width:100%;max-width:340px;display:block;margin:0 auto}
+.fg{cursor:pointer;outline:none}
+.fg:focus-visible .fg-hit{stroke:#234E70;stroke-width:2;stroke-dasharray:3 3}
+.fg-chips{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.fg-chip{border:1px solid var(--line);border-radius:10px;background:#fff;padding:6px 2px;font:inherit;cursor:pointer;line-height:1.3;color:var(--ink);text-align:center}
+.fg-chip b{display:block;font-size:.8rem}
+.fg-chip i{font-style:normal;color:var(--sub);font-size:.64rem;display:block}
+.fg-chip:focus-visible{outline:2px solid var(--navy);outline-offset:1px}
+.fg-chip[data-lv="1"]{border-color:#A8790A;background:#FBF4E4}.fg-chip[data-lv="1"] i{color:#8A6308}
+.fg-chip[data-lv="2"]{border-color:#C2571A;background:#FBEDE4}.fg-chip[data-lv="2"] i{color:#A04513}
+.fg-chip[data-lv="3"]{border-color:#B02A21;background:#FBEBEA}.fg-chip[data-lv="3"] i{color:#B02A21}
+.fg-tools{display:flex;align-items:center;gap:10px;margin:10px 0;font-size:.82rem;flex-wrap:wrap}
+.fg-tools label{display:flex;align-items:center;gap:6px;cursor:pointer}
+.fg-tools button{margin-left:auto;border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 12px;font:inherit;font-size:.76rem;cursor:pointer;color:var(--navy)}
+.fg-legend{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;font-size:.72rem;color:var(--sub);margin-bottom:10px;line-height:1.45}
+.fg-legend>span{display:flex;gap:6px;align-items:flex-start}
+.fg-legend i{width:12px;height:12px;border-radius:3px;flex-shrink:0;margin-top:2px}
+@media(max-width:440px){.fg-legend{grid-template-columns:1fr}}
+.fg-result{display:flex;flex-direction:column;gap:8px}
+.fg-item{background:var(--navy-soft);border-radius:10px;padding:10px 12px;font-size:.84rem}
+.fg-item-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.fg-item-top .di-num{margin-left:auto;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums}
+.fg-tag{font-size:.7rem;color:var(--navy);border:1px solid var(--navy);border-radius:999px;padding:0 7px}
+.fg-note{font-size:.76rem;background:#FFF7E6;border:1px solid #E8C468;border-radius:8px;padding:8px 10px;color:#5A4A1E;line-height:1.6}
+.fg-empty{font-size:.82rem;color:var(--sub);text-align:center;padding:10px}
+
+.demo-jseg{display:flex;gap:6px;margin:0 0 8px}
+.demo-jseg button{flex:1;padding:7px 6px;border:1px solid var(--line);border-radius:999px;background:#fff;font:inherit;font-size:.8rem;font-weight:700;color:var(--navy);cursor:pointer}
+.demo-jseg button.on{border-color:var(--seal);background:var(--seal-soft);color:var(--seal)}
+.demo-jseg button:focus-visible{outline:2px solid var(--navy);outline-offset:1px}
+.demo-pose{font-size:.76rem;color:var(--sub);margin:8px 0 0}
+
+.demo3d{position:relative}
+.demo3d canvas{display:block;width:100%;height:auto;touch-action:pan-y;cursor:grab;border-radius:12px}
+.demo3d canvas.grab{cursor:grabbing}
+.d3-lbl{position:absolute;transform:translate(-50%,-50%);font-size:12.5px;font-weight:700;white-space:nowrap;pointer-events:none;padding:2px 9px;border-radius:999px;background:rgba(255,255,255,.88);box-shadow:0 1px 3px rgba(30,43,56,.12)}
+.d3-lbl.av{color:#2E7D4F}.d3-lbl.lo{color:#C0392B}
+.d3-lbl.el{color:var(--sub);font-weight:500;background:transparent;box-shadow:none}
+.d3-read{position:absolute;right:14px;top:10px;text-align:right;pointer-events:none}
+.d3-read b{display:block;font-family:'Noto Serif TC',serif;font-size:1.7rem;color:var(--navy);font-variant-numeric:tabular-nums;line-height:1.1}
+.d3-read span{font-size:.7rem;color:var(--sub)}
+.d3-lock{position:absolute;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;background:#C0392B;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.d3-lock.pulse{animation:d3lock .7s ease-out}
+@keyframes d3lock{from{box-shadow:0 0 0 0 rgba(192,57,43,.55)}to{box-shadow:0 0 0 16px rgba(192,57,43,0)}}
+.d3-hint{position:absolute;left:12px;top:10px;font-size:.68rem;color:var(--sub);pointer-events:none}
+.demo3d[hidden],#demoSvgWrap[hidden],.d3-lbl[hidden],.d3-lock[hidden]{display:none}
+@media(max-width:420px){.demo-seg button{font-size:.72rem}}
+td.id{font-weight:700;color:var(--navy);white-space:nowrap;font-variant-numeric:tabular-nums}
+td.desc{min-width:180px}
+td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+td.amt{text-align:right;white-space:nowrap;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums}
+.badge{display:inline-block;padding:2px 9px;border-radius:999px;color:#fff;font-size:.75rem;font-weight:700;white-space:nowrap}
+.b1{background:var(--g1)}.b2{background:var(--g2)}.b3{background:var(--g3)}.b4{background:var(--g4)}.b5{background:var(--g5)}
+.lifelong{display:inline-block;margin-left:6px;font-size:.68rem;color:var(--seal);border:1px solid var(--seal);border-radius:4px;padding:0 4px;white-space:nowrap}
+
+.ref-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin-top:4px}
+.ref-card h3{font-family:'Noto Serif TC',serif;color:var(--navy);font-size:1rem;margin-bottom:8px}
+.ref-card p.small,.footer-note{font-size:.75rem;color:var(--sub);margin-top:10px}
+.footer-note a{color:var(--navy)}
+.empty{padding:40px;text-align:center;color:var(--sub);background:var(--card);border:1px dashed var(--line);border-radius:var(--radius)}
+mark{background:#FFE9A8;padding:0 1px}
+
+/* 臟器示意圖 */
+.organ-map{padding:12px 18px 6px;border-bottom:1px solid var(--line);background:#FCFDFE}
+.organ-map p{font-size:.75rem;color:var(--sub);margin-bottom:4px}
+svg.organs{width:100%;max-width:430px;height:auto;display:block;margin:0 auto}
+.ozone{cursor:pointer}
+.ozone .org{stroke:#7E93A6;stroke-width:1.2;transition:all .15s}
+.ozone text{font-size:11.5px;font-weight:700;fill:var(--ink);pointer-events:none}
+.ozone:hover .org,.ozone.sel .org{stroke:var(--seal);stroke-width:2.2;filter:drop-shadow(0 0 3px rgba(192,57,43,.45))}
+.ozone.sel text{fill:var(--seal)}
+.ochip rect{fill:#fff;stroke:var(--line)}
+.ochip:hover rect,.ochip.sel rect{stroke:var(--seal);fill:var(--seal-soft)}
+.organ-reset{display:inline-block;margin:6px 0 4px;padding:4px 12px;border:1px solid var(--navy);border-radius:999px;background:#fff;color:var(--navy);font:inherit;font-size:.78rem;font-weight:700;cursor:pointer}
+.organ-reset:hover{background:var(--navy-soft)}
+
+/* 心肺肝 審核基準詳解 */
+.crit-wrap{margin:0 18px 12px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#FCFDFE}
+.crit-head{padding:9px 14px;background:var(--navy-soft);font-size:.82rem;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:8px}
+.crit-body{padding:2px 14px 10px}
+.crit-grade{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+.crit-grade:first-child{margin-top:6px;padding-top:0;border-top:0}
+.crit-grade-title{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.crit-mode{font-size:.68rem;font-weight:700;padding:1px 8px;border-radius:999px}
+.crit-mode.all{background:#FBEEEC;color:var(--seal)}
+.crit-mode.any{background:#E9F1EA;color:#2E7D4F}
+.crit-list{list-style:none;margin-left:0;font-size:.83rem;color:var(--ink)}
+.crit-list li{position:relative;padding:2px 0 2px 20px}
+.crit-list.all li::before{content:'✓';position:absolute;left:0;color:var(--seal);font-weight:700}
+.crit-list.any li::before{content:'○';position:absolute;left:0;color:#2E7D4F;font-weight:700}
+.crit-single{font-size:.83rem;color:var(--ink);padding-left:2px}
+.crit-ref{margin-top:8px}
+.crit-ref summary{cursor:pointer;font-size:.76rem;color:var(--navy);font-weight:700}
+table.mini{width:100%;border-collapse:collapse;font-size:.76rem;margin-top:6px}
+table.mini th,table.mini td{border:1px solid var(--line);padding:4px 7px;text-align:center}
+table.mini th{background:var(--navy-soft);color:var(--navy)}
+.crit-interpret{margin-top:10px;padding:10px 12px;background:#FFF7E6;border:1px solid #E8C468;border-radius:8px;font-size:.78rem;color:#5A4A1E;line-height:1.6;display:flex;align-items:flex-start;gap:8px}
+.crit-interpret b{color:#8A5A00}
+.crit-interpret svg{color:#B8860B}
+table.param{width:100%;border-collapse:collapse;font-size:.75rem;margin-top:8px}
+table.param th,table.param td{border:1px solid var(--line);padding:5px 7px;text-align:left;vertical-align:top}
+table.param th{background:var(--navy-soft);color:var(--navy);font-size:.72rem}
+
+/* 速查表 */
+table.qref{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:8px}
+table.qref th{font-size:.72rem;color:var(--sub);text-align:right;font-weight:700;padding:7px 10px;border-bottom:1.5px solid var(--line);white-space:nowrap}
+table.qref th:first-child,table.qref td:first-child{text-align:left}
+table.qref td{padding:6px 10px;border-bottom:1px solid #EEF2F6;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+table.qref tr:last-child td{border-bottom:0}
+table.qref td.new{font-weight:700;color:var(--navy)}
+.qref-wrap{overflow-x:auto}
+.ref-flex{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px}
+@media(max-width:880px){.ref-flex{grid-template-columns:1fr}}
+.mini-input{display:flex;align-items:center;gap:8px;margin-top:6px;flex-wrap:wrap}
+.mini-input label{font-size:.78rem;font-weight:700;color:var(--sub)}
+.mini-input input{width:150px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;font:inherit}
+.mini-input input:focus{outline:2px solid var(--navy);border-color:var(--navy)}
+
+/* 對外版：提醒與聯絡 */
+.pub-note{display:flex;gap:14px;align-items:flex-start;background:var(--seal-soft);border:1px solid #EBC7C2;border-left:5px solid var(--seal);border-radius:10px;padding:12px 16px;margin:-4px 0 16px;font-size:.9rem;line-height:1.7}
+.pub-note b{color:var(--seal)}
+.pub-note a{color:var(--navy);font-weight:700;white-space:nowrap}
+.pub-cta{margin-top:28px;background:var(--navy);color:#fff;border-radius:var(--radius);padding:26px 24px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
+.pub-cta h2{font-family:'Noto Serif TC',serif;font-size:clamp(1.15rem,2.6vw,1.45rem);margin-bottom:6px}
+.pub-cta p{font-size:.92rem;line-height:1.75;color:#D8E4EE;max-width:40em}
+.pub-cta .motto{margin-top:10px;font-size:.8rem;color:#A9C0D3}
+.pub-cta a.go{display:inline-block;background:#fff;color:var(--navy);font-weight:700;text-decoration:none;padding:12px 22px;border-radius:999px;white-space:nowrap}
+.pub-cta a.go:hover{background:var(--seal-soft);color:var(--seal)}
+.pub-cta a.go:focus-visible,.pub-note a:focus-visible{outline:3px solid var(--seal);outline-offset:3px}
+@media(max-width:640px){.pub-cta{grid-template-columns:1fr}.pub-note{flex-direction:column;gap:4px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <span class="brand">安欣理賠顧問｜老劉理賠說</span>
+  <h1>勞保失能給付標準・互動人體圖</h1>
+  <span class="law-ref">依 111.3.30 修正「勞工保險失能給付標準」第三條附表</span>
+</header>
+
+<aside class="pub-note" role="note">
+  <div>這裡的等級和金額是<b>試算</b>，不是勞保局的核定結果。同樣的傷，診斷書怎麼寫、治療時間夠不夠，結果可能差一個等級以上。想知道自己的狀況，<a href="https://anxin-claims.com" target="_blank" rel="noopener">帶著診斷書來找我們</a>。</div>
+</aside>
+
+<section class="controls" aria-label="給付試算設定">
+  <div class="ctl">
+    <label for="salary">平均月投保薪資（元）</label>
+    <input type="number" id="salary" value="45800" min="0" step="100" inputmode="numeric">
+  </div>
+  <div class="ctl">
+    <label>事故類型</label>
+    <div class="seg" role="group" aria-label="事故類型">
+      <button id="btnOrd" class="on" type="button">普通事故（勞保）</button>
+      <button id="btnOcc" type="button">職業傷病（災保）</button>
+    </div>
+  </div>
+  <div class="ctl">
+    <label for="gradeFilter">等級篩選</label>
+    <select id="gradeFilter">
+      <option value="0">全部等級</option>
+    </select>
+  </div>
+  <div class="day-salary" id="daySalaryLine"></div>
+  <div class="day-salary" style="margin-top:2px">每項下方「強制險」標籤為經比對現行 115.2.25 強制險失能標準表後之同等級對照金額（新制，115.7.1起事故適用）；標示「無對應項目」者，代表強制險標準表中並無該項目（如心臟、肝臟障害多非交通事故直接病因）。商業意外險／團險因等級與編號結構不同，不列入逐項對照，請見下方「更多對照表」之等級速查。</div>
+</section>
+
+<div class="searchbar">
+  <input type="search" id="q" placeholder="搜尋失能狀態關鍵字，例如：失明、人工肛門、膝關節、缺損…" aria-label="搜尋失能項目">
+</div>
+
+<nav class="cat-cards" id="catCards" aria-label="失能種類快速選單"></nav>
+
+<main class="panel" id="panel"></main>
+
+<button class="more-toggle" id="moreToggle" type="button" aria-expanded="false">
+  <span>更多保險金額對照表</span>
+  <span class="mt-sub">失能等級日數／強制險新舊制／團險意外險百分比</span>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+</button>
+<div class="more-body" id="moreBody"><div class="more-body-inner">
+
+<section class="ref-card">
+  <h3>失能等級 × 給付日數速查</h3>
+  <svg class="bar-chart" id="refChart" viewBox="0 0 700 460" role="img" aria-label="失能等級與給付日數長條圖"></svg>
+  <p class="small">普通事故：勞工保險失能給付標準第 5 條（平均月投保薪資 ÷ 30 × 日數，勞保月投保薪資上限 45,800 元）。職業傷病：勞工職業災害保險及保護法之失能一次金日數（災保月投保薪資上限 72,800 元），即普通日數加給五成。111.4.30 前診斷之職災失能，適用勞保條例規定（普通日數加給 50%，日數相同）。</p>
+  <p class="small"><b>併合升等原則（標準第 5 條）：</b>符合兩項目以上按最高等級核定；其中兩項目以上均在第 14 級至第 1 級間者升一等級；均在第 8 級至第 1 級間者升二等級；均在第 5 級至第 1 級間者升三等級（升等後日數不得超過各項分別計算之合計額，最高第 1 級）。</p>
+  <p class="footer-note">資料來源：<a href="https://www.bli.gov.tw/0005867.html" target="_blank" rel="noopener">勞保局失能種類圖示說明</a>、勞工保險失能給付標準第三條附表（111.3.30 修正）。本工具為輔助試算與查詢之用，實際失能等級與核付金額以勞動部勞工保險局審定為準。◆ 安欣理賠顧問製作</p>
+</section>
+
+<div class="ref-flex">
+  <section class="ref-card">
+    <h3>強制險失能等級 × 給付金額速查</h3>
+    <p class="small" style="margin-top:0">依「強制汽車責任保險給付標準」第 3 條。<b style="color:var(--seal)">以事故發生日判斷適用版本</b>：115.7.1（含）以後發生之交通事故適用新制（115.5.29 修正）；115.6.30 以前事故適用舊制（101.3.2 修正）。</p>
+    <div class="qref-wrap"><table class="qref" id="caliTable"></table></div>
+    <svg class="bar-chart" id="caliChart" viewBox="0 0 700 420" role="img" aria-label="強制險新舊制給付金額比較長條圖" style="margin-top:10px"></svg>
+    <p class="small">新制同步調整：死亡給付 200 萬 → <b>300 萬</b>；每人每事故死亡＋失能＋傷害醫療合計上限 220 萬 → <b>320 萬</b>（傷害醫療維持 20 萬）。強制險失能標準表為獨立之 15 等級標準（現行 110.6.24 修正版 205 項），與勞保附表項目、等級認定不通用。併合升等原則與勞保同（升一、二、三等級規則）。</p>
+  </section>
+
+  <section class="ref-card">
+    <h3>團險／意外險／學平險 失能等級 × 給付百分比</h3>
+    <p class="small" style="margin-top:0">依「傷害保險單示範條款」附表：失能程度與保險金給付表（<b>11 等級 80 項</b>，與勞保、強制險之 15 等級標準不同，不可互相套用）。團體傷害險、個人意外險、學生團體保險（學平險）之失能保險金原則上均按投保保額乘以下列百分比計算，實際以各保單條款約定為準。</p>
+    <div class="mini-input">
+      <label for="ahSum">試算保額（元）</label>
+      <input type="number" id="ahSum" value="1000000" min="0" step="100000" inputmode="numeric">
+    </div>
+    <div class="qref-wrap"><table class="qref" id="ahTable"></table></div>
+    <p class="small">常見對照：第 1 級（如雙目失明、終身無工作能力之神經障害）100%；第 5 級（一上肢三大關節全失能等）60%；第 11 級（一手拇指喪失機能等）5%。學平險另有身故保險金與集體投保之約定保額，理賠時同以本表百分比計算。</p>
+  </section>
+</div>
+
+</div></div>
+
+<section class="pub-cta" aria-label="聯絡安欣理賠顧問">
+  <div>
+    <h2>看完還是不確定自己算哪一級？</h2>
+    <p>失能等級要把診斷書、檢查報告和治療過程放在一起看。資料帶來，老劉陪你一項一項對，先弄清楚該補什麼、再決定下一步。</p>
+    <p class="motto">安欣理賠顧問｜老劉理賠說・要做帶來好消息的藍鳥，也要帶給真實建議的烏鴉</p>
+  </div>
+  <a class="go" href="https://anxin-claims.com" target="_blank" rel="noopener">前往安欣理賠顧問官網</a>
+</section>
+
+</div>
+
+<script>
+/* ================= 資料層 ================= */
+const DAYS_ORD=[1200,1000,840,740,640,540,440,360,280,220,160,100,60,40,30];
+const DAYS_OCC=[1800,1500,1260,1110,960,810,660,540,420,330,240,150,90,60,45];
+const CN=['一','二','三','四','五','六','七','八','九','十','十一','十二','十三','十四','十五'];
+
+/* 強制險失能給付金額（萬元）：舊制 101.3.2 修正（115.6.30 以前事故）／新制 115.5.29 修正（115.7.1 起事故） */
+const CALI_OLD=[200,167,140,123,107,90,73,60,47,37,27,17,10,7,5];
+const CALI_NEW=[300,250,210,185,160,135,110,90,70,55,40,25,15,10,8];
+/* 強制險失能給付標準表（115.2.25 修正版）與勞保附表逐項比對後之例外清單：
+   多數項目經比對項次與失能狀態文字，強制險採「相同等級」認定，故預設以勞保等級直接查對照金額；
+   下列項目為確認強制險標準「無對應項目」或認定基準不同者，個別標註，不套用預設等級對照。 */
+const CALI_EXCEPT={
+  '6-9':'唾液減少（放射或化學治療後）非強制險列表項目',
+  '7-6':'心臟障害非強制險標準列表項目（交通事故通常非其直接病因）',
+  '7-7':'心臟障害非強制險標準列表項目（交通事故通常非其直接病因）',
+  '7-8':'心臟障害非強制險標準列表項目（交通事故通常非其直接病因）',
+  '7-9':'心臟障害非強制險標準列表項目（交通事故通常非其直接病因）',
+  '7-10':'心臟障害非強制險標準列表項目（交通事故通常非其直接病因）',
+  '7-11':'心臟障害非強制險標準列表項目（交通事故通常非其直接病因）',
+  '7-16':'肺臟移植非強制險標準列表項目',
+  '7-18':'肝臟障害非強制險標準列表項目（交通事故通常非其直接病因）',
+  '7-19':'肝臟障害非強制險標準列表項目（交通事故通常非其直接病因）',
+  '7-20':'肝臟障害非強制險標準列表項目（交通事故通常非其直接病因）',
+  '7-21':'肝臟障害非強制險標準列表項目（交通事故通常非其直接病因）',
+  '7-22':'肝臟障害非強制險標準列表項目（交通事故通常非其直接病因）',
+  '7-23':'肝臟障害非強制險標準列表項目（交通事故通常非其直接病因）',
+  '7-29':'腎臟移植非強制險標準列表項目',
+  '7-36':'強制險標準對膀胱機能喪失之細分方式不同（不區分是否裝置人工膀胱），建議個案逐項確認'
+};
+const CALI_GENDER={'9-1':{female:8,male:10}}; // 強制險現行仍按性別分級（女8／男10），勞保111.3.30起已統一為第8級
+/* 傷害保險單示範條款：失能程度與保險金給付表（11 等級）給付百分比 */
+const AH_PCT=[100,90,80,70,60,50,40,30,20,10,5];
+/* 15 等級對應的長條圖顏色（同 badgeCls 三級一組） */
+const GRADE_HEX=['var(--g1)','var(--g1)','var(--g1)','var(--g2)','var(--g2)','var(--g2)','var(--g3)','var(--g3)','var(--g3)','var(--g4)','var(--g4)','var(--g4)','var(--g5)','var(--g5)','var(--g5)'];
+/* 12 類失能種類的簡易線性圖示（24x24, stroke-based） */
+const CAT_ICONS={
+mind:'<path d="M8 4.2c-2 0-3.6 1.5-3.6 3.3 0 .7.2 1.3.6 1.8-1 .5-1.6 1.5-1.6 2.7 0 1.7 1.4 3 3.1 3h.2c.3 1.6 1.7 2.8 3.4 2.8h1.4c1.9 0 3.4-1.5 3.4-3.4V8.2C15.9 5.9 13.9 4.2 11.6 4.2H8Z"/><path d="M10 8v8M13.3 7.6v9"/>',
+nerve:'<circle cx="12" cy="5.5" r="2"/><path d="M12 7.5v3l-4 3v2.2M12 10.5l4 3v2.2"/><circle cx="8" cy="16.7" r="1.7"/><circle cx="16" cy="16.7" r="1.7"/>',
+eye:'<path d="M2.5 12S6 6.2 12 6.2 21.5 12 21.5 12 18 17.8 12 17.8 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3.1"/>',
+ear:'<path d="M8.2 13.2c0-4.1 2.4-8.2 6-8.2 3.1 0 5.2 2.6 5.2 5.7 0 2.5-1.5 4.1-3.1 5.1-1 .7-1.5 1.5-1.5 2.6 0 1.6-1.1 3.1-3.1 3.1-1.8 0-3.1-1.4-3.1-3.1"/><path d="M11.3 9.8c1 0 2.1.7 2.1 2.1s-1.1 1.9-1.1 2.9"/>',
+nose:'<path d="M12.3 4.2v10c0 1.6-1.1 2.7-2.7 2.7"/><path d="M9.4 16.9c0 1.8 1.4 3.2 3.2 3.2s3.2-1.4 3.2-3.2"/>',
+mouth:'<path d="M4 11.6c2.2 3.2 5.2 4.3 8 4.3s5.8-1.1 8-4.3"/><path d="M7.2 12.1c1.6 1.6 3.4 2.1 4.8 2.1s3.2-.5 4.8-2.1"/>',
+organ:'<path d="M12 7c-1.5-2.2-4.9-2.2-6.2.3-1.2 2.3-.2 4.6 1.7 6.6L12 18.5l4.5-4.6c1.9-2 2.9-4.3 1.7-6.6-1.3-2.5-4.7-2.5-6.2-.3Z"/>',
+trunk:'<rect x="9.3" y="2.6" width="5.4" height="3.1" rx="1.3"/><rect x="9.3" y="7" width="5.4" height="3.1" rx="1.3"/><rect x="9.3" y="11.4" width="5.4" height="3.1" rx="1.3"/><rect x="9.3" y="15.8" width="5.4" height="3.1" rx="1.3"/><rect x="9.3" y="20.2" width="5.4" height="2" rx="1"/>',
+head:'<circle cx="12" cy="7.6" r="5"/><path d="M9 12v2.1c0 1.1.9 2 2 2h2c1.1 0 2-.9 2-2V12"/><path d="M9 19.6h6"/>',
+skin:'<rect x="4.3" y="9.2" width="15.4" height="5.6" rx="2.8" transform="rotate(-15 12 12)"/><circle cx="9" cy="10.3" r=".65" transform="rotate(-15 12 12)"/><circle cx="15.2" cy="13.5" r=".65" transform="rotate(-15 12 12)"/>',
+arm:'<circle cx="7.2" cy="4.4" r="1.7"/><path d="M7.2 6.4v5.2c0 1.7 1.4 3.1 3.1 3.1h1"/><path d="M11.3 14.7h4.3c1.4 0 2.5 1.1 2.5 2.5s-1.1 2.5-2.5 2.5h-2.3"/>',
+leg:'<path d="M10.3 2.8h3.6l.5 8.4-1 6.2c-.2 1.2.7 2.3 1.9 2.3h2.6"/><path d="M10.3 2.8l-.5 8.4 1 6.2c.2 1.2-.7 2.3-1.9 2.3H6.5"/>'
+};
+function catIcon(k){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${CAT_ICONS[k]||''}</svg>`;}
+const ICON_WARN='<svg class="icon-inline" style="width:1.1em;height:1.1em;flex-shrink:0;margin-top:.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 2.5 20h19L12 3.5Z"/><path d="M12 10v4.3"/><circle cx="12" cy="17.3" r=".9" fill="currentColor" stroke="none"/></svg>';
+const ICON_CLIPBOARD='<svg class="icon-inline" style="width:1.05em;height:1.05em;margin-right:.3em;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4.5" width="14" height="17" rx="2"/><rect x="9" y="3" width="6" height="3" rx="1"/><path d="M8.5 11.5h7M8.5 15h7M8.5 18h4.5"/></svg>';
+
+/* items: [項目, 失能狀態, 等級, 終身無工作能力?] */
+const CATS=[
+{k:'mind',no:'1',name:'精神',notes:['須經治療二年以上，始得認定；審定時應綜合全部症狀，就永久喪失勞動能力、對日常生活或社會生活活動之影響及需他人扶助之情況，綜合判斷等級。','須由精神科專科醫師開具診斷書；失智症得由神經科專科醫師診斷出具；必要時保險人得另指定神經科、復健科、職業醫學科等專科醫師會同認定。','精神失能須經心理衡鑑或職能評估、「簡易智能狀態測驗（MMSE）」、「魏氏成人智力測驗（WAIS）」或「臨床失智評估量表（CDR）」等評估始可診斷——這些量表是用來佐證診斷成立的檢查工具，附表本身並未就各等級訂出對應的量表分數門檻，仍須綜合全部症狀認定等級，不能只看單一分數高低判斷等級。','憂鬱症所致之精神失能，須經 3 線（3 種）以上之抗憂鬱藥物治療後，仍遺存顯著失能者，始得診斷開具；申請時應加附最近 3 個月之 WAIS 及 MMSE 檢測結果。','失智症應加附最近 3 個月之 CDR 及 MMSE 檢測結果；未曾住院治療但已達終身無工作能力者，應加附最近 2 年之病歷影本。','精神失能同時併存中樞神經系統機能失能時，須綜合全部症狀定其失能等級。'],groups:[{t:'精神失能',items:[
+['1-1','精神遺存極度失能，終身無工作能力，為維持生命必要之日常生活活動，全須他人扶助，經常須醫療護理及專人周密照護者。',1,1],
+['1-2','精神遺存高度失能，終身無工作能力，為維持生命必要之日常生活活動之一部須他人扶助者。',2,1],
+['1-3','精神遺存顯著失能，終身無工作能力，為維持生命必要之日常生活活動尚可自理者。',3,1],
+['1-4','精神遺存顯著失能，終身僅能從事輕便工作，精神及身體之勞動能力較一般明顯低下者。',7,0],
+['1-5','醫學上可證明精神遺有失能，但通常無礙勞動者。',13,0]]}]},
+
+{k:'nerve',no:'2',name:'神經',notes:['須經治療六個月以上，始得認定；如經手術，須最後一次手術後六個月以上，始得認定（已達植物人狀態經查證屬實者不受此限）；併存失智症所致認知功能失能，適用精神失能審核原則認定。','須由神經科、神經外科或復健科專科醫師診斷開具失能診斷書；必要時保險人得另指定精神科或職業醫學科專科醫師會同認定。','診斷書常附「肢體肌力分級（0–5 級）」「巴金森氏症 Modified Hoehn-Yahr 分期」「失能評估 Modified Rankin Scale」等量表結果作為佐證資料（詳見下方參考表），但這些量表分數同樣不是附表直接訂定的等級門檻，仍須綜合意識狀態、行動能力、工作能力、大小便自理程度等全部症狀，比對「終身無工作能力／僅能從事輕便工作／通常無礙勞動」等等級描述後認定。','癲癇、頭痛、眩暈及平衡機能失能、外傷後疼痛症候群、脊神經根及週邊神經功能失能、一氧化碳中毒或缺氧後遺症等，另有個別審定細則。','脊髓失能依其損傷程度所致之運動、感覺、腸管、尿路、生殖器等失能，綜合症狀選用合適等級；中樞神經系統機能失能同時併存精神失能時，須綜合全部症狀定其失能等級。'],groups:[{t:'神經失能',ref:{title:'附：神經失能常用評估量表（僅為佐證資料，非附表直接訂定之等級門檻）',rows:[
+ ['Rankin 0','沒有症狀'],
+ ['Rankin 1','除症狀外無顯著失能，能執行所有日常活動'],
+ ['Rankin 2','輕度失能，無法執行之前所有活動，但能自理生活不須協助'],
+ ['Rankin 3','中度失能，需要一些幫助，但能獨立行走不須協助'],
+ ['Rankin 4','中重度失能，無法不依賴協助而獨立行走及照料自身所需'],
+ ['Rankin 5','重度失能，臥床、失禁，需持續照護及注意'],
+ ['Hoehn-Yahr 0','沒有症狀'],
+ ['Hoehn-Yahr 1','單側之症狀'],
+ ['Hoehn-Yahr 2','輕微之兩側症狀，姿態平穩正常'],
+ ['Hoehn-Yahr 3','日常生活已受一些限制，姿態稍微不平穩，不需他人協助'],
+ ['Hoehn-Yahr 4','可自行站立與慢慢行走，但大部分日常生活與工作有明顯限制'],
+ ['Hoehn-Yahr 5','若沒有人幫助，將完全依靠輪椅或終日臥床']
+]},items:[
+['2-1','中樞神經系統機能遺存極度失能，終身無工作能力，為維持生命必要之日常生活活動，全須他人扶助，經常須醫療護理及專人周密照護者。',1,1],
+['2-2','中樞神經系統機能之病變，引起截癱或偏癱，終身無工作能力，為維持生命必要之日常生活活動之一部須他人扶助者。',2,1],
+['2-3','中樞神經系統機能遺存顯著失能，終身無工作能力，為維持生命必要之日常生活活動尚可自理者。',3,1],
+['2-4','中樞神經系統機能遺存顯著失能，終身僅能從事輕便工作者。',7,0],
+['2-5','神經系統之病變，通常無礙勞動，但由醫學上可證明局部遺存頑固神經症狀者。',13,0]]}]},
+
+{k:'eye',no:'3',name:'眼',notes:['視力以萬國式視力表矯正後視力為準，須通過測盲（Malingering）檢查。','「失明」含眼球喪失、摘出，或僅能辨明暗、辨眼前一公尺內手動、五公分內指數。','視力、視野、調節或運動失能併存得提高等級，惟雙目最高第 2 級、一目最高第 8 級（另有眼瞼缺損者不在此限）。','須由醫學中心、區域醫院等評鑑合格醫院出具診斷（眼瞼部分除外）。'],groups:[
+{t:'眼球視力失能',items:[
+['3-1','雙目均失明者。',2,0],['3-2','雙目視力均減退至 0.02 以下，未達失明者。',3,0],['3-3','雙目視力均減退至 0.06 以下者。',5,0],['3-4','雙目視力均減退至 0.1 以下者。',7,0],
+['3-5','一目失明，他目視力減退至 0.02 以下，未達失明者。',3,0],['3-6','一目失明，他目視力減退至 0.06 以下者。',4,0],['3-7','一目失明，他目視力減退至 0.1 以下者。',6,0],['3-8','一目失明，他目視力減退至 0.4 以下者。',7,0],
+['3-9','雙目視力均減退至 0.4 以下者。',10,0],['3-10','一目失明者。',8,0],['3-11','一目視力減退至 0.02 以下，未達失明者。',9,0],['3-12','一目視力減退至 0.06 以下者。',10,0],['3-13','一目視力減退至 0.1 以下者。',11,0]]},
+{t:'視野失能',items:[['3-14','兩目均遺存半盲症，視野狹窄或視野變形者。',10,0],['3-15','一目遺存半盲症，視野狹窄或視野變形者。',14,0]]},
+{t:'調節或運動失能',items:[['3-16','兩眼眼球均遺存顯著調節機能失能或運動失能者。',12,0],['3-17','一眼眼球遺存顯著調節機能失能或運動失能者。',13,0],['3-18','眼肌麻痺，正面視發生複視，以致兩眼視引起高度頭痛、眩暈，對日常生活與勞動有顯著失能者。',13,0],['3-19','外傷引起高度之散瞳，且畏光流淚顯著，對於勞動有顯著之妨礙者。',13,0]]},
+{t:'眼瞼缺損失能',items:[['3-20','兩眼眼瞼均遺存顯著缺損者。',10,0],['3-21','一眼眼瞼遺存顯著缺損者。',12,0]]},
+{t:'眼瞼運動失能',items:[['3-22','兩眼眼瞼均遺存顯著運動失能者。',12,0],['3-23','一眼眼瞼遺存顯著運動失能者。',13,0]]}]},
+
+{k:'ear',no:'4',name:'耳',notes:['兩耳失能程度不同時綜合審定，不得各耳分別核定後再升等；如一耳適合第 4-3 項、他耳適合第 4-4 項，應綜合失能程度按第 4-2 項第七等級審定。','聽覺失能應依最近 3 個月內之二次「純音聽力檢查（PTA）」（二次應間隔 24 小時以上）、「語言聽閾測試（SRT）」及「聽性腦幹聽力檢查（ABR）」報告診斷；必要時得配合 Stenger test 詐聾測試或 SSEP 檢查。','檢測結果可信度查核：兩次 PTA 檢查，其 500Hz、1kHz、2kHz 各檢測值須均相差 10 分貝以內；較佳一次 PTA 與 ABR 或 SRT 之檢測數值須相差 15 分貝以內，始具可信度——超出容許誤差者，應要求重新檢測或另行鑑定，不宜逕採單次結果。','平均閾值＝精密聽力計檢查所得 500Hz、1kHz、2kHz 閾值之平均值；診斷失能時之平均閾值以兩次 PTA 檢測結果中較佳者為準。','內耳損傷引起平衡機能失能，準用神經失能審定原則；同一耳同時遺存聽覺失能與耳廓缺損，得依規定提高等級。'],groups:[
+{t:'內耳及中耳聽覺失能',items:[['4-1','兩耳聽力平均閾值在九十分貝以上者。',5,0],['4-2','兩耳聽力平均閾值在七十分貝以上者。',7,0],['4-3','一耳聽力平均閾值在九十分貝以上者。',10,0],['4-4','一耳聽力平均閾值在七十分貝以上者。',11,0]]},
+{t:'耳廓缺損失能',items:[['4-5','一側耳廓大部分缺損者（軟骨缺損二分之一以上）。',13,0]]}]},
+
+{k:'nose',no:'5',name:'鼻',notes:['「鼻部缺損」指鼻外部軟骨缺損二分之一以上；併存頭臉頸部缺損得提高等級。','「機能遺存顯著失能」指兩側鼻孔閉塞、鼻呼吸困難不能矯治，或兩側嗅覺完全喪失。'],groups:[{t:'缺損及機能失能',items:[['5-1','鼻部缺損者。',10,0],['5-2','鼻未缺損，而鼻機能遺存顯著失能者。',13,0]]}]},
+
+{k:'mouth',no:'6',name:'口',notes:['咀嚼、吞嚥或言語機能失能：最後一次手術（或放化療終止）後六個月始得認定（全喉切除之言語失能不在此限）。','喪失言語機能＝七種語音有五種以上不能構音；顯著失能＝三種以上不能構音。','牙齒失能以遭受意外傷害者為限；「缺」指完全脫落無殘根且無法再植，「損」指斷落牙冠二分之一以上。'],groups:[
+{t:'咀嚼、吞嚥及言語機能失能',items:[
+['6-1','喪失咀嚼、吞嚥及言語之機能者。',2,0],['6-2','喪失咀嚼、吞嚥或言語之機能者。',4,0],['6-3','咀嚼、吞嚥及言語之機能遺存顯著失能者。',5,0],['6-4','咀嚼、吞嚥或言語之機能遺存顯著失能者。',7,0],
+['6-5','言語中樞損傷所致之失語症，無法用言語或聲音與人溝通，屬表達或理解功能嚴重失能者。',4,0],
+['6-6','言語中樞損傷所致之失語症，語言理解、表達、說話清晰度、流暢性或發聲有困難，導致與人溝通有顯著困難，屬表達或理解功能輕度失能者。',7,0],
+['6-7','因綴音機能遺存顯著失能，只以言語表示對方不能通曉其語意者。',7,0],
+['6-8','頭部外傷、顎骨周圍組織損傷或舌之損傷而引起之味覺完全喪失者。',13,0],
+['6-9','經放射線或化學治療後致唾液減少，需佐以液體始能吞嚥者。',13,0]]},
+{t:'牙齒失能',items:[['6-10','因遭受意外傷害致牙齒缺損十齒以上者。',11,0],['6-11','因遭遇意外傷害而致牙齒缺損五齒以上者。',13,0]]}]},
+
+{k:'organ',no:'7',name:'胸腹部臟器',notes:['原則須經治療六個月以上（手術者自最後一次手術後六個月）始得認定；器質性切除或初次透析（洗腎）於出院日／初次透析日審定。個別臟器另有規定治療期間者，從其規定。','二種以上臟器同時併存失能，須綜合全部症狀衡量，依同一原則審定，不得按各臟器失能等級分別計算後合併提高等級。','心臟、肺臟、肝臟機能失能之等級審定，均採「多項客觀指標＋病史／併發症」複合基準，且各等級對「是否須全部符合」或「符合其一即可」的要求不同，不可只看單一指標（如只看 FEV1 或只看 LVEF）就判斷等級——詳見各臟器下方「審核基準詳解」。','胸腹部臟器遺存失能，須工作上確有明顯之阻害且由醫學上可予證明；未遺存明顯永久性機能失能者，不在給付範圍。'],groups:[
+{t:'胸腹部臟器（綜合機能）',items:[
+['7-1','胸腹部臟器機能遺存極度失能，終身無工作能力，為維持生命必要之日常生活活動，全須他人扶助，經常需要醫療護理及專人周密照護者。',1,1],
+['7-2','胸腹部臟器機能遺存高度失能，終身無工作能力，為維持生命必要之日常生活活動之一部須他人扶助者。',2,1],
+['7-3','胸腹部臟器機能遺存顯著失能，終身無工作能力，為維持生命必要之日常生活活動尚可自理者。',3,1],
+['7-4','胸腹部臟器機能遺存顯著失能，終身僅能從事輕便工作者。',7,0],
+['7-5','胸腹部臟器遺存失能者。',12,0]]},
+{t:'心臟',crit:[
+ {grade:1,badge:'一',baseLabel:'需同時符合下列 4 項（缺一不可）：',base:[
+   '符合「心臟機能損害分類標準」第四度',
+   '住院接受四週以上連續性機械輔助或靜脈注射強心藥物治療，且仍須持續上述治療',
+   '有無法控制之進行性慢性心臟衰竭',
+   '經核子醫學檢查測得左心室射出分率 LVEF ≦ 25%'
+ ]},
+ {grade:2,badge:'二',baseLabel:'需同時符合下列 4 項（與第一等級差異在治療週數）：',base:[
+   '符合「心臟機能損害分類標準」第四度',
+   '住院接受二週以上連續性機械輔助或靜脈注射強心藥物治療，且仍不定時須要上述治療',
+   '有無法控制之進行性慢性心臟衰竭',
+   'LVEF ≦ 25%'
+ ]},
+ {grade:3,badge:'三',baseLabel:'需同時符合下列 4 項（差異在住院治療未超過 2 週）：',base:[
+   '符合「心臟機能損害分類標準」第四度',
+   '不定期住院接受未超過二週之連續性機械輔助或靜脈注射強心藥物治療',
+   '有無法控制之進行性慢性心臟衰竭',
+   'LVEF ≦ 25%'
+ ]},
+ {grade:7,badge:'七',baseLabel:'須同時符合下列 2 項基礎條件：',base:[
+   '符合「心臟機能損害分類標準」第三、四度',
+   'LVEF ≦ 25%'
+ ],anyLabel:'並符合下列病因之一：',any:[
+   '冠狀動脈心臟病：有心肌梗塞病史或經冠狀動脈攝影術證實',
+   '瓣膜性心臟病：心臟超音波檢查證實中重度以上瓣膜異常（狹窄或逆流）',
+   '心肌疾病（擴大性、肥厚性、侷限性）：經心臟超音波檢查證實',
+   '動脈瘤（含主動脈剝離或非剝離性瘤達直徑 5 公分者）：經適當影像學檢查證實',
+   '其他心臟血管疾病：經心臟專科醫師診斷，評估判定有相當程度之心臟功能失能'
+ ]},
+ {grade:12,badge:'十二',baseLabel:'須同時符合下列 2 項基礎條件：',base:[
+   '符合「心臟機能損害分類標準」第二、三、四度',
+   'LVEF ＝ 26%–49%'
+ ],anyLabel:'並符合下列病因之一：',any:[
+   '冠狀動脈心臟病：心肌梗塞病史或冠狀動脈攝影術證實',
+   '瓣膜性心臟病：心臟超音波檢查證實中度以上瓣膜異常（狹窄或逆流）',
+   '心肌疾病（擴大性、肥厚性、侷限性）：經心臟超音波檢查證實',
+   '主動脈剝離：經適當影像學檢查證實',
+   '其他心臟血管疾病：經心臟專科醫師診斷，評估判定有相當程度之心臟功能失能'
+ ]}
+],ref:{title:'附：心臟機能損害分類標準（NYHA 概念對照）',rows:[
+   ['第一度','有心臟病，但無運動失能，平常活動下無疲倦、心悸、呼吸困難或心絞痛等症狀'],
+   ['第二度','有心臟病，且有輕度運動失能；休息或輕工作時無症狀，日常生活較重工作時有疲倦、心悸、呼吸困難或心絞痛'],
+   ['第三度','有心臟病，且有重度運動失能；休息時無症狀，但稍有活動即有疲倦、心悸、呼吸困難或心絞痛'],
+   ['第四度','有心臟病，且無法活動；靜止狀態下仍有疲倦、心悸、呼吸困難或心絞痛，活動時症狀加重']
+]},items:[
+['7-6','心臟機能遺存失能，無法活動，終身無工作能力，符合失能審核（一）者。',1,1],
+['7-7','心臟機能遺存失能，終身無工作能力，符合失能審核（二）者。',2,1],
+['7-8','心臟機能遺存失能，終身無工作能力，符合失能審核（三）者。',3,1],
+['7-9','心臟機能遺存失能，符合失能審核（四）者。',7,0],
+['7-10','心臟移植或心室輔助器植入者。',7,0],
+['7-11','心臟機能遺存失能，符合失能審核（五）者。',12,0]]},
+{t:'肺臟',crit:[
+ {grade:1,badge:'一',single:'呼吸系統疾病引起肺功能失能，需氧氣或人工呼吸器維持生命，未予氧氣時 PaO2 ≦ 50mmHg，終身無工作能力，日常生活限於病床之狀態。'},
+ {grade:2,badge:'二',anyLabel:'符合下列情況之一即可：',any:[
+   'FEV1 ＜ 25%',
+   'FEV1/FVC ≦ 25%',
+   '肺臟切除一側（含）以上',
+   '未予氧氣時 PaO2 ＝ 50–55mmHg，日常生活主要在病床，可以如廁、用餐、自家內行走，但須他人協助、照顧'
+ ]},
+ {grade:3,badge:'三',anyLabel:'符合下列情況之一即可：',any:[
+   'FEV1 ＝ 25–30%',
+   'FEV1/FVC ＝ 26–40%',
+   'DLCO/VA ＝ 25–30%',
+   '肺臟切除兩葉以上',
+   '未予氧氣時 PaO2 ＝ 50–60mmHg'
+ ]},
+ {grade:7,badge:'七',anyLabel:'符合下列情況之一即可：',any:[
+   'FEV1 ＝ 31–59%',
+   'FEV1/FVC ＝ 41–59%',
+   'DLCO/VA ＝ 31–59%',
+   '放射性肺炎兩葉以上'
+ ]},
+ {grade:12,badge:'十二',anyLabel:'符合下列情況之一即可：',any:[
+   'FEV1 ＝ 60–79%',
+   'FEV1/FVC ＝ 60–74%',
+   'VO2max ＝ 20–25 ml/kg·min'
+ ]}
+],interpretNote:'判讀原則：條文中 FEV1、FEV1/FVC、DLCO/VA（第十二等級另含 VO2max）為同一份肺功能檢查報告中的不同指標，應解讀為「符合其中任一項數值範圍即可」，不需三項同時達標——因不同肺部疾病型態，主要影響的指標本就不同：阻塞性疾病（氣喘、COPD）以 FEV1、FEV1/FVC 下降為主；純限制性疾病（如肺纖維化）之 FEV1/FVC 往往正常甚至偏高，須改看 FEV1 絕對值或 DLCO/VA 瀰散功能才能反映其嚴重度。若解讀為「三項須同時符合」，將使限制性肺病患者實質上無法適用本項標準，顯非法規原意；官方公告之塵肺症肺功能損失分級表，亦是將 FVC、FEV1、FEV1/FVC、DLCO、VO2max 平行列出、任一項落點即可對應同一嚴重度。＊此為依醫學文獻與官方分級表格式所作之專業判讀，尚未查得勞保局就此句是否為「任一／全部」的正式函釋或行政法院判決；個案如遇爭議，建議於申請或複審理由中援引患者實際疾病型態主張，必要時正式函詢勞保局。',paramRef:{title:'附：肺功能指標對照與判讀重點',cols:['指標','檢查方式（對應報告）','臨床意義','主要適用之疾病型態'],rows:[
+   ['FEV1（第一秒用力呼氣容積）','肺量計（Spirometry）','反映通氣功能損害嚴重度，阻塞性、限制性疾病皆會下降','各型肺病之通用嚴重度指標'],
+   ['FEV1/FVC（一秒率）','肺量計，與 FEV1 同次檢查','用以區分阻塞性與限制性——阻塞性疾病下降；純限制性疾病正常或偏高','主要用於阻塞性疾病（氣喘、COPD、支氣管擴張症等）'],
+   ['DLCO/VA（肺瀰散功能）','一氧化碳瀰散量測定，為獨立檢查','反映肺泡微血管氣體交換能力，與通氣功能是兩回事','間質性肺病、肺纖維化、肺氣腫、肺栓塞等瀰散障礙為主之疾病'],
+   ['PaO2（動脈血氧分壓）','動脈血液氣體分析（ABG），非肺量計','反映實際血氧交換結果','各型嚴重呼吸衰竭、需氧氣或呼吸器維生者'],
+   ['VO2max（最高耗氧量）','心肺運動測試（CPET），為獨立檢查','反映整體心肺功能儲備','靜態肺功能數值未達等級門檻但運動耐受力已明顯受損者，第十二等級適用']
+]},footnote:'塵肺症須經 X 光照片確認為第二症度以上者，始可依上述肺臟失能等級及臨床症狀審定。指標定義：PaO2＝動脈血氧分壓；FEV1＝第一秒分時肺活量；FVC＝用力肺活量；FEV1/FVC＝比值；DLCO/VA＝氣體交換之肺瀰散功能／受 VA 肺泡容量矯正；VO2max＝最高耗氧量。',items:[
+['7-12','肺臟機能遺存失能，終身無工作能力，符合失能審核（一）者。',1,1],
+['7-13','肺臟機能遺存失能，終身無工作能力，符合失能審核（二）者。',2,1],
+['7-14','肺臟機能遺存失能，終身無工作能力，符合失能審核（三）者。',3,1],
+['7-15','肺臟機能遺存失能，符合失能審核（四）者。',7,0],
+['7-16','肺臟移植者。',7,0],
+['7-17','肺臟機能遺存失能，符合失能審核（五）者。',12,0]]},
+{t:'肝臟',crit:[
+ {grade:1,badge:'一',baseLabel:'需同時符合下列 4 項（缺一不可）：',base:[
+   '符合 Child-Pugh 肝功能失代償指標分類 C 級',
+   '身體遺有頑固難治之腹水',
+   '有多次（2 次以上）發生肝腦病變',
+   '胃或食道靜脈曲張破裂出血'
+ ]},
+ {grade:2,badge:'二',baseLabel:'需同時符合下列 2 項基礎條件：',base:[
+   '符合 Child-Pugh 肝功能失代償指標分類 C 級',
+   '身體遺有頑固難治之腹水'
+ ],anyLabel:'並符合下列情況之一：',any:[
+   '多次（2 次以上）發生肝腦病變',
+   '胃或食道靜脈曲張破裂出血'
+ ]},
+ {grade:3,badge:'三',single:'符合 Child-Pugh 肝功能失代償指標分類 C 級，且身體遺有頑固難治之腹水。'},
+ {grade:7,badge:'七',baseLabel:'需同時符合下列 2 項基礎條件：',base:[
+   '符合 Child-Pugh 肝功能失代償指標分類 B 級或 C 級',
+   '曾有肝腦病變'
+ ],anyLabel:'並符合下列情況之一：',any:[
+   '有持續存在之腹水',
+   '曾有胃靜脈瘤破裂出血',
+   '曾有食道靜脈瘤破裂出血'
+ ]},
+ {grade:12,badge:'十二',single:'慢性肝病，肝功能符合 Child-Pugh 指標分類 A 級或以上，合併門脈高壓，且內視鏡證實胃或食道有靜脈瘤者（無須住院即可申請）。'}
+],ref:{title:'附：Child-Pugh 肝功能失代償指標分項計分法',cols:['計分項目','1 分','2 分','3 分'],rows:[
+   ['總膽紅素','＜2','2–3','＞3'],
+   ['血清白蛋白','＞3.5','3.0–3.5','＜3.0'],
+   ['腹水','無','少量，容易控制','中量以上，不易控制'],
+   ['肝腦病變','無','第 1 或第 2 級','第 3 或第 4 級'],
+   ['凝血脢原時間延長秒數／INR','＜4 秒／＜1.7','4–6 秒／1.7–2.3','＞6 秒／＞2.3']
+]},footnote:'A 級：6 分（含）以下；B 級：7–9 分；C 級：10 分（含）以上。肝病須住院治療且觀察滿 6 個月以上，始得以最近一次評估報告認定（申請第十二等級者，無需住院）。',items:[
+['7-18','肝臟機能遺存失能，終身無工作能力，符合失能審核（一）者。',1,1],
+['7-19','肝臟機能遺存失能，終身無工作能力，符合失能審核（二）者。',2,1],
+['7-20','肝臟機能遺存失能，終身無工作能力，符合失能審核（三）者。',3,1],
+['7-21','肝臟機能遺存失能，符合失能審核（四）者。',7,0],
+['7-22','肝臟移植者。',9,0],
+['7-23','肝臟機能遺存失能，符合失能審核（五）者。',12,0]]},
+{t:'胰臟・胃・脾臟',notes:['胰臟部分切除者，須經手術後六個月以上，始得認定。'],items:[
+['7-24','胰臟全切除者。',7,0],['7-25','胰臟部分切除致糖尿病或致原患糖尿病加重者。',9,0],['7-26','胃全切除者。',12,0],['7-27','脾臟切除者。',9,0]]},
+{t:'腎臟（泌尿器）',items:[
+['7-28','二側腎臟無機能且須終身定期透析治療者。',7,0],['7-29','腎臟移植者。',9,0],['7-30','一側腎臟切除或萎縮完全喪失功能者。',9,0]]},
+{t:'腸道・肛門',notes:['「短腸症候群」係指：小腸切除手術六個月以上，仍因小腸腸道過短以致吸收不良，需長期靜脈營養支持者。','裝置永久性人工肛門者，須經手術後六個月以上，始得認定。'],items:[
+['7-31','小腸切除百分之五十以上，且有短腸症候群者。',7,0],['7-32','小腸切除百分之五十以上，但無短腸症候群者。',9,0],
+['7-33','大腸全切除且無裝置人工肛門者。',9,0],['7-34','裝置永久性人工肛門者。',7,0],
+['7-35','肛門括約肌不全（因斷裂等）所致之大便失禁者。',12,0]]},
+{t:'膀胱・腎上腺・骨盆',notes:['膀胱機能相關項目，審定時須由泌尿科專科醫師診斷開具失能診斷書；必要時得另指定婦產科、復健科或婦女泌尿科等專科醫師會同認定。'],items:[
+['7-36','膀胱機能完全喪失且無裝置人工膀胱者。',3,0],['7-36-1','裝置永久性人工膀胱者。',7,0],['7-37','膀胱萎縮容量祇存 50c.c. 以下者。',8,0],['7-38','膀胱括約肌變化所致之尿失禁者。',12,0],
+['7-39','喪失兩側腎上腺需要終身補充荷爾蒙者。',12,0],
+['7-40','骨盆環骨折引起尿道外傷，導致嚴重尿道狹窄，無法以外科手術矯正，必須終身置放恥骨上膀胱造口者。',13,0]]},
+{t:'生殖器・乳腺',notes:['「生殖器遺存顯著失能」：割除兩側卵巢（或放化療致喪失機能）；或喪失兩側睪丸（或放化療致喪失機能）。','「生殖器遺存缺損」：因傷病割除子宮；或因瘢痕致陰道口窄狹、陰莖不可能插入致性行為不能；或陰莖大部分缺損、瘢痕等畸形致性行為不能。','「生殖器遺存失能」：割除單側卵巢；或喪失單側睪丸；或骨盆環骨折引起骨盆內臟神經（勃起中樞神經）病變所致之陽萎。','生殖器失能併存不同等級時，按其中較高等級給與，不得合併提高等級。'],items:[
+['7-41','生殖器遺存顯著失能者。',11,0],
+['7-41-1','生殖器遺存缺損者。',12,0],
+['7-42','生殖器遺存失能者。',13,0],
+['7-43','雙側乳腺全部切除者。',11,0],['7-44','單側乳腺全部切除者。',13,0]]}]},
+
+{k:'trunk',no:'8',name:'軀幹',notes:['脊柱失能須經治療一年以上（多次手術者自最後一次手術後一年，拔釘除外）始得認定；惡性腫瘤所致經診斷無好轉可能者，得治療六個月以上認定。','脊柱須經 X 光檢查始可診斷，且須符合下列「明顯骨折／明顯脫位」定義之一，始能依運動失能等級審定：不穩定性骨折（骨折後滑脫、移位）；壓迫性骨折（椎體被壓迫塌陷達 50% 以上）；爆裂性骨折（3 片以上骨碎片）；需手術治療之脫臼；關節脫位在二度以上（滑脫弧度約占寬度 25% 以上）。','顯著運動失能＝連續固定 4 椎體 3 椎間盤以上，且喪失生理運動範圍 1/2 以上；運動失能＝同樣連續固定 4 椎體 3 椎間盤以上，但喪失生理運動範圍 1/3 以上。固定 3 椎體 2 椎間盤以下不在給付範圍。','「脊柱遺存畸形」符合下列情況之一：著衣不易察見但脫衣或 X 光可見明顯變形（含缺損）；手術切除棘狀突起 3 個以上；或符合下列「明顯變形」之一：單節椎體高度喪失 50% 以上、椎體滑脫 25% 以上（第二度以上）、脊柱側彎 30 度以上、脊柱前傾（kyphosis）50 度以上。','畸形與運動失能屬同一種類不得合併升等，按其中較重者定之；畸形併脊髓壓迫致四肢麻痺（他覺可證明）可合併提高等級；脊柱失能與第 8-4 項體幹骨畸形（種類不同）亦可合併提高等級。'],groups:[
+{t:'脊柱畸形或運動失能',items:[
+['8-1','脊柱遺存顯著畸形或顯著運動失能者。',7,0],['8-2','脊柱遺存運動失能者。',9,0],['8-3','脊柱遺存畸形者。',12,0]]},
+{t:'其他軀幹骨畸形失能',items:[
+['8-4','鎖骨、胸骨、肋骨、肩胛骨或骨盤骨遺存顯著畸形者（不同體幹骨併存二項以上顯著畸形，得合併提高為第 12 級）。',13,0]]}]},
+
+{k:'head',no:'9',name:'頭、臉、頸',notes:['指眼瞼、鼻、耳廓缺損以外，遺存於頭、臉、頸日常露出部位之缺損。','三個部位（頭部／顏面部／頸下頷部）為替代適用關係，符合任一部位之範圍即可；顏面部本身另有四種測量方式，同樣符合其一即可：①直徑 5 公分以上面積之瘢痕、②8 公分以上之線狀痕、③不同部分之線狀痕合計達 12 公分以上、④直徑 3 公分以上之組織凹陷。頭部範圍為直徑 8 公分以上面積之瘢痕；頸部、下頷部範圍為直徑 8 公分以上面積之瘢痕。','須經治療一年以上（手術者自最後一次手術後一年）始得認定；應附治療一年以上、症狀固定後之 4×6 近距離彩色照片（附量尺及拍攝日期），並於背面加註姓名及身分證統一編號佐證。'],groups:[{t:'頭、臉、頸部缺損',items:[['9-1','頭部、顏面部或頸部遺存缺損者。',8,0]]}]},
+
+{k:'skin',no:'10',name:'皮膚',notes:['指外傷、燒燙傷、化學灼傷或手術影響致排汗功能喪失，遺存肥厚性疤痕或植皮後疤痕（頭臉頸以外）。','最後一次外科手術後一年（未手術者治療一年）以上始得認定；以一手掌約占體表面積 1% 為測算基準，附量尺彩色照片佐證。','併存頭臉頸缺損或其他失能種類時，得依規定提高等級。'],groups:[{t:'皮膚排汗功能喪失',items:[
+['10-1','身體皮膚排汗功能喪失 71% 以上，且終身無工作能力者。',2,1],
+['10-2','身體皮膚排汗功能喪失 61%–70%，且終身無工作能力者。',3,1],
+['10-3','身體皮膚排汗功能喪失 51% 以上者。',4,0],
+['10-4','身體皮膚排汗功能喪失 41%–50% 者。',5,0],
+['10-5','身體皮膚排汗功能喪失 31%–40% 者。',6,0],
+['10-6','身體皮膚排汗功能喪失 21%–30% 者。',7,0],
+['10-7','身體皮膚排汗功能喪失 16%–20% 者。',9,0],
+['10-8','身體皮膚排汗功能喪失 11%–15% 者。',11,0],
+['10-9','身體皮膚排汗功能喪失 6%–10% 者。',12,0],
+['10-10','身體皮膚排汗功能喪失 2%–5% 者。',13,0]]}]},
+
+{k:'arm',no:'11',name:'上肢',notes:['三大關節＝肩、肘、腕。喪失機能＝關節完全強直或完全麻痺；顯著運動失能＝喪失生理運動範圍 1/2 以上；運動失能＝喪失 1/3 以上。','機能失能須經治療一年以上（手術者自最後一次手術後一年，拔釘除外）始得認定；器質性切除於出院日審定。','手指缺損：拇指自指節間關節以上、其他各指自近位指節間關節以上切斷。同手指缺損併他指喪失機能可合併升等（未達第 7 級者按第 8 級）。','類風濕、退化性關節炎、痛風所致關節失能，關節間隙完整經藥物可緩解者，不在給付範圍。握力失能不在給付範圍。'],groups:[
+{t:'上肢缺損失能',items:[
+['11-1','兩上肢肘關節以上缺損者。',2,0],['11-2','兩上肢腕關節以上缺損者。',3,0],['11-3','一上肢肘關節以上缺損者。',5,0],['11-4','一上肢腕關節以上缺損者。',6,0]]},
+{t:'手指缺損失能',items:[
+['11-5','雙手十指均缺損者。',4,0],['11-6','雙手拇指均缺損者。',7,0],['11-7','一手五指均缺損者。',7,0],['11-8','一手拇指缺損者。',10,0],['11-9','一手食指缺損者。',11,0],['11-10','一手中指或無名指缺損者。',12,0],['11-11','一手小指缺損者。',14,0],
+['11-12','一手拇指、食指及其他任何手指，共有四指缺損者。',7,0],['11-13','一手拇指、食指及其他任何手指，共有三指缺損者。',8,0],['11-14','一手拇指及食指缺損者。',8,0],['11-15','一手拇指或食指及其他任何手指，共有三指以上缺損者。',8,0],
+['11-16','一手拇指及其他任何手指，共有二指缺損者。',9,0],['11-17','一手食指及其他任何手指，共有二指缺損者。',10,0],['11-18','一手中指、無名指及小指缺損者。',10,0],['11-19','一手拇指及食指以外之任何手指，共有二指缺損者。',11,0],
+['11-20','一手拇指之指骨一部分缺損者。',14,0],['11-21','一手食指之指骨一部分缺損者。',14,0],['11-22','一手中指、無名指或小指之指骨一部分缺損者。',15,0]]},
+{t:'上肢機能失能',items:[
+['11-23','兩上肢均喪失機能者。',2,0],['11-24','兩上肢三大關節中，各有二大關節喪失機能者。',3,0],['11-25','兩上肢三大關節中，各有一大關節喪失機能者。',6,0],
+['11-26','一上肢喪失機能者。',6,0],['11-27','一上肢三大關節中，有二大關節喪失機能者。',7,0],['11-28','一上肢三大關節中，有一大關節喪失機能者。',9,0],
+['11-29','兩上肢均遺存顯著運動失能者。',4,0],['11-30','兩上肢三大關節中，各有二大關節遺存顯著運動失能者。',5,0],['11-31','兩上肢三大關節中，各有一大關節遺存顯著運動失能者。',7,0],
+['11-32','一上肢遺存顯著運動失能者。',7,0],['11-33','一上肢三大關節中，有二大關節遺存顯著運動失能者。',8,0],['11-34','一上肢三大關節中，有一大關節遺存顯著運動失能者。',11,0],
+['11-35','兩上肢均遺存運動失能者。',6,0],['11-36','兩上肢三大關節中，各有二大關節遺存運動失能者。',9,0],['11-37','兩上肢三大關節中，各有一大關節遺存運動失能者。',11,0],
+['11-38','一上肢遺存運動失能者。',9,0],['11-39','一上肢三大關節中，有二大關節遺存運動失能者。',11,0],['11-40','一上肢三大關節中，有一大關節遺存運動失能者。',13,0],
+['11-41','一上肢遺存假關節且有顯著運動失能者。',8,0],['11-42','一上肢遺存假關節者。',9,0]]},
+{t:'畸形失能（上臂骨或前臂骨）',items:[
+['11-43','兩上肢長管骨遺存畸形者。',11,0],['11-44','一上肢長管骨遺存畸形者。',13,0]]},
+{t:'手指機能失能',items:[
+['11-45','雙手十指均喪失機能者。',5,0],['11-46','雙手拇指均喪失機能者。',8,0],['11-47','一手五指均喪失機能者。',8,0],['11-48','一手拇指喪失機能者。',11,0],['11-49','一手食指喪失機能者。',12,0],['11-50','一手中指或無名指喪失機能者。',13,0],['11-51','一手小指喪失機能者。',15,0],
+['11-52','一手拇指、食指及其他任何手指，共有四指喪失機能者。',8,0],['11-53','一手拇指、食指及其他任何手指，共有三指喪失機能者。',9,0],['11-54','一手拇指及食指喪失機能者。',9,0],['11-55','一手拇指或食指及其他任何手指，共有三指以上喪失機能者。',9,0],
+['11-56','一手拇指及其他任何手指，共有二指喪失機能者。',10,0],['11-57','一手食指及其他任何手指，共有二指喪失機能者。',11,0],['11-58','一手中指、無名指及小指喪失機能者。',11,0],['11-59','一手拇指及食指以外之任何手指，共有二指喪失機能者。',12,0],
+['11-60','一手食指之末關節不能屈伸者。',14,0],['11-61','一手中指、無名指或小指之末關節不能屈伸者。',15,0]]}]},
+
+{k:'leg',no:'12',name:'下肢',notes:['三大關節＝髖、膝、踝。喪失機能、顯著運動失能、運動失能之認定參照上肢規定。','下肢縮短自患側腸骨前上棘至內踝下端測量，與健側比較，須附雙下肢站立全長 X 光片（含長度標尺）。','足趾缺損指自中足趾關節切斷而足趾全部缺損；足趾機能喪失另有各趾切斷／強直認定基準。','機能失能須經治療一年以上（手術後一年，拔釘除外）始得認定。'],groups:[
+{t:'下肢缺損失能',items:[
+['12-1','兩下肢膝關節以上缺損者。',2,0],['12-2','兩下肢足關節以上缺損者。',3,0],['12-3','兩下肢跗蹠關節以上缺損者。',5,0],
+['12-4','一下肢膝關節以上缺損者。',5,0],['12-5','一下肢足關節以上缺損者。',6,0],['12-6','一下肢跗蹠關節以上缺損者。',8,0]]},
+{t:'縮短失能',items:[
+['12-7','一下肢縮短五公分以上者。',9,0],['12-8','一下肢縮短三公分以上者。',11,0]]},
+{t:'足趾缺損失能',items:[
+['12-9','雙足十趾均缺損者。',6,0],['12-10','一足五趾均缺損者。',9,0],['12-11','一足第一趾或其他之四趾均缺損者。',11,0],['12-12','一足第二趾缺損者。',13,0],
+['12-13','一足第一趾及其他任何之足趾，共有二趾以上缺損者。',10,0],['12-14','一足第二趾及其他任何之足趾，共有三趾缺損者。',12,0],['12-15','一足第二趾及其他任何之足趾，共有二趾缺損者。',13,0],
+['12-16','一足第三趾、第四趾及第五趾缺損者。',13,0],['12-17','一足第一趾及第二趾以外之任何足趾中，有一趾或二趾缺損者。',14,0]]},
+{t:'下肢機能失能',items:[
+['12-18','兩下肢均喪失機能者。',2,0],['12-19','兩下肢三大關節中，各有二大關節喪失機能者。',3,0],['12-20','兩下肢三大關節中，各有一大關節喪失機能者。',6,0],
+['12-21','一下肢喪失機能者。',6,0],['12-22','一下肢三大關節中，有二大關節喪失機能者。',7,0],['12-23','一下肢三大關節中，有一大關節喪失機能者。',9,0],
+['12-24','兩下肢均遺存顯著運動失能者。',4,0],['12-25','兩下肢三大關節中，各有二大關節遺存顯著運動失能者。',5,0],['12-26','兩下肢三大關節中，各有一大關節遺存顯著運動失能者。',7,0],
+['12-27','一下肢遺存顯著運動失能者。',7,0],['12-28','一下肢三大關節中，有二大關節遺存顯著運動失能者。',8,0],['12-29','一下肢三大關節中，有一大關節遺存顯著運動失能者。',11,0],
+['12-30','兩下肢均遺存運動失能者。',6,0],['12-31','兩下肢三大關節中，各有二大關節遺存運動失能者。',9,0],['12-32','兩下肢三大關節中，各有一大關節遺存運動失能者。',11,0],
+['12-33','一下肢遺存運動失能者。',9,0],['12-34','一下肢三大關節中，有二大關節遺存運動失能者。',11,0],['12-35','一下肢三大關節中，有一大關節遺存運動失能者。',13,0],
+['12-36','一下肢遺存假關節且有顯著運動失能者。',8,0],['12-37','一下肢遺存假關節者。',9,0]]},
+{t:'畸形失能（大腿骨或下腿骨）',items:[
+['12-38','兩下肢長管骨遺存畸形者。',11,0],['12-39','一下肢長管骨遺存畸形者。',13,0]]},
+{t:'足趾機能失能',items:[
+['12-40','雙足十趾均喪失機能者。',8,0],['12-41','一足五趾均喪失機能者。',10,0],['12-42','一足第一趾或其他之四趾喪失機能者。',12,0],['12-43','一足第二趾喪失機能者。',14,0],
+['12-44','一足第一趾及其他任何之足趾，共有二趾以上喪失機能者。',11,0],['12-45','一足第二趾及其他任何之足趾，共有三趾喪失機能者。',13,0],['12-46','一足第二趾及其他任何之足趾，共有二趾喪失機能者。',14,0],
+['12-47','一足第三趾、第四趾及第五趾喪失機能者。',14,0],['12-48','一足第一趾及第二趾以外之任何足趾中，有一趾或二趾喪失機能者。',15,0]]}]}
+];
+
+/* ================= 狀態 ================= */
+let mode='ord';           // ord=普通事故 occ=職業傷病
+let selCats=['organ'];    // 預設顯示胸腹部臟器
+let query='';
+let gradeF=0;
+let organFilter=null;     // 胸腹部臟器子分類篩選（群組名稱）
+
+const $=s=>document.querySelector(s);
+const panel=$('#panel');
+
+/* ================= 工具 ================= */
+function days(g){return (mode==='ord'?DAYS_ORD:DAYS_OCC)[g-1];}
+function salary(){return Math.max(0,Number($('#salary').value)||0);}
+function amount(g){const m=salary();if(!m)return null;return Math.round(m/30*days(g));}
+function fmt(n){return n.toLocaleString('zh-Hant-TW');}
+function fmtWan(n){if(Math.abs(n)>=10000){const w=n/10000;return (Number.isInteger(w)?w:w.toFixed(1))+'萬';}return fmt(n);}
+function badgeCls(g){return g<=3?'b1':g<=6?'b2':g<=9?'b3':g<=12?'b4':'b5';}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function hi(t){if(!query)return esc(t);const q=query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');return esc(t).replace(new RegExp(q,'g'),m=>'<mark>'+m+'</mark>');}
+
+/* ================= 畫面 ================= */
+function caliTag(id,g){
+  if(CALI_GENDER[id]){
+    const gg=CALI_GENDER[id];
+    return `<span class="tag-cali">強制險：女性第${CN[gg.female-1]}等級 NT$ ${fmt(CALI_NEW[gg.female-1]*10000)}／男性第${CN[gg.male-1]}等級 NT$ ${fmt(CALI_NEW[gg.male-1]*10000)}</span>`;
+  }
+  if(CALI_EXCEPT[id]){
+    return `<span class="tag-cali none">強制險：無對應項目（${esc(CALI_EXCEPT[id])}）</span>`;
+  }
+  return `<span class="tag-cali">強制險（同第${CN[g-1]}等級）：NT$ ${fmt(CALI_NEW[g-1]*10000)}<i>115.7.1起新制；115.6.30前事故為 NT$ ${fmt(CALI_OLD[g-1]*10000)}</i></span>`;
+}
+function rowHTML(it){
+  const [id,txt,g,life]=it;
+  const amt=amount(g);
+  return `<div class="item-row">
+    <div class="item-top">
+      <span class="item-id">${id}</span>
+      <span class="badge ${badgeCls(g)}">第${CN[g-1]}等級</span>
+      <span class="item-stats"><span class="item-days">${fmt(days(g))} 日</span><span class="item-amt">${amt===null?'—':'NT$ '+fmt(amt)}</span></span>
+    </div>
+    <p class="item-desc">${hi(txt)}${life?'<span class="lifelong">終身無工作能力</span>':''}</p>
+    <div class="item-extra">${caliTag(id,g)}${(DEMOS[id]||FINGER_DEMOS[id]||TOE_DEMOS[id]||LLD_DEMOS[id]||GDEMO[id])?`<button type="button" class="demo-btn" data-demo="${id}"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.8v8.4L10 6z" fill="currentColor"/></svg>看示範</button>`:''}</div>
+  </div>`;
+}
+/* 胸腹部臟器示意圖：data-grp 對應資料中的群組名稱 */
+function organMapHTML(){
+  const sel=g=>organFilter===g?' sel':'';
+  return `<div class="organ-map">
+  <p>點選臟器可只顯示該臟器之失能項目${organFilter?'（目前：<b style="color:var(--seal)">'+esc(organFilter)+'</b>）':''}</p>
+  ${organFilter?'<button type="button" class="organ-reset">顯示全部臟器項目</button>':''}
+  <svg class="organs" viewBox="0 0 340 340" role="img" aria-label="胸腹部臟器示意圖">
+    <path d="M100 22 Q170 8 240 22 L250 120 Q248 210 235 262 L230 312 Q170 328 110 312 L105 262 Q92 210 90 120 Z" fill="#F3F6F9" stroke="#C4D0DA" stroke-width="1.4"/>
+    <g class="ozone ochip${sel('胸腹部臟器（綜合機能）')}" data-grp="胸腹部臟器（綜合機能）" tabindex="0" role="button" aria-label="綜合機能">
+      <rect x="4" y="8" width="82" height="24" rx="12" class="org" fill="#fff"/>
+      <text x="45" y="24" text-anchor="middle">綜合機能</text></g>
+    <g class="ozone ochip${sel('生殖器・乳腺')}" data-grp="生殖器・乳腺" tabindex="0" role="button" aria-label="生殖器與乳腺">
+      <rect x="234" y="8" width="102" height="24" rx="12" class="org" fill="#fff"/>
+      <text x="285" y="24" text-anchor="middle">生殖器・乳腺</text></g>
+    <g class="ozone${sel('肺臟')}" data-grp="肺臟" tabindex="0" role="button" aria-label="肺臟">
+      <path class="org" fill="#E8B9B5" d="M152 48 Q124 52 114 92 Q109 122 122 142 Q142 147 154 136 Q158 92 156 52 Z"/>
+      <path class="org" fill="#E8B9B5" d="M188 48 Q216 52 226 92 Q231 122 218 142 Q198 147 186 136 Q182 92 184 52 Z"/>
+      <text x="128" y="78">肺臟</text></g>
+    <g class="ozone${sel('心臟')}" data-grp="心臟" tabindex="0" role="button" aria-label="心臟">
+      <path class="org" fill="#D98880" d="M170 88 Q186 80 195 94 Q202 108 188 122 Q176 132 167 122 Q155 108 161 94 Q164 86 170 88 Z"/>
+      <text x="196" y="90">心臟</text></g>
+    <g class="ozone${sel('肝臟')}" data-grp="肝臟" tabindex="0" role="button" aria-label="肝臟">
+      <path class="org" fill="#C68B59" d="M106 152 Q148 143 184 152 L179 178 Q145 190 114 180 Q106 166 106 152 Z"/>
+      <text x="132" y="169" fill="#fff">肝臟</text></g>
+    <g class="ozone${sel('胰臟・胃・脾臟')}" data-grp="胰臟・胃・脾臟" tabindex="0" role="button" aria-label="胰臟、胃、脾臟">
+      <path class="org" fill="#E4C05C" d="M196 150 Q222 148 229 165 Q233 184 215 191 Q199 193 192 179 Q189 162 196 150 Z"/>
+      <ellipse class="org" fill="#B98CC7" cx="243" cy="152" rx="10" ry="16"/>
+      <path class="org" fill="#E7C662" d="M150 197 Q180 190 213 199 Q213 209 206 211 Q177 203 150 207 Z"/>
+      <text x="200" y="145">胃・胰・脾</text></g>
+    <g class="ozone${sel('腎臟（泌尿器）')}" data-grp="腎臟（泌尿器）" tabindex="0" role="button" aria-label="腎臟">
+      <path class="org" fill="#A9846B" d="M110 202 Q124 200 128 214 Q130 228 120 234 Q108 236 104 224 Q102 210 110 202 Z"/>
+      <path class="org" fill="#A9846B" d="M230 202 Q216 200 212 214 Q210 228 220 234 Q232 236 236 224 Q238 210 230 202 Z"/>
+      <text x="84" y="245">腎臟</text></g>
+    <g class="ozone${sel('腸道・肛門')}" data-grp="腸道・肛門" tabindex="0" role="button" aria-label="腸道與肛門">
+      <path class="org" fill="#E2A76F" d="M128 228 Q170 218 212 228 Q222 252 212 276 Q170 289 128 276 Q118 252 128 228 Z"/>
+      <path d="M132 244 Q170 236 208 244 M132 260 Q170 252 208 260" fill="none" stroke="#C08447" stroke-width="2"/>
+      <text x="146" y="256" fill="#5B3A1E">腸道・肛門</text></g>
+    <g class="ozone${sel('膀胱・腎上腺・骨盆')}" data-grp="膀胱・腎上腺・骨盆" tabindex="0" role="button" aria-label="膀胱、腎上腺、骨盆">
+      <ellipse class="org" fill="#8FB0CC" cx="170" cy="300" rx="18" ry="12"/>
+      <text x="196" y="305">膀胱</text></g>
+  </svg></div>`;
+}
+/* 心臟／肺臟／肝臟：多指標審核基準詳解（區分「須全部符合」與「符合其一即可」） */
+function critLevelHTML(lv){
+  const badge=`<span class="badge ${badgeCls(lv.grade)}">第${lv.badge}等級</span>`;
+  let inner='';
+  if(lv.single){
+    inner=`<div class="crit-single">${esc(lv.single)}</div>`;
+  }else{
+    if(lv.base){
+      inner+=`<div style="font-size:.78rem;color:var(--seal);font-weight:700;margin-bottom:2px">${esc(lv.baseLabel||'需同時符合下列各項：')}</div><ul class="crit-list all">${lv.base.map(t=>'<li>'+esc(t)+'</li>').join('')}</ul>`;
+    }
+    if(lv.any){
+      inner+=`<div style="font-size:.78rem;color:#2E7D4F;font-weight:700;margin:6px 0 2px">${esc(lv.anyLabel||'符合下列情況之一即可：')}</div><ul class="crit-list any">${lv.any.map(t=>'<li>'+esc(t)+'</li>').join('')}</ul>`;
+    }
+  }
+  let modeTag='';
+  if(lv.base&&lv.any)modeTag='<span class="crit-mode all">基礎條件全符合＋病因擇一</span>';
+  else if(lv.base)modeTag='<span class="crit-mode all">須全部符合</span>';
+  else if(lv.any)modeTag='<span class="crit-mode any">符合其一即可</span>';
+  return `<div class="crit-grade"><div class="crit-grade-title">${badge}${modeTag}</div>${inner}</div>`;
+}
+function refTableHTML(ref){
+  if(ref.cols){ // 表格式（肝臟 Child-Pugh）
+    return `<table class="mini"><thead><tr>${ref.cols.map(c=>'<th>'+esc(c)+'</th>').join('')}</tr></thead><tbody>${ref.rows.map(r=>'<tr>'+r.map(v=>'<td>'+esc(v)+'</td>').join('')+'</tr>').join('')}</tbody></table>`;
+  }
+  // 兩欄對照（心臟分類）
+  return `<table class="mini"><tbody>${ref.rows.map(r=>`<tr><td style="font-weight:700;white-space:nowrap">${esc(r[0])}</td><td style="text-align:left">${esc(r[1])}</td></tr>`).join('')}</tbody></table>`;
+}
+function critHTML(gr){
+  if(!gr.crit&&!gr.ref&&!gr.paramRef&&!gr.interpretNote)return '';
+  const levels=gr.crit?gr.crit.map(critLevelHTML).join(''):'';
+  const interpret=gr.interpretNote?`<div class="crit-interpret">${ICON_WARN}<span>${esc(gr.interpretNote)}</span></div>`:'';
+  const paramTable=gr.paramRef?`<table class="param"><thead><tr>${gr.paramRef.cols.map(c=>'<th>'+esc(c)+'</th>').join('')}</tr></thead><tbody>${gr.paramRef.rows.map(r=>'<tr>'+r.map(v=>'<td>'+esc(v)+'</td>').join('')+'</tr>').join('')}</tbody></table>`:'';
+  const paramBlock=gr.paramRef?`<div style="margin-top:10px"><div style="font-size:.78rem;font-weight:700;color:var(--navy);margin-bottom:2px">${esc(gr.paramRef.title)}</div>${paramTable}</div>`:'';
+  const ref=gr.ref?`<details class="crit-ref"${gr.crit?'':' open'}><summary>${esc(gr.ref.title)}</summary>${refTableHTML(gr.ref)}</details>`:'';
+  const foot=gr.footnote?`<p style="font-size:.74rem;color:var(--sub);margin-top:8px">${esc(gr.footnote)}</p>`:'';
+  const headTitle=gr.crit?`各等級判定條件——請注意部分等級須全部符合、部分符合其一即可`:`參考資料`;
+  return `<div class="crit-wrap"><div class="crit-head">${ICON_CLIPBOARD}審核基準詳解（${esc(gr.t)}${headTitle}）</div><div class="crit-body">${levels}${interpret}${paramBlock}${ref}${foot}</div></div>`;
+}
+function catHTML(cat,filterFn,showOrganMap){
+  let total=0,body='';
+  cat.groups.forEach(gr=>{
+    if(cat.k==='organ'&&showOrganMap&&organFilter&&gr.t!==organFilter)return;
+    const its=gr.items.filter(filterFn);
+    if(!its.length)return;
+    total+=its.length;
+    if(cat.groups.length>1)body+=`<div class="grp-title">◆ ${gr.t}</div>`;
+    body+=critHTML(gr);
+    if(gr.notes&&gr.notes.length)body+=`<details class="notes"><summary>${esc(gr.t)}審核重點</summary><ul>${gr.notes.map(n=>'<li>'+esc(n)+'</li>').join('')}</ul></details>`;
+    body+=`<div class="items-list">${its.map(rowHTML).join('')}</div>`;
+  });
+  if(!total&&!(cat.k==='organ'&&showOrganMap))return '';
+  const notes=cat.notes&&cat.notes.length?`<details class="notes"><summary>審核重點（摘錄）</summary><ul>${cat.notes.map(n=>'<li>'+esc(n)+'</li>').join('')}</ul></details>`:'';
+  const omap=(cat.k==='organ'&&showOrganMap)?organMapHTML():'';
+  return `<section class="cat-block"><div class="cat-head"><span class="cat-no">${cat.no}</span><h3>${cat.name}</h3><span class="cnt">符合 ${total} 項</span></div>${omap}${notes}${body}</section>`;
+}
+function render(){
+  const filterFn=it=>{
+    if(gradeF&&it[2]!==gradeF)return false;
+    if(query&&!it[1].includes(query)&&!it[0].includes(query))return false;
+    return true;
+  };
+  let cats,showOrganMap=false;
+  if(query||gradeF){cats=CATS;}                 // 搜尋／篩選跨全部種類
+  else{cats=CATS.filter(c=>selCats.includes(c.k));showOrganMap=selCats.includes('organ');}
+  const html=cats.map(c=>catHTML(c,filterFn,showOrganMap)).join('');
+  panel.innerHTML=html||`<div class="empty">查無符合項目，請調整關鍵字或等級篩選。</div>`;
+  // 日投保薪資列
+  const m=salary();
+  $('#daySalaryLine').innerHTML=m
+    ?`平均日投保薪資＝ ${fmt(m)} ÷ 30 ＝ <b>${(m/30).toFixed(2)} 元</b>；一次金＝平均日投保薪資 × 給付日數（${mode==='ord'?'普通事故日數':'職業傷病日數（災保，為普通日數加給五成）'}），元以下四捨五入。`
+    :`輸入平均月投保薪資即可即時試算各項一次金。`;
+  refChart();
+  // 卡片選取樣式；搜尋或篩選等級時，卡片與其標題暫時收起（跨全部種類顯示，選卡片已無意義）
+  const searching=!!(query||gradeF);
+  $('#catCards').classList.toggle('hidden',searching);
+  document.querySelectorAll('.cat-card').forEach(c=>{
+    c.classList.toggle('sel',!searching&&selCats.includes(c.dataset.k)&&selCats.length===1);
+  });
+}
+function refChart(){
+  const arr=mode==='ord'?DAYS_ORD:DAYS_OCC;
+  const maxV=arr[0];
+  const rowH=27,gap=3,top=8,bottom=8,x0=92,barW=340;
+  const totalH=top+15*rowH+14*gap+bottom;
+  const svg=$('#refChart');
+  svg.setAttribute('viewBox',`0 0 700 ${totalH}`);
+  const m=salary();
+  let rows='';
+  for(let i=0;i<15;i++){
+    const y=top+i*(rowH+gap);
+    const d=arr[i];
+    const w=Math.max(2,d/maxV*barW);
+    const amt=m?Math.round(m/30*d):null;
+    const valText=`${fmt(d)} 日${amt!==null?' ・ NT$ '+fmtWan(amt):''}`;
+    rows+=`<g class="bar-row">
+      <text class="glabel" x="${x0-8}" y="${y+rowH/2+4}">第${CN[i]}級</text>
+      <rect class="track" x="${x0}" y="${y}" width="${barW}" height="${rowH}" rx="5"/>
+      <rect class="fill" x="${x0}" y="${y}" width="${w}" height="${rowH}" rx="5" fill="${GRADE_HEX[i]}"/>
+      <text x="${x0+barW+10}" y="${y+rowH/2+4}">${esc(valText)}</text>
+      <title>第${CN[i]}等級：${fmt(d)} 日${amt!==null?'，約 NT$ '+fmt(amt):''}</title>
+    </g>`;
+  }
+  svg.innerHTML=rows;
+}
+function caliChart(){
+  const maxV=CALI_NEW[0];
+  const rowH=30,gap=4,top=30,bottom=8,x0=92,barW=300,subH=11;
+  const totalH=top+15*rowH+14*gap+bottom;
+  const svg=$('#caliChart');
+  svg.setAttribute('viewBox',`0 0 700 ${totalH}`);
+  let rows=`<g>
+    <rect x="${x0}" y="4" width="14" height="9" rx="2" fill="#9FB2C2"/><text x="${x0+18}" y="12" style="font-size:10.5px;fill:var(--sub)">115.6.30 以前（舊制）</text>
+    <rect x="${x0+150}" y="4" width="14" height="9" rx="2" fill="var(--seal)"/><text x="${x0+168}" y="12" style="font-size:10.5px;fill:var(--sub)">115.7.1 起（新制）</text>
+  </g>`;
+  for(let i=0;i<15;i++){
+    const y=top+i*(rowH+gap);
+    const wOld=Math.max(2,CALI_OLD[i]/maxV*barW);
+    const wNew=Math.max(2,CALI_NEW[i]/maxV*barW);
+    rows+=`<g class="bar-row">
+      <text class="glabel" x="${x0-8}" y="${y+rowH/2+4}">第${CN[i]}級</text>
+      <rect class="track" x="${x0}" y="${y}" width="${barW}" height="${subH}" rx="4"/>
+      <rect class="fill" x="${x0}" y="${y}" width="${wOld}" height="${subH}" rx="4" fill="#9FB2C2"/>
+      <rect class="track" x="${x0}" y="${y+subH+2}" width="${barW}" height="${subH}" rx="4"/>
+      <rect class="fill" x="${x0}" y="${y+subH+2}" width="${wNew}" height="${subH}" rx="4" fill="var(--seal)"/>
+      <text x="${x0+barW+10}" y="${y+rowH/2+4}">${CALI_OLD[i]}萬 → ${CALI_NEW[i]}萬</text>
+      <title>第${CN[i]}等級：舊制 NT$${fmt(CALI_OLD[i]*10000)} → 新制 NT$${fmt(CALI_NEW[i]*10000)}</title>
+    </g>`;
+  }
+  svg.innerHTML=rows;
+}
+function caliTable(){
+  $('#caliTable').innerHTML=`<thead><tr><th>失能等級</th><th>115.6.30 以前事故</th><th>115.7.1 起事故（新制）</th></tr></thead><tbody>`+
+  CALI_OLD.map((v,i)=>`<tr><td><span class="badge ${badgeCls(i+1)}">第${CN[i]}等級</span></td><td>NT$ ${fmt(v*10000)}</td><td class="new">NT$ ${fmt(CALI_NEW[i]*10000)}</td></tr>`).join('')+`</tbody>`;
+}
+function ahTable(){
+  const sum=Math.max(0,Number($('#ahSum').value)||0);
+  $('#ahTable').innerHTML=`<thead><tr><th>失能等級</th><th>給付百分比</th><th>試算金額</th></tr></thead><tbody>`+
+  AH_PCT.map((p,i)=>`<tr><td><span class="badge ${i<3?'b1':i<6?'b2':i<9?'b3':'b4'}">第${CN[i]}等級</span></td><td>${p}%</td><td class="new">${sum?'NT$ '+fmt(Math.round(sum*p/100)):'—'}</td></tr>`).join('')+`</tbody>`;
+}
+
+function buildCategoryCards(){
+  const wrap=$('#catCards');
+  wrap.innerHTML=CATS.map(c=>{
+    const cnt=c.groups.reduce((s,g)=>s+g.items.length,0);
+    return `<div class="cat-card" data-k="${c.k}" tabindex="0" role="button" aria-label="${c.name}（共${cnt}項）">
+      ${catIcon(c.k)}
+      <span class="cc-name">${c.no}．${c.name}</span>
+      <span class="cc-count">共 ${cnt} 項</span>
+    </div>`;
+  }).join('');
+}
+function selectCats(ks){
+  selCats=ks; query=''; gradeF=0; organFilter=null;
+  $('#q').value=''; $('#gradeFilter').value='0';
+  render();
+  panel.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* ================= 事件 ================= */
+document.addEventListener('DOMContentLoaded',()=>{
+  buildCategoryCards();
+  $('#catCards').addEventListener('click',e=>{
+    const t=e.target.closest('.cat-card');
+    if(t)selectCats([t.dataset.k]);
+  });
+  $('#catCards').addEventListener('keydown',e=>{
+    if(e.key!=='Enter'&&e.key!==' ')return;
+    const t=e.target.closest('.cat-card');
+    if(t){e.preventDefault();selectCats([t.dataset.k]);}
+  });
+  // 等級選單
+  const sel=$('#gradeFilter');
+  CN.forEach((c,i)=>{const o=document.createElement('option');o.value=i+1;o.textContent=`第${c}等級`;sel.appendChild(o);});
+  $('#btnOrd').addEventListener('click',()=>{mode='ord';$('#btnOrd').classList.add('on');$('#btnOcc').classList.remove('on');render();});
+  $('#btnOcc').addEventListener('click',()=>{mode='occ';$('#btnOcc').classList.add('on');$('#btnOrd').classList.remove('on');render();});
+  $('#salary').addEventListener('input',render);
+  $('#q').addEventListener('input',e=>{query=e.target.value.trim();render();});
+  sel.addEventListener('change',e=>{gradeF=Number(e.target.value);render();});
+  // 臟器示意圖：點選／鍵盤操作與重置
+  function organAct(t){
+    if(!t)return false;
+    const g=t.dataset.grp;
+    organFilter=(organFilter===g)?null:g;
+    render();return true;
+  }
+  panel.addEventListener('click',e=>{
+    if(organAct(e.target.closest('.ozone')))return;
+    if(e.target.closest('.organ-reset')){organFilter=null;render();}
+  });
+  panel.addEventListener('keydown',e=>{
+    if(e.key!=='Enter'&&e.key!==' ')return;
+    if(organAct(e.target.closest('.ozone')))e.preventDefault();
+  });
+  $('#ahSum').addEventListener('input',ahTable);
+  // 更多對照表 摺疊
+  const moreToggle=$('#moreToggle'),moreBody=$('#moreBody');
+  moreToggle.addEventListener('click',()=>{
+    const open=moreBody.classList.toggle('open');
+    moreToggle.classList.toggle('open',open);
+    moreToggle.setAttribute('aria-expanded',open?'true':'false');
+  });
+  caliTable();caliChart();ahTable();
+  render();
+});
+
+/* ================= 動畫示範：關節活動範圍（依上、下肢關節生理運動範圍一覽表；透視骨骼，以骨骼長軸量角） ================= */
+const ROM_PFX={arm:'11',leg:'12'},ROM_START={arm:{loss:23,sig:29,rom:35},leg:{loss:18,sig:24,rom:30}};
+const DEMOS={};
+['arm','leg'].forEach(lb=>['loss','sig','rom'].forEach(st=>{for(let i=0;i<6;i++)DEMOS[`${ROM_PFX[lb]}-${ROM_START[lb][st]+i}`]=[lb,st,3-(i%3),i<3];}));
+function itemGrade(id){for(const c of CATS)for(const g of c.groups)for(const it of g.items)if(it[0]===id)return it[2];return null;}
+const romItemId=(lb,st,cnt,both)=>`${ROM_PFX[lb]}-${ROM_START[lb][st]+(both?0:3)+(3-cnt)}`;
+const LIMBS={
+  arm:{limb:'上肢',joints:['shoulder','elbow','wrist'],def:'elbow',
+    notes:['「喪失機能」＝關節完全強直或完全麻痺；「顯著運動失能」＝喪失生理運動範圍 1/2 以上；「運動失能」＝喪失生理運動範圍 1/3 以上。',
+      '生理運動範圍依「上、下肢關節生理運動範圍一覽表」：肩關節前舉 180°＋後舉 60°＝240°、肘關節屈曲 145°＋伸展 0°＝145°、腕關節掌屈 80°＋背屈 70°＝150°（關節活動度為兩項角度之總和）。',
+      '量角以骨骼長軸為準：固定臂沿近端骨（如肱骨）、移動臂沿遠端骨（如橈骨、掌骨），軸心在關節中心；請打開「透視骨骼」對照。',
+      '失能原因及程度明顯時採自動運動範圍，如有心因性因素，則以他動運動的可能範圍參考決定；健側關節宜一併測定作為參考。',
+      '須經治療一年以上始得認定；如經手術，須最後一次手術後一年以上（拔釘除外）。',
+      '上方「範圍」可切換一大關節、二大關節、三大關節均失能，以及單側或兩側，對應 11-23～11-40 各項。']},
+  leg:{limb:'下肢',joints:['hip','knee','ankle'],def:'knee',
+    notes:['「喪失機能」＝關節完全強直或完全麻痺；「顯著運動失能」＝喪失生理運動範圍 1/2 以上；「運動失能」＝喪失生理運動範圍 1/3 以上。',
+      '生理運動範圍依「上、下肢關節生理運動範圍一覽表」：髖關節屈曲 125°＋伸展 10°＝135°、膝關節屈曲 140°＋伸展 0°＝140°、踝關節蹠屈 45°＋背屈 20°＝65°（關節活動度為兩項角度之總和）。',
+      '量角以骨骼長軸為準：固定臂沿近端骨（如股骨）、移動臂沿遠端骨（如脛骨），軸心在關節中心；請打開「透視骨骼」對照。',
+      '中樞神經病變引起截癱或偏癱者，對下肢三大關節生理運動範圍應採綜合觀察，不宜逐一關節個別審定（依一覽表註 3）。',
+      '須經治療一年以上始得認定；如經手術，須最後一次手術後一年以上（拔釘除外）。',
+      '上方「範圍」可切換一大關節、二大關節、三大關節均失能，以及單側或兩側，對應 12-18～12-35 各項。']}
+};
+const JDEF={
+  shoulder:{name:'肩關節',flexN:'前舉',extN:'後舉',flex:180,ext:60,base:-90,pose:'站立側面：手臂自然下垂為 0°，向前上舉為「前舉」、向後舉為「後舉」。',look:[.2,.05],camY:.35,dist:[13.8,15],ground:-2.8,el:[-1.35,.6]},
+  elbow:{name:'肘關節',flexN:'屈曲',extN:'伸展',flex:145,ext:0,base:0,pose:'上臂固定，前臂伸直為 0°，向上彎曲為「屈曲」。',look:[.2,1.1],dist:[10.3,11.1],ground:-1.05,el:[0,-.95]},
+  wrist:{name:'腕關節',flexN:'背屈',extN:'掌屈',flex:70,ext:80,base:0,pose:'前臂平放桌面，手與前臂成一直線為 0°，手背往上為「背屈」、手掌往下為「掌屈」。',look:[.35,-.1],camY:.35,dist:[13.2,14.4],ground:-3.1,el:[-1.6,-1.25]},
+  hip:{name:'髖關節',flexN:'屈曲',extN:'伸展',flex:125,ext:10,base:-90,pose:'站立側面：腿自然下垂為 0°，向前抬為「屈曲」、向後伸為「伸展」。',look:[.8,-.7],camY:.3,dist:[13.8,15],ground:-3.62,el:[-1.25,.4]},
+  knee:{name:'膝關節',flexN:'屈曲',extN:'伸展',flex:140,ext:0,base:0,pose:'俯臥：小腿伸直為 0°，向上彎為「屈曲」。',look:[-.2,1.1],dist:[10.3,11.1],ground:-1.05,el:[0,-1.3]},
+  ankle:{name:'踝關節',flexN:'背屈',extN:'蹠屈',flex:20,ext:45,base:90,pose:'仰臥：腳掌與小腿垂直為 0°，腳尖往小腿方向為「背屈」、往下踩為「蹠屈」。',look:[.15,1.55],dist:[11.2,12.4],ground:-1.26,el:[.6,-1.0],lrA:.52,lrL:1.12}
+};
+const r1=v=>Math.round(v*10)/10,jTot=J=>J.flex+J.ext;
+let demoMeas=false,demoMF=null,demoME=null;
+let demoRAF=null,demoState='sig',demoLimb='arm',demoJ='elbow',demoCnt=1,demoBoth=false,demoXray=true,demoT0=0,demoReturnFocus=null;
+const reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ROMST={normal:{k:'normal',label:'正常',lost:0},rom:{k:'rom',label:'運動失能',lost:1/3,frac:'1/3'},sig:{k:'sig',label:'顯著運動失能',lost:1/2,frac:'1/2'},loss:{k:'loss',label:'喪失機能',lost:1}};
+const curState=()=>ROMST[demoState];
+
+/* ---------- 平面動畫（備援） ---------- */
+function dPt(cx,cy,r,a){const t=a*Math.PI/180;return [(cx+r*Math.cos(t)).toFixed(1),(cy-r*Math.sin(t)).toFixed(1)];}
+function sectorPath(cx,cy,r,a0,a1){if(a1-a0<=0.01)return '';const [x0,y0]=dPt(cx,cy,r,a0),[x1,y1]=dPt(cx,cy,r,a1);return `M${cx} ${cy} L${x0} ${y0} A${r} ${r} 0 ${(a1-a0)>180?1:0} 0 ${x1} ${y1} Z`;}
+function demoRenderSVG(st){
+  const J=JDEF[demoJ],T=jTot(J),S=150/T,cx=190,cy=180,R=140,lo=-J.ext*S,hi=J.flex*S,alo=lo*(1-st.lost),ahi=hi*(1-st.lost);
+  const wrap=$('#demoSvgWrap');wrap.hidden=false;$('#demo3d').hidden=true;
+  wrap.innerHTML=`<svg class="demo-svg" viewBox="0 0 420 285" role="img" aria-label="${J.name}活動範圍示意（簡化）">
+    <path d="${sectorPath(cx,cy,R,lo,hi)}" fill="none" stroke="#B7C5D1" stroke-dasharray="4 5"/>
+    ${st.lost<1?`<path d="${sectorPath(cx,cy,R,alo,ahi)}" fill="rgba(46,125,79,.13)" stroke="#2E7D4F" stroke-width="1.6"/>`:''}
+    ${st.lost>0?`<path d="${sectorPath(cx,cy,R,ahi,hi)}" fill="rgba(192,57,43,.12)" stroke="#C0392B"/><path d="${sectorPath(cx,cy,R,lo,alo)}" fill="rgba(192,57,43,.12)" stroke="#C0392B"/>`:''}
+    <line x1="${cx}" y1="${cy}" x2="${cx+R}" y2="${cy}" stroke="#234E70" stroke-dasharray="5 4"/>
+    <g id="demoFore"><rect x="${cx}" y="${cy-9}" width="${R-10}" height="18" rx="9" fill="#E7C3A8" stroke="#B57C5C"/><line x1="${cx}" y1="${cy}" x2="${cx+R-10}" y2="${cy}" stroke="#EFE6D2" stroke-width="5"/></g>
+    <circle cx="${cx}" cy="${cy}" r="12" fill="#B57C5C"/>
+    <text x="${cx}" y="${cy+40}" text-anchor="middle" style="font-size:12px;fill:#5A6B7A">${J.name}（簡化示意，0° 為虛線方向）</text>
+    <text id="demoPct" x="404" y="28" text-anchor="end" style="font-size:14px;font-weight:700;fill:#234E70"></text></svg>`;
+  const fore=document.getElementById('demoFore'),pct=document.getElementById('demoPct');
+  const draw=d=>{fore.setAttribute('transform',`rotate(${(-d*S).toFixed(2)} ${cx} ${cy})`);pct.textContent=st.lost>=1?'無法活動':`${d>=0?J.flexN:J.extN} ${Math.abs(Math.round(d))}°`;};
+  demoT0=performance.now();
+  const lo2=-J.ext*(1-st.lost),hi2=J.flex*(1-st.lost);
+  if(reduceMotion||st.lost>=1){draw(st.lost>=1?0:hi2);return;}
+  const tick=now=>{const t=(now-demoT0)/1000,p=.5-.5*Math.cos(t*1.6);draw(lo2+(hi2-lo2)*p);demoRAF=requestAnimationFrame(tick);};
+  demoRAF=requestAnimationFrame(tick);
+}
+
+/* ---------- 立體即時渲染（three.js r128，點開示範時才載入） ---------- */
+const THREE_URL='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+let threePromise=null,threeFailed=false,D3=null;
+function loadThree(){
+  if(window.THREE)return Promise.resolve(true);
+  if(threeFailed)return Promise.resolve(false);
+  if(!threePromise)threePromise=new Promise(res=>{
+    const s=document.createElement('script');s.src=THREE_URL;s.async=true;
+    const to=setTimeout(()=>{threeFailed=true;res(false);},7000);
+    s.onload=()=>{clearTimeout(to);res(!!window.THREE);};s.onerror=()=>{clearTimeout(to);threeFailed=true;res(false);};
+    document.head.appendChild(s);});
+  return threePromise;
+}
+const R3=3.35;
+function sectorGeo(a0,a1){return new THREE.CircleGeometry(R3,72,a0*Math.PI/180,Math.max(0.001,a1-a0)*Math.PI/180);}
+function arcGeo(a0,a1,r){const p=[],n=60;for(let i=0;i<=n;i++){const a=(a0+(a1-a0)*i/n)*Math.PI/180;p.push(new THREE.Vector3(r*Math.cos(a),r*Math.sin(a),0));}return new THREE.BufferGeometry().setFromPoints(p);}
+function tickGeo(a0,a1,base){const p=[];for(let d=Math.ceil((a0-base)/10)*10;d<=a1-base+.01;d+=10){const a=(base+d)*Math.PI/180,l=d%30===0?.26:.13;p.push(new THREE.Vector3(R3*Math.cos(a),R3*Math.sin(a),0),new THREE.Vector3((R3+l)*Math.cos(a),(R3+l)*Math.sin(a),0));}return new THREE.BufferGeometry().setFromPoints(p);}
+function lineGeo(a,r){const t=a*Math.PI/180;return new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(),new THREE.Vector3(r*Math.cos(t),r*Math.sin(t),0)]);}
+function setGeo(o,g){o.geometry.dispose();o.geometry=g;}
+function build3D(){
+  const T=THREE,host=$('#demo3d');
+  const renderer=new T.WebGLRenderer({antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+  renderer.outputEncoding=T.sRGBEncoding;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.0;
+  renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;
+  host.insertBefore(renderer.domElement,host.firstChild);
+  const scene=new T.Scene(),camera=new T.PerspectiveCamera(30,1.5,0.1,100);
+  scene.add(new T.HemisphereLight(0xffffff,0x9fb0c0,0.55));
+  const key=new T.DirectionalLight(0xfff1e4,1.4);key.position.set(3.5,7,6);key.castShadow=true;
+  key.shadow.mapSize.set(1024,1024);Object.assign(key.shadow.camera,{left:-8,right:8,top:8,bottom:-8});key.shadow.radius=5;key.shadow.bias=-0.0006;scene.add(key);
+  const rim=new T.DirectionalLight(0xcfe0ff,0.75);rim.position.set(-5,3,-6);scene.add(rim);
+  const ground=new T.Mesh(new T.PlaneGeometry(40,40),new T.ShadowMaterial({opacity:.16}));ground.rotation.x=-Math.PI/2;ground.receiveShadow=true;scene.add(ground);
+  const root=new T.Group();scene.add(root);
+  const skin=new T.MeshPhysicalMaterial({color:0x9A5536,roughness:.48,clearcoat:.18,clearcoatRoughness:.5});
+  const jointMat=new T.MeshPhysicalMaterial({color:0x8A4A2E,roughness:.42,clearcoat:.22,clearcoatRoughness:.45});
+  const boneMat=new T.MeshStandardMaterial({color:0xE9DEC6,roughness:.5,emissive:0x2a2418});
+  const tableM=new T.MeshStandardMaterial({color:0xD5DEE6,roughness:.85});
+  const ringMat=new T.MeshBasicMaterial({color:0x234E70});
+  const mk=(g,m)=>{const x=new T.Mesh(g,m||skin);x.castShadow=true;x.receiveShadow=true;return x;};
+  const limb=(L,r0,r1,pair)=>{const g=new T.CylinderGeometry(r1,r0,L,48,1);g.rotateZ(-Math.PI/2);g.translate(L/2,0,0);g.userData.limb={L,r0,r1,pair:!!pair};return g;};
+  const seg=(L,r0,r1,x,pair)=>{const o=mk(limb(L,r0,r1,pair));o.position.x=x||0;return o;};
+  const sph=(r,x,y,z,m)=>{const o=mk(new T.SphereGeometry(r,40,28),m);o.position.set(x||0,y||0,z||0);return o;};
+  const ell=(sx,sy,sz,x,y,z,rz)=>{const o=sph(1,x,y,z);o.scale.set(sx,sy,sz);o.rotation.z=rz||0;return o;};
+  const ring=r=>new T.Mesh(new T.TorusGeometry(r,.025,12,72),ringMat);
+  const table=(w,h,d,x,y)=>{const o=new T.Mesh(new T.BoxGeometry(w,h,d),tableM);o.position.set(x,y,0);o.receiveShadow=true;o.castShadow=true;return o;};
+  const B=(o)=>{o.userData.bone=1;return o;};
+  const bRod=(p,a,b,r)=>{const A=new T.Vector3(...a),Bv=new T.Vector3(...b),d=Bv.clone().sub(A),L=d.length();const m=B(new T.Mesh(new T.CylinderGeometry(r,r,L,14),boneMat));m.position.copy(A.clone().add(Bv).multiplyScalar(.5));m.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),d.normalize());p.add(m);[A,Bv].forEach(v=>{const k=B(new T.Mesh(new T.SphereGeometry(r*1.45,12,10),boneMat));k.position.copy(v);p.add(k);});};
+  const bEll=(p,sx,sy,sz,x,y,z)=>{const m=B(new T.Mesh(new T.SphereGeometry(1,24,16),boneMat));m.scale.set(sx,sy,sz);m.position.set(x,y,z);p.add(m);};
+  const hand=(p,x0)=>{
+    p.add(ell(.47,.37,.2,x0+.41,0,0));
+    [[.21,.44],[.07,.5],[-.07,.47],[-.21,.38]].forEach(([y,L],i)=>{const rz=-.1-i*.05,f=mk(limb(L,.075,.058));f.position.set(x0+.75,y*.92,0);f.rotation.z=rz;p.add(f);p.add(sph(.058,x0+.75+L*Math.cos(rz),y*.92+L*Math.sin(rz),0));bRod(p,[x0+.14,y*.8,0],[x0+.72,y*.9,0],.035);});
+    const th=mk(limb(.44,.095,.068));th.position.set(x0+.3,.27,.04);th.rotation.z=.72;p.add(th);p.add(sph(.068,x0+.3+.44*Math.cos(.72),.27+.44*Math.sin(.72),.04));
+    bRod(p,[x0+.06,.1,.02],[x0+.29,.26,.04],.04);[[.02,.08],[.06,-.06],[.1,.1],[.1,-.1]].forEach(([dx,dy])=>bEll(p,.06,.06,.08,x0+dx+.02,dy,0));
+  };
+  const legChain=(p)=>{p.add(seg(3.05,.62,.45));p.add(sph(.45,3.05));p.add(seg(2.6,.43,.24,3.05,true));p.add(sph(.25,5.65));
+    p.add(sph(.24,5.62,-.16,0));p.add(ell(.25,.62,.3,5.72,.42,0));p.add(ell(.2,.2,.3,5.76,1.0,0));
+    bEll(p,.2,.14,.16,5.62,-.12,0);[-.12,0,.12].forEach(z=>bRod(p,[5.7,.05,z],[5.74,.95,z],.035));};
+  const models={};
+  const model=(k,s)=>{const g=new T.Group(),pv=new T.Group();g.add(pv);g.scale.setScalar(s);g.visible=false;root.add(g);models[k]={g,pv};return [g,pv];};
+  { const [g,pv]=model('shoulder',.62);
+    const torso=mk(new T.CylinderGeometry(1.22,1.02,4.3,48,1));torso.scale.set(.78,1,1);torso.position.set(-.2,-2.05,-1.3);g.add(torso);
+    const chest=sph(1,-.05,-.75,-1.3);chest.scale.set(1.0,1.15,1.25);g.add(chest);
+    const neck=mk(new T.CylinderGeometry(.34,.4,.6,32));neck.position.set(-.15,.45,-1.3);g.add(neck);g.add(sph(.78,-.05,1.3,-1.3));
+    g.add(sph(.5,0,0,0,jointMat));g.add(ring(.66));
+    bEll(g,.45,.8,.08,-.55,-.7,-.45);bRod(g,[.05,.15,-.1],[-.1,.35,-1.3],.07);for(let i=0;i<9;i++)bEll(g,.16,.14,.16,-.75,.7-i*.5,-1.3);
+    pv.add(seg(2.65,.44,.36));pv.add(sph(.36,2.65,0,0,jointMat));pv.add(seg(2.15,.34,.26,2.65,true));pv.add(sph(.26,4.8));hand(pv,4.8);}
+  { const [g,pv]=model('elbow',1);
+    const sh=sph(.6,-2.65);sh.scale.set(1,1.06,1);g.add(sh);g.add(seg(2.65,.48,.37,-2.65));g.add(sph(.4,0,0,0,jointMat));g.add(ring(.56));
+    pv.add(seg(2.15,.36,.26,0,true));pv.add(sph(.26,2.15));hand(pv,2.15);}
+  { const [g,pv]=model('wrist',2.1);
+    g.add(table(2.5,.24,1.5,-1.55,-.44));g.add(sph(.34,-2.4,0,0,jointMat));g.add(seg(2.4,.34,.25,-2.4,true));g.add(sph(.26,0,0,0,jointMat));g.add(ring(.38));
+    hand(pv,0);}
+  { const [g,pv]=model('hip',.6);
+    const torso=mk(new T.CylinderGeometry(1.15,1.25,3.4,48,1));torso.scale.set(.8,1,1);torso.position.set(-.15,1.95,-1.0);g.add(torso);
+    const butt=sph(1,-.35,.25,-1.0);butt.scale.set(.95,.8,1.25);g.add(butt);
+    g.add(sph(.58,0,0,0,jointMat));g.add(ring(.74));
+    const other=new T.Group();other.position.z=-1.95;other.rotation.z=-Math.PI/2;g.add(other);legChain(other);
+    legChain(pv);
+    bEll(g,.62,.55,.22,-.15,.62,-.35);bEll(g,.62,.55,.22,-.15,.62,-1.65);bEll(g,.3,.45,.3,-.55,.55,-1.0);bEll(g,.28,.28,.28,0,0,0);
+    for(let i=0;i<6;i++)bEll(g,.18,.15,.18,-.7,1.2+i*.45,-1.0);}
+  { const [g,pv]=model('knee',1);
+    g.add(table(4.6,.3,2.4,-2.75,-.82));
+    const hp=sph(.78,-3.05);hp.scale.set(1,.86,1.08);g.add(hp);g.add(seg(3.05,.64,.45,-3.05));
+    g.add(sph(.48,0,0,0,jointMat));const pat=sph(1,.06,-.44,0,jointMat);pat.scale.set(.2,.1,.22);g.add(pat);g.add(ring(.68));bEll(g,.16,.08,.18,.06,-.4,0);
+    pv.add(seg(2.6,.45,.24,0,true));pv.add(ell(.95,.42,.4,.95,.1,0));pv.add(sph(.25,2.6));pv.add(sph(.24,2.6,.12,0));
+    pv.add(ell(.27,.64,.33,2.78,-.5,0,.12));pv.add(ell(.22,.2,.3,2.86,-1.08,0));
+    bEll(pv,.18,.14,.16,2.62,.08,0);[-.12,0,.12].forEach(z=>bRod(pv,[2.72,-.12,z],[2.84,-1.0,z],.035));}
+  { const [g,pv]=model('ankle',1.62);
+    g.add(table(3.4,.3,1.8,-1.8,-.62));g.add(seg(2.6,.43,.25,-2.6,true));g.add(ell(.95,.4,.4,-1.65,-.1,0));
+    g.add(sph(.27,0,0,0,jointMat));g.add(ring(.4));bEll(g,.18,.16,.18,0,0,0);
+    pv.add(sph(.31,-.16,-.24,0));pv.add(ell(.55,.38,.36,.4,-.04,0));pv.add(ell(.46,.25,.38,.98,-.12,0,-.08));pv.add(ell(.17,.17,.36,1.42,-.17,0));
+    bEll(pv,.28,.18,.2,-.12,-.2,0);[-.2,-.1,0,.1,.2].forEach(z=>bRod(pv,[.22,-.05,z],[1.3,-.15,z],.03));}
+  // 為每段肢體自動加入長骨（前臂、小腿為雙骨）
+  const limbs=[];root.traverse(o=>{if(o.isMesh&&o.geometry.userData&&o.geometry.userData.limb)limbs.push(o);});
+  limbs.forEach(m=>{const {L,r0,r1,pair}=m.geometry.userData.limb,rm=Math.min(r0,r1),rb=rm*(pair?.2:.3),zs=pair?[-rm*.32,rm*.32]:[0];
+    zs.forEach(z=>{const b=B(new T.Mesh(new T.CylinderGeometry(rb,rb,L*.86,14),boneMat));b.rotation.z=-Math.PI/2;b.position.set(L/2,0,z);m.add(b);
+      [L*.07,L*.93].forEach(x=>{const k=B(new T.Mesh(new T.SphereGeometry(rb*1.6,14,10),boneMat));k.position.set(x,0,z);m.add(k);});});});
+  const bones=[];root.traverse(o=>{if(o.userData.bone)bones.push(o);});
+  // 活動範圍：可活動扇形、兩端喪失扇形、刻度、量角器兩臂
+  const mA=new T.MeshBasicMaterial({color:0x2E7D4F,transparent:true,opacity:.22,side:T.DoubleSide,depthWrite:false});
+  const mL=new T.MeshBasicMaterial({color:0xC0392B,transparent:true,opacity:.16,side:T.DoubleSide,depthWrite:false});
+  const secA=new T.Mesh(sectorGeo(0,70),mA),secH=new T.Mesh(sectorGeo(70,140),mL),secLo=new T.Mesh(sectorGeo(0,1),mL);
+  [secA,secH,secLo].forEach(m=>{m.renderOrder=2;root.add(m);});
+  const arcA=new T.Line(arcGeo(0,70,R3),new T.LineBasicMaterial({color:0x2E7D4F})),arcH=new T.Line(arcGeo(70,140,R3),new T.LineBasicMaterial({color:0xC0392B})),arcLo=new T.Line(arcGeo(0,1,R3),new T.LineBasicMaterial({color:0xC0392B}));root.add(arcA,arcH,arcLo);
+  const ticks=new T.LineSegments(tickGeo(0,140,0),new T.LineBasicMaterial({color:0x8FA4B6}));root.add(ticks);
+  const outer=new T.Line(arcGeo(0,140,R3+.26),new T.LineDashedMaterial({color:0xB7C5D1,dashSize:.12,gapSize:.1}));outer.computeLineDistances();root.add(outer);
+  const armFix=new T.Line(lineGeo(0,R3*1.08),new T.LineDashedMaterial({color:0x234E70,dashSize:.16,gapSize:.1}));armFix.computeLineDistances();root.add(armFix);
+  const movMat=new T.LineBasicMaterial({color:0x234E70}),armMov=new T.Line(lineGeo(0,R3*1.08),movMat);root.add(armMov);
+  const degArc=new T.Line(arcGeo(0,1,.95),new T.LineBasicMaterial({color:0x234E70}));root.add(degArc);
+  const ghostMat=new T.MeshBasicMaterial({color:0x7FB3D5,transparent:true,opacity:.24,depthWrite:false});
+  D3={ghostMat,ghosts:{},lo:0,hi:70,tlo:0,thi:70,renderer,scene,camera,root,ground,models,skin,jointMat,bones,pivot:models.elbow.pv,jk:null,secA,secH,secLo,arcA,arcH,arcLo,ticks,outer,armFix,armMov,movMat,degArc,ringMat,f:1,tf:1,yaw:-.3,pitch:.05,w:480,h:320,last:0,cyc:-1,st:curState()};
+  root.rotation.set(D3.pitch,D3.yaw,0);
+  const cv=renderer.domElement,clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+  cv.addEventListener('pointerdown',e=>{D3.drag={x:e.clientX,y:e.clientY,yaw:D3.yaw,pitch:D3.pitch};cv.setPointerCapture(e.pointerId);cv.classList.add('grab');});
+  cv.addEventListener('pointermove',e=>{if(!D3.drag)return;D3.yaw=clamp(D3.drag.yaw+(e.clientX-D3.drag.x)*.009,-1.1,.25);D3.pitch=clamp(D3.drag.pitch+(e.clientY-D3.drag.y)*.004,-.2,.38);});
+  const end=()=>{D3.drag=null;cv.classList.remove('grab');};cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);
+  cv.addEventListener('dblclick',()=>{D3.yaw=-.3;D3.pitch=.05;});
+  if(window.ResizeObserver)new ResizeObserver(()=>fit3D()).observe(host);
+  setXray(demoXray);
+}
+function setXray(on){demoXray=on;const sg=$('#demoStage');if(sg)sg.classList.toggle('xray',on&&!!D3);if(!D3)return;[D3.skin,D3.jointMat].forEach(m=>{m.transparent=on;m.opacity=on?.26:1;m.depthWrite=!on;m.needsUpdate=true;});D3.bones.forEach(b=>b.visible=on);}
+function set3DJoint(jk){
+  const J=JDEF[jk];D3.jk=jk;
+  Object.entries(D3.models).forEach(([k,m])=>{m.g.visible=k===jk;m.pv.rotation.z=J.base*Math.PI/180;});
+  D3.pivot=D3.models[jk].pv;
+  Object.values(D3.ghosts).forEach(g=>g.visible=false);
+  if(!D3.ghosts[jk]){const gh=D3.pivot.clone(true);gh.traverse(o=>{if(o.userData.bone)o.visible=false;else if(o.isMesh){o.material=D3.ghostMat;o.castShadow=false;o.receiveShadow=false;}});D3.models[jk].g.add(gh);D3.ghosts[jk]=gh;}
+  D3.ghosts[jk].rotation.z=(J.base+J.flex)*Math.PI/180;
+  setGeo(D3.ticks,tickGeo(J.base-J.ext,J.base+J.flex,J.base));
+  setGeo(D3.outer,arcGeo(J.base-J.ext,J.base+J.flex,R3+.26));D3.outer.computeLineDistances();
+  setGeo(D3.armFix,lineGeo(J.base,R3*1.08));D3.armFix.computeLineDistances();
+  D3.ground.position.y=J.ground;fit3D();
+}
+function fit3D(){
+  if(!D3||!D3.jk)return;const host=$('#demo3d');const w=host.clientWidth;if(!w)return;
+  const J=JDEF[D3.jk],h=Math.round(w/1.5);D3.w=w;D3.h=h;D3.renderer.setSize(w,h,false);D3.camera.aspect=w/h;
+  const dist=w<440?J.dist[1]:J.dist[0];D3.camera.position.set(J.look[0],J.look[1]+(J.camY==null?1.0:J.camY),dist);D3.camera.lookAt(J.look[0],J.look[1],0);D3.camera.updateProjectionMatrix();
+}
+function updSectors(lo,hi){ // 相對 0° 的可活動區間
+  const J=JDEF[D3.jk],b=J.base,L0=b-J.ext,H0=b+J.flex,alo=Math.max(L0,Math.min(H0,b+lo)),ahi=Math.max(alo,Math.min(H0,b+hi));
+  setGeo(D3.secA,sectorGeo(alo,ahi));setGeo(D3.arcA,arcGeo(alo,ahi,R3));
+  setGeo(D3.secH,sectorGeo(ahi,H0));setGeo(D3.arcH,arcGeo(ahi,H0,R3));
+  setGeo(D3.secLo,sectorGeo(L0,alo));setGeo(D3.arcLo,arcGeo(L0,alo,R3));
+  D3.secA.visible=D3.arcA.visible=ahi-alo>.5;D3.secH.visible=D3.arcH.visible=H0-ahi>.5;D3.secLo.visible=D3.arcLo.visible=alo-L0>.5;
+}
+const easeIO=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+function romRel(t,lo,hi,hiLim,loLim){
+  if(hi-lo<.5){const c=t%2.6;return {d:lo+(c<.7?Math.sin(c*42)*1.4*Math.sin(c/.7*Math.PI):0),hit:c<.7};}
+  const bump=(k,on)=>on?2.2*Math.abs(Math.sin(k*17))*Math.exp(-k*8):0,c=t%4.4;
+  if(c<1.6)return {d:lo+(hi-lo)*easeIO(c/1.6),hit:false};
+  if(c<2.2)return {d:hi-bump(c-1.6,hiLim),hit:hiLim&&c<2.05};
+  if(c<3.8)return {d:hi+(lo-hi)*easeIO((c-2.2)/1.6),hit:false};
+  return {d:lo+bump(c-3.8,loLim),hit:loLim&&c<4.25};
+}
+function place(el,x,y,z){const v=new THREE.Vector3(x,y,z);D3.root.localToWorld(v);v.project(D3.camera);el.style.left=((v.x+1)/2*D3.w)+'px';el.style.top=((1-v.y)/2*D3.h)+'px';}
+function demo3DLoop(now){
+  const dt=Math.min(.3,D3.last?(now-D3.last)/1000:.016);D3.last=now;
+  const st=D3.st,J=JDEF[D3.jk];
+  if(Math.abs(D3.tlo-D3.lo)>.05||Math.abs(D3.thi-D3.hi)>.05){const k=1-Math.exp(-dt*9);D3.lo+=(D3.tlo-D3.lo)*k;D3.hi+=(D3.thi-D3.hi)*k;if(Math.abs(D3.tlo-D3.lo)<=.05&&Math.abs(D3.thi-D3.hi)<=.05){D3.lo=D3.tlo;D3.hi=D3.thi;}updSectors(D3.lo,D3.hi);}
+  const t=(now-demoT0)/1000,r=reduceMotion?{d:D3.thi,hit:false}:romRel(t,D3.lo,D3.hi,D3.hi<J.flex-.5,D3.lo>-J.ext+.5),abs=J.base+r.d;
+  D3.pivot.rotation.z=abs*Math.PI/180;
+  setGeo(D3.armMov,lineGeo(abs,R3*1.08));
+  setGeo(D3.degArc,Math.abs(r.d)>.5?arcGeo(Math.min(J.base,abs),Math.max(J.base,abs),.95):arcGeo(J.base,J.base+.01,.95));
+  D3.root.rotation.y+=(D3.yaw-D3.root.rotation.y)*Math.min(1,dt*9);D3.root.rotation.x+=(D3.pitch-D3.root.rotation.x)*Math.min(1,dt*9);
+  D3.secH.material.opacity=r.hit?.34:.16;D3.movMat.color.setHex(r.hit?0xC0392B:0x234E70);
+  D3.ringMat.color.setHex(st.lost>=1||r.hit?0xC0392B:0x234E70);
+  D3.renderer.render(D3.scene,D3.camera);D3.root.updateMatrixWorld();
+  const rad=a=>a*Math.PI/180,rA=R3*(J.lrA||.64),rL=R3*(J.lrL||.64),b=J.base,lo_=D3.lo,hi_=D3.hi,locked=hi_-lo_<.5;
+  const av=$('#d3Av'),lo=$('#d3Lo'),lo2=$('#d3Lo2'),dg=$('#d3Deg'),gh=$('#d3Gh');
+  av.hidden=locked;lo.hidden=!(locked||J.flex-hi_>3);lo2.hidden=locked||!(lo_+J.ext>12);
+  if(!av.hidden){const a=rad(b+(lo_+hi_)/2);place(av,rA*Math.cos(a),rA*Math.sin(a),0);}
+  if(!lo.hidden){const a=rad(locked?b+(J.flex-J.ext)/2:b+(hi_+J.flex)/2);place(lo,rL*Math.cos(a),rL*Math.sin(a),0);}
+  if(!lo2.hidden){const a=rad(b+(lo_-J.ext)/2);place(lo2,rL*Math.cos(a),rL*Math.sin(a),0);}
+  gh.hidden=!(D3.ghosts&&D3.ghosts[D3.jk]&&D3.ghosts[D3.jk].visible);if(!gh.hidden){const a=rad(b+J.flex);place(gh,R3*1.18*Math.cos(a),R3*1.18*Math.sin(a),0);}
+  dg.hidden=Math.abs(r.d)<3;if(!dg.hidden){const a=rad(b+r.d/2);place(dg,1.45*Math.cos(a),1.45*Math.sin(a),0);dg.textContent=Math.round(Math.abs(r.d))+'°';}
+  place($('#d3El'),J.el[0],J.el[1],0);
+  const lk=$('#d3Lock');lk.hidden=st.lost<1;
+  if(!lk.hidden){place(lk,0,0,.6);const cyc=Math.floor(t/2.6);if(cyc!==D3.cyc&&!reduceMotion){D3.cyc=cyc;lk.classList.remove('pulse');void lk.offsetWidth;lk.classList.add('pulse');}}
+  $('#d3Pct').textContent=st.lost>=1?'0°':Math.round(Math.abs(r.d))+'°';
+  $('#d3Cap').textContent=st.lost>=1?'完全強直・無法活動':(r.d>=0?J.flexN:J.extN)+`｜可活動 ${r1(Math.max(0,D3.thi-D3.tlo))}°／正常 ${jTot(J)}°`;
+  demoRAF=requestAnimationFrame(demo3DLoop);
+}
+
+/* ---------- 共用 ---------- */
+function romRange(){const J=JDEF[demoJ],T=jTot(J);
+  if(demoMeas&&(demoMF!=null||demoME!=null)){const f=demoMF||0,e=demoME||0,tot=Math.max(0,f+e),lost=Math.max(0,1-tot/T),k=tot<=0?'loss':lost>=.5?'sig':lost>=1/3?'rom':'normal';
+    let lo=-Math.min(e,J.ext),hi=Math.min(f,J.flex);if(hi<lo)hi=lo;return {k,lo,hi,tot,lost,meas:true};}
+  const s=ROMST[demoState];return {k:demoState,lo:-J.ext*(1-s.lost),hi:J.flex*(1-s.lost),tot:T*(1-s.lost),lost:s.lost,meas:false};}
+function demoInfoHTML(st){
+  const J=JDEF[demoJ],T=jTot(J),R=romRange();
+  const calc=R.meas?`<span class="di-desc g-calc">實測：${J.flexN} ${demoMF||0}°＋${J.extN} ${demoME||0}°＝<b>${r1(R.tot)}°</b>；正常 ${T}°；喪失 (${T}−${r1(R.tot)})÷${T}＝<b>${Math.round(R.lost*1000)/10}%</b>${R.lost>=.5?'（≧ 1/2）':R.lost>=1/3?'（≧ 1/3）':'（未達 1/3）'}</span>`:'';
+  if(st.lost<=0)return calc+`<span class="di-desc">關節活動度數未喪失 1/3 以上（${J.name}正常 ${T}°），不符合運動失能。</span>`;
+  const id=romItemId(demoLimb,st.k,demoCnt,demoBoth),it=itemInfo(id),g=it[2],amt=amount(g);
+  const cond=st.lost>=1?'完全強直或完全麻痺':`可活動度數 ≦ ${r1(T*(1-st.lost))}°（喪失 ${st.frac} 以上）`;
+  return calc+`<span class="di-desc">${J.name}${cond}；範圍：${demoBoth?'兩側':'單側'}${LIMBS[demoLimb].limb}${['','三大關節中有一大關節','三大關節中有二大關節','三大關節均'][demoCnt]} → <b>第 ${id} 項</b>：${esc(it[1])}</span>
+    <span class="badge ${badgeCls(g)}">第${CN[g-1]}等級</span><span style="color:var(--sub)">${fmt(days(g))} 日</span><span class="di-num">${amt===null?'—':'試算 NT$ '+fmt(amt)}</span>`;
+}
+function demoDegTable(){
+  return `<table class="mini" style="margin-top:8px"><thead><tr><th>關節</th><th>正常範圍</th><th>合計</th><th>喪失 1/3（可動 ≦）</th><th>喪失 1/2（可動 ≦）</th></tr></thead><tbody>${LIMBS[demoLimb].joints.map(j=>{const J=JDEF[j],T=jTot(J);return `<tr${j===demoJ?' style="background:#FBEEEC;font-weight:700"':''}><td>${J.name}</td><td>${J.flexN} ${J.flex}°${J.ext?`／${J.extN} ${J.ext}°`:''}</td><td>${T}°</td><td>${r1(T*2/3)}°</td><td>${r1(T/2)}°</td></tr>`;}).join('')}</tbody></table>`;
+}
+function demoRender(){
+  const R0=romRange();if(R0.meas)demoState=R0.k;
+  const st=curState(),J=JDEF[demoJ];
+  $('#demoTitle').textContent=`關節活動範圍怎麼看？以${J.name}為例`;
+  $('#demoPose').textContent=J.pose;$('#d3El').textContent=J.name;
+  $('#demoInfo').innerHTML=demoInfoHTML(st);$('#demoDegTbl').innerHTML=demoDegTable();
+  const on=(sel,attr,val)=>document.querySelectorAll(sel).forEach(b=>{const o=b.dataset[attr]===String(val);b.classList.toggle('on',o);b.setAttribute('aria-pressed',o?'true':'false');});
+  on('#demoSeg button','k',demoState);on('#demoJSeg button','j',demoJ);on('#demoCnt button','c',demoCnt);on('#demoSide button','b',demoBoth?1:0);
+  $('#demoScope').classList.toggle('dim',st.lost<=0);$('#demoSeg').classList.toggle('dim',demoMeas);$('#xrayChk').checked=demoXray;$('#demoStage').classList.toggle('xray',demoXray&&!!D3);
+  cancelAnimationFrame(demoRAF);demoT0=performance.now();
+  if(D3){
+    $('#demoSvgWrap').hidden=true;$('#demo3d').hidden=false;
+    const jc=D3.jk!==demoJ;if(jc)set3DJoint(demoJ);else fit3D();
+    const R=romRange();D3.st=st;D3.tlo=R.lo;D3.thi=R.hi;D3.cyc=-1;if(jc){D3.lo=R.lo;D3.hi=R.hi;updSectors(R.lo,R.hi);}
+    D3.ghosts[demoJ].visible=R.lost>0;
+    $('#d3Av').textContent=`可活動 ${r1(R.tot)}°`;$('#d3Lo').textContent=st.lost>=1?'完全強直':`喪失 ≧ ${st.frac}`;$('#d3Lo2').textContent=`喪失（${J.extN}側）`;
+    D3.last=0;demoRAF=requestAnimationFrame(demo3DLoop);
+  }else demoRenderSVG(st);
+}
+function buildDemoModal(){
+  if($('#demoModal'))return;
+  const m=document.createElement('div');m.className='demo-modal';m.id='demoModal';
+  m.innerHTML=`<div class="demo-box" role="dialog" aria-modal="true" aria-labelledby="demoTitle">
+    <div class="demo-head"><h3 id="demoTitle"></h3><button type="button" class="demo-close" id="demoClose" aria-label="關閉示範">×</button></div>
+    <p class="demo-sub">先選關節與狀態，看「還能動幾度」如何對應失能等級；角度依關節生理運動範圍一覽表，以骨骼長軸量測。</p>
+    <div class="demo-jseg" id="demoJSeg" role="group" aria-label="選擇關節"></div>
+    <div class="demo-seg" id="demoSeg" role="group" aria-label="關節狀態">${Object.values(ROMST).map(s=>`<button type="button" data-k="${s.k}">${s.label}</button>`).join('')}</div>
+    <div class="demo-scope" id="demoScope"><span>範圍</span><div id="demoCnt">${[1,2,3].map(c=>`<button type="button" data-c="${c}">${['','一大關節','二大關節','三大關節均'][c]}</button>`).join('')}</div><div id="demoSide"><button type="button" data-b="0">單側</button><button type="button" data-b="1">兩側</button></div></div>
+    <div class="demo-meas"><label class="xr-toggle"><input type="checkbox" id="measChk"> 輸入診斷書實測角度</label><span id="measIn"></span></div>
+    <div class="demo-poserow"><p class="demo-pose" id="demoPose"></p><label class="xr-toggle"><input type="checkbox" id="xrayChk"> 透視骨骼</label></div>
+    <div class="demo-stage" id="demoStage">
+      <div class="demo3d" id="demo3d" hidden>
+        <div class="d3-read"><b id="d3Pct">0°</b><span id="d3Cap"></span></div>
+        <span class="d3-lbl av" id="d3Av"></span><span class="d3-lbl lo" id="d3Lo"></span><span class="d3-lbl lo" id="d3Lo2"></span><span class="d3-lbl deg" id="d3Deg"></span><span class="d3-lbl el" id="d3El"></span><span class="d3-lbl gh" id="d3Gh" hidden>健側可達</span>
+        <span class="d3-lock" id="d3Lock" hidden><svg viewBox="0 0 18 20" width="13" height="14" aria-hidden="true"><rect x="1" y="8" width="16" height="12" rx="2.5" fill="#fff"/><path d="M4.5 8.5V6a4.5 4.5 0 0 1 9 0v2.5" fill="none" stroke="#fff" stroke-width="2.2"/></svg></span>
+        <span class="d3-hint">虛線＝近端骨長軸・實線＝遠端骨長軸・可拖曳旋轉</span>
+      </div>
+      <div id="demoSvgWrap"></div>
+    </div>
+    <div class="demo-info" id="demoInfo" aria-live="polite"></div>
+    <div id="demoDegTbl"></div><div id="demoCards"></div>
+    <details class="notes" id="demoNotesWrap" style="margin-top:10px;border:1px solid var(--line);border-radius:10px"><summary>認定重點</summary><ul id="demoNotes"></ul></details>
+    <p class="demo-disc">角度依「上、下肢關節生理運動範圍一覽表」；失能喪失的範圍在圖中平均分配到兩個方向示意，實際以診斷書「關節活動範圍度數表」及勞保局審定為準。</p>
+  </div>`;
+  document.body.appendChild(m);
+  m.addEventListener('click',e=>{if(e.target===m)closeDemo();});
+  $('#demoClose').addEventListener('click',closeDemo);
+  $('#demoSeg').addEventListener('click',e=>{const b=e.target.closest('button');if(b){demoState=b.dataset.k;demoRender();}});
+  $('#demoJSeg').addEventListener('click',e=>{const b=e.target.closest('button');if(b){demoJ=b.dataset.j;demoMF=demoME=null;buildMeas();demoRender();}});
+  $('#demoCnt').addEventListener('click',e=>{const b=e.target.closest('button');if(b){demoCnt=+b.dataset.c;demoRender();}});
+  $('#demoSide').addEventListener('click',e=>{const b=e.target.closest('button');if(b){demoBoth=b.dataset.b==='1';demoRender();}});
+  $('#xrayChk').addEventListener('change',e=>setXray(e.target.checked));
+  $('#measChk').addEventListener('change',e=>{demoMeas=e.target.checked;buildMeas();demoRender();});
+  $('#measIn').addEventListener('input',e=>{const v=e.target.value===''?null:+e.target.value;if(e.target.id==='measF')demoMF=v;if(e.target.id==='measE')demoME=v;demoRender();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&m.classList.contains('open'))closeDemo();});
+}
+function openDemo(id,trigger){
+  buildDemoModal();
+  const [lb,st,cnt,both]=DEMOS[id]||['arm','sig',1,false];demoLimb=lb;demoState=st;demoCnt=cnt;demoBoth=both;demoJ=LIMBS[lb].def;demoReturnFocus=trigger||null;
+  $('#demoJSeg').innerHTML=LIMBS[lb].joints.map(j=>`<button type="button" data-j="${j}">${JDEF[j].name}</button>`).join('');
+  $('#demoNotes').innerHTML=LIMBS[lb].notes.map(n=>'<li>'+esc(n)+'</li>').join('');$('#demoNotesWrap').open=false;
+  demoMeas=false;demoMF=demoME=null;buildMeas();$('#demoCards').innerHTML=infoCards('rom');
+  $('#demoModal').classList.add('open');document.body.style.overflow='hidden';
+  demoRender();$('#demoClose').focus();
+  if(!D3)loadThree().then(ok=>{
+    if(!ok||D3)return;
+    try{$('#demo3d').hidden=false;build3D();}catch(err){console.warn('3D 初始化失敗，改用平面動畫',err);D3=null;threeFailed=true;$('#demo3d').hidden=true;return;}
+    if($('#demoModal').classList.contains('open'))demoRender();
+  });
+}
+function buildMeas(){const J=JDEF[demoJ];$('#measChk').checked=demoMeas;$('#measIn').innerHTML=demoMeas?`<label class="g-num"><span>${J.flexN}</span><input type="number" id="measF" value="${demoMF==null?'':demoMF}" placeholder="例 ${Math.round(J.flex/2)}"><i>°</i></label><label class="g-num"><span>${J.extN}</span><input type="number" id="measE" value="${demoME==null?'':demoME}" placeholder="例 ${Math.round(J.ext/2)}"><i>°</i></label><i class="g-hint">伸展不足可填負數</i>`:'';}
+function closeDemo(){cancelAnimationFrame(demoRAF);$('#demoModal').classList.remove('open');document.body.style.overflow='';if(demoReturnFocus)demoReturnFocus.focus();}
+document.addEventListener('click',e=>{const b=e.target.closest('.demo-btn');if(!b)return;const d=b.dataset.demo;GDEMO[d]?openG(d,b):LLD_DEMOS[d]!=null?openLld(d,b):TOE_DEMOS[d]?openToe(d,b):FINGER_DEMOS[d]?openFinger(d,b):openDemo(d,b);});
+
+
+/* ================= 每個示範的三張小卡：診斷書填哪裡／治療時間軸／常見誤區 ================= */
+const LV3='開具醫院須符合適當層級（診斷書應注意事項 3）。';
+const INFO={
+ rom:{form:'第 12 頁「拾貳、肢體缺損或機能失能」第 4 點：上、下肢體各關節活動範圍度數表（屈曲、伸展、可活動度數，左右分填）。'+LV3,m:12,t:'治療一年以上；手術者最後一次手術後一年（拔釘除外）',my:['看的是「屈曲＋伸展」合計度數，不是只看單一方向。','置換人工關節不等於假關節；置換後仍喪失 1/3 以上，可依運動失能申請。','類風濕、痛風所致關節失能，關節間隙完整、藥物可緩解者不給付。']},
+ finger:{form:'第 12～13 頁：依 X 光結果於手部圖標示缺損位置；手指關節可活動度數表（中手指節、近位、遠位指節關節）。',m:12,t:'關節機能失能須治療一年以上（手術後一年）；切斷缺損以症狀固定時開具',my:['只切掉指尖、未達末節 1/2，屬「指骨一部分缺損」，不是手指缺損。','拇指以指節間關節、其他指以近位指節間關節為缺損界線。','同一手指同時有機能與器質失能，按較高等級，不合併升等。']},
+ toe:{form:'第 13 頁：依 X 光結果於足部圖標示缺損位置；腳趾關節可活動度數表。',m:12,t:'關節機能失能依下肢規定須治療一年以上；切斷缺損以症狀固定時開具',my:['第二～五趾「自末關節以上切斷」就屬喪失機能。','「足趾缺損」須自中足趾關節切斷、整根足趾不見。','缺損加上其他足趾喪失機能時，可能按各趾均以喪失機能計的較高等級審定。']},
+ lld:{form:'第 12 頁「拾貳」第 3 點：縮短失能（長短腳），左、右下肢分別填公分數。',m:null,t:'以症狀固定時量測；應輔以雙下肢站立全長 X 光（含長度標尺）',my:['是「患側與健側」比較，不是和一般人比較。','未達 3 公分不給付；3 公分以上 12-8、5 公分以上 12-7。','站立全長 X 光須附長度標尺。']},
+ mind:{form:'第 2 頁「壹、精神失能詳況」：外觀、情感、行為、思想、認知、職業社交功能、日常生活、治療種類及 MMSE／WAIS／CDR 分數。',m:24,t:'治療二年以上',my:['量表分數是佐證，不是等級門檻。','憂鬱症須經 3 線以上抗憂鬱藥物治療仍顯著失能才可開具。','未曾住院但已終身無工作能力者，須附最近 2 年病歷。']},
+ nerve:{form:'第 3～4 頁「貳、神經失能詳況」：意識、呼吸、肌力 0～5 級、行動、起臥、工作能力、攝食、大小便、Rankin 量表等。',m:6,t:'治療六個月以上；手術者最後一次手術後六個月',my:['失智症的失能詳況填在第 2 頁精神失能欄。','Rankin、Hoehn-Yahr 等量表是佐證，不是等級門檻。','截癱、偏癱造成的關節失能應綜合觀察，不逐一關節審定。']},
+ organ:{form:'第 7～10 頁「玖、胸腹部臟器失能詳況」：各臟器檢查數值、切除或移植、造口，及意識、行動、工作能力等欄。'+LV3,m:6,t:'治療六個月以上；器質性切除、移植或初次透析於出院日／初次透析日審定',my:['二種以上臟器併存，綜合審定，不得各自計算後合併升等。','膀胱機能失能須由泌尿科專科醫師認定。','肝臟第十二等級無需住院；其他等級須住院觀察滿 6 個月。']},
+ eye:{form:'第 5 頁「叁、眼失能」：測盲檢查結果、初診與診斷失能時矯正前後視力；其他眼失能附最近 3 個月報告。'+LV3,m:null,t:'以症狀固定、再治療無法改善時開具',my:['以「矯正後」視力為準，不是裸視。','視力、視野失能須通過測盲（Malingering）檢查。','眼瞼失能不受醫院層級限制，其他眼失能須適當層級醫院。']},
+ ear:{form:'第 5 頁「肆、聽覺失能」：二次 PTA、ABR、SRT 結果及初診、診斷失能時右左耳平均閾值。'+LV3,m:null,t:'附最近 3 個月內二次純音聽力檢查（間隔 24 小時以上）',my:['兩次 PTA 各頻率相差超過 10 dB，檢查不具可信度。','平均閾值只取 500Hz、1kHz、2kHz。','兩耳分別看等級再升等是錯的，應綜合審定。']},
+ nose:{form:'診斷書無鼻部專欄：填於第 13 頁「拾叁、其他失能」，詳述缺損範圍或機能檢查結果。',m:null,t:'以症狀固定時開具',my:['「鼻部缺損」須外部軟骨缺損二分之一以上。','嗅覺須「兩側完全喪失」才算機能顯著失能。']},
+ mouth:{form:'第 6 頁「伍、咀嚼吞嚥」「陸、言語」「柒、牙齒」（牙齒須在齒列圖標示）。'+LV3,m:6,t:'最後一次手術（或放化療終止）後六個月以上；全喉切除不在此限',my:['疾病造成的牙齒缺損不給付，須為意外傷害。','咀嚼機能失能指牙齒以外原因（頰、舌、顎骨、下顎關節等）。','構音以 7 種語音計：5 種以上不能＝喪失，3 種以上＝顯著失能。']},
+ face:{form:'第 6 頁「捌、頭、臉、頸部缺損」勾選部位與大小，並在頭像繪圖標示。',m:12,t:'治療一年以上；手術者最後一次手術後一年',my:['須附症狀固定後 4×6 近距離彩色照片，含量尺與拍攝日期。','眼瞼、鼻、耳廓缺損各有項目，不列入頭臉頸。']},
+ skin:{form:'第 11 頁「拾、身體皮膚排汗失能」：喪失百分比、最後手術日期，並附燒燙傷相片或圖畫。'+LV3,m:12,t:'最後一次外科手術後一年以上（未手術者治療一年以上）',my:['頭、臉、頸部面積不計入。','一手掌約等於體表面積 1%。','71% 以上仍須「終身無工作能力」才是第二等級。']},
+ spine:{form:'第 11 頁「拾壹、脊柱失能」：X 光骨折／脫位、固定節數、頸椎與胸腰椎屈伸度數、畸形；附最近 3 個月正側面 X 光。'+LV3,m:12,t:'治療一年以上；手術者最後一次手術後一年（拔釘除外）',my:['固定 3 椎體 2 椎間盤以下不給付。','畸形與運動失能屬同一種類，不合併升等。','顯著畸形應加附穿著衣服所攝照片。']},
+ amp:{form:'第 12 頁「拾貳」第 1、2 點：上、下肢缺損（截肢）位置，並依 X 光於肢體圖標示。',m:null,t:'以症狀固定時開具',my:['「以上」指在該關節或更靠近身體處切斷。','截肢未達腕、足關節者，改看手指、足趾項目。']},
+ lbone:{form:'第 12 頁肢體欄並附 X 光；無適合欄位時於第 13 頁「拾叁、其他失能」詳述。',m:12,t:'治療一年以上；手術者最後一次手術後一年（拔釘除外）',my:['人工關節不是假關節。','僅骨痂增生或骨幹肥厚，通常不認定為畸形。']}
+};
+function timeBar(m){const X=v=>8+v/24*84;return `<div class="ic-tl"><div class="ic-tlbar"><i style="width:${m?X(m):0}%"></i></div>${[[0,'事故'],[6,'6 個月'],[12,'1 年'],[24,'2 年']].map(([v,l])=>`<span style="left:${X(v)}%" class="${m===v?'on':''}">${l}</span>`).join('')}</div>`;}
+function infoCards(k){const c=INFO[k];if(!c)return '';
+  return `<div class="ic-grid"><div class="ic"><h4>診斷書填哪裡</h4><p>${esc(c.form)}</p></div><div class="ic"><h4>治療多久才能申請</h4>${c.m?timeBar(c.m):''}<p>${esc(c.t)}</p></div><div class="ic ic-my"><h4>常見誤區</h4><ul>${c.my.map(x=>'<li>'+esc(x)+'</li>').join('')}</ul></div></div>`;}
+/* ================= 透視骨骼共用（手指、足趾、下肢縮短） ================= */
+let fXray=true,tXray=true,lldXray=true;
+function xBones(seg,top,w,meta){let s='',acc=0;const bw=w*.34,st='fill="#F3ECDD" stroke="#A89B84" stroke-width=".8"';
+  seg.forEach(L=>{const a=-acc,e=-(acc+L);acc+=L;const vt=Math.max(e,top);if(a-vt>3)s+=`<rect x="${-bw/2}" y="${vt+1.3}" width="${bw}" height="${a-vt-2.6}" rx="${bw*.4}" ${st}/>`;});
+  return s+`<rect x="${-bw*.55}" y="3" width="${bw*1.1}" height="${meta}" rx="${bw*.45}" ${st}/>`;}
+/* ================= 手指切斷位置互動圖（11-5～11-22、11-45～11-59） ================= */
+const FINGERS=[
+  {k:'T',name:'拇指',x:94,y:272,w:34,seg:[52,42],ang:-50},
+  {k:'I',name:'食指',x:120,y:200,w:30,seg:[58,34,28],ang:-8},
+  {k:'M',name:'中指',x:160,y:192,w:32,seg:[64,38,30],ang:-2},
+  {k:'R',name:'無名指',x:199,y:197,w:30,seg:[60,35,28],ang:4},
+  {k:'L',name:'小指',x:234,y:210,w:26,seg:[46,27,24],ang:11}
+];
+const FLV=[
+  {label:'正常',color:'#9FB2C2'},
+  {label:'指骨一部分缺損',sub:'指骨部分損失、未達末節 1/2（X 光可見）',color:'#A8790A'},
+  {label:'末節切斷 ≧ 1/2',sub:'屬「手指喪失機能」',color:'#C2571A'},
+  {label:'手指缺損',sub:'拇指由指節間關節、其他指由近位指節間關節以上切斷',color:'#B02A21'}
+];
+/* 各項目預設示範狀態：C＝缺損、F＝末節切斷≧1/2（喪失機能）、P＝指骨一部分缺損 */
+const FINGER_DEMOS={
+  '11-5':{C:'TIMRL',both:1},'11-6':{C:'T',both:1},'11-7':{C:'TIMRL'},'11-8':{C:'T'},'11-9':{C:'I'},'11-10':{C:'M'},'11-11':{C:'L'},
+  '11-12':{C:'TIMR'},'11-13':{C:'TIM'},'11-14':{C:'TI'},'11-15':{C:'TMR'},'11-16':{C:'TM'},'11-17':{C:'IM'},'11-18':{C:'MRL'},'11-19':{C:'MR'},
+  '11-20':{P:'T'},'11-21':{P:'I'},'11-22':{P:'M'},
+  '11-45':{F:'TIMRL',both:1},'11-46':{F:'T',both:1},'11-47':{F:'TIMRL'},'11-48':{F:'T'},'11-49':{F:'I'},'11-50':{F:'M'},'11-51':{F:'L'},
+  '11-52':{F:'TIMR'},'11-53':{F:'TIM'},'11-54':{F:'TI'},'11-55':{F:'TMR'},'11-56':{F:'TM'},'11-57':{F:'IM'},'11-58':{F:'MRL'},'11-59':{F:'MR'}
+};
+let fState={T:0,I:0,M:0,R:0,L:0},fBoth=false,fReturn=null;
+const fName=k=>FINGERS.find(f=>f.k===k).name;
+function itemInfo(id){for(const c of CATS)for(const g of c.groups)for(const it of g.items)if(it[0]===id)return it;return null;}
+function lossItem(S){const n=S.length,T=S.includes('T'),I=S.includes('I');
+  if(n===5)return '11-7';if(n===4)return T&&I?'11-12':'11-15';
+  if(n===3)return T&&I?'11-13':(T||I)?'11-15':'11-18';
+  if(n===2)return T&&I?'11-14':T?'11-16':I?'11-17':'11-19';
+  return T?'11-8':I?'11-9':S[0]==='L'?'11-11':'11-10';}
+function funcItem(S){const n=S.length,T=S.includes('T'),I=S.includes('I');
+  if(n===5)return '11-47';if(n===4)return T&&I?'11-52':'11-55';
+  if(n===3)return T&&I?'11-53':(T||I)?'11-55':'11-58';
+  if(n===2)return T&&I?'11-54':T?'11-56':I?'11-57':'11-59';
+  return T?'11-48':I?'11-49':S[0]==='L'?'11-51':'11-50';}
+const partItem=k=>k==='T'?'11-20':k==='I'?'11-21':'11-22';
+function fingerEval(){
+  const order=FINGERS.map(f=>f.k),by=lv=>order.filter(k=>fState[k]===lv);
+  const C=by(3),F=by(2),P=by(1),res={items:[],notes:[]};
+  if(!C.length&&!F.length&&!P.length)return res;
+  if(fBoth){
+    const onlyC=!F.length&&!P.length,onlyF=!C.length&&!P.length;
+    if(onlyC&&C.length===5){res.items.push({id:'11-5'});return res;}
+    if(onlyC&&C.join('')==='T'){res.items.push({id:'11-6'});return res;}
+    if(onlyF&&F.length===5){res.items.push({id:'11-45'});return res;}
+    if(onlyF&&F.join('')==='T'){res.items.push({id:'11-46'});return res;}
+  }
+  const tag=fBoth?'左右手各一項':'';
+  if(C.length)res.items.push({id:lossItem(C),tag});
+  if(F.length)res.items.push({id:funcItem(F),tag});
+  P.forEach(k=>res.items.push({id:partItem(k),tag:(tag?tag+'・':'')+fName(k)}));
+  const pairCF=C.length&&F.length;
+  if(pairCF){
+    const U=order.filter(k=>fState[k]>=2),alt=funcItem(U);
+    res.notes.push(`同一手同時有「手指缺損」與其他手指「喪失機能」：依審核基準，原則上可合併提高等級或按合計額審定，但未達第七等級者按第八等級審定；若結果低於各該手指均以喪失機能計算的等級，可按後者審定。本例 ${U.map(fName).join('、')} 以喪失機能計，對應第 ${alt} 項（第${CN[itemGrade(alt)-1]}等級）。`);
+  }
+  const cnt=res.items.length*(fBoth?2:1);
+  if(cnt>=2&&!(pairCF&&cnt===2))res.notes.push('符合兩個以上失能項目：依勞工保險失能給付標準第五條，按最高等級核定，並依規定升等（兩項以上均在第十四至第一等級間升一級、均在第八至第一等級間升二級、均在第五至第一等級間升三級，升等後不得超過各項分別計算之合計額）。實際等級以勞保局審定為準。');
+  if(F.length)res.notes.push('「喪失機能」也包括中手指節關節或近位指節間關節（拇指為中手指節或指節間關節）喪失生理運動範圍 1/2 以上；本圖只示範末節切斷這一種情形。');
+  return res;
+}
+function fingerSVG(f,lv){
+  const L=f.seg.reduce((a,b)=>a+b,0),pd=f.seg[f.seg.length-1],hw=f.w/2,ref=-f.seg[0];
+  const cut=lv===3?ref:lv===2?-(L-.6*pd):lv===1?-(L-.28*pd):null,top=cut===null?-L:cut;
+  const joints=[];let acc=0;f.seg.slice(0,-1).forEach(s=>{acc+=s;joints.push(-acc);});
+  let g=`<g class="fg" data-f="${f.k}" transform="translate(${f.x} ${f.y}) rotate(${f.ang})" tabindex="0" role="button" aria-label="${f.name}：${FLV[lv].label}，按一下切換">`;
+  g+=`<rect class="fg-hit" x="${-hw-7}" y="${-L-18}" width="${f.w+14}" height="${L+30}" rx="10" fill="transparent"/>`;
+  if(cut!==null)g+=`<rect x="${-hw}" y="${-L}" width="${f.w}" height="${L+cut}" rx="${hw}" fill="rgba(192,57,43,.05)" stroke="#C0392B" stroke-opacity=".5" stroke-dasharray="4 3"/>`;
+  g+=`<rect x="${-hw}" y="${top}" width="${f.w}" height="${14-top}" rx="${cut===null?hw:6}" fill="url(#fgSkin)" fill-opacity="${fXray?.42:1}" stroke="#8E5A40" stroke-opacity=".35"/>`;if(fXray)g+=xBones(f.seg,top,f.w,f.k==='T'?40:62);
+  joints.forEach(jy=>{if(jy>top+5)g+=`<path d="M${-hw*.55} ${jy} q${hw*.55} 3 ${hw*1.1} 0" stroke="#8E5A40" stroke-opacity=".55" fill="none" stroke-width="1.3"/>`;});
+  if(cut===null)g+=`<rect x="${-hw*.55}" y="${-L+4}" width="${f.w*.55}" height="${pd*.55}" rx="${hw*.45}" fill="#F4DCCD" stroke="#C99A85" stroke-width="1"/>`;
+  else g+=`<line x1="${-hw-4}" y1="${cut}" x2="${hw+4}" y2="${cut}" stroke="${FLV[lv].color}" stroke-width="3.2" stroke-linecap="round"/>`;
+  g+=`<line x1="${-hw-8}" y1="${ref}" x2="${hw+8}" y2="${ref}" stroke="#234E70" stroke-width="1.1" stroke-dasharray="2 3"/>`;
+  g+=`<text x="0" y="${-L-7}" text-anchor="middle" style="font-size:11px;font-weight:700;fill:${lv?FLV[lv].color:'#5A6B7A'}">${f.name}</text></g>`;
+  return g;
+}
+function fingerRender(){
+  const [T,...rest]=FINGERS;
+  $('#fgSvg').innerHTML=`<defs>
+    <linearGradient id="fgSkin" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C08466"/><stop offset=".45" stop-color="#F1CFB6"/><stop offset="1" stop-color="#BB7F61"/></linearGradient>
+    <radialGradient id="fgPalm" cx=".45" cy=".35" r=".75"><stop offset="0" stop-color="#F3D5BF"/><stop offset=".7" stop-color="#DDA98A"/><stop offset="1" stop-color="#C48A6B"/></radialGradient>
+    <linearGradient id="fgWrist" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D9A585"/><stop offset="1" stop-color="#D9A585" stop-opacity="0"/></linearGradient>
+    <filter id="fgSh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#1E2B38" flood-opacity=".18"/></filter>
+  </defs>
+  <g filter="url(#fgSh)">
+    ${rest.map(f=>fingerSVG(f,fState[f.k])).join('')}
+    <rect x="130" y="338" width="86" height="40" fill="url(#fgWrist)"/>
+    <path d="M104 200 Q160 186 250 206 L262 300 Q258 340 216 350 L130 350 Q98 342 94 300 Z" fill="url(#fgPalm)" fill-opacity="${fXray?.45:1}" stroke="#8E5A40" stroke-opacity=".25"/>
+    <ellipse cx="120" cy="296" rx="28" ry="40" transform="rotate(-28 120 296)" fill="url(#fgPalm)" fill-opacity="${fXray?.4:1}"/>${fXray?[[150,318],[170,314],[190,316],[210,320],[160,332],[182,332],[204,334]].map(([x,y])=>`<rect x="${x-9}" y="${y-6}" width="18" height="12" rx="5" fill="#F3ECDD" stroke="#A89B84" stroke-width=".8"/>`).join(''):''}
+    ${fingerSVG(T,fState.T)}
+  </g>
+  <text x="178" y="300" text-anchor="middle" style="font-size:11px;fill:#8E5A40;opacity:.75">右手手背</text>`;
+  $('#fgChips').innerHTML=FINGERS.map(f=>`<button type="button" class="fg-chip" data-f="${f.k}" data-lv="${fState[f.k]}"><b>${f.name}</b><i>${FLV[fState[f.k]].label}</i></button>`).join('');
+  $('#fgBoth').checked=fBoth;$('#fgSvg').parentNode.classList.toggle('xray',fXray);
+  const r=fingerEval();
+  $('#fgResult').innerHTML=!r.items.length?`<p class="fg-empty">點選手指，標示切斷位置後，這裡會顯示對應的失能項目。</p>`:
+    r.items.map(o=>{const it=itemInfo(o.id),g=it[2],amt=amount(g);
+      return `<div class="fg-item"><div class="fg-item-top"><span class="item-id">${o.id}</span><span class="badge ${badgeCls(g)}">第${CN[g-1]}等級</span>${o.tag?`<span class="fg-tag">${esc(o.tag)}</span>`:''}<span style="color:var(--sub)">${fmt(days(g))} 日</span><span class="di-num">${amt===null?'—':'試算 NT$ '+fmt(amt)}</span></div><div style="margin-top:4px">${esc(it[1])}</div></div>`;}).join('')+
+    r.notes.map(n=>`<div class="fg-note">${esc(n)}</div>`).join('');
+}
+function fingerCycle(k){fState[k]=(fState[k]+1)%4;fingerRender();const el=document.querySelector(`#fgSvg .fg[data-f="${k}"]`);if(el&&document.activeElement&&document.activeElement.closest&&document.activeElement.closest('#fgSvg'))el.focus();}
+function buildFingerModal(){
+  if($('#fingerModal'))return;
+  const m=document.createElement('div');m.className='demo-modal';m.id='fingerModal';
+  m.innerHTML=`<div class="demo-box" role="dialog" aria-modal="true" aria-labelledby="fgTitle">
+    <div class="demo-head"><h3 id="fgTitle">手指切斷位置怎麼看？</h3><button type="button" class="demo-close" id="fgClose" aria-label="關閉示範">×</button></div>
+    <p class="demo-sub">點手指（或下方按鈕）切換切斷位置：正常 → 指骨一部分缺損 → 末節切斷 ≧ 1/2 → 手指缺損。藍色虛線是「手指缺損」的基準關節。</p>
+    <div class="fg-stage"><svg id="fgSvg" viewBox="-6 34 284 340" role="group" aria-label="右手手背示意圖"></svg></div>
+    <div class="fg-chips" id="fgChips"></div>
+    <div class="fg-tools"><label><input type="checkbox" id="fgBoth"> 另一手的情形也相同</label><label><input type="checkbox" id="fgX" checked> 透視骨骼</label><button type="button" id="fgClear">全部清除</button></div>
+    <div class="fg-legend">${FLV.slice(1).map(l=>`<span><i style="background:${l.color}"></i><span><b style="color:${l.color}">${l.label}</b>：${l.sub}</span></span>`).join('')}<span><i style="background:transparent;border-top:2px dashed #234E70;border-radius:0;height:0;margin-top:8px"></i><span><b style="color:var(--navy)">基準關節</b>：拇指＝指節間關節，其他指＝近位指節間關節</span></span></div>
+    <div class="fg-result" id="fgResult" aria-live="polite"></div><div id="fgCards"></div>
+    <details class="notes" style="margin-top:10px;border:1px solid var(--line);border-radius:10px"><summary>認定重點</summary><ul>
+      <li>「手指缺損」：拇指由指節間關節以上切斷；其他各指由近位指節間關節以上切斷。</li>
+      <li>「指骨一部分缺損」：指骨缺損一部分，由 X 光可明確顯示指骨有一部分損失，而未達該指末節二分之一。</li>
+      <li>「手指喪失機能」包括拇指或其他各指之末節切斷達二分之一以上，也包括關節喪失生理運動範圍二分之一以上（本圖未示範關節部分）。</li>
+      <li>同一手指併存「機能失能」及「器質失能」時，按其中較高等級給與，不得合併提高等級。</li>
+      <li>診斷書須依 X 光拍攝結果，在手部圖標示失能部位；手指缺損由全民健康保險特約醫院或診所出具即可。</li>
+    </ul></details>
+    <p class="demo-disc">圖為示意，切斷位置以 X 光及診斷書為準；實際等級以勞保局審定為準。</p>
+  </div>`;
+  document.body.appendChild(m);
+  m.addEventListener('click',e=>{if(e.target===m)closeFinger();});
+  $('#fgClose').addEventListener('click',closeFinger);
+  $('#fgSvg').addEventListener('click',e=>{const g=e.target.closest('.fg');if(g)fingerCycle(g.dataset.f);});
+  $('#fgSvg').addEventListener('keydown',e=>{if(e.key!=='Enter'&&e.key!==' ')return;const g=e.target.closest('.fg');if(g){e.preventDefault();fingerCycle(g.dataset.f);}});
+  $('#fgChips').addEventListener('click',e=>{const b=e.target.closest('.fg-chip');if(b)fingerCycle(b.dataset.f);});
+  $('#fgBoth').addEventListener('change',e=>{fBoth=e.target.checked;fingerRender();});$('#fgX').addEventListener('change',e=>{fXray=e.target.checked;fingerRender();});
+  $('#fgClear').addEventListener('click',()=>{FINGERS.forEach(f=>fState[f.k]=0);fBoth=false;fingerRender();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&m.classList.contains('open'))closeFinger();});
+}
+function openFinger(id,trigger){
+  buildFingerModal();fReturn=trigger||null;
+  const p=FINGER_DEMOS[id]||{};FINGERS.forEach(f=>fState[f.k]=0);
+  (p.P||'').split('').forEach(k=>fState[k]=1);(p.F||'').split('').forEach(k=>fState[k]=2);(p.C||'').split('').forEach(k=>fState[k]=3);
+  fBoth=!!p.both;fingerRender();$('#fgCards').innerHTML=infoCards('finger');
+  $('#fingerModal').classList.add('open');document.body.style.overflow='hidden';$('#fgClose').focus();
+}
+function closeFinger(){$('#fingerModal').classList.remove('open');document.body.style.overflow='';if(fReturn)fReturn.focus();}
+
+/* ================= 足趾切斷位置互動圖（12-9～12-17、12-40～12-48） ================= */
+const TOES=[
+  {k:'1',name:'第一趾',x:118,y:152,w:40,seg:[34,30],ang:-4},
+  {k:'2',name:'第二趾',x:156,y:142,w:25,seg:[22,14,12],ang:2},
+  {k:'3',name:'第三趾',x:184,y:148,w:23,seg:[19,12,11],ang:6},
+  {k:'4',name:'第四趾',x:209,y:158,w:21,seg:[16,11,10],ang:11},
+  {k:'5',name:'第五趾',x:231,y:173,w:19,seg:[13,9,9],ang:17}
+];
+const TLV=[
+  {label:'正常',color:'#9FB2C2'},
+  {label:'足趾喪失機能（切斷）',sub:'第一趾末節切斷 1/2 以上；第二～五趾自末關節以上切斷',color:'#C2571A'},
+  {label:'足趾缺損',sub:'自中足趾關節切斷，足趾全部缺損',color:'#B02A21'}
+];
+const TOE_DEMOS={
+  '12-9':{C:'12345',both:1},'12-10':{C:'12345'},'12-11':{C:'1'},'12-12':{C:'2'},'12-13':{C:'12'},'12-14':{C:'234'},'12-15':{C:'23'},'12-16':{C:'345'},'12-17':{C:'3'},
+  '12-40':{F:'12345',both:1},'12-41':{F:'12345'},'12-42':{F:'1'},'12-43':{F:'2'},'12-44':{F:'12'},'12-45':{F:'234'},'12-46':{F:'23'},'12-47':{F:'345'},'12-48':{F:'3'}
+};
+let tState={1:0,2:0,3:0,4:0,5:0},tBoth=false,tReturn=null;
+const tName=k=>TOES.find(t=>t.k===k).name;
+function toeItem(S,kind){ // kind: 'C' 缺損 / 'F' 喪失機能
+  const n=S.length,h1=S.includes('1'),h2=S.includes('2'),x=kind==='C'?
+    {all:'12-10',one1:'12-11',with1:'12-13',four:'12-11',s2_3:'12-14',s2_2:'12-15',s2_1:'12-12',t345:'12-16',rest:'12-17'}:
+    {all:'12-41',one1:'12-42',with1:'12-44',four:'12-42',s2_3:'12-45',s2_2:'12-46',s2_1:'12-43',t345:'12-47',rest:'12-48'};
+  if(n===5)return x.all;
+  if(h1)return n===1?x.one1:x.with1;
+  if(n===4)return x.four;
+  if(h2)return n===3?x.s2_3:n===2?x.s2_2:x.s2_1;
+  return n===3?x.t345:x.rest;
+}
+function toeEval(){
+  const order=TOES.map(t=>t.k),by=lv=>order.filter(k=>tState[k]===lv);
+  const C=by(2),F=by(1),res={items:[],notes:[]};
+  if(!C.length&&!F.length)return res;
+  if(tBoth){
+    if(C.length===5&&!F.length){res.items.push({id:'12-9'});return res;}
+    if(F.length===5&&!C.length){res.items.push({id:'12-40'});return res;}
+  }
+  const tag=tBoth?'左右腳各一項':'';
+  if(C.length)res.items.push({id:toeItem(C,'C'),tag});
+  if(F.length)res.items.push({id:toeItem(F,'F'),tag});
+  const pair=C.length&&F.length;
+  if(pair){
+    const U=order.filter(k=>tState[k]>=1),alt=toeItem(U,'F');
+    res.notes.push(`同一足同時有「足趾缺損」與其他足趾「喪失機能」：準用手指規定，原則上可合併提高等級或按合計額審定；若結果低於各該足趾均以喪失機能計算的等級，可按後者審定（附表舉例：第三趾缺損＋第一趾喪失機能，按 12-44 第十一等級）。本例 ${U.map(tName).join('、')} 以喪失機能計，對應第 ${alt} 項（第${CN[itemGrade(alt)-1]}等級）。`);
+  }
+  const cnt=res.items.length*(tBoth?2:1);
+  if(cnt>=2&&!(pair&&cnt===2))res.notes.push('符合兩個以上失能項目：依勞工保險失能給付標準第五條，按最高等級核定，並依規定升等（兩項以上均在第十四至第一等級間升一級、均在第八至第一等級間升二級、均在第五至第一等級間升三級，升等後不得超過各項分別計算之合計額）。實際等級以勞保局審定為準。');
+  if(F.length)res.notes.push('「足趾喪失機能」也包括關節活動受限：第一趾中足趾關節或趾關節、第二趾中足趾關節或第一趾關節喪失生理運動範圍 1/2 以上；第三～五趾中足趾關節及第一趾關節均完全強直。本圖只示範切斷這一種情形。');
+  return res;
+}
+function toeSVG(t,lv){
+  const L=t.seg.reduce((a,b)=>a+b,0),pd=t.seg[t.seg.length-1],hw=t.w/2;
+  const fRef=t.k==='1'?-(L-.5*pd):-(t.seg[0]+t.seg[1]); // 喪失機能基準：第一趾末節一半、其他趾末關節
+  const cut=lv===2?0:lv===1?(t.k==='1'?-(L-.62*pd):fRef):null,top=cut===null?-L:cut;
+  const joints=[];let acc=0;t.seg.slice(0,-1).forEach(s=>{acc+=s;joints.push(-acc);});
+  let g=`<g class="fg" data-t="${t.k}" transform="translate(${t.x} ${t.y}) rotate(${t.ang})" tabindex="0" role="button" aria-label="${t.name}：${TLV[lv].label}，按一下切換">`;
+  g+=`<rect class="fg-hit" x="${-hw-5}" y="${-L-18}" width="${t.w+10}" height="${L+26}" rx="9" fill="transparent"/>`;
+  if(cut!==null)g+=`<rect x="${-hw}" y="${-L}" width="${t.w}" height="${L+cut}" rx="${hw*.9}" fill="rgba(192,57,43,.05)" stroke="#C0392B" stroke-opacity=".5" stroke-dasharray="3 3"/>`;
+  if(top<0)g+=`<rect x="${-hw}" y="${top}" width="${t.w}" height="${8-top}" rx="${cut===null?hw*.9:5}" fill="url(#tfSkin)" fill-opacity="${tXray?.42:1}" stroke="#8E5A40" stroke-opacity=".35"/>`;if(tXray)g+=xBones(t.seg,top,t.w,t.k==='1'?64:56);
+  joints.forEach(jy=>{if(jy>top+4)g+=`<path d="M${-hw*.5} ${jy} q${hw*.5} 2.5 ${hw} 0" stroke="#8E5A40" stroke-opacity=".5" fill="none" stroke-width="1.1"/>`;});
+  if(cut===null)g+=`<rect x="${-hw*.55}" y="${-L+3}" width="${t.w*.55}" height="${pd*.55}" rx="${hw*.4}" fill="#F4DCCD" stroke="#C99A85" stroke-width=".9"/>`;
+  else g+=`<line x1="${-hw-4}" y1="${cut}" x2="${hw+4}" y2="${cut}" stroke="${TLV[lv].color}" stroke-width="3" stroke-linecap="round"/>`;
+  g+=`<line x1="${-hw-3}" y1="${fRef}" x2="${hw+3}" y2="${fRef}" stroke="#234E70" stroke-width=".9" stroke-dasharray="2 2"/>`;
+  g+=`<text x="0" y="${-L-6}" text-anchor="middle" style="font-size:9px;font-weight:700;fill:${lv?TLV[lv].color:'#5A6B7A'}">${t.k}</text></g>`;
+  return g;
+}
+function toeRender(){
+  $('#tfSvg').innerHTML=`<defs>
+    <linearGradient id="tfSkin" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C08466"/><stop offset=".45" stop-color="#F1CFB6"/><stop offset="1" stop-color="#BB7F61"/></linearGradient>
+    <radialGradient id="tfFoot" cx=".45" cy=".3" r=".8"><stop offset="0" stop-color="#F3D5BF"/><stop offset=".7" stop-color="#DDA98A"/><stop offset="1" stop-color="#C48A6B"/></radialGradient>
+    <filter id="tfSh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#1E2B38" flood-opacity=".18"/></filter>
+  </defs>
+  <g filter="url(#tfSh)">
+    <path d="M96 160 Q160 132 246 176 Q262 236 250 300 Q244 372 206 404 Q170 428 136 406 Q106 376 108 300 Q104 232 96 160 Z" fill="url(#tfFoot)" fill-opacity="${tXray?.45:1}" stroke="#8E5A40" stroke-opacity=".25"/>
+    ${TOES.map(t=>toeSVG(t,tState[t.k])).join('')}
+  </g>
+  <text x="176" y="262" text-anchor="middle" style="font-size:9px;fill:#8E5A40;opacity:.75">右腳腳背（前足）</text>`;
+  $('#tfChips').innerHTML=TOES.map(t=>`<button type="button" class="fg-chip" data-t="${t.k}" data-lv="${tState[t.k]?tState[t.k]+1:0}"><b>${t.name}</b><i>${['正常','喪失機能','缺損'][tState[t.k]]}</i></button>`).join('');
+  $('#tfBoth').checked=tBoth;$('#tfSvg').parentNode.classList.toggle('xray',tXray);
+  const r=toeEval();
+  $('#tfResult').innerHTML=!r.items.length?`<p class="fg-empty">點選足趾，標示切斷位置後，這裡會顯示對應的失能項目。</p>`:
+    r.items.map(o=>{const it=itemInfo(o.id),g=it[2],amt=amount(g);
+      return `<div class="fg-item"><div class="fg-item-top"><span class="item-id">${o.id}</span><span class="badge ${badgeCls(g)}">第${CN[g-1]}等級</span>${o.tag?`<span class="fg-tag">${esc(o.tag)}</span>`:''}<span style="color:var(--sub)">${fmt(days(g))} 日</span><span class="di-num">${amt===null?'—':'試算 NT$ '+fmt(amt)}</span></div><div style="margin-top:4px">${esc(it[1])}</div></div>`;}).join('')+
+    r.notes.map(n=>`<div class="fg-note">${esc(n)}</div>`).join('');
+}
+function toeCycle(k){tState[k]=(tState[k]+1)%3;toeRender();const inSvg=document.activeElement&&document.activeElement.closest&&document.activeElement.closest('#tfSvg');if(inSvg){const el=document.querySelector(`#tfSvg .fg[data-t="${k}"]`);if(el)el.focus();}}
+function buildToeModal(){
+  if($('#toeModal'))return;
+  const m=document.createElement('div');m.className='demo-modal';m.id='toeModal';
+  m.innerHTML=`<div class="demo-box" role="dialog" aria-modal="true" aria-labelledby="tfTitle">
+    <div class="demo-head"><h3 id="tfTitle">足趾切斷位置怎麼看？</h3><button type="button" class="demo-close" id="tfClose" aria-label="關閉示範">×</button></div>
+    <p class="demo-sub">點足趾（或下方按鈕）切換：正常 → 喪失機能（切斷）→ 足趾缺損。藍色虛線是「喪失機能」的切斷基準，足趾根部（中足趾關節）是「缺損」的基準。</p>
+    <div class="fg-stage"><svg id="tfSvg" viewBox="84 70 184 200" role="group" aria-label="右腳腳背示意圖"></svg></div>
+    <div class="fg-chips" id="tfChips"></div>
+    <div class="fg-tools"><label><input type="checkbox" id="tfBoth"> 另一腳的情形也相同</label><label><input type="checkbox" id="tfX" checked> 透視骨骼</label><button type="button" id="tfClear">全部清除</button></div>
+    <div class="fg-legend">${TLV.slice(1).map(l=>`<span><i style="background:${l.color}"></i><span><b style="color:${l.color}">${l.label}</b>：${l.sub}</span></span>`).join('')}<span><i style="background:transparent;border-top:2px dashed #234E70;border-radius:0;height:0;margin-top:8px"></i><span><b style="color:var(--navy)">喪失機能基準</b>：第一趾＝末節一半，其他趾＝末關節</span></span></div>
+    <div class="fg-result" id="tfResult" aria-live="polite"></div><div id="tfCards"></div>
+    <details class="notes" style="margin-top:10px;border:1px solid var(--line);border-radius:10px"><summary>認定重點</summary><ul>
+      <li>「足趾缺損」：自中足趾關節切斷而足趾全部缺損。</li>
+      <li>「足趾喪失機能」（切斷）：第一趾末節切斷二分之一以上；第二趾自末關節以上切斷；第三、四、五趾末關節以上切斷。</li>
+      <li>「足趾喪失機能」也包括關節活動受限（第一趾中足趾關節或趾關節、第二趾中足趾關節或第一趾關節喪失生理運動範圍二分之一以上；第三～五趾中足趾關節及第一趾關節均完全強直），本圖未示範。</li>
+      <li>一足足趾缺損，同時其他足趾喪失機能：準用手指缺損審核規定，可合併提高等級或按合計額審定；若低於各趾以喪失機能計算的等級，可按後者審定。</li>
+      <li>診斷書須依 X 光拍攝結果，在足部圖標示失能部位；由全民健康保險特約醫院或診所出具即可。</li>
+    </ul></details>
+    <p class="demo-disc">圖為示意，切斷位置以 X 光及診斷書為準；實際等級以勞保局審定為準。</p>
+  </div>`;
+  document.body.appendChild(m);
+  m.addEventListener('click',e=>{if(e.target===m)closeToe();});
+  $('#tfClose').addEventListener('click',closeToe);
+  $('#tfSvg').addEventListener('click',e=>{const g=e.target.closest('.fg');if(g)toeCycle(g.dataset.t);});
+  $('#tfSvg').addEventListener('keydown',e=>{if(e.key!=='Enter'&&e.key!==' ')return;const g=e.target.closest('.fg');if(g){e.preventDefault();toeCycle(g.dataset.t);}});
+  $('#tfChips').addEventListener('click',e=>{const b=e.target.closest('.fg-chip');if(b)toeCycle(b.dataset.t);});
+  $('#tfBoth').addEventListener('change',e=>{tBoth=e.target.checked;toeRender();});$('#tfX').addEventListener('change',e=>{tXray=e.target.checked;toeRender();});
+  $('#tfClear').addEventListener('click',()=>{TOES.forEach(t=>tState[t.k]=0);tBoth=false;toeRender();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&m.classList.contains('open'))closeToe();});
+}
+function openToe(id,trigger){
+  buildToeModal();tReturn=trigger||null;
+  const p=TOE_DEMOS[id]||{};TOES.forEach(t=>tState[t.k]=0);
+  (p.F||'').split('').forEach(k=>tState[k]=1);(p.C||'').split('').forEach(k=>tState[k]=2);
+  tBoth=!!p.both;toeRender();$('#tfCards').innerHTML=infoCards('toe');
+  $('#toeModal').classList.add('open');document.body.style.overflow='hidden';$('#tfClose').focus();
+}
+function closeToe(){$('#toeModal').classList.remove('open');document.body.style.overflow='';if(tReturn)tReturn.focus();}
+
+
+/* ================= 下肢縮短互動示意（12-7、12-8） ================= */
+const LLD_DEMOS={'12-7':6,'12-8':4};
+const LLD_BASE=88,LLD_PX=3.1,LLD_EXAG=2; // 健側長度示意值 88 公分；圖中差距放大 2 倍
+let lldCm=4,lldSide='R',lldReturn=null;
+function lldItem(cm){return cm>=5?'12-7':cm>=3?'12-8':null;}
+function lldSVG(){
+  const floor=372,footH=12,Lh=LLD_BASE*LLD_PX,dpx=lldCm*LLD_PX*LLD_EXAG,sides=['R','L'];
+  const hx={R:118,L:202},len={R:Lh,L:Lh};len[lldSide]-=dpx;
+  const hy={R:floor-footH-len.R,L:floor-footH-len.L},ankY=floor-footH;
+  const dir={R:-1,L:1}; // 外側方向（病人右側在畫面左）
+  const leg=s=>{
+    const kx=hx[s]-dir[s]*6,ky=hy[s]+.52*(ankY-hy[s]),ax=hx[s]-dir[s]*9;
+    const thigh=`M${hx[s]-28} ${hy[s]} L${hx[s]+28} ${hy[s]} L${kx+17} ${ky} L${kx-17} ${ky} Z`;
+    const shank=`M${kx-16} ${ky} Q${kx-18} ${ky+40} ${ax-10} ${ankY} L${ax+10} ${ankY} Q${kx+18} ${ky+40} ${kx+16} ${ky} Z`;
+    const xo=lldXray?.4:1;return `<g opacity="${xo}"><path d="${thigh}" fill="url(#llSkin)" stroke="#D9A585" stroke-width="5" stroke-linejoin="round"/>
+      <path d="${shank}" fill="url(#llSkin)" stroke="#D9A585" stroke-width="4" stroke-linejoin="round"/>
+      <ellipse cx="${kx}" cy="${ky}" rx="17" ry="19" fill="url(#llSkin)"/></g>
+      <ellipse cx="${ax-dir[s]*2}" cy="${floor-6}" rx="22" ry="8" fill="url(#llSkin)"/>
+      <circle cx="${ax-dir[s]*11}" cy="${ankY-4}" r="4" fill="#C98F6E"/>`;
+  };
+  const asis=s=>[hx[s]+dir[s]*14,hy[s]-26],mal=s=>{const ax=hx[s]-dir[s]*9;return [ax-dir[s]*11,ankY-4];};
+  const avg=(hy.R+hy.L)/2;
+  const W1=[hx.R-30,hy.R-56],W2=[hx.L+30,hy.L-56];
+  const shorts=`M${W1} L${W2} L${hx.L+36} ${hy.L+16} L${hx.L-16} ${hy.L+36} L160 ${avg+20} L${hx.R+16} ${hy.R+36} L${hx.R-36} ${hy.R+16} Z`;
+  const torso=`M${W1[0]+4} ${W1[1]} L${W2[0]-4} ${W2[1]} L${W2[0]-8} ${W2[1]-44} L${W1[0]+8} ${W1[1]-44} Z`;
+  const pelvis=`<path d="${torso}" fill="url(#llTorso)"/><path d="${shorts}" fill="url(#llShorts)" opacity="${lldXray?.28:1}" stroke="#3E5C77" stroke-width="5" stroke-linejoin="round"/><line x1="${W1[0]}" y1="${W1[1]}" x2="${W2[0]}" y2="${W2[1]}" stroke="#2C4760" stroke-width="4" stroke-linecap="round"/>`;
+  const tape=s=>{
+    const [x1,y1]=asis(s),[x2,y2]=mal(s),aff=s===lldSide,col=aff&&lldCm>0?'#C0392B':'#234E70';
+    const cm=aff?LLD_BASE-lldCm:LLD_BASE,tx=s==='R'?Math.min(x1,x2)-10:Math.max(x1,x2)+10,ty=(y1+y2)/2;
+    return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${col}" stroke-width="2" stroke-dasharray="6 4"/>
+      <circle cx="${x1}" cy="${y1}" r="4.5" fill="#fff" stroke="${col}" stroke-width="2"/><circle cx="${x2}" cy="${y2}" r="4.5" fill="#fff" stroke="${col}" stroke-width="2"/>
+      <text x="${tx}" y="${ty-8}" text-anchor="${s==='R'?'end':'start'}" style="font-size:11px;fill:${col};font-weight:700">${aff?'患側':'健側'}</text>
+      <text x="${tx}" y="${ty+8}" text-anchor="${s==='R'?'end':'start'}" style="font-size:12px;fill:${col};font-weight:700">${cm.toFixed(1)} cm</text>`;
+  };
+  const hs=lldSide==='R'?'L':'R',refY=asis(hs)[1],affA=asis(lldSide);
+  return `<defs>
+    <linearGradient id="llSkin" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C98F6E"/><stop offset=".45" stop-color="#F1D0B8"/><stop offset="1" stop-color="#C58A69"/></linearGradient>
+    <linearGradient id="llShorts" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3E5C77"/><stop offset=".5" stop-color="#6F8FAB"/><stop offset="1" stop-color="#3B566F"/></linearGradient>
+    <linearGradient id="llTorso" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#E2B292"/><stop offset="1" stop-color="#E2B292" stop-opacity="0"/></linearGradient>
+    <filter id="llSh" x="-20%" y="-10%" width="140%" height="130%"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#1E2B38" flood-opacity=".16"/></filter>
+  </defs>
+  <line x1="10" y1="${floor}" x2="310" y2="${floor}" stroke="#9FB2C2" stroke-width="2"/>
+  <ellipse cx="160" cy="${floor+2}" rx="110" ry="6" fill="#1E2B38" opacity=".07"/>
+  <g filter="url(#llSh)">${sides.map(leg).join('')}${pelvis}</g>${lldXray?lldBones(hx,hy,ankY,dir):''}
+  <line x1="40" y1="${refY}" x2="280" y2="${refY}" stroke="#9FB2C2" stroke-width="1" stroke-dasharray="3 4"/>
+  ${lldCm>0?`<line x1="${affA[0]}" y1="${refY}" x2="${affA[0]}" y2="${affA[1]}" stroke="#C0392B" stroke-width="1.5"/><text x="160" y="${Math.min(refY,affA[1])-66}" text-anchor="middle" style="font-size:10.5px;fill:#C0392B">腰帶線傾斜＝骨盆向患側傾斜</text>`:''}
+  ${sides.map(tape).join('')}
+  <text x="${affA[0]+dir[lldSide]*16}" y="${affA[1]+4}" text-anchor="${lldSide==='R'?'end':'start'}" style="font-size:10px;fill:#fff;font-weight:700;paint-order:stroke;stroke:#2C4760;stroke-width:3px">腸骨前上棘</text>
+  <text x="${mal(lldSide)[0]}" y="${floor+18}" text-anchor="middle" style="font-size:10px;fill:#5A6B7A">內踝下端</text>`;
+}
+
+function lldBones(hx,hy,ankY,dir){
+  const bs=(d,w)=>`<path d="${d}" fill="none" stroke="#A89B84" stroke-width="${w+2}" stroke-linecap="round"/><path d="${d}" fill="none" stroke="#F3ECDD" stroke-width="${w}" stroke-linecap="round"/>`;
+  let o='';['R','L'].forEach(s=>{const kx=hx[s]-dir[s]*6,ky=hy[s]+.52*(ankY-hy[s]),ax=hx[s]-dir[s]*9;
+    o+=`<ellipse cx="${hx[s]+dir[s]*8}" cy="${hy[s]-30}" rx="27" ry="19" transform="rotate(${dir[s]*-18} ${hx[s]+dir[s]*8} ${hy[s]-30})" fill="#F3ECDD" fill-opacity=".85" stroke="#A89B84"/>`;
+    o+=bs(`M${hx[s]-dir[s]*13} ${hy[s]-3} L${hx[s]+dir[s]*3} ${hy[s]+8} L${kx} ${ky-12}`,11)+`<circle cx="${hx[s]-dir[s]*14}" cy="${hy[s]-4}" r="9" fill="#F3ECDD" stroke="#A89B84"/>`;
+    o+=bs(`M${kx-dir[s]*2} ${ky+10} L${ax} ${ankY-6}`,10)+bs(`M${kx+dir[s]*10} ${ky+14} L${ax+dir[s]*9} ${ankY-3}`,4)+`<circle cx="${kx}" cy="${ky-1}" r="6.5" fill="#F3ECDD" stroke="#A89B84"/>`;});
+  return o+`<path d="M150 ${Math.min(hy.R,hy.L)-36} L170 ${Math.min(hy.R,hy.L)-36} L165 ${Math.max(hy.R,hy.L)-4} L155 ${Math.max(hy.R,hy.L)-4} Z" fill="#F3ECDD" fill-opacity=".85" stroke="#A89B84"/>`;
+}
+function lldRender(){
+  $('#llSvg').innerHTML=lldSVG();$('#llSvg').parentNode.classList.toggle('xray',lldXray);
+  $('#llVal').textContent=lldCm.toFixed(1);$('#llRange').value=lldCm;
+  document.querySelectorAll('#llSide button').forEach(b=>{const on=b.dataset.s===lldSide;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on?'true':'false');});
+  const id=lldItem(lldCm);
+  $('#llResult').innerHTML=id?(()=>{const it=itemInfo(id),g=it[2],amt=amount(g);
+    return `<div class="fg-item"><div class="fg-item-top"><span class="item-id">${id}</span><span class="badge ${badgeCls(g)}">第${CN[g-1]}等級</span><span style="color:var(--sub)">${fmt(days(g))} 日</span><span class="di-num">${amt===null?'—':'試算 NT$ '+fmt(amt)}</span></div><div style="margin-top:4px">${esc(it[1])}（患側比健側短 ${lldCm.toFixed(1)} 公分）</div></div>`;})():
+    `<p class="fg-empty">患側比健側短 ${lldCm.toFixed(1)} 公分，未達 3 公分，不符合下肢縮短失能。</p>`;
+}
+function buildLldModal(){
+  if($('#lldModal'))return;
+  const m=document.createElement('div');m.className='demo-modal';m.id='lldModal';
+  m.innerHTML=`<div class="demo-box" role="dialog" aria-modal="true" aria-labelledby="llTitle">
+    <div class="demo-head"><h3 id="llTitle">下肢縮短怎麼量？</h3><button type="button" class="demo-close" id="llClose" aria-label="關閉示範">×</button></div>
+    <p class="demo-sub">拖曳滑桿設定患側縮短的公分數，看量測方式與對應等級。圖為正面站立示意。</p>
+    <div class="demo-jseg" id="llSide" role="group" aria-label="患側"><button type="button" data-s="R">患側：右下肢</button><button type="button" data-s="L">患側：左下肢</button></div>
+    <div class="fg-stage"><svg id="llSvg" viewBox="0 -34 320 426" role="img" aria-label="雙下肢長度比較示意圖"></svg></div>
+    <label class="xr-toggle" style="margin-top:6px"><input type="checkbox" id="llX" checked> 透視骨骼（X 光片量測）</label><div class="ll-ctl"><label for="llRange">患側比健側短</label><input type="range" id="llRange" min="0" max="8" step="0.5"><span><b id="llVal"></b> 公分</span></div>
+    <div class="ll-marks" aria-hidden="true"><span style="left:0">0</span><span style="left:37.5%">3</span><span style="left:62.5%">5</span><span style="left:100%">8</span></div>
+    <div class="fg-result" id="llResult" aria-live="polite" style="margin-top:12px"></div><div id="llCards"></div>
+    <details class="notes" style="margin-top:10px;border:1px solid var(--line);border-radius:10px"><summary>認定重點</summary><ul>
+      <li>下肢縮短之測定：自患側之腸骨前上棘與內踝下端之長度，與健側下肢比較測定其短縮程度。</li>
+      <li>應輔以雙下肢站立全長 X 光片（需附有長度標尺）佐證。</li>
+      <li>失能診斷書「縮短失能（長短腳）」欄，分別填寫左、右下肢的公分數。</li>
+      <li>一下肢縮短三公分以上適用 12-8（第十一等級）；五公分以上適用 12-7（第九等級）。</li>
+      <li>同一下肢若同時有關節機能失能等其他項目，依第五條併合規定審定。</li>
+    </ul></details>
+    <p class="demo-disc">圖為示意：健側長度 88 公分為假設值，兩腿差距放大 2 倍顯示；實際以 X 光量測與勞保局審定為準。</p>
+  </div>`;
+  document.body.appendChild(m);
+  m.addEventListener('click',e=>{if(e.target===m)closeLld();});
+  $('#llClose').addEventListener('click',closeLld);
+  $('#llRange').addEventListener('input',e=>{lldCm=Number(e.target.value);lldRender();});$('#llX').addEventListener('change',e=>{lldXray=e.target.checked;lldRender();});
+  $('#llSide').addEventListener('click',e=>{const b=e.target.closest('button');if(b){lldSide=b.dataset.s;lldRender();}});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&m.classList.contains('open'))closeLld();});
+}
+function openLld(id,trigger){
+  buildLldModal();lldReturn=trigger||null;lldCm=LLD_DEMOS[id]!=null?LLD_DEMOS[id]:4;lldRender();$('#llCards').innerHTML=infoCards('lld');
+  $('#lldModal').classList.add('open');document.body.style.overflow='hidden';$('#llClose').focus();
+}
+function closeLld(){$('#lldModal').classList.remove('open');document.body.style.overflow='';if(lldReturn)lldReturn.focus();}
+
+
+/* ================= 其他失能項目示範（通用框架） ================= */
+const GDEMO={},GT={};
+const GEN_MERGE='符合兩個以上失能項目：依第五條按最高等級核定，並依規定升等（均在第十四至第一等級間升一級、均在第八至第一等級間升二級、均在第五至第一等級間升三級，升等後不得超過各項合計額）；同部位有特別規定者從其規定。實際等級以勞保局審定為準。';
+let G={t:null,s:{},ret:null,id:null};
+function gItems(items,notes,empty){
+  const nt=(notes||[]).map(n=>`<div class="fg-note">${esc(n)}</div>`).join('');
+  if(!items.length)return `<p class="fg-empty">${esc(empty||'目前條件未符合任何失能項目。')}</p>`+nt;
+  return items.map(o=>{const id=typeof o==='string'?o:o.id,tag=o.tag||'',it=itemInfo(id),g=it[2],amt=amount(g);
+    return `<div class="fg-item"><div class="fg-item-top"><span class="item-id">${id}</span><span class="badge ${badgeCls(g)}">第${CN[g-1]}等級</span>${tag?`<span class="fg-tag">${esc(tag)}</span>`:''}<span style="color:var(--sub)">${fmt(days(g))} 日</span><span class="di-num">${amt===null?'—':'試算 NT$ '+fmt(amt)}</span></div><div style="margin-top:4px">${esc(it[1])}</div></div>`;}).join('')+nt;
+}
+const bestOf=ids=>ids.filter(Boolean).sort((a,b)=>itemGrade(a)-itemGrade(b)).slice(0,1);
+const gSeg=(k,opts,cur,label)=>`<div class="g-row">${label?`<span class="g-lab">${label}</span>`:''}<div class="g-seg">${opts.map(([v,l])=>`<button type="button" data-a="set" data-k="${k}" data-v="${v}" class="${String(cur)===String(v)?'on':''}">${l}</button>`).join('')}</div></div>`;
+const gChk=(k,label,on)=>`<label class="g-chk"><input type="checkbox" data-k="${k}"${on?' checked':''}> ${label}</label>`;
+const gRng=(k,label,min,max,step,v,unit)=>`<div class="g-row g-rng"><span class="g-lab">${label}</span><input type="range" data-k="${k}" min="${min}" max="${max}" step="${step}" value="${v}"><b><span id="gv_${k}">${v}</span>${unit||''}</b></div>`;
+const gNum=(k,label,v,unit)=>`<label class="g-num"><span>${label}</span><input type="number" inputmode="decimal" data-k="${k}" value="${v==null?'':v}" placeholder="未填"><i>${unit||''}</i></label>`;
+const gSel=(k,label,opts,cur)=>`<label class="g-num"><span>${label}</span><select data-k="${k}" data-n="1">${opts.map((o,i)=>`<option value="${i}"${+cur===i?' selected':''}>${o}</option>`).join('')}</select></label>`;
+const gTog=(k,v,label,arr)=>`<button type="button" class="g-tg${arr.map(String).includes(String(v))?' on':''}" data-a="tog" data-k="${k}" data-v="${v}">${label}</button>`;
+function gRender(full){
+  const T=GT[G.t],s=G.s,f=x=>typeof x==='function'?x(s):x;
+  if(full){$('#gTitle').textContent=f(T.title);$('#gSub').textContent=f(T.sub);$('#gCtrl').innerHTML=T.ctrl?T.ctrl(s):'';
+    $('#gNotes').innerHTML=f(T.notes).map(x=>'<li>'+esc(x)+'</li>').join('');$('#gDisc').textContent=f(T.disc)||'圖為示意；實際等級以診斷書、檢查資料及勞保局審定為準。';}
+  $('#gVis').className='g-vis'+(T.dark?' dark':'');$('#gVis').innerHTML=T.vis(s);if(T.mount)T.mount(s);
+  const r=T.eval(s);$('#gResult').innerHTML=gItems(r.items,r.notes,r.empty);
+}
+function buildGModal(){
+  if($('#gModal'))return;
+  const m=document.createElement('div');m.className='demo-modal';m.id='gModal';
+  m.innerHTML=`<div class="demo-box" role="dialog" aria-modal="true" aria-labelledby="gTitle">
+    <div class="demo-head"><h3 id="gTitle"></h3><button type="button" class="demo-close" id="gClose" aria-label="關閉示範">×</button></div>
+    <p class="demo-sub" id="gSub"></p><div id="gCtrl"></div><div id="gVis" class="g-vis"></div>
+    <div class="fg-result" id="gResult" aria-live="polite" style="margin-top:10px"></div><div id="gCards"></div>
+    <details class="notes" style="margin-top:10px;border:1px solid var(--line);border-radius:10px"><summary>認定重點</summary><ul id="gNotes"></ul></details>
+    <p class="demo-disc" id="gDisc"></p></div>`;
+  document.body.appendChild(m);
+  const box=m.querySelector('.demo-box');
+  m.addEventListener('click',e=>{if(e.target===m)closeG();});
+  $('#gClose').addEventListener('click',closeG);
+  box.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;const k=b.dataset.k,v=b.dataset.v,T=GT[G.t];if(b.dataset.a==='fn'){T.fn[v](G.s);return;}
+    if(b.dataset.a==='set')G.s[k]=(v!==''&&!isNaN(+v))?+v:v;
+    else if(b.dataset.a==='tog'){const a=G.s[k].map(String),i=a.indexOf(v);if(i>=0)G.s[k].splice(i,1);else G.s[k].push(v);}
+    if(T.act)T.act(G.s,k);gRender(true);});
+  box.addEventListener('input',e=>{const el=e.target;if(!el.dataset||!el.dataset.k)return;const k=el.dataset.k;
+    G.s[k]=el.type==='checkbox'?el.checked:(el.type==='range'||el.type==='number'||el.dataset.n)?(el.value===''?null:+el.value):el.value;
+    const o=document.getElementById('gv_'+k);if(o)o.textContent=el.value;const T=GT[G.t];if(T.act)T.act(G.s,k);gRender(false);});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&m.classList.contains('open'))closeG();});
+}
+function openG(id,trigger){buildGModal();const p=GDEMO[id];G={t:p.t,id,ret:trigger||null,s:JSON.parse(JSON.stringify(GT[p.t].init(p)))};gRender(true);$('#gCards').innerHTML=infoCards(p.t==='ladder'?G.s.cat:({heart:'organ',lung:'organ',liver:'organ',organ:'organ',dip:'finger'}[p.t]||p.t));$('#gModal').classList.add('open');document.body.style.overflow='hidden';$('#gClose').focus();}
+function closeG(){$('#gModal').classList.remove('open');document.body.style.overflow='';if(G.ret)G.ret.focus();}
+const reg=(ids,t,pre)=>ids.forEach((id,i)=>GDEMO[id]=Object.assign({t},typeof pre==='function'?pre(id,i):(pre||{})));
+const rngIds=(p,a,b)=>Array.from({length:b-a+1},(_,i)=>`${p}-${a+i}`);
+
+/* ---------- 精神／神經／胸腹部臟器綜合：失能程度階梯 ---------- */
+const LAD={
+  mind:{ids:rngIds(1,1,5),name:'精神',last:'通常無礙勞動，但醫學上可證明遺存精神失能',notes:['須經治療二年以上，由精神科專科醫師（失智症得由神經科）診斷開具。','須經心理衡鑑或職能評估、MMSE、WAIS 或 CDR 等評估始可診斷；量表是佐證工具，附表未訂各等級分數門檻，仍須綜合全部症狀認定。','憂鬱症須經 3 線以上抗憂鬱藥物治療後仍遺存顯著失能者，始得診斷開具。','階梯中的長條為示意：以「日常生活需他人扶助程度」與「工作能力」區分等級。']},
+  nerve:{ids:rngIds(2,1,5),name:'神經（中樞神經系統）',last:'通常無礙勞動，但醫學上可證明遺存頑固神經症狀',notes:['須經治療六個月以上；如經手術，須最後一次手術後六個月以上（植物人狀態經查證屬實者不受此限）。','由神經科、神經外科或復健科專科醫師開具；可附肌力分級、Rankin 量表、Hoehn-Yahr 分期等佐證，但非直接等級門檻。','截癱或偏癱引起之下肢三大關節失能，應綜合觀察，不宜逐一關節個別審定。','階梯中的長條為示意。']},
+  organ:{ids:rngIds(7,1,5),name:'胸腹部臟器（綜合機能）',last:'胸腹部臟器遺存失能（工作上確有明顯阻害）',notes:['原則須經治療六個月以上；器質性切除或初次透析於出院日／初次透析日審定。','二種以上臟器同時併存失能，須綜合全部症狀衡量，不得按各臟器等級分別計算後合併提高等級。','心、肺、肝另有客觀指標，請改看各該臟器項目的示範計算器。','階梯中的長條為示意。']}
+};
+const ACTS=[['吃飯','<path d="M5 13h14a7 7 0 0 1-14 0z"/><path d="M8 4l3 7M16 3l-3 8"/>'],['如廁','<path d="M7 4h7v6H7zM5 10h13a5 5 0 0 1-5 5h-3l1 5H8l1-5a4 4 0 0 1-4-4z"/>'],['洗澡','<path d="M5 20v-9a5 5 0 0 1 10 0"/><path d="M13 12h6M14 15v2M17 15v3M20 15v2"/>'],['穿衣','<path d="M8 4l-4 3 2 4 2-1v10h8V10l2 1 2-4-4-3a4 4 0 0 1-8 0z"/>'],['外出','<circle cx="13" cy="4" r="2"/><path d="M12 7l-3 6h4l-2 7M12 13l4 2M9 9l-3 3"/>'],['工作','<rect x="3" y="8" width="18" height="12" rx="2"/><path d="M9 8V5h6v3M3 13h18"/>']];
+const ACT_ST={s:['自己可以','#2E7D4F'],h:['需要協助','#C2571A'],a:['全靠他人','#B02A21'],x:['不能工作','#B02A21'],l:['輕便工作','#2F6B8F'],w:['可以工作','#2E7D4F']};
+const LADACT=['aaaaax','shhhhx','sssssx','sssssl','sssssw'];
+const LADV=[['極度失能',0,0,'日常生活全須他人扶助，經常須醫療護理及專人周密照護'],['高度失能',40,0,'日常生活之一部須他人扶助'],['顯著失能',100,0,'日常生活尚可自理，但終身無工作能力'],['僅能從事輕便工作',100,35,'終身僅能從事輕便工作'],['輕度失能',100,85,'']];
+GT.ladder={
+  title:s=>`${LAD[s.cat].name}失能等級怎麼分？`,sub:'用日常生活情境比較各等級：綠色＝自己可以、橘色＝需要協助、紅色＝全靠他人或不能工作。點選一列查看對應項目。',
+  init:p=>({cat:p.cat,lv:p.lv}),notes:s=>LAD[s.cat].notes.concat(['生活情境為依等級文字的示意推想，實際依診斷書各欄（意識、行動、攝食、大小便、沐浴更衣、工作能力等）個案評估。']),
+  vis:s=>`<div class="g-legend">${['s','h','a','l'].map(k=>`<span><i style="background:${ACT_ST[k][1]}"></i>${ACT_ST[k][0]}</span>`).join('')}</div><div class="g-ladder">${LAD[s.cat].ids.map((id,i)=>{const [n,,,d]=LADV[i],g=itemGrade(id);return `<button type="button" class="g-lrow${s.lv===i?' on':''}" data-a="set" data-k="lv" data-v="${i}"><span class="badge ${badgeCls(g)}">第${CN[g-1]}級</span><span class="g-ln">${n}<small>${esc(d||LAD[s.cat].last)}</small></span><span class="g-acts">${ACTS.map(([an,ic],j)=>{const st=ACT_ST[LADACT[i][j]];return `<span class="g-act" title="${an}：${st[0]}"><svg viewBox="0 0 24 24" fill="none" stroke="${st[1]}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="background:${st[1]}14;border-color:${st[1]}">${ic}</svg><em>${an}</em><b style="color:${st[1]}">${st[0]}</b></span>`;}).join('')}</span>${i===0?'<span class="g-extra">＋經常需要醫療護理與專人周密照護</span>':''}</button>`;}).join('')}</div>`,
+  eval:s=>({items:[LAD[s.cat].ids[s.lv]]})
+};
+reg(LAD.mind.ids,'ladder',(id,i)=>({cat:'mind',lv:i}));reg(LAD.nerve.ids,'ladder',(id,i)=>({cat:'nerve',lv:i}));reg(LAD.organ.ids,'ladder',(id,i)=>({cat:'organ',lv:i}));
+
+/* ---------- 眼 ---------- */
+const VA=['正常（高於 0.4）','0.4 以下','0.1 以下','0.06 以下','0.02 以下（未失明）','失明'],VAB=[0,1.2,2.8,4.2,6.5,0];
+function eyeScene(o){const hemi=o.includes('3-14')||o.includes('3-15'),dip=o.includes('3-18'),gl=o.includes('3-19'),acc=o.includes('3-16')||o.includes('3-17'),lid=o.includes('3-22')||o.includes('3-23');
+  const sc=`<rect width="360" height="200" fill="#CFE4F2"/><rect x="0" y="40" width="70" height="110" fill="#9FB2C2"/><rect x="80" y="20" width="60" height="130" fill="#B7C5D1"/><rect x="250" y="30" width="80" height="120" fill="#A7B8C7"/>${[0,1,2,3].map(i=>`<rect x="${92+i%2*24}" y="${34+Math.floor(i/2)*30}" width="14" height="18" fill="#EAF1F7"/>`).join('')}<rect x="0" y="150" width="360" height="50" fill="#6B7684"/>${[0,1,2,3,4,5].map(i=>`<rect x="${120+i*20}" y="158" width="12" height="34" fill="#F4F4F4"/>`).join('')}<rect x="190" y="126" width="70" height="26" rx="8" fill="#C0392B"/><circle cx="205" cy="154" r="7" fill="#333"/><circle cx="245" cy="154" r="7" fill="#333"/><circle cx="60" cy="118" r="7" fill="#5A4A3E"/><path d="M60 125v22M52 132h16M60 147l-6 12M60 147l6 12" stroke="#5A4A3E" stroke-width="4" stroke-linecap="round"/><rect x="300" y="80" width="10" height="70" fill="#555"/><rect x="294" y="60" width="22" height="34" rx="4" fill="#333"/><circle cx="305" cy="70" r="5" fill="#2E7D4F"/>`;
+  return `<svg viewBox="0 0 360 200" style="max-width:420px;border-radius:10px"><g style="filter:blur(${acc?1.6:0}px)">${sc}</g>${dip?`<g opacity=".45" transform="translate(14 6)">${sc}</g>`:''}${hemi?'<rect x="180" y="0" width="180" height="200" fill="#111"/>':''}${gl?'<rect width="360" height="200" fill="url(#glr)"/><defs><radialGradient id="glr"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity=".25"/></radialGradient></defs>':''}${lid?'<path d="M0 0H360V70Q180 20 0 70Z" fill="#3E2E26" fill-opacity=".85"/>':''}</svg><p class="g-cap">患眼所見（示意）：${[hemi&&'半盲＝一半視野看不見',dip&&'複視＝影像重疊',gl&&'散瞳＝畏光刺眼',acc&&'調節失能＝看不清楚',lid&&'眼瞼運動失能＝眼瞼無法正常開合'].filter(Boolean).join('、')||'請勾選上方狀況'}</p>`;}
+const EYE_OTHER=rngIds(3,14,23);
+function eyeVA(L,R){const a=Math.max(L,R),b=Math.min(L,R);
+  if(a===5)return [['3-10','3-8','3-7','3-6','3-5','3-1'][b]];
+  return bestOf([{1:'3-9',2:'3-4',3:'3-3',4:'3-2'}[b],{2:'3-13',3:'3-12',4:'3-11'}[a]]);}
+GT.eye={
+  title:'視力與眼睛失能怎麼看？',sub:s=>s.tab==='va'?'選擇兩眼「矯正後視力」，看模擬視覺與對應項目。':'勾選視野、調節運動或眼瞼的失能狀態。',
+  init:p=>({tab:p.tab||'va',L:p.L||0,R:p.R||0,oth:p.oth||[]}),
+  ctrl:s=>gSeg('tab',[['va','視力'],['other','視野・調節・眼瞼']],s.tab)+(s.tab==='va'?`<div class="g-row">${gSel('R','右眼',VA,s.R)}${gSel('L','左眼',VA,s.L)}</div>`:`<div class="g-tgs">${EYE_OTHER.map(id=>gTog('oth',id,id+' '+itemInfo(id)[1].replace(/者。$/,''),s.oth)).join('')}</div>`),
+  vis:s=>{if(s.tab==='other')return eyeScene(s.oth.map(String));const o=s.oth.map(String),cls=k=>[(k==='L'&&o.some(x=>x==='3-14'||x==='3-15'))||(k==='R'&&o.includes('3-14'))?'hemi':'',o.includes('3-18')?'dip':'',o.includes('3-19')?'glare':''].join(' ');
+    const chart=(k,lv)=>`<div class="g-eye"><b>${k==='R'?'右眼':'左眼'}</b><div class="g-chart ${s.tab==='va'&&lv===5?'blind':''} ${s.tab==='other'?cls(k):''}"><div style="filter:blur(${s.tab==='va'?VAB[lv]:0}px)"><span class="l1">E</span><span class="l2">F P</span><span class="l3">T O Z</span><span class="l4">L P E D</span><span class="l5">P E C F D</span></div></div><i>${s.tab==='va'?VA[lv]:'模擬視野'}</i></div>`;
+    return `<div class="g-eyes">${chart('R',s.R)}${chart('L',s.L)}</div><p class="g-cap">${s.tab==='va'?'以萬國式視力表矯正後視力為準；畫面模糊程度為示意。':'黑色區塊示意半盲、重影示意複視、白光示意散瞳畏光。'}</p>`;},
+  eval:s=>s.tab==='va'?{items:eyeVA(s.L,s.R),empty:'兩眼視力未達失能標準。',notes:['本示範取最符合的單一項目；視力、視野、調節或運動失能併存時得提高等級，但雙目最高第二等級、一目最高第八等級。']}:{items:s.oth,notes:s.oth.length>1?[GEN_MERGE]:[]},
+  notes:['視力以萬國式視力表測定之矯正後視力為準，並須通過測盲（Malingering）檢查。','「失明」包括眼球喪失或摘出、僅能辨明暗、僅能辨眼前 1 公尺以內手動或 5 公分以內指數。','視野失能應依最近 3 個月內以視神經及黃斑部為中心之眼底神經盤照片、視野圖診斷。','眼（眼瞼除外）失能之診斷書，須由評鑑合格之醫學中心、區域醫院等適當層級醫院開具（離島除外）。']
+};
+reg(['3-1','3-2','3-3','3-4','3-5','3-6','3-7','3-8','3-9','3-10','3-11','3-12','3-13'],'eye',(id,i)=>({L:[5,4,3,2,4,3,2,1,1,0,0,0,0][i],R:[5,4,3,2,5,5,5,5,1,5,4,3,2][i]}));
+reg(EYE_OTHER,'eye',id=>({tab:'other',oth:[id]}));
+
+/* ---------- 耳 ---------- */
+let _ac=null;function earPlay(db,pan){try{_ac=_ac||new (window.AudioContext||window.webkitAudioContext)();const ac=_ac,t0=ac.currentTime+.05,g=.22*Math.pow(10,-Math.max(0,db-20)/20);
+  [500,1000,2000,1000].forEach((f,i)=>{const o=ac.createOscillator(),v=ac.createGain(),p=ac.createStereoPanner?ac.createStereoPanner():null;o.frequency.value=f;o.type='sine';
+    v.gain.setValueAtTime(0,t0+i*.42);v.gain.linearRampToValueAtTime(g,t0+i*.42+.04);v.gain.linearRampToValueAtTime(0,t0+i*.42+.36);
+    if(p){p.pan.value=pan;o.connect(v).connect(p).connect(ac.destination);}else o.connect(v).connect(ac.destination);o.start(t0+i*.42);o.stop(t0+i*.42+.4);});}catch(e){alert('此瀏覽器不支援聲音模擬');}}
+GT.ear={
+  title:'聽力失能怎麼看？',sub:'拖曳兩耳「平均聽力閾值」（500Hz、1kHz、2kHz 平均），看對應項目。數值越大代表聽力越差。',
+  init:p=>({R:p.R||0,L:p.L||0,aur:!!p.aur}),
+  ctrl:s=>gRng('R','右耳',0,110,5,s.R,' dB')+gRng('L','左耳',0,110,5,s.L,' dB')+gChk('aur','一側耳廓大部分缺損（軟骨缺損 1/2 以上）',s.aur)+
+    `<div class="g-row"><span class="g-lab">聽聽看</span><button type="button" class="g-tg" data-a="fn" data-v="n">▶ 正常聽力</button><button type="button" class="g-tg" data-a="fn" data-v="R">▶ 右耳聽到的</button><button type="button" class="g-tg" data-a="fn" data-v="L">▶ 左耳聽到的</button></div><p class="g-cap" style="text-align:left">以音量衰減示意（建議戴耳機、先調到舒適音量），不是醫學聽力檢查。</p>`,
+  fn:{n:s=>earPlay(0,0),R:s=>earPlay(s.R,1),L:s=>earPlay(s.L,-1)},
+  vis:s=>{const ear=(k,v)=>{const x=k==='R'?90:270,waves=[40,60,80].map((th,i)=>`<path d="M${x+(k==='R'?34:-34)+(k==='R'?i*14:-i*14)} 60 q${k==='R'?12:-12} 30 0 60" fill="none" stroke="${v<th?'#2E7D4F':'#C9D3DC'}" stroke-width="4" stroke-linecap="round"/>`).join('');
+      const gx=a=>30+a/110*300;
+      return `<g><path d="M${x-14} 50 q${k==='R'?-30:30} 10 ${k==='R'?-22:22} 50 q${k==='R'?4:-4} 22 ${k==='R'?22:-22} 30 q${k==='R'?18:-18} -30 0 -80" fill="#E7BFA2" stroke="#B57C5C" stroke-width="2" ${s.aur&&k==='R'?'stroke-dasharray="4 3" fill-opacity=".35"':''}/>${waves}<text x="${x}" y="30" text-anchor="middle" style="font-size:13px;font-weight:700;fill:#234E70">${k==='R'?'右耳':'左耳'} ${v} dB</text></g>`;};
+    const bar=(y,v,lab)=>`<text x="24" y="${y+4}" text-anchor="end" style="font-size:11px;fill:#5A6B7A">${lab}</text><rect x="30" y="${y-5}" width="300" height="10" rx="5" fill="#E3E9EF"/><rect x="30" y="${y-5}" width="${v/110*300}" height="10" rx="5" fill="${v>=90?'#B02A21':v>=70?'#C2571A':'#2F6B8F'}"/>`;
+    return `<svg viewBox="0 0 360 230">${ear('R',s.R)}${ear('L',s.L)}${bar(170,s.R,'右')}${bar(192,s.L,'左')}<line x1="${30+70/110*300}" y1="158" x2="${30+70/110*300}" y2="204" stroke="#C2571A" stroke-dasharray="3 3"/><line x1="${30+90/110*300}" y1="158" x2="${30+90/110*300}" y2="204" stroke="#B02A21" stroke-dasharray="3 3"/><text x="${30+70/110*300}" y="220" text-anchor="middle" style="font-size:10px;fill:#C2571A">70 dB</text><text x="${30+90/110*300}" y="220" text-anchor="middle" style="font-size:10px;fill:#B02A21">90 dB</text></svg><p class="g-cap">綠色聲波表示仍可聽見的音量層級（示意）。</p>`;},
+  eval:s=>{const {L,R}=s,id=L>=90&&R>=90?'4-1':L>=70&&R>=70?'4-2':(L>=90||R>=90)?'4-3':(L>=70||R>=70)?'4-4':null,items=[id,s.aur?'4-5':null].filter(Boolean);
+    return {items,notes:items.length>1?['同一耳同時遺存聽覺失能與耳廓缺損者，得依規定提高等級；不同耳則依第五條併合規定審定。']:[],empty:'兩耳聽力未達 70 dB，未達失能標準。'};},
+  notes:['應附最近 3 個月內二次純音聽力檢查（PTA，間隔 24 小時以上）、語言聽閾測試（SRT）及聽性腦幹聽力檢查（ABR）。','平均閾值以 500Hz、1kHz、2kHz 閾值平均計算；以兩次 PTA 較佳者為準。','兩次 PTA 各頻率相差須在 10 dB 以內，較佳 PTA 與 ABR 或 SRT 相差須在 15 dB 以內，始具可信度。','兩耳程度不同時綜合審定，例如一耳 90 dB 以上、他耳 70 dB 以上，按 4-2 第七等級。']
+};
+reg(rngIds(4,1,5),'ear',(id,i)=>[{R:95,L:95},{R:75,L:75},{R:95,L:20},{R:75,L:20},{aur:true}][i]);
+
+/* ---------- 鼻 ---------- */
+GT.nose={
+  title:'鼻失能怎麼看？',sub:'勾選鼻部缺損或機能失能的情形。',init:p=>({def:!!p.def,func:!!p.func}),
+  ctrl:s=>gChk('def','鼻部缺損（鼻外部軟骨缺損二分之一以上）',s.def)+'<br>'+gChk('func','鼻機能顯著失能（兩側鼻孔閉塞、鼻呼吸困難不能矯治，或兩側嗅覺完全喪失）',s.func),
+  vis:s=>`<svg viewBox="0 0 240 200"><path d="M70 20 Q60 90 40 130 Q36 150 60 156 L110 160 Q130 158 128 140 Q118 110 110 20" fill="#E7BFA2" stroke="#B57C5C" stroke-width="2"/>${s.def?'<path d="M40 130 Q36 150 60 156 L110 160 Q130 158 128 140 L118 112 Z" fill="#fff" stroke="#C0392B" stroke-dasharray="5 4"/><text x="150" y="140" style="font-size:12px;fill:#C0392B">軟骨缺損 ≧ 1/2</text>':''}${s.func?'<ellipse cx="70" cy="150" rx="10" ry="5" fill="#555"/><ellipse cx="100" cy="152" rx="10" ry="5" fill="#555"/><path d="M60 145 l20 12 M80 145 l-20 12 M90 147 l20 12 M110 147 l-20 12" stroke="#C0392B" stroke-width="2.5"/><text x="150" y="170" style="font-size:12px;fill:#C0392B">閉塞／嗅覺喪失</text>':''}</svg>`,
+  eval:s=>({items:[s.def&&'5-1',s.func&&'5-2'].filter(Boolean),notes:s.def&&s.func?[GEN_MERGE]:[]}),
+  notes:['「鼻部缺損」指鼻外部軟骨缺損二分之一以上；併存頭臉頸部缺損得提高等級。','「鼻機能遺存顯著失能」指兩側鼻孔閉塞、鼻呼吸困難不能矯治，或兩側嗅覺完全喪失。']
+};
+reg(['5-1','5-2'],'nose',(id,i)=>i?{func:true}:{def:true});
+
+/* ---------- 口 ---------- */
+const SOUNDS=['雙唇音','唇齒音','舌尖音','舌根音','舌面音','舌尖後音','舌尖前音'];
+const TEETH_U=[18,17,16,15,14,13,12,11,21,22,23,24,25,26,27,28],TEETH_L=[48,47,46,45,44,43,42,41,31,32,33,34,35,36,37,38];
+GT.mouth={
+  title:'口（咀嚼、吞嚥、言語、牙齒）失能怎麼看？',sub:'勾選各項狀況；點牙齒標示缺損（完全脫落或牙冠斷落 1/2 以上）。',
+  init:p=>Object.assign({sw:0,snd:[],lar:false,dys:false,aph:0,taste:false,sal:false,acc:true,teeth:[]},p.pre||{}),
+  ctrl:s=>gSeg('sw',[[0,'正常'],[1,'只能吃粥、糊類'],[2,'只能吃流質']],s.sw,'咀嚼吞嚥')+
+    `<div class="g-row"><span class="g-lab">不能構音</span><div class="g-tgs">${SOUNDS.map((n,i)=>gTog('snd',i,n,s.snd)).join('')}</div></div>`+
+    `<div class="g-row">${gChk('lar','全喉切除',s.lar)}${gChk('dys','綴音機能遺存顯著失能',s.dys)}</div>`+
+    gSeg('aph',[[0,'無'],[1,'輕度（溝通顯著困難）'],[2,'嚴重（無法溝通）']],s.aph,'失語症')+
+    `<div class="g-row">${gChk('taste','味覺完全喪失（外傷）',s.taste)}${gChk('sal','放化療後唾液減少，須佐以液體吞嚥',s.sal)}${gChk('acc','牙齒為意外傷害所致',s.acc)}</div>`,
+  vis:s=>{const t=s.teeth.map(String),row=(arr,y)=>arr.map((n,i)=>{const x=14+i*21+(i>7?6:0),miss=t.includes(String(n));return `<g data-a="tog" data-k="teeth" data-v="${n}" style="cursor:pointer"><rect x="${x}" y="${y}" width="18" height="26" rx="6" fill="${miss?'#FBEBEA':'#FFFDF8'}" stroke="${miss?'#B02A21':'#B9AE9A'}" stroke-width="1.5"/>${miss?`<path d="M${x+4} ${y+6} l10 14 M${x+14} ${y+6} l-10 14" stroke="#B02A21" stroke-width="2"/>`:''}<text x="${x+9}" y="${y+(y<50?-4:40)}" text-anchor="middle" style="font-size:8px;fill:#5A6B7A">${n}</text></g>`;}).join('');
+    return `<svg viewBox="0 0 364 110">${row(TEETH_U,14)}${row(TEETH_L,62)}<line x1="182" y1="6" x2="182" y2="104" stroke="#9FB2C2" stroke-dasharray="2 3"/></svg><p class="g-cap">已標示缺損 ${s.teeth.length} 顆（點牙齒切換）${s.snd.length?`｜不能構音 ${s.snd.length} 種`:''}</p>`;},
+  eval:s=>{const sp=s.lar||s.snd.length>=5?2:s.snd.length>=3?1:0,sw=s.sw,items=[];
+    if(sw===2&&sp===2)items.push('6-1');else if(sw===2||sp===2)items.push('6-2');else if(sw&&sp)items.push('6-3');else if(sw||sp)items.push('6-4');
+    if(s.aph)items.push(s.aph===2?'6-5':'6-6');if(s.dys)items.push('6-7');if(s.taste)items.push('6-8');if(s.sal)items.push('6-9');
+    const notes=[];if(s.teeth.length>=5){if(s.acc)items.push(s.teeth.length>=10?'6-10':'6-11');else notes.push('牙齒失能以遭受意外傷害致原生牙齒缺損者為限，疾病所致不適用。');}
+    if(items.length>1)notes.push(GEN_MERGE);return {items,notes};},
+  notes:['咀嚼、吞嚥或言語機能失能須經最後一次手術後 6 個月以上（放化療終止後 6 個月以上）始可認定；全喉切除者不在此限。','咀嚼吞嚥機能失能須經吞嚥復健評估；言語機能失能（全喉切除外）須經語言復健評估。','言語：7 種語音中 5 種以上不能構音＝喪失言語機能；3 種以上＝顯著失能。','牙齒失能以遭受意外傷害致原生牙齒缺損五齒以上為限；「缺」指完全脫落無殘根且無法再植，「損」指牙冠斷落二分之一以上。']
+};
+reg(rngIds(6,1,11),'mouth',(id,i)=>({pre:[{sw:2,lar:true},{sw:2},{sw:1,snd:['0','1','2']},{sw:1},{aph:2},{aph:1},{dys:true},{taste:true},{sal:true},{teeth:['11','12','13','14','15','21','22','23','24','25']},{teeth:['11','12','21','22','31']}][i]}));
+
+/* ---------- 頭、臉、頸 ---------- */
+const FACE_TH={head:8,neck:8,scar:5,line:8,total:12,dep:3};
+GT.face={
+  title:'頭、臉、頸部缺損（疤痕）怎麼量？',sub:'選部位與疤痕型態，拖曳大小，與門檻（虛線）比較。',
+  init:p=>({reg:'face',type:'scar',cm:p.cm||5}),
+  ctrl:s=>gSeg('reg',[['head','頭部'],['face','顏面部'],['neck','頸部、下頷部']],s.reg,'部位')+(s.reg==='face'?gSeg('type',[['scar','瘢痕直徑'],['line','線狀痕'],['total','線狀痕合計'],['dep','組織凹陷']],s.type,'型態'):'')+gRng('cm','大小',0,15,.5,s.cm,' 公分'),
+  vis:s=>{const k=s.reg==='face'?s.type:s.reg,th=FACE_TH[k],P=8,c={head:[120,34],face:[150,110],neck:[120,214]}[s.reg],isLine=k==='line'||k==='total';
+    const mark=(v,ref)=>isLine?(k==='total'?`<line x1="${c[0]-v*P*.3}" y1="${c[1]-8}" x2="${c[0]+v*P*.25}" y2="${c[1]-8}" ${ref}/><line x1="${c[0]-v*P*.25}" y1="${c[1]+8}" x2="${c[0]+v*P*.2}" y2="${c[1]+8}" ${ref}/>`:`<line x1="${c[0]-v*P/2}" y1="${c[1]}" x2="${c[0]+v*P/2}" y2="${c[1]}" ${ref}/>`):`<circle cx="${c[0]}" cy="${c[1]}" r="${v*P/2}" ${ref}/>`;
+    return `<svg viewBox="0 0 240 318"><ellipse cx="120" cy="100" rx="66" ry="84" fill="#E7BFA2" stroke="#B57C5C" stroke-width="2"/><rect x="92" y="180" width="56" height="56" rx="10" fill="#E7BFA2" stroke="#B57C5C" stroke-width="2"/><ellipse cx="96" cy="92" rx="9" ry="5" fill="#5A4A3E"/><ellipse cx="144" cy="92" rx="9" ry="5" fill="#5A4A3E"/><path d="M104 140 q16 10 32 0" stroke="#8E5A40" stroke-width="3" fill="none"/>
+      ${mark(th,'fill="none" stroke="#234E70" stroke-width="1.5" stroke-dasharray="4 3"')}<g transform="translate(8 250)"><rect width="${8.56*P}" height="${5.4*P}" rx="5" fill="#DCE6F0" stroke="#2F6B8F"/><rect x="6" y="10" width="14" height="10" rx="2" fill="#E8C468"/><text x="${8.56*P/2}" y="${5.4*P+11}" text-anchor="middle" style="font-size:9px;fill:#2F6B8F">信用卡 8.56 公分</text><circle cx="${8.56*P+50}" cy="${5.4*P/2}" r="${1.3*P}" fill="#E4C98C" stroke="#A8790A"/><text x="${8.56*P+50}" y="${5.4*P/2+3}" text-anchor="middle" style="font-size:8px;fill:#7A5A08">10</text><text x="${8.56*P+50}" y="${5.4*P+11}" text-anchor="middle" style="font-size:9px;fill:#A8790A">十元硬幣 2.6 公分</text></g>${mark(s.cm,k==='dep'?'fill="#8E5A40" fill-opacity=".45" stroke="#6B3F2A" stroke-width="2"':isLine?'stroke="#C0392B" stroke-width="4" stroke-linecap="round"':'fill="#C0392B" fill-opacity=".35" stroke="#C0392B" stroke-width="2"')}</svg><p class="g-cap">虛線＝門檻 ${th} 公分；下方信用卡與十元硬幣為同比例參照。</p>`;},
+  eval:s=>{const k=s.reg==='face'?s.type:s.reg;return s.cm>=FACE_TH[k]?{items:['9-1']}:{items:[],empty:`未達門檻（${FACE_TH[k]} 公分），不符合頭臉頸缺損。`};},
+  notes:['指眼瞼、鼻、耳廓以外，遺存於頭、臉、頸日常露出部位之缺損。','頭部：直徑 8 公分以上瘢痕；顏面部：直徑 5 公分以上瘢痕、8 公分以上線狀痕、不同部分線狀痕合計 12 公分以上，或直徑 3 公分以上組織凹陷；頸部、下頷部：直徑 8 公分以上瘢痕。三部位符合其一即可。','須經治療一年以上（手術者自最後一次手術後一年）始得認定；應附症狀固定後 4×6 近距離彩色照片（附量尺及拍攝日期）。']
+};
+reg(['9-1'],'face',{cm:5});
+
+/* ---------- 皮膚排汗功能 ---------- */
+let _skc=null;function SKIN_CELLS(){if(_skc)return _skc;const R=[[28,48,92,150],[10,64,28,146],[92,64,110,146],[30,152,58,256],[62,152,90,256]],o=[];
+  [20,150].forEach(ox=>R.forEach(([x0,y0,x1,y1])=>{for(let y=y1-9;y>=y0;y-=9)for(let x=x0;x+8.4<=x1+.5;x+=9)o.push([ox+x,y]);}));return _skc=o;}
+function skinOrder(){const C=SKIN_CELLS();return C.map((c,i)=>i).sort((a,b)=>C[b][1]-C[a][1]||C[a][0]-C[b][0]);}
+function skinPct(s){return Math.round(s.cells.length/SKIN_CELLS().length*91);}
+const SKIN_MAP=[[71,'10-1',1],[61,'10-2',1],[51,'10-3'],[41,'10-4'],[31,'10-5'],[21,'10-6'],[16,'10-7'],[11,'10-8'],[6,'10-9'],[2,'10-10']];
+const BODY_P='M60 38 Q78 38 84 46 L104 60 Q112 64 112 74 L118 140 Q119 148 112 148 L106 148 L98 84 L92 84 L92 150 L98 250 Q98 258 90 258 L72 258 L64 160 L56 160 L48 258 L30 258 Q22 258 22 250 L28 150 L28 84 L22 84 L14 148 L8 148 Q1 148 2 140 L8 74 Q8 64 16 60 L36 46 Q42 38 60 38 Z';
+GT.skin={
+  title:'皮膚排汗功能喪失怎麼算？',sub:'在身體圖上用手指或滑鼠「塗色」疤痕範圍（可拖曳連續塗），每格約半個手掌；也可用滑桿快速設定。頭、臉、頸不列入。',
+  init:p=>({cells:skinOrder().slice(0,Math.round(p.p*SKIN_CELLS().length/91)),life:!!p.life,q:p.p}),
+  ctrl:s=>gRng('q','快速設定',0,91,1,s.q,'%')+`<div class="g-row">${gChk('life','經評估終身無工作能力（61% 以上才適用）',s.life)}<button type="button" class="g-tg" data-a="fn" data-v="clear">清除塗色</button></div>`,
+  act:(s,k)=>{if(k==='q')s.cells=skinOrder().slice(0,Math.round(s.q*SKIN_CELLS().length/91));},
+  fn:{clear:s=>{s.cells=[];s.q=0;gRender(true);}},
+  vis:s=>{const C=SKIN_CELLS(),on=new Set(s.cells.map(Number)),pc=skinPct(s);
+    const fig=(ox,lab)=>`<g transform="translate(${ox} 0)"><path d="${BODY_P}" fill="#F1D6C2" stroke="#B57C5C" stroke-width="1.5"/><circle cx="60" cy="20" r="15" fill="#D5DEE6" stroke="#9FB2C2"/><text x="60" y="276" text-anchor="middle" style="font-size:11px;fill:#5A6B7A">${lab}</text></g>`;
+    return `<svg viewBox="0 0 290 285" id="skSvg" style="touch-action:none">${fig(20,'正面')}${fig(150,'背面')}${C.map(([x,y],i)=>`<rect data-c="${i}" x="${x}" y="${y}" width="8.4" height="8.4" rx="2" fill="${on.has(i)?'#C0392B':'#fff'}" fill-opacity="${on.has(i)?.7:.05}" stroke="#B57C5C" stroke-opacity=".25" stroke-width=".5"/>`).join('')}</svg><p class="g-cap" id="skCap">已塗 ${s.cells.length} 格，約 <b>${pc}%</b>（約 ${pc} 個手掌大小）</p>`;},
+  mount:s=>{const svg=document.getElementById('skSvg');let mode=null;const C=SKIN_CELLS().length;
+    const apply=el=>{if(!el||!el.dataset||el.dataset.c==null)return;const i=+el.dataset.c,has=s.cells.map(Number).includes(i);
+      if(mode==='add'&&!has)s.cells.push(i);else if(mode==='del'&&has)s.cells=s.cells.filter(x=>+x!==i);else return;
+      el.setAttribute('fill',mode==='add'?'#C0392B':'#fff');el.setAttribute('fill-opacity',mode==='add'?.7:.05);
+      document.getElementById('skCap').innerHTML=`已塗 ${s.cells.length} 格，約 <b>${skinPct(s)}%</b>（約 ${skinPct(s)} 個手掌大小）`;};
+    svg.addEventListener('pointerdown',e=>{const el=e.target;if(el.dataset.c==null)return;mode=s.cells.map(Number).includes(+el.dataset.c)?'del':'add';apply(el);svg.setPointerCapture(e.pointerId);e.preventDefault();});
+    svg.addEventListener('pointermove',e=>{if(!mode)return;apply(document.elementFromPoint(e.clientX,e.clientY));});
+    const end=()=>{if(!mode)return;mode=null;s.q=skinPct(s);const r=document.querySelector('#gCtrl input[data-k="q"]');if(r){r.value=s.q;document.getElementById('gv_q').textContent=s.q;}const ev=GT.skin.eval(s);$('#gResult').innerHTML=gItems(ev.items,ev.notes,ev.empty);};
+    svg.addEventListener('pointerup',end);svg.addEventListener('pointercancel',end);},
+  eval:s=>{const p=skinPct(s),m=SKIN_MAP.find(([t,,life])=>p>=t&&(!life||s.life));return m?{items:[m[1]],notes:[`以塗色估算約 ${p}%。`]}:{items:[],empty:`約 ${p}%，未達 2%，不符合皮膚排汗失能。`};},
+  notes:['指外傷、燒燙傷、化學灼傷或手術影響，除頭、臉、頸部以外身體遺存肥厚性疤痕（含植皮供應處）或植皮後疤痕。','應於最後一次外科手術後 1 年以上（未手術者治療 1 年以上）始得認定；失能面積以一手掌約占體表面積 1% 為測量基準。','應附症狀固定後之 4×6 燒燙傷相片（附量尺及拍攝日期）；設有整形外科或燒燙傷病房之醫院開具者得以圖畫說明替代。','71% 以上、61～70% 須同時終身無工作能力，才適用第二、三等級；否則依面積適用 10-3。','塗色格子按軀幹、上肢、下肢面積比例配置（示意），合計代表頭頸以外約 91% 的體表面積。']
+};
+reg(rngIds(10,1,10),'skin',(id,i)=>({p:[80,65,55,45,35,25,18,13,8,3][i],life:i<2}));
+
+/* ---------- 脊柱（8-1～8-4） ---------- */
+const VERT=[...Array(7)].map((_,i)=>'C'+(i+1)).concat([...Array(12)].map((_,i)=>'T'+(i+1)),[...Array(5)].map((_,i)=>'L'+(i+1)));
+const SP_ROM={C:{n:'頸椎',norm:'110～120°',t3:73,t2:55},TL:{n:'胸腰椎',norm:'75～85°',t3:50,t2:37}};
+const SP_DEF=[['h','單節椎體高度喪失 50% 以上'],['s','椎體滑脫 25% 以上（第二度以上）'],['c','脊柱側彎 30° 以上'],['k','脊柱前傾（Kyphosis）50° 以上'],['sp','手術切除棘狀突起 3 個以上']];
+const TRUNK_B=['鎖骨','胸骨','肋骨','肩胛骨','骨盤骨'];
+function spRun(f){const a=f.map(Number).sort((x,y)=>x-y);let best=[],cur=[];a.forEach(v=>{if(cur.length&&v===cur[cur.length-1]+1)cur.push(v);else cur=[v];if(cur.length>best.length)best=cur.slice();});return best;}
+GT.spine={
+  title:'脊柱失能怎麼看？',sub:'點椎體標示「固定（融合）」節段，設定剩餘活動度數，並勾選畸形狀況。',dark:true,
+  init:p=>Object.assign({fused:[],rem:120,frac:false,sig:false,def:[],oth:[]},p.pre||{}),
+  ctrl:s=>{const run=spRun(s.fused),rg=run.length&&run[0]<7?'C':'TL',R=SP_ROM[rg];
+    return `<div class="g-row">${gChk('frac','X 光有明顯骨折或脫位（不穩定、壓迫 50% 以上、爆裂、需手術之脫臼等）',s.frac)}</div>`+gRng('rem',`${R.n}屈伸可活動`,0,120,1,s.rem,'°')+
+      `<p class="g-cap">${R.n}正常屈伸範圍約 ${R.norm}：可活動 ≦ ${R.t3}° 為喪失 1/3、≦ ${R.t2}° 為喪失 1/2（依所附舊式角度表）。</p>`+
+      `<div class="g-row">${gChk('sig','脊柱遺存顯著畸形（穿著衣服由外部可察知）',s.sig)}</div><div class="g-row"><span class="g-lab">X 光明顯變形</span><div class="g-tgs">${SP_DEF.map(([k,l])=>gTog('def',k,l,s.def)).join('')}</div></div>`+
+      `<div class="g-row"><span class="g-lab">其他體幹骨顯著畸形</span><div class="g-tgs">${TRUNK_B.map(b=>gTog('oth',b,b,s.oth)).join('')}</div></div>`;},
+  act:(s,k)=>{},
+  vis:s=>{const f=s.fused.map(String),run=spRun(s.fused);let y=58,o='';const pos=[];
+    VERT.forEach((v,i)=>{const w=v[0]==='C'?26:v[0]==='T'?32:40,h=v[0]==='C'?10:v[0]==='T'?12:15,x=150+20*Math.sin(i/23*Math.PI*2.1+.9)-w/2;pos.push([x+w/2,y+h/2,w]);
+      const on=f.includes(String(i));o+=`<g data-a="tog" data-k="fused" data-v="${i}" style="cursor:pointer"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="3" fill="${on?'#F6D9A8':'#F3ECDD'}" stroke="${on?'#C2571A':'#A89B84'}" stroke-width="${on?2:1}"/><rect x="${x+w}" y="${y+2}" width="${w*.5}" height="${h-4}" rx="3" fill="#E4DACA"/>${i%6===0||v==='T1'||v==='L1'?`<text x="${x-8}" y="${y+h-2}" text-anchor="end" style="font-size:9px;fill:#C9D6E2">${v}</text>`:''}</g>`;y+=h+4;});
+    o+=`<path d="M${150+20*Math.sin(2.1*Math.PI+.9)-26} ${y} q26 34 52 0 Z" fill="#F3ECDD" stroke="#A89B84"/><text x="${150+20*Math.sin(2.1*Math.PI+.9)+36}" y="${y+14}" style="font-size:9px;fill:#C9D6E2">薦椎</text>`;
+    if(run.length>1){const a=pos[run[0]],b=pos[run[run.length-1]];o+=`<line x1="${a[0]+a[2]*.2}" y1="${a[1]}" x2="${b[0]+b[2]*.2}" y2="${b[1]}" stroke="#9FB2C2" stroke-width="4" stroke-linecap="round"/>`+run.map(i=>`<circle cx="${pos[i][0]+pos[i][2]*.2}" cy="${pos[i][1]}" r="3.2" fill="#DCE4EB" stroke="#5A6B7A"/>`).join('');}
+    const dd=s.def.map(String),pan=[];const L='stroke="#F3ECDD" fill="none" stroke-width="2"';
+    if(dd.includes('c'))pan.push(`<svg viewBox="0 0 140 150"><path d="M70 10 Q110 50 70 80 Q30 110 70 140" ${L} stroke-width="8" stroke-linecap="round" stroke-dasharray="6 3"/><line x1="40" y1="22" x2="110" y2="42" stroke="#F2B8B0" stroke-width="2"/><line x1="30" y1="128" x2="100" y2="108" stroke="#F2B8B0" stroke-width="2"/><text x="70" y="78" text-anchor="middle" style="font-size:12px;font-weight:700;fill:#fff">Cobb ≧ 30°</text><text x="70" y="148" text-anchor="middle" style="font-size:9px;fill:#C9D6E2">正面：側彎角</text></svg>`);
+    if(dd.includes('k'))pan.push(`<svg viewBox="0 0 140 150"><path d="M40 20 Q110 75 40 130" ${L} stroke-width="8" stroke-linecap="round" stroke-dasharray="6 3"/><line x1="30" y1="30" x2="100" y2="12" stroke="#F2B8B0" stroke-width="2"/><line x1="30" y1="120" x2="100" y2="138" stroke="#F2B8B0" stroke-width="2"/><text x="96" y="80" text-anchor="middle" style="font-size:12px;font-weight:700;fill:#fff">≧ 50°</text><text x="70" y="148" text-anchor="middle" style="font-size:9px;fill:#C9D6E2">側面：前傾（後凸）角</text></svg>`);
+    if(dd.includes('h'))pan.push(`<svg viewBox="0 0 140 150"><rect x="30" y="20" width="80" height="34" rx="3" fill="#F3ECDD"/><path d="M30 64 L110 64 L110 98 L30 81 Z" fill="#F6D9A8" stroke="#C2571A" stroke-width="2"/><rect x="30" y="108" width="80" height="34" rx="3" fill="#F3ECDD"/><text x="70" y="86" text-anchor="middle" style="font-size:10px;font-weight:700;fill:#8A4A10">高度喪失 ≧ 50%</text><text x="70" y="148" text-anchor="middle" style="font-size:9px;fill:#C9D6E2">椎體壓迫變形</text></svg>`);
+    if(dd.includes('s'))pan.push(`<svg viewBox="0 0 140 150"><rect x="30" y="30" width="80" height="36" rx="3" fill="#F6D9A8" stroke="#C2571A" transform="translate(22 0)"/><rect x="30" y="76" width="80" height="36" rx="3" fill="#F3ECDD"/><line x1="110" y1="24" x2="110" y2="118" stroke="#F2B8B0" stroke-dasharray="3 3"/><text x="70" y="130" text-anchor="middle" style="font-size:10px;font-weight:700;fill:#fff">滑脫 ≧ 25%</text><text x="70" y="148" text-anchor="middle" style="font-size:9px;fill:#C9D6E2">上位椎體向前滑移</text></svg>`);
+    return `${pan.length?`<div class="g-panels">${pan.join('')}</div>`:''}<svg viewBox="0 0 300 ${y+46}">${o}<text x="290" y="24" text-anchor="end" style="font-size:12px;font-weight:700;fill:#fff">連續固定 ${run.length} 椎體・${Math.max(0,run.length-1)} 椎間盤</text><text x="290" y="42" text-anchor="end" style="font-size:10px;fill:${run.length>=4?'#8FE3A8':'#F2B8B0'}">${run.length>=4?'已達 4 椎體 3 椎間盤':'未達 4 椎體 3 椎間盤'}</text></svg>`;},
+  eval:s=>{const run=spRun(s.fused),R=SP_ROM[run.length&&run[0]<7?'C':'TL'],notes=[];let mot=null;
+    if(run.length>=4){if(!s.frac)notes.push('運動失能須 X 光可見明顯骨折或脫位，始能依運動失能等級審定。');else mot=s.rem<=R.t2?'8-1':s.rem<=R.t3?'8-2':null;}
+    else if(run.length)notes.push('固定 3 椎體 2 椎間盤以下者，不在運動失能給付範圍。');
+    const dfm=s.sig?'8-1':s.def.length?'8-3':null,items=bestOf([mot,dfm]);
+    if(mot&&dfm)notes.push('脊柱畸形與運動失能屬同一種類，不得合併升等，按其中較重者審定。');
+    if(s.oth.length){items.push('8-4');if(s.oth.length>1)notes.push('不同體幹骨併存二項以上顯著畸形，得合併提高為第十二等級（依附表）。');if(items.length>1)notes.push(GEN_MERGE);}
+    return {items,notes};},
+  notes:['脊柱失能須經治療一年以上（手術者自最後一次手術後一年，拔釘除外）始得認定；惡性腫瘤所致者得治療六個月認定。','脊柱須經 X 光診斷，並符合明顯骨折（不穩定、壓迫 50% 以上、爆裂 3 片以上骨碎片）或脫位（需手術之脫臼、二度以上滑脫）。','顯著運動失能＝連續固定 4 椎體 3 椎間盤以上且喪失生理運動範圍 1/2 以上；運動失能＝同樣固定範圍且喪失 1/3 以上。','「脊柱遺存畸形」：X 光明顯變形（椎體高度喪失 50%、滑脫 25%、側彎 30°、前傾 50° 之一）或切除棘突 3 個以上；「顯著畸形」為穿著衣服可由外部察知。','活動度數參考所附舊式角度表（脊柱前屈後屈 75～85°、頸部 110～120°），實際依診斷書頸椎、胸腰椎度數欄。'],
+  disc:'椎體排列與大小為示意；實際以 X 光片及診斷書為準。'
+};
+reg(['8-1','8-2','8-3','8-4'],'spine',(id,i)=>({pre:[{fused:['19','20','21','22'],frac:true,rem:30},{fused:['19','20','21','22'],frac:true,rem:45},{def:['h']},{oth:['肋骨']}][i]}));
+
+/* ---------- 上下肢缺損（截肢） ---------- */
+const AMP={arm:{lv:[['elbow','肘關節以上'],['wrist','腕關節以上']],id:{1:{elbow:'11-1',wrist:'11-2'},0:{elbow:'11-3',wrist:'11-4'}}},leg:{lv:[['knee','膝關節以上'],['ankle','足關節以上'],['tarso','跗蹠關節以上']],id:{1:{knee:'12-1',ankle:'12-2',tarso:'12-3'},0:{knee:'12-4',ankle:'12-5',tarso:'12-6'}}}};
+const bn=(d,w)=>`<path d="${d}" fill="none" stroke="#A89B84" stroke-width="${w+2}" stroke-linecap="round"/><path d="${d}" fill="none" stroke="#F3ECDD" stroke-width="${w}" stroke-linecap="round"/>`;
+function limbX(limb,cutY,ox){
+  const arm=limb==='arm';
+  const skin=arm?`M44 10 Q60 2 76 10 L80 150 Q76 160 78 170 L74 262 Q84 270 84 300 L80 350 L40 350 L36 300 Q36 270 46 262 L42 170 Q44 160 40 150 Z`:`M34 8 Q60 0 86 8 L82 170 Q86 180 80 190 L74 300 Q86 310 90 330 L92 372 L30 372 L34 330 Q40 312 46 300 L40 190 Q34 180 38 170 Z`;
+  const bones=arm?bn('M60 18 L60 146',10)+`<circle cx="60" cy="14" r="9" fill="#F3ECDD" stroke="#A89B84"/>`+bn('M54 156 L52 258',6)+bn('M67 156 L68 258',5)+[44,52,60,68,76].map((x,i)=>`<rect x="${x-4}" y="266" width="8" height="10" rx="3" fill="#F3ECDD" stroke="#A89B84"/>`+bn(`M${x} 282 L${x+(i-2)*1.5} 312`,4)+bn(`M${x+(i-2)*1.5} 318 L${x+(i-2)*2.5} 344`,3)).join(''):
+    bn('M58 22 L60 164',13)+`<circle cx="52" cy="16" r="10" fill="#F3ECDD" stroke="#A89B84"/><circle cx="60" cy="176" r="7" fill="#F3ECDD" stroke="#A89B84"/>`+bn('M56 188 L56 296',10)+bn('M73 192 L72 294',4)+`<rect x="46" y="302" width="26" height="14" rx="5" fill="#F3ECDD" stroke="#A89B84"/>`+[40,50,60,70,80].map((x,i)=>bn(`M${x} 326 L${x+(i-2)*2} 350`,4)+bn(`M${x+(i-2)*2} 356 L${x+(i-2)*2.5} 368`,3)).join('')+`<rect x="40" y="318" width="44" height="5" rx="2" fill="#F3ECDD" stroke="#A89B84"/>`;
+  const H=arm?356:378,cut=cutY!=null;
+  return `<g transform="translate(${ox} 0)"><clipPath id="ka${ox}"><rect x="0" y="0" width="120" height="${cut?cutY:H}"/></clipPath><clipPath id="kb${ox}"><rect x="0" y="${cut?cutY:H}" width="120" height="${H}"/></clipPath>
+    <g clip-path="url(#ka${ox})"><path d="${skin}" fill="#E7BFA2" fill-opacity=".35" stroke="#B57C5C"/>${bones}</g>
+    ${cut?`<g clip-path="url(#kb${ox})" opacity=".2"><path d="${skin}" fill="none" stroke="#C0392B" stroke-dasharray="4 3"/>${bones}</g><line x1="18" y1="${cutY}" x2="102" y2="${cutY}" stroke="#C0392B" stroke-width="3" stroke-linecap="round"/>`:''}</g>`;
+}
+GT.amp={
+  title:s=>s.limb==='arm'?'上肢缺損（截肢）位置怎麼看？':'下肢缺損（截肢）位置怎麼看？',sub:'選擇切斷位置與單側／兩側；紅線以下為缺損部分（X 光透視示意）。',dark:true,
+  init:p=>({limb:p.limb,both:!!p.both,lv:p.lv}),
+  ctrl:s=>gSeg('lv',AMP[s.limb].lv,s.lv,'切斷位置')+gSeg('both',[[0,'單側'],[1,'兩側']],s.both?1:0,'範圍'),
+  vis:s=>{const Y=s.limb==='arm'?{elbow:151,wrist:263}:{knee:172,ankle:299,tarso:321};const one=limbX(s.limb,Y[s.lv],s.both?30:90);
+    return `<svg viewBox="0 0 300 ${s.limb==='arm'?360:382}">${s.both?one+limbX(s.limb,Y[s.lv],150):one}</svg>`;},
+  eval:s=>({items:[AMP[s.limb].id[s.both?1:0][s.lv]]}),
+  notes:s=>['「以上」指由該關節或較近端處切斷缺損；未達該關節者，依較遠端之項目或手指、足趾項目認定。',s.limb==='arm'?'上肢：肘關節以上缺損 11-1／11-3、腕關節以上缺損 11-2／11-4（兩側／單側）。':'下肢：膝關節以上 12-1／12-4、足關節以上 12-2／12-5、跗蹠關節以上 12-6／12-3（單側／兩側）；跗蹠關節以上缺損之範圍依附表審核基準及 X 光認定。','截肢者請依 X 光拍攝結果，於失能診斷書肢體圖標示失能部位；器質性缺損於出院日即可審定。'],
+  disc:'骨骼與切斷位置為示意；實際以 X 光及診斷書標示為準。'
+};
+reg(['11-1','11-2','11-3','11-4'],'amp',(id,i)=>({limb:'arm',both:i<2,lv:['elbow','wrist'][i%2]}));
+reg(rngIds(12,1,6),'amp',(id,i)=>({limb:'leg',both:i<3,lv:['knee','ankle','tarso'][i%3]}));
+
+/* ---------- 假關節、長管骨畸形 ---------- */
+const LB={arm:{pjm:'11-41',pj:'11-42',mal2:'11-43',mal:'11-44',bone:'上臂骨或前臂骨'},leg:{pjm:'12-36',pj:'12-37',mal2:'12-38',mal:'12-39',bone:'大腿骨或下腿骨'}};
+function boneX(type,ox){
+  const base=`<circle cx="60" cy="16" r="11" fill="#F3ECDD" stroke="#A89B84"/><ellipse cx="60" cy="300" rx="16" ry="9" fill="#F3ECDD" stroke="#A89B84"/>`;
+  if(type==='mal')return `<g transform="translate(${ox} 0)">${base}${bn('M60 24 L60 150 L78 296',14)}<ellipse cx="62" cy="152" rx="13" ry="9" fill="#EFE3CB" stroke="#A89B84"/><path d="M60 150 L60 200" stroke="#9FB2C2" stroke-dasharray="4 3"/><text x="86" y="200" style="font-size:10px;fill:#F2B8B0">癒合後彎曲變形</text></g>`;
+  return `<g transform="translate(${ox} 0)">${base}${bn('M60 24 L60 142',14)}<g class="g-wob" style="transform-origin:60px 152px">${bn('M60 162 L60 294',14)}</g><text x="84" y="156" style="font-size:10px;fill:#F2B8B0">斷端未癒合・可異常活動</text></g>`;
+}
+GT.lbone={
+  title:s=>`${LB[s.limb].bone}：假關節與畸形怎麼看？`,sub:'切換型態與範圍（X 光透視示意）。',dark:true,
+  init:p=>({limb:p.limb,type:p.type,both:!!p.both}),
+  ctrl:s=>gSeg('type',[['pjm','假關節＋顯著運動失能'],['pj','假關節'],['mal','長管骨畸形']],s.type,'型態')+gSeg('both',[[0,'單側'],[1,'兩側']],s.both?1:0,'範圍'),
+  vis:s=>`<svg viewBox="0 0 300 320">${s.both?boneX(s.type==='pjm'?'pj':s.type,30)+boneX(s.type==='pjm'?'pj':s.type,150):boneX(s.type==='pjm'?'pj':s.type,90)}</svg>`,
+  eval:s=>{const L=LB[s.limb];if(s.type==='mal')return {items:[s.both?L.mal2:L.mal]};const id=L[s.type];return s.both?{items:[{id,tag:'左右各一項'}],notes:[GEN_MERGE]}:{items:[id]};},
+  notes:s=>['「假關節」：骨折後兩斷端無法癒合，肢體在斷處可以活動，形成類似關節的狀態（勞保實務說明）；與人工關節不同。','假關節同時遺存顯著運動失能者，適用較高等級（'+LB[s.limb].pjm+'）。','「長管骨畸形」以 X 光判定骨幹癒合後之變形；僅有骨痂增生或骨幹肥厚，通常不認定為畸形（依附表審核基準為準）。','須經治療一年以上（手術者自最後一次手術後一年，拔釘除外）始得認定。'],
+  disc:'骨骼圖為示意；實際以 X 光及勞保局審定為準。'
+};
+reg(['11-41','11-42','11-43','11-44'],'lbone',(id,i)=>({limb:'arm',type:['pjm','pj','mal','mal'][i],both:i===2}));
+reg(['12-36','12-37','12-38','12-39'],'lbone',(id,i)=>({limb:'leg',type:['pjm','pj','mal','mal'][i],both:i===2}));
+
+/* ---------- 手指末關節不能屈伸 ---------- */
+GT.dip={
+  title:'手指末關節不能屈伸怎麼看？',sub:'選擇手指；動畫中近位關節仍能彎曲，但末關節（遠位指節間關節）固定不動。',dark:true,
+  init:p=>({f:p.f}),ctrl:s=>gSeg('f',[['I','食指'],['M','中指'],['R','無名指'],['L','小指']],s.f,'手指'),
+  vis:s=>`<svg viewBox="0 0 320 170"><path d="M20 70 L110 62 L110 104 L20 110 Z" fill="#E7BFA2" fill-opacity=".35" stroke="#B57C5C"/>${bn('M26 88 L104 84',9)}<g class="g-pip">${bn('M112 84 L176 84',8)}<g>${bn('M184 84 L226 84',7)}${bn('M234 84 L262 84',6)}<circle cx="230" cy="84" r="11" fill="#C0392B"/><path d="M225 83 v-3 a5 5 0 0 1 10 0 v3" fill="none" stroke="#fff" stroke-width="2"/><rect x="224" y="83" width="12" height="8" rx="2" fill="#fff"/></g></g><text x="180" y="150" text-anchor="middle" style="font-size:11px;fill:#C9D6E2">${{I:'食指',M:'中指',R:'無名指',L:'小指'}[s.f]}：末關節（鎖頭處）強直，不能屈伸</text></svg>`,
+  eval:s=>({items:[s.f==='I'?'11-60':'11-61']}),
+  notes:['「末關節不能屈伸」指遠位指節間關節（DIP）強直或屈伸不能。','食指適用 11-60（第十四等級）；中指、無名指或小指適用 11-61（第十五等級）。','拇指末節或各指末節切斷達 1/2 以上，屬「手指喪失機能」，請看手指切斷位置示範。']
+};
+reg(['11-60','11-61'],'dip',(id,i)=>({f:i?'M':'I'}));
+
+/* ---------- 心臟 ---------- */
+GT.heart={
+  title:'心臟失能等級怎麼判斷？',sub:'輸入心臟機能損害分類、住院治療情形與 LVEF，依附表審核基準判斷。',
+  init:p=>Object.assign({nyha:1,hosp:'none',chf:false,lvef:60,cause:false,tx:false},p.pre||{}),
+  ctrl:s=>gSeg('nyha',[[1,'第一度'],[2,'第二度'],[3,'第三度'],[4,'第四度']],s.nyha,'機能損害')+gSeg('hosp',[['none','無'],['lt2','未超過 2 週'],['2w','2 週以上'],['4w','4 週以上']],s.hosp,'住院機械輔助／強心藥')+
+    `<div class="g-row">${gNum('lvef','LVEF（核醫）',s.lvef,'%')}${gChk('chf','無法控制之進行性慢性心衰竭',s.chf)}</div><div class="g-row">${gChk('cause','符合病因之一（冠狀動脈、瓣膜、心肌、主動脈、其他經專科醫師評估）',s.cause)}${gChk('tx','心臟移植或心室輔助器植入',s.tx)}</div>`,
+  vis:s=>{const v=Math.max(0,Math.min(80,s.lvef==null?0:s.lvef)),a=Math.PI*(1-v/80),x=150+100*Math.cos(a),y=130-100*Math.sin(a),arc=(v0,v1,c)=>{const p=t=>[150+100*Math.cos(Math.PI*(1-t/80)),130-100*Math.sin(Math.PI*(1-t/80))];const [x0,y0]=p(v0),[x1,y1]=p(v1);return `<path d="M${x0} ${y0} A100 100 0 0 1 ${x1} ${y1}" stroke="${c}" stroke-width="16" fill="none"/>`;};
+    return `<svg viewBox="0 0 300 160">${arc(0,25,'#B02A21')}${arc(25,49,'#C2571A')}${arc(49,80,'#2E7D4F')}<line x1="150" y1="130" x2="${x}" y2="${y}" stroke="#234E70" stroke-width="3"/><circle cx="150" cy="130" r="6" fill="#234E70"/><text x="150" y="154" text-anchor="middle" style="font-size:13px;font-weight:700;fill:#234E70">LVEF ${s.lvef==null?'—':s.lvef+'%'}｜第${['','一','二','三','四'][s.nyha]}度</text><text x="40" y="146" style="font-size:9px;fill:#B02A21">≦25%</text><text x="236" y="146" style="font-size:9px;fill:#2E7D4F">≧50%</text></svg>`;},
+  eval:s=>{const lv=s.lvef==null?999:s.lvef,b4=s.nyha===4&&s.chf&&lv<=25,c=[];
+    if(b4&&s.hosp==='4w')c.push('7-6');if(b4&&s.hosp==='2w')c.push('7-7');if(b4&&s.hosp==='lt2')c.push('7-8');
+    if(s.nyha>=3&&lv<=25&&s.cause)c.push('7-9');if(s.tx)c.push('7-10');if(s.nyha>=2&&lv>=26&&lv<=49&&s.cause)c.push('7-11');
+    return {items:bestOf(c),empty:'未符合心臟失能各等級條件。',notes:['第一至三等級須同時符合：第四度、住院治療週數、無法控制之進行性心衰竭、LVEF ≦ 25%（缺一不可）。']};},
+  notes:['請附最近 3 個月之心臟功能檢查及核子醫學左心室功能檢查（LVEF）報告。','第七等級：第三、四度且 LVEF ≦ 25%，並符合病因之一；第十二等級：第二至四度且 LVEF 26～49%，並符合病因之一。','心臟機能損害分類：第一度無運動失能；第二度輕度運動失能；第三度稍有活動即有症狀；第四度靜止時仍有症狀。']
+};
+reg(rngIds(7,6,11),'heart',(id,i)=>({pre:[{nyha:4,hosp:'4w',chf:true,lvef:20},{nyha:4,hosp:'2w',chf:true,lvef:20},{nyha:4,hosp:'lt2',chf:true,lvef:20},{nyha:3,lvef:22,cause:true},{tx:true},{nyha:2,lvef:40,cause:true}][i]}));
+
+/* ---------- 肺臟 ---------- */
+function lungHits(s){const h=[],n=v=>v!=null&&v!=='';
+  if(s.support&&n(s.pao2)&&s.pao2<=50)h.push([1,`需氧氣或呼吸器維生，PaO2 ${s.pao2} mmHg`]);
+  if(n(s.pao2)&&s.pao2<=55&&s.help)h.push([2,`PaO2 ${s.pao2} mmHg 且日常生活須他人協助`]);else if(n(s.pao2)&&s.pao2<=60)h.push([3,`PaO2 ${s.pao2} mmHg`]);
+  if(n(s.fev1)){const v=s.fev1;h.push(v<25?[2,'FEV1 < 25%']:v<=30?[3,'FEV1 25～30%']:v<60?[7,'FEV1 31～59%']:v<80?[12,'FEV1 60～79%']:null);}
+  if(n(s.ratio)){const v=s.ratio;h.push(v<=25?[2,'FEV1/FVC ≦ 25%']:v<=40?[3,'FEV1/FVC 26～40%']:v<60?[7,'FEV1/FVC 41～59%']:v<=74?[12,'FEV1/FVC 60～74%']:null);}
+  if(n(s.dlco)){const v=s.dlco;h.push(v>=25&&v<=30?[3,'DLCO/VA 25～30%']:v>30&&v<60?[7,'DLCO/VA 31～59%']:null);}
+  if(n(s.vo2)&&s.vo2>=20&&s.vo2<=25)h.push([12,'VO2max 20～25 ml/kg·min']);
+  if(s.res==='side')h.push([2,'肺臟切除一側以上']);if(s.res==='lobe2')h.push([3,'肺臟切除兩葉以上']);if(s.rad)h.push([7,'放射性肺炎兩葉以上']);
+  return h.filter(Boolean);}
+GT.lung={
+  title:'肺臟失能等級怎麼判斷？',sub:'填入肺功能檢查數值（未做的留白），依「符合其中一項」原則判斷。',
+  init:p=>Object.assign({support:false,help:false,pao2:null,fev1:null,ratio:null,dlco:null,vo2:null,res:'none',rad:false,tx:false},p.pre||{}),
+  ctrl:s=>`<div class="g-row">${gNum('fev1','FEV1',s.fev1,'%')}${gNum('ratio','FEV1/FVC',s.ratio,'%')}${gNum('dlco','DLCO/VA',s.dlco,'%')}${gNum('vo2','VO2max',s.vo2,'ml/kg·min')}${gNum('pao2','PaO2（未給氧）',s.pao2,'mmHg')}</div>`+
+    gSeg('res',[['none','無'],['lobe2','兩葉以上'],['side','一側以上']],s.res,'肺臟切除')+`<div class="g-row">${gChk('support','需氧氣或呼吸器維持生命、日常生活限於病床',s.support)}${gChk('help','日常生活須他人協助照顧',s.help)}${gChk('rad','放射性肺炎兩葉以上',s.rad)}${gChk('tx','肺臟移植',s.tx)}</div>`,
+  vis:s=>{const v=s.fev1==null?100:Math.max(0,Math.min(100,s.fev1));return `<svg viewBox="0 0 300 150"><path d="M140 20 Q100 22 88 70 Q82 110 96 130 Q124 136 138 124 Z" fill="#E8B9B5" stroke="#B57C5C"/><path d="M160 20 Q200 22 212 70 Q218 110 204 130 Q176 136 162 124 Z" fill="#E8B9B5" stroke="#B57C5C"/><rect x="146" y="10" width="8" height="40" rx="4" fill="#D9A0A0"/>
+    ${s.res!=='none'?`<path d="M160 20 Q200 22 212 70 Q218 110 204 130 Q176 136 162 124 Z" fill="#fff" stroke="#C0392B" stroke-dasharray="4 3" ${s.res==='lobe2'?'transform="translate(0 40) scale(1 .7)"':''}/>`:''}
+    <text x="20" y="146" style="font-size:10px;fill:#5A6B7A">FEV1</text><rect x="52" y="138" width="200" height="8" rx="4" fill="#E3E9EF"/><rect x="52" y="138" width="${v*2}" height="8" rx="4" fill="${v<31?'#B02A21':v<60?'#A8790A':v<80?'#2F6B8F':'#2E7D4F'}"/><text x="258" y="146" style="font-size:10px;fill:#234E70">${s.fev1==null?'未填':s.fev1+'%'}</text></svg>`;},
+  eval:s=>{const h=lungHits(s),G2ID={1:'7-12',2:'7-13',3:'7-14',7:'7-15',12:'7-17'},c=h.map(([g])=>G2ID[g]);if(s.tx)c.push('7-16');
+    const notes=h.length?['符合指標：'+h.map(([g,t])=>`${t}（第${CN[g-1]}等級）`).join('、')]:[];notes.push('FEV1、FEV1/FVC、DLCO/VA 等為不同指標，本示範採「符合其中一項即可」之判讀（醫學專業判讀，非正式函釋）。');
+    return {items:bestOf(c),notes,empty:'尚未符合肺臟失能各等級條件。'};},
+  notes:['請附診斷失能當時之完整肺功能檢查報告（含吐氣流速容積曲線圖）及 X 光片。','塵肺症須經 X 光照片確認為第二症度以上，始可依肺臟失能等級審定。','指標：PaO2 動脈血氧分壓；FEV1 第一秒用力呼氣量；FVC 用力肺活量；DLCO/VA 肺瀰散功能；VO2max 最高耗氧量。']
+};
+reg(rngIds(7,12,17),'lung',(id,i)=>({pre:[{support:true,pao2:48},{fev1:22},{fev1:28},{fev1:45},{tx:true},{fev1:70}][i]}));
+
+/* ---------- 肝臟 ---------- */
+const CP=[['總膽紅素','<2','2～3','>3'],['血清白蛋白','>3.5','3.0～3.5','<3.0'],['腹水','無','少量易控制','中量以上'],['肝腦病變','無','第1～2級','第3～4級'],['凝血酶原延長／INR','<4秒／<1.7','4～6秒／1.7～2.3','>6秒／>2.3']];
+GT.liver={
+  title:'肝臟失能等級怎麼判斷？',sub:'以 Child-Pugh 計分，再加上腹水、肝腦病變、靜脈瘤出血等條件判斷。',
+  init:p=>Object.assign({c0:1,c1:1,c2:1,c3:1,c4:1,asc:'none',he:0,bleed:false,portal:false,tx:false},p.pre||{}),
+  ctrl:s=>CP.map((r,i)=>gSeg('c'+i,[[1,`1分 ${r[1]}`],[2,`2分 ${r[2]}`],[3,`3分 ${r[3]}`]],s['c'+i],r[0])).join('')+gSeg('asc',[['none','無'],['persist','持續存在'],['refr','頑固難治']],s.asc,'腹水')+gSeg('he',[[0,'未曾'],[1,'曾經'],[2,'二次以上']],s.he,'肝腦病變')+
+    `<div class="g-row">${gChk('bleed','胃或食道靜脈瘤（曲張）破裂出血',s.bleed)}${gChk('portal','門脈高壓且內視鏡證實胃或食道靜脈瘤',s.portal)}${gChk('tx','肝臟移植',s.tx)}</div>`,
+  vis:s=>{const sc=[0,1,2,3,4].reduce((a,i)=>a+s['c'+i],0),cl=sc>=10?'C':sc>=7?'B':'A',x=30+(sc-5)/10*240;
+    return `<svg viewBox="0 0 300 90"><rect x="30" y="30" width="${240*2/10}" height="16" fill="#2E7D4F"/><rect x="${30+48}" y="30" width="${240*3/10}" height="16" fill="#C2571A"/><rect x="${30+120}" y="30" width="${240*.5+1}" height="16" fill="#B02A21"/><text x="54" y="62" style="font-size:10px;fill:#2E7D4F">A（≦6）</text><text x="110" y="62" style="font-size:10px;fill:#C2571A">B（7～9）</text><text x="200" y="62" style="font-size:10px;fill:#B02A21">C（≧10）</text><path d="M${x} 26 l-6 -10 h12 z" fill="#234E70"/><text x="${x}" y="12" text-anchor="middle" style="font-size:12px;font-weight:700;fill:#234E70">${sc} 分・${cl} 級</text></svg>`;},
+  eval:s=>{const sc=[0,1,2,3,4].reduce((a,i)=>a+s['c'+i],0),C=sc>=10,BC=sc>=7,refr=s.asc==='refr',pers=s.asc!=='none',c=[];
+    if(C&&refr&&s.he===2&&s.bleed)c.push('7-18');if(C&&refr&&(s.he===2||s.bleed))c.push('7-19');if(C&&refr)c.push('7-20');
+    if(BC&&s.he>=1&&(pers||s.bleed))c.push('7-21');if(s.tx)c.push('7-22');if(s.portal)c.push('7-23');
+    return {items:bestOf(c),empty:'尚未符合肝臟失能各等級條件。'};},
+  notes:['請附最近 6 個月之肝功能檢查報告（含超音波及電腦斷層）；肝病須住院治療且觀察滿 6 個月以上（申請第十二等級者無需住院）。','第一等級：C 級＋頑固腹水＋二次以上肝腦病變＋靜脈曲張破裂出血（全部符合）；第二等級：C 級＋頑固腹水，並有二次以上肝腦病變或出血之一；第三等級：C 級＋頑固腹水。','第七等級：B 或 C 級、曾有肝腦病變，並有持續腹水或靜脈瘤破裂出血之一；第十二等級：A 級以上合併門脈高壓且內視鏡證實靜脈瘤。']
+};
+reg(rngIds(7,18,23),'liver',(id,i)=>({pre:[{c0:3,c1:3,c2:3,c3:2,c4:2,asc:'refr',he:2,bleed:true},{c0:3,c1:3,c2:3,c3:2,c4:2,asc:'refr',he:2},{c0:3,c1:3,c2:3,c3:2,c4:2,asc:'refr'},{c0:2,c1:2,c2:2,c3:1,c4:1,asc:'persist',he:1},{tx:true},{portal:true}][i]}));
+
+/* ---------- 其他胸腹部臟器（切除、造口、泌尿生殖） ---------- */
+function organFig(grp){const prev=organFilter;organFilter=grp;const h=organMapHTML();organFilter=prev;const m=h.match(/<svg[\s\S]*<\/svg>/);return m?m[0]:'';}
+GT.organ={
+  title:s=>`${s.grp}：失能項目怎麼看？`,sub:'勾選符合的狀況；上圖標示臟器位置。',
+  init:p=>({grp:p.grp,sel:p.sel.slice()}),
+  ctrl:s=>{const gr=CATS.find(c=>c.k==='organ').groups.find(g=>g.t===s.grp);return `<div class="g-tgs">${gr.items.map(it=>gTog('sel',it[0],`${it[0]} ${it[1].replace(/者。$/,'')}`,s.sel)).join('')}</div>`;},
+  vis:s=>`<div class="g-organ">${organFig(s.grp)}</div>`,
+  eval:s=>({items:s.sel.slice().sort((a,b)=>itemGrade(a)-itemGrade(b)),notes:s.sel.length>1?['同一臟器或二種以上臟器併存失能時，須綜合全部症狀衡量；胸腹部臟器不得按各臟器等級分別計算後合併提高等級。生殖器失能併存不同等級時，按較高等級給與。']:[],empty:'請勾選符合的狀況。'}),
+  notes:s=>{const gr=CATS.find(c=>c.k==='organ').groups.find(g=>g.t===s.grp);return (gr.notes||[]).concat(['器質性切除、移植或初次透析者，於出院日或初次透析日審定；其他須經治療六個月以上。']);}
+};
+CATS.find(c=>c.k==='organ').groups.filter(g=>!['胸腹部臟器（綜合機能）','心臟','肺臟','肝臟'].includes(g.t)).forEach(g=>g.items.forEach(it=>GDEMO[it[0]]={t:'organ',grp:g.t,sel:[it[0]]}));
+
+</script>
+</body>
+</html>
