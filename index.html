@@ -322,6 +322,34 @@ table.qref td.new{font-weight:700;color:var(--navy)}
 .mini-input label{font-size:.78rem;font-weight:700;color:var(--sub)}
 .mini-input input{width:150px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;font:inherit}
 .mini-input input:focus{outline:2px solid var(--navy);border-color:var(--navy)}
+/* v3：口剖面、臟器場景、脊柱人形、指趾角度 */
+.g-mouth{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:10px;align-items:start}
+.g-mouth svg,.g-oscene svg,.g-spwrap svg{max-width:100%!important}
+.g-mh{font-size:.78rem;font-weight:700;color:var(--navy);margin:6px 0 4px}
+.g-diets{display:flex;gap:6px}
+.g-diet{flex:1 1 0;display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 4px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:.74rem;text-align:center}
+.g-diet b{font-size:1.2rem;line-height:1.2}.g-diet i{font-style:normal;font-weight:700;font-size:.72rem}
+.g-diet.ok i{color:#2E7D4F}.g-diet.no{background:#FBEEEC;opacity:.7}.g-diet.no i{color:#B02A21}
+.g-snds{display:grid;gap:3px}
+.g-snd{display:flex;align-items:center;gap:6px;font-size:.78rem;padding:3px 6px;border-radius:8px;background:#fff;border:1px solid var(--line)}
+.g-snd em{font-style:normal;width:18px;height:18px;border-radius:50%;background:#2F6B8F;color:#fff;font-size:.68rem;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.g-snd small{color:var(--sub);margin-left:auto;font-size:.7rem}
+.g-snd.no{background:#FBEEEC;border-color:#EBC7C2;color:#B02A21}.g-snd.no em{background:#C0392B}
+.g-oscene{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:10px;align-items:start}
+.g-oside p{font-size:.82rem;display:flex;gap:6px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 8px;margin-bottom:6px;line-height:1.5}
+.g-oside p b{flex:none}
+.g-spwrap{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.8fr);gap:8px;align-items:start}
+@media(max-width:640px){.g-mouth,.g-oscene,.g-spwrap{grid-template-columns:1fr}}
+.g-anim-flow{stroke-dasharray:6 6;animation:gflow 1s linear infinite}
+@keyframes gflow{to{stroke-dashoffset:-24}}
+.g-drip{animation:gdrip 1.4s ease-in infinite}
+@keyframes gdrip{0%{transform:translateY(0);opacity:1}100%{transform:translateY(16px);opacity:0}}
+.g-pulse{animation:gpulse 2.2s ease-in-out infinite}
+@keyframes gpulse{50%{opacity:.4}}
+@media(prefers-reduced-motion:reduce){.g-anim-flow,.g-drip,.g-pulse{animation:none}}
+.g-spstat{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:.8rem;color:#fff;margin:2px 0 4px}
+.g-spleg{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:.72rem;color:#C9D6E2;margin-top:4px}
+.g-spleg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
 
 /* 對外版：提醒與聯絡 */
 .pub-note{display:flex;gap:14px;align-items:flex-start;background:var(--seal-soft);border:1px solid #EBC7C2;border-left:5px solid var(--seal);border-radius:10px;padding:12px 16px;margin:-4px 0 16px;font-size:.9rem;line-height:1.7}
@@ -335,6 +363,7 @@ table.qref td.new{font-weight:700;color:var(--navy)}
 .pub-cta a.go:hover{background:var(--seal-soft);color:var(--seal)}
 .pub-cta a.go:focus-visible,.pub-note a:focus-visible{outline:3px solid var(--seal);outline-offset:3px}
 @media(max-width:640px){.pub-cta{grid-template-columns:1fr}.pub-note{flex-direction:column;gap:4px}}
+
 </style>
 </head>
 <body>
@@ -1473,7 +1502,7 @@ function fingerEval(){
   }
   const cnt=res.items.length*(fBoth?2:1);
   if(cnt>=2&&!(pairCF&&cnt===2))res.notes.push('符合兩個以上失能項目：依勞工保險失能給付標準第五條，按最高等級核定，並依規定升等（兩項以上均在第十四至第一等級間升一級、均在第八至第一等級間升二級、均在第五至第一等級間升三級，升等後不得超過各項分別計算之合計額）。實際等級以勞保局審定為準。');
-  if(F.length)res.notes.push('「喪失機能」也包括中手指節關節或近位指節間關節（拇指為中手指節或指節間關節）喪失生理運動範圍 1/2 以上；本圖只示範末節切斷這一種情形。');
+  if(F.length)res.notes.push('「喪失機能」也包括中手指節關節或近位指節間關節（拇指為中手指節或指節間關節）喪失生理運動範圍 1/2 以上；關節途徑請按下方「看關節角度途徑」。');
   return res;
 }
 function fingerSVG(f,lv){
@@ -1524,13 +1553,13 @@ function buildFingerModal(){
     <p class="demo-sub">點手指（或下方按鈕）切換切斷位置：正常 → 指骨一部分缺損 → 末節切斷 ≧ 1/2 → 手指缺損。藍色虛線是「手指缺損」的基準關節。</p>
     <div class="fg-stage"><svg id="fgSvg" viewBox="-6 34 284 340" role="group" aria-label="右手手背示意圖"></svg></div>
     <div class="fg-chips" id="fgChips"></div>
-    <div class="fg-tools"><label><input type="checkbox" id="fgBoth"> 另一手的情形也相同</label><label><input type="checkbox" id="fgX" checked> 透視骨骼</label><button type="button" id="fgClear">全部清除</button></div>
+    <div class="fg-tools"><label><input type="checkbox" id="fgBoth"> 另一手的情形也相同</label><label><input type="checkbox" id="fgX" checked> 透視骨骼</label><button type="button" id="fgClear">全部清除</button><button type="button" id="fgAng">看關節角度途徑 ▸</button></div>
     <div class="fg-legend">${FLV.slice(1).map(l=>`<span><i style="background:${l.color}"></i><span><b style="color:${l.color}">${l.label}</b>：${l.sub}</span></span>`).join('')}<span><i style="background:transparent;border-top:2px dashed #234E70;border-radius:0;height:0;margin-top:8px"></i><span><b style="color:var(--navy)">基準關節</b>：拇指＝指節間關節，其他指＝近位指節間關節</span></span></div>
     <div class="fg-result" id="fgResult" aria-live="polite"></div><div id="fgCards"></div>
     <details class="notes" style="margin-top:10px;border:1px solid var(--line);border-radius:10px"><summary>認定重點</summary><ul>
       <li>「手指缺損」：拇指由指節間關節以上切斷；其他各指由近位指節間關節以上切斷。</li>
       <li>「指骨一部分缺損」：指骨缺損一部分，由 X 光可明確顯示指骨有一部分損失，而未達該指末節二分之一。</li>
-      <li>「手指喪失機能」包括拇指或其他各指之末節切斷達二分之一以上，也包括關節喪失生理運動範圍二分之一以上（本圖未示範關節部分）。</li>
+      <li>「手指喪失機能」包括拇指或其他各指之末節切斷達二分之一以上，也包括關節喪失生理運動範圍二分之一以上（請按上方「看關節角度途徑」）。</li>
       <li>同一手指併存「機能失能」及「器質失能」時，按其中較高等級給與，不得合併提高等級。</li>
       <li>診斷書須依 X 光拍攝結果，在手部圖標示失能部位；手指缺損由全民健康保險特約醫院或診所出具即可。</li>
     </ul></details>
@@ -1544,6 +1573,7 @@ function buildFingerModal(){
   $('#fgChips').addEventListener('click',e=>{const b=e.target.closest('.fg-chip');if(b)fingerCycle(b.dataset.f);});
   $('#fgBoth').addEventListener('change',e=>{fBoth=e.target.checked;fingerRender();});$('#fgX').addEventListener('change',e=>{fXray=e.target.checked;fingerRender();});
   $('#fgClear').addEventListener('click',()=>{FINGERS.forEach(f=>fState[f.k]=0);fBoth=false;fingerRender();});
+  $('#fgAng').addEventListener('click',()=>{const d=FINGERS.map(f=>f.k).find(k=>fState[k]===2)||'I',tr=fReturn;closeFinger();openFAngle('hand',d,tr);});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&m.classList.contains('open'))closeFinger();});
 }
 function openFinger(id,trigger){
@@ -1602,7 +1632,7 @@ function toeEval(){
   }
   const cnt=res.items.length*(tBoth?2:1);
   if(cnt>=2&&!(pair&&cnt===2))res.notes.push('符合兩個以上失能項目：依勞工保險失能給付標準第五條，按最高等級核定，並依規定升等（兩項以上均在第十四至第一等級間升一級、均在第八至第一等級間升二級、均在第五至第一等級間升三級，升等後不得超過各項分別計算之合計額）。實際等級以勞保局審定為準。');
-  if(F.length)res.notes.push('「足趾喪失機能」也包括關節活動受限：第一趾中足趾關節或趾關節、第二趾中足趾關節或第一趾關節喪失生理運動範圍 1/2 以上；第三～五趾中足趾關節及第一趾關節均完全強直。本圖只示範切斷這一種情形。');
+  if(F.length)res.notes.push('「足趾喪失機能」也包括關節活動受限：第一趾中足趾關節或趾關節、第二趾中足趾關節或第一趾關節喪失生理運動範圍 1/2 以上；第三～五趾中足趾關節及第一趾關節均完全強直。關節途徑請按下方「看關節角度途徑」。');
   return res;
 }
 function toeSVG(t,lv){
@@ -1649,13 +1679,13 @@ function buildToeModal(){
     <p class="demo-sub">點足趾（或下方按鈕）切換：正常 → 喪失機能（切斷）→ 足趾缺損。藍色虛線是「喪失機能」的切斷基準，足趾根部（中足趾關節）是「缺損」的基準。</p>
     <div class="fg-stage"><svg id="tfSvg" viewBox="84 70 184 200" role="group" aria-label="右腳腳背示意圖"></svg></div>
     <div class="fg-chips" id="tfChips"></div>
-    <div class="fg-tools"><label><input type="checkbox" id="tfBoth"> 另一腳的情形也相同</label><label><input type="checkbox" id="tfX" checked> 透視骨骼</label><button type="button" id="tfClear">全部清除</button></div>
+    <div class="fg-tools"><label><input type="checkbox" id="tfBoth"> 另一腳的情形也相同</label><label><input type="checkbox" id="tfX" checked> 透視骨骼</label><button type="button" id="tfClear">全部清除</button><button type="button" id="tfAng">看關節角度途徑 ▸</button></div>
     <div class="fg-legend">${TLV.slice(1).map(l=>`<span><i style="background:${l.color}"></i><span><b style="color:${l.color}">${l.label}</b>：${l.sub}</span></span>`).join('')}<span><i style="background:transparent;border-top:2px dashed #234E70;border-radius:0;height:0;margin-top:8px"></i><span><b style="color:var(--navy)">喪失機能基準</b>：第一趾＝末節一半，其他趾＝末關節</span></span></div>
     <div class="fg-result" id="tfResult" aria-live="polite"></div><div id="tfCards"></div>
     <details class="notes" style="margin-top:10px;border:1px solid var(--line);border-radius:10px"><summary>認定重點</summary><ul>
       <li>「足趾缺損」：自中足趾關節切斷而足趾全部缺損。</li>
       <li>「足趾喪失機能」（切斷）：第一趾末節切斷二分之一以上；第二趾自末關節以上切斷；第三、四、五趾末關節以上切斷。</li>
-      <li>「足趾喪失機能」也包括關節活動受限（第一趾中足趾關節或趾關節、第二趾中足趾關節或第一趾關節喪失生理運動範圍二分之一以上；第三～五趾中足趾關節及第一趾關節均完全強直），本圖未示範。</li>
+      <li>「足趾喪失機能」也包括關節活動受限（第一趾中足趾關節或趾關節、第二趾中足趾關節或第一趾關節喪失生理運動範圍二分之一以上；第三～五趾中足趾關節及第一趾關節均完全強直），請按上方「看關節角度途徑」。</li>
       <li>一足足趾缺損，同時其他足趾喪失機能：準用手指缺損審核規定，可合併提高等級或按合計額審定；若低於各趾以喪失機能計算的等級，可按後者審定。</li>
       <li>診斷書須依 X 光拍攝結果，在足部圖標示失能部位；由全民健康保險特約醫院或診所出具即可。</li>
     </ul></details>
@@ -1669,6 +1699,7 @@ function buildToeModal(){
   $('#tfChips').addEventListener('click',e=>{const b=e.target.closest('.fg-chip');if(b)toeCycle(b.dataset.t);});
   $('#tfBoth').addEventListener('change',e=>{tBoth=e.target.checked;toeRender();});$('#tfX').addEventListener('change',e=>{tXray=e.target.checked;toeRender();});
   $('#tfClear').addEventListener('click',()=>{TOES.forEach(t=>tState[t.k]=0);tBoth=false;toeRender();});
+  $('#tfAng').addEventListener('click',()=>{const d=TOES.map(t=>t.k).find(k=>tState[k]===1)||'1',tr=tReturn;closeToe();openFAngle('foot',d,tr);});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&m.classList.contains('open'))closeToe();});
 }
 function openToe(id,trigger){
@@ -2136,6 +2167,223 @@ GT.organ={
 };
 CATS.find(c=>c.k==='organ').groups.filter(g=>!['胸腹部臟器（綜合機能）','心臟','肺臟','肝臟'].includes(g.t)).forEach(g=>g.items.forEach(it=>GDEMO[it[0]]={t:'organ',grp:g.t,sel:[it[0]]}));
 
+/* ================= 2026-09-25 v3 新增：共用動畫小工具 ================= */
+const AN=(v)=>reduceMotion?'':v; // 使用者要求減少動態時不輸出動畫
+const orgSt={ok:'',gone:'fill="none" stroke="#C0392B" stroke-width="1.6" stroke-dasharray="4 3"',weak:'fill="#C9D3DC" stroke="#7E93A6" stroke-width="1.2"'};
+function oShape(tag,attrs,color,st){return `<${tag} ${attrs} ${st==='gone'?orgSt.gone:st==='weak'?orgSt.weak:`fill="${color}" stroke="#7E5A48" stroke-opacity=".55" stroke-width="1.1"`}/>`;}
+const oLab=(x,y,t,c,anchor)=>`<text x="${x}" y="${y}" text-anchor="${anchor||'middle'}" style="font-size:10px;font-weight:700;fill:${c||'#5A6B7A'}">${t}</text>`;
+const oTag=(x,y,t,c)=>{const w=t.length*10+10;return `<g><rect x="${x-w/2}" y="${y-11}" width="${w}" height="16" rx="8" fill="#fff" stroke="${c||'#C0392B'}" stroke-width="1"/><text x="${x}" y="${y+1}" text-anchor="middle" style="font-size:9.5px;font-weight:700;fill:${c||'#C0392B'}">${t}</text></g>`;};
+const TORSO='<path d="M72 14 Q150 0 228 14 L242 118 Q248 196 236 248 L246 326 Q150 346 54 326 L64 248 Q52 196 58 118 Z" fill="#F7E6DA" stroke="#C99A85" stroke-width="1.5"/>';
+const drops=(x,y,c)=>[0,1,2].map(i=>`<circle cx="${x+(i-1)*6}" cy="${y}" r="2.6" fill="${c||'#6FA8D6'}" class="g-drip" style="animation-delay:${i*.45}s"/>`).join('');
+
+/* ---------- 口：頭部側面剖面 ---------- */
+const ART=[ // 發音部位（索引對應 SOUNDS）
+  {x:46,y:190,zy:'ㄅㄆㄇ',p:'雙唇'},{x:61,y:194,zy:'ㄈ',p:'上齒＋下唇'},{x:87,y:171,zy:'ㄉㄊㄋㄌ',p:'舌尖＋牙齦'},
+  {x:152,y:176,zy:'ㄍㄎㄏ',p:'舌根＋軟顎'},{x:124,y:168,zy:'ㄐㄑㄒ',p:'舌面＋硬顎'},{x:105,y:169,zy:'ㄓㄔㄕㄖ',p:'舌尖＋硬顎前'},{x:71,y:177,zy:'ㄗㄘㄙ',p:'舌尖＋上齒背'}];
+function mouthHead(s){
+  const bad=new Set(s.snd.map(Number)),lar=s.lar,sw=s.sw;
+  const BOL=[['#9C6B3F','一般飯菜'],['#E8C66A','粥、糊狀'],['#6FA8D6','流質']][sw];
+  const path='M56 192 C80 188 120 184 150 196 C168 206 176 222 178 240 L178 300';
+  const bolus=sw===2?`<g><circle r="4.5" fill="${BOL[0]}"/><circle cx="-7" cy="3" r="3" fill="${BOL[0]}"/></g>`:sw===1?`<ellipse rx="8" ry="5.5" fill="${BOL[0]}" stroke="#B89630"/>`:`<rect x="-7" y="-5" width="14" height="10" rx="3" fill="${BOL[0]}" stroke="#6B4524"/>`;
+  let o=`<svg viewBox="0 14 300 292" aria-label="頭部側面剖面示意">
+  <path d="M150 16 C104 12 76 46 72 96 L70 116 L40 150 L60 160 L52 180 L58 190 L50 200 L60 208 L66 234 C80 248 104 250 118 250 L122 305 L218 305 L214 244 C236 226 262 196 266 146 C270 82 226 20 150 16 Z" fill="#F4DCCB" stroke="#B57C5C" stroke-width="1.6"/>
+  <path d="M74 142 C100 136 150 134 176 144 L178 166 L72 170 Z" fill="#EBC3B3" opacity=".7"/>${oLab(124,156,'鼻腔','#8E5A40')}
+  <path d="M64 170 L140 166 C152 166 160 172 164 182 L168 196" fill="none" stroke="#C98C86" stroke-width="5" stroke-linecap="round"/>
+  <path d="M164 182 q6 10 2 16" fill="none" stroke="#C98C86" stroke-width="4" stroke-linecap="round"/>
+  <path d="M70 200 C84 182 130 176 156 190 C170 200 172 218 166 230 C140 234 100 230 72 214 Z" fill="${s.taste?'#C9B3B8':'#D98E97'}" stroke="#A85D67" stroke-width="1.2"/>${oLab(118,212,'舌','#fff')}
+  ${s.taste?[0,1,2,3,4].map(i=>`<circle cx="${92+i*14}" cy="${196-(i%2)*4}" r="2.4" fill="#8A7B7F"/>`).join('')+oTag(118,240,'味覺喪失','#8A5A60'):''}
+  <rect x="58" y="168" width="10" height="13" rx="3" fill="#FFFDF6" stroke="#B9AE9A"/><rect x="58" y="198" width="10" height="12" rx="3" fill="#FFFDF6" stroke="#B9AE9A"/>
+  <path d="M184 142 L186 305" stroke="#C98C86" stroke-width="3" fill="none"/>
+  <path d="M168 228 q-8 -8 -4 -18" stroke="#B57C5C" stroke-width="3" fill="none" stroke-linecap="round"/>${oLab(200,222,'會厭','#8E5A40','start')}
+  ${lar?`<rect x="146" y="246" width="26" height="22" rx="4" fill="none" stroke="#C0392B" stroke-dasharray="4 3"/>${oTag(222,262,'喉頭已切除','#C0392B')}<path d="M152 270 L152 290 Q140 294 124 292" stroke="#6FA8D6" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="122" cy="292" r="5" fill="#fff" stroke="#6FA8D6" stroke-width="2"/>${oLab(118,284,'頸部造口','#2F6B8F','end')}`
+      :`<rect x="146" y="246" width="26" height="22" rx="4" fill="#E9B7A0" stroke="#A86B55"/><line x1="150" y1="257" x2="168" y2="257" stroke="#7E4A38" stroke-width="2"/>${oLab(212,262,'喉頭（聲帶）','#8E5A40','start')}<rect x="148" y="268" width="22" height="37" fill="#E6C2B2" stroke="#A86B55" stroke-width="1"/>${oLab(158,300,'氣管','#8E5A40')}`}
+  <rect x="174" y="250" width="12" height="55" fill="#E9A99A" stroke="#A86B55" stroke-width="1"/>${oLab(200,300,'食道','#8E5A40','start')}
+  <ellipse cx="226" cy="150" rx="16" ry="22" fill="${s.sal?'#D7D0C8':'#EFD18E'}" stroke="#B89630" stroke-width="1" opacity=".9"/>${oLab(226,182,'腮腺','#8E6A18')}
+  <ellipse cx="116" cy="244" rx="14" ry="7" fill="${s.sal?'#D7D0C8':'#EFD18E'}" stroke="#B89630" stroke-width="1" opacity=".9"/>
+  ${s.sal?oTag(252,120,'唾液減少','#8E6A18')+`<g transform="translate(262 206)"><path d="M-12 0 h24 l-3 30 h-18 Z" fill="#DCEBF6" stroke="#2F6B8F"/><rect x="-10" y="12" width="20" height="16" fill="#6FA8D6" opacity=".6"/></g>`+oLab(262,250,'須配水吞','#2F6B8F'):''}
+  ${(s.aph||s.dys)?`<ellipse cx="120" cy="58" rx="46" ry="26" fill="#F8E7E4" stroke="#C99A85" stroke-dasharray="3 2"/><circle cx="104" cy="66" r="7" fill="#C0392B" opacity=".75" class="g-pulse"/>${oLab(132,56,s.aph?'言語中樞受損':'綴音失能','#9A2E22')}
+    <g transform="translate(6 36)"><path d="M0 0 h58 a8 8 0 0 1 8 8 v18 a8 8 0 0 1 -8 8 h-40 l-10 10 v-10 h-8 a8 8 0 0 1 -8 -8 v-18 a8 8 0 0 1 8 -8Z" fill="#fff" stroke="#C0392B"/><text x="29" y="21" text-anchor="middle" style="font-size:11px;font-weight:700;fill:#C0392B">${s.aph===2?'？？？':s.aph===1?'那個…我…':'語意不清'}</text></g>`:''}
+  ${ART.map((a,i)=>{const b=bad.has(i)||lar;return `<g><circle cx="${a.x}" cy="${a.y}" r="5.4" fill="${b?'#C0392B':'#2F6B8F'}" stroke="#fff" stroke-width="1.5"/><text x="${a.x}" y="${a.y+3.5}" text-anchor="middle" style="font-size:7.5px;font-weight:700;fill:#fff">${i+1}</text></g>`;}).join('')}
+  ${sw<3?`<g>${bolus}${AN(`<animateMotion dur="3.2s" repeatCount="indefinite" path="${path}" keyTimes="0;1" calcMode="linear"/>`)}</g>`:''}
+  <path d="${path}" fill="none" stroke="${BOL[0]}" stroke-width="1.2" stroke-dasharray="3 4" opacity=".7"/>
+  </svg>`;
+  const diet=[['一般飯菜','🍚'],['粥、糊狀','🥣'],['流質','🥤']].map(([n,ic],i)=>{const ok=i>=sw;return `<span class="g-diet ${ok?'ok':'no'}"><b>${ic}</b>${n}<i>${ok?'可以':'不行'}</i></span>`;}).join('');
+  const snd=SOUNDS.map((n,i)=>{const b=bad.has(i)||lar;return `<span class="g-snd ${b?'no':''}"><em>${i+1}</em>${n}<small>${ART[i].zy}・${ART[i].p}</small></span>`;}).join('');
+  return `<div class="g-mouth">${o}<div class="g-mside"><p class="g-mh">能吃什麼（食物團跟著動畫走）</p><div class="g-diets">${diet}</div><p class="g-mh">7 種語音的發音位置${lar?'（全喉切除：無法用喉頭發聲）':''}</p><div class="g-snds">${snd}</div></div></div>`;
+}
+
+/* ---------- 胸腹部臟器：各組解剖場景 ---------- */
+const OSC={
+ '胰臟・胃・脾臟':s=>{const h=id=>s.includes(id);
+   const stG=h('7-26')?'gone':'ok',pan=h('7-24')?'gone':'ok',spl=h('7-27')?'gone':'ok';
+   let o=TORSO+`<path d="M66 98 Q120 84 170 96 L162 136 Q112 150 72 138 Z" fill="#E7CBB8" opacity=".6"/>${oLab(110,122,'肝','#A07A60')}`;
+   o+=`<path d="M152 18 L156 98" stroke="#D98E7F" stroke-width="7" stroke-linecap="round"/>${oLab(174,40,'食道','#8E5A40','start')}`;
+   o+=oShape('path','d="M156 96 Q196 84 214 110 Q226 150 196 170 Q170 180 156 166 Q172 150 178 132 Q170 112 156 110 Z"','#E9A99A',stG)+oLab(196,134,'胃',stG==='gone'?'#C0392B':'#7E3F33');
+   o+=oShape('ellipse','cx="234" cy="120" rx="12" ry="24"','#B98CC7',spl)+oLab(234,158,'脾',spl==='gone'?'#C0392B':'#6B4A78');
+   o+=`<path d="M110 150 Q96 176 118 196" stroke="#E2B07F" stroke-width="10" fill="none" stroke-linecap="round"/>${oLab(84,176,'十二指腸','#8E5A40','end')}`;
+   if(h('7-25')&&pan!=='gone')o+=oShape('path','d="M118 176 Q150 168 172 176 L172 190 Q146 186 118 192 Z"','#E4C05C','ok')+oShape('path','d="M172 176 Q198 172 222 182 L220 192 Q196 190 172 190 Z"','','gone')+oTag(196,208,'部分切除','#C0392B');
+   else o+=oShape('path','d="M118 176 Q170 164 222 182 L220 192 Q170 184 118 192 Z"','#E4C05C',pan);
+   o+=oLab(150,184,'胰',pan==='gone'?'#C0392B':'#7A5A08');
+   o+=`<path d="M80 210 Q110 200 150 210 T220 212 Q230 250 200 268 Q150 280 104 266 Q74 248 80 210 Z" fill="#EFC6A4" opacity=".55"/>${oLab(150,244,'小腸','#A07A60')}`;
+   if(stG==='gone')o+=`<path d="M156 98 Q150 160 150 212" stroke="#D98E7F" stroke-width="5" fill="none" stroke-dasharray="1 0"/>`+oTag(196,82,'胃已全切除','#C0392B')+oLab(130,160,'食道直接接小腸','#9A2E22','end');
+   if(pan==='gone')o+=oTag(170,212,'胰臟全切除','#C0392B');
+   if(spl==='gone')o+=oTag(232,90,'脾切除','#C0392B');
+   const side=[];if(pan==='gone')side.push(['💉','終身需胰島素與消化酵素']);if(h('7-25'))side.push(['🩸','切除後出現或加重糖尿病']);if(stG==='gone')side.push(['🍽','少量多餐，易傾食症候群']);if(spl==='gone')side.push(['🛡','免疫力較弱（易感染）']);
+   return {svg:o,side};},
+ '腎臟（泌尿器）':s=>{const h=id=>s.includes(id),dial=h('7-28'),tx=h('7-29'),one=h('7-30');
+   let o=TORSO;const kid=(x,st)=>oShape('path',`d="M${x} 150 q-22 4 -22 34 q0 30 22 34 q12 -2 12 -14 q-8 -20 0 -40 q0 -12 -12 -14 Z"`,'#A9846B',st);
+   const kR=(x,st)=>oShape('path',`d="M${x} 150 q22 4 22 34 q0 30 -22 34 q-12 -2 -12 -14 q8 -20 0 -40 q0 -12 12 -14 Z"`,'#A9846B',st);
+   o+=kid(98,dial||tx?'weak':'ok')+kR(202,dial||tx?'weak':one?'gone':'ok');
+   o+=`<path d="M100 214 Q116 260 140 290" stroke="#C4A38E" stroke-width="3" fill="none"/><path d="M200 214 Q184 260 160 290" stroke="#C4A38E" stroke-width="3" fill="none" ${one?'stroke-dasharray="3 3"':''}/>`;
+   o+=`<ellipse cx="150" cy="298" rx="22" ry="15" fill="#8FB0CC" stroke="#5D7F9C"/>${oLab(150,302,'膀胱','#fff')}`;
+   o+=oLab(84,146,'腎','#6B4A38')+oLab(216,146,'腎',one?'#C0392B':'#6B4A38');
+   if(one)o+=oTag(216,236,'一側切除／萎縮','#C0392B');
+   if(tx)o+=`<path d="M92 252 q-18 4 -18 22 q0 18 18 22 q10 -2 10 -10 q-6 -12 0 -24 q0 -8 -10 -10 Z" fill="#8FC79E" stroke="#2E7D4F" stroke-width="1.6"/><path d="M100 272 Q120 292 134 296" stroke="#2E7D4F" stroke-width="2.5" fill="none"/>`+oTag(84,242,'移植腎','#2E7D4F');
+   if(dial){o+=`<g transform="translate(250 196)"><rect x="-4" y="0" width="44" height="64" rx="6" fill="#fff" stroke="#2F6B8F" stroke-width="1.5"/><rect x="4" y="8" width="28" height="14" rx="2" fill="#DCEBF6"/><circle cx="12" cy="40" r="7" fill="none" stroke="#2F6B8F"/><circle cx="28" cy="40" r="7" fill="none" stroke="#2F6B8F"/></g>
+     <path d="M246 210 Q226 190 206 186" stroke="#C0392B" stroke-width="3" fill="none" class="g-anim-flow"/><path d="M246 240 Q224 236 206 206" stroke="#2F6B8F" stroke-width="3" fill="none" class="g-anim-flow"/>`+oTag(150,120,'兩側腎臟無機能','#C0392B')+oLab(270,276,'透析機','#2F6B8F');}
+   const side=[];if(dial)side.push(['🔁','須終身定期透析（洗腎）']);if(tx)side.push(['🟢','移植腎放在下腹部，原本的腎臟通常留在原位']);if(one)side.push(['➖','只剩一側腎臟工作']);
+   return {svg:o,side};},
+ '腸道・肛門':s=>{const h=id=>s.includes(id),sb=h('7-31')||h('7-32'),col=h('7-33'),sto=h('7-34'),anal=h('7-35');
+   let o=TORSO+`<path d="M60 108 L240 108" stroke="#E7CBB8" stroke-width="10" opacity=".5"/>`;
+   o+=oShape('path','d="M78 262 L78 150 Q80 130 100 130 L200 130 Q220 130 222 150 L222 262 Q218 290 190 296"','none',col?'gone':'ok').replace('fill="none"','fill="none"');
+   if(!col)o+=`<path d="M78 262 L78 150 Q80 130 100 130 L200 130 Q220 130 222 150 L222 262 Q218 290 190 296" stroke="#C99466" stroke-width="16" fill="none" stroke-linecap="round" opacity=".85"/>`;
+   o+=oLab(66,200,'大腸',col?'#C0392B':'#8E5A40','end');
+   const coil=(y0,n,st)=>{let d='';for(let i=0;i<n;i++){const y=y0+i*18;d+=`M104 ${y} Q126 ${y-12} 150 ${y} T196 ${y}`;}return `<path d="${d}" stroke="${st==='gone'?'#C0392B':'#E2A76F'}" stroke-width="${st==='gone'?2:9}" fill="none" stroke-linecap="round" ${st==='gone'?'stroke-dasharray="4 3"':''}/>`;};
+   o+=coil(160,3,sb?'gone':'ok')+coil(214,3,'ok')+oLab(150,280,'小腸','#8E5A40');
+   o+=`<path d="M190 296 Q160 304 152 322" stroke="#B87E57" stroke-width="12" fill="none" stroke-linecap="round"/>`;
+   o+=`<circle cx="150" cy="330" r="8" fill="none" stroke="${anal?'#C0392B':'#8E5A40'}" stroke-width="3" ${anal?'stroke-dasharray="6 5"':''}/>`+oLab(172,336,'肛門',anal?'#C0392B':'#8E5A40','start');
+   if(anal)o+=`<g transform="translate(150 340)">${drops(0,6,'#9C6B3F')}</g>`+oTag(212,316,'括約肌不全','#C0392B');
+   if(sb)o+=oTag(150,150,'小腸切除 ≧ 50%','#C0392B');
+   if(col)o+=oTag(150,124,'大腸全切除','#C0392B');
+   if(sto)o+=`<path d="M222 236 Q220 248 212 250" stroke="#C99466" stroke-width="8" fill="none"/><path d="M222 262 Q218 290 190 296 Q160 304 152 322" stroke="#F7E6DA" stroke-width="18" fill="none" opacity=".75"/><circle cx="210" cy="250" r="7" fill="#D98E97" stroke="#A85D67"/><g><rect x="222" y="238" width="30" height="42" rx="10" fill="#FFF7EC" stroke="#A8790A"/><rect x="224" y="262" width="26" height="16" rx="7" fill="#C99466" class="g-pulse"/></g>`+oTag(236,228,'永久性人工肛門','#A8790A');
+   const bar=`<g transform="translate(92 316)"></g>`;
+   const side=[];if(sb){side.push(['📏','小腸長度切除一半以上']);side.push(h('7-31')?['⚠','併短腸症候群：吸收不良、腹瀉、體重下降（第七等級）']:['✔','無短腸症候群，營養吸收尚可維持（第九等級）']);}
+   if(col)side.push(['➖','大腸全切除、未裝人工肛門（小腸直接接到直腸或肛門）']);if(sto)side.push(['👜','糞便改由腹部造口排到造口袋（術後六個月始得認定）']);if(anal)side.push(['💧','肛門括約肌斷裂等造成大便失禁']);
+   return {svg:o+bar,side};},
+ '膀胱・腎上腺・骨盆':s=>{const h=id=>s.includes(id),blad=h('7-36'),uro=h('7-36-1'),small=h('7-37'),leak=h('7-38'),adr=h('7-39'),pel=h('7-40');
+   let o=TORSO;
+   o+=`<path d="M60 250 Q70 300 110 318 L190 318 Q230 300 240 250 Q210 270 190 262 L150 300 L110 262 Q90 270 60 250 Z" fill="#EDE3D3" stroke="#A89B84" stroke-width="1.4"/>${oLab(80,300,'骨盆','#8A7B64','end')}`;
+   if(pel)o+=`<path d="M120 270 l8 10 l-6 8 l8 10" stroke="#C0392B" stroke-width="2.5" fill="none"/>`+oTag(92,248,'骨盆環骨折','#C0392B');
+   [[98,1],[202,-1]].forEach(([x,d])=>{o+=`<path d="M${x} 130 q${-22*d} 4 ${-22*d} 30 q0 26 ${22*d} 30 q${12*d} -2 ${12*d} -12 q${-8*d} -18 0 -36 q0 -10 ${-12*d} -12 Z" fill="#A9846B" stroke="#7E5A48" stroke-opacity=".5"/>`;
+     o+=`<path d="M${x-14*d} 132 l${10*d} -16 l${12*d} 14 Z" ${adr?orgSt.gone:'fill="#E4B85C" stroke="#A8790A"'}/>`;});
+   o+=oLab(150,112,'腎上腺（腎臟上方）',adr?'#C0392B':'#8A6A10');
+   o+=`<path d="M100 190 Q118 236 138 272" stroke="#C4A38E" stroke-width="3" fill="none"/><path d="M200 190 Q182 236 162 272" stroke="#C4A38E" stroke-width="3" fill="none"/>`;
+   const r=small?9:22;o+=`<ellipse cx="150" cy="282" rx="${r}" ry="${small?7:15}" ${blad?orgSt.weak:'fill="#8FB0CC" stroke="#5D7F9C"'}/>`;
+   o+=`<path d="M150 ${282+(small?7:15)} L150 334" stroke="${pel?'#C0392B':'#C4A38E'}" stroke-width="${pel?1.5:3.5}"/>`+oLab(158,332,'尿道','#8E5A40','start');
+   if(blad)o+=oTag(150,250,'膀胱機能完全喪失','#C0392B');
+   if(small)o+=`<g transform="translate(246 250)"><path d="M-14 0 h28 l-3 40 h-22 Z" fill="#fff" stroke="#2F6B8F"/><rect x="-12" y="26" width="23" height="13" fill="#8FB0CC"/><line x1="-14" y1="26" x2="18" y2="26" stroke="#C0392B" stroke-dasharray="2 2"/></g>`+oLab(246,304,'≦ 50 c.c.','#C0392B')+oLab(246,316,'約 3 湯匙','#5A6B7A');
+   if(uro)o+=`<path d="M100 190 Q96 230 82 252" stroke="#C4A38E" stroke-width="3" fill="none"/><circle cx="80" cy="256" r="6" fill="#D98E97" stroke="#A85D67"/><rect x="44" y="244" width="26" height="36" rx="9" fill="#EFF6FB" stroke="#2F6B8F"/><rect x="46" y="262" width="22" height="16" rx="7" fill="#E8D36A" class="g-pulse"/>`+oTag(62,232,'永久性人工膀胱','#2F6B8F');
+   if(leak)o+=`<g transform="translate(150 344)">${drops(0,0,'#E8D36A')}</g>`+oTag(206,334,'尿失禁','#C0392B');
+   if(pel)o+=`<path d="M152 268 L152 236 Q156 226 172 224" stroke="#2F6B8F" stroke-width="3" fill="none"/><circle cx="152" cy="236" r="3" fill="#fff" stroke="#2F6B8F"/><rect x="172" y="206" width="24" height="32" rx="8" fill="#EFF6FB" stroke="#2F6B8F"/><rect x="174" y="222" width="20" height="14" rx="6" fill="#E8D36A" class="g-pulse"/>`+oTag(184,196,'恥骨上膀胱造口','#2F6B8F')+`<rect x="146" y="304" width="8" height="10" fill="#C0392B" opacity=".7"/>`;
+   const side=[];if(blad)side.push(['❌','無法自行儲尿、排尿，且未裝人工膀胱']);if(uro)side.push(['👜','尿液改由腹部造口排到集尿袋']);if(small)side.push(['🥄','膀胱萎縮，只能存 50 c.c. 以下']);if(leak)side.push(['💧','膀胱括約肌變化，尿液不自主流出']);if(adr)side.push(['💊','兩側腎上腺喪失，需終身補充荷爾蒙']);if(pel)side.push(['🩹','尿道嚴重狹窄無法手術矯正，須終身放置恥骨上膀胱造口']);
+   return {svg:o,side};},
+ '生殖器・乳腺':s=>{const h=id=>s.includes(id),bothO=h('7-41'),ut=h('7-41-1'),oneO=h('7-42'),bB=h('7-43'),oB=h('7-44');
+   let o=TORSO;
+   const br=(x,st)=>st==='gone'?`<circle cx="${x}" cy="84" r="24" ${orgSt.gone}/>`:`<circle cx="${x}" cy="84" r="24" fill="#F1CDBA" stroke="#C99A85"/><circle cx="${x}" cy="88" r="3" fill="#B57C5C"/>`;
+   o+=br(108,bB?'gone':'ok')+br(192,bB||oB?'gone':'ok')+oLab(150,60,'乳腺',bB||oB?'#C0392B':'#8E5A40');
+   if(bB)o+=oTag(150,124,'雙側全部切除','#C0392B');else if(oB)o+=oTag(192,124,'單側全部切除','#C0392B');
+   o+=oShape('path','d="M136 236 Q150 226 164 236 L160 268 Q150 276 140 268 Z"','#E3A4A8',ut?'gone':'ok')+oLab(150,288,'子宮',ut?'#C0392B':'#8E3F47');
+   o+=`<path d="M136 240 Q116 236 104 244" stroke="#E3A4A8" stroke-width="2" fill="none"/><path d="M164 240 Q184 236 196 244" stroke="#E3A4A8" stroke-width="2" fill="none"/>`;
+   o+=oShape('ellipse','cx="98" cy="248" rx="9" ry="6"','#F0C3A0',bothO||oneO?'gone':'ok')+oShape('ellipse','cx="202" cy="248" rx="9" ry="6"','#F0C3A0',bothO?'gone':'ok')+oLab(98,236,'卵巢','#8E5A40')+oLab(202,236,'卵巢','#8E5A40');
+   o+=`<g transform="translate(250 280)"><circle r="30" fill="#fff" stroke="#C99A85"/>${oLab(0,-14,'男性','#5A6B7A')}${oShape('ellipse','cx="-9" cy="6" rx="7" ry="9"','#E7BFA2',bothO||oneO?'gone':'ok')}${oShape('ellipse','cx="9" cy="6" rx="7" ry="9"','#E7BFA2',bothO?'gone':'ok')}${oLab(0,26,'睪丸','#8E5A40')}</g>`;
+   if(ut)o+=oTag(150,216,'子宮割除','#C0392B');
+   const side=[];if(bothO)side.push(['❌','兩側卵巢割除，或兩側睪丸喪失（含放化療致喪失機能）']);if(ut)side.push(['➖','割除子宮、陰道口狹窄或陰莖大部分缺損致性行為不能']);if(oneO)side.push(['➖','割除單側卵巢、喪失單側睪丸，或骨盆神經病變所致陽萎']);if(bB)side.push(['➖','雙側乳腺全部切除']);else if(oB)side.push(['➖','單側乳腺全部切除']);
+   return {svg:o,side};}
+};
+function organScene(s){const f=OSC[s.grp];if(!f)return `<div class="g-organ">${organFig(s.grp)}</div>`;const sel=s.sel.map(String),r=f(sel);
+  return `<div class="g-oscene"><svg viewBox="30 0 270 350" aria-label="${esc(s.grp)}示意圖">${r.svg}</svg><div class="g-oside">${r.side.length?r.side.map(([i,t])=>`<p><b>${i}</b>${esc(t)}</p>`).join(''):'<p class="g-cap">勾選上方項目，圖上會標出切除、造口或功能喪失的位置。</p>'}<p class="g-cap" style="text-align:left">紅色虛線＝已切除或失去功能（示意）</p></div></div>`;}
+
+/* ---------- 脊柱：側面人體骨骼＋屈伸動畫 ---------- */
+const SP_FIG={C:{norm:115,pf:.5,piv:[116,94],lab:'頸部屈伸（點頭、抬頭）'},TL:{norm:80,pf:.75,piv:[118,196],lab:'彎腰（胸腰椎屈伸）'}};
+function spineFigure(s){
+  const run=spRun(s.fused),rg=run.length&&run[0]<7?'C':'TL',F=SP_FIG[rg],f=s.fused.map(Number),[px,py]=F.piv;
+  const act=Math.min(s.rem,F.norm),fl=+(act*F.pf).toFixed(1),ex=+(act*(1-F.pf)).toFixed(1),nf=F.norm*F.pf,ne=F.norm*(1-F.pf);
+  const ys=[],xs=[];for(let i=0;i<24;i++){const y=i<7?70+i*3.4:i<19?95+(i-7)*5.3:161+(i-19)*6.6;ys.push(y);xs.push(i<7?113:i<19?109-Math.sin((i-7)/11*Math.PI)*4:108+Math.sin((i-19)/4.5*Math.PI)*4);}
+  const vb=i=>{const on=f.includes(i),h=i<7?2.6:i<19?4.2:5.2;return `<rect x="${xs[i]-3.5}" y="${ys[i]-h/2}" width="7" height="${h}" rx="1" fill="${on?'#F6B35C':'#F3ECDD'}" stroke="${on?'#C2571A':'#A89B84'}" stroke-width="${on?1:.5}"/>`;};
+  const rod=run.length>1?`<line x1="${xs[run[0]]-6}" y1="${ys[run[0]]}" x2="${xs[run[run.length-1]]-6}" y2="${ys[run[run.length-1]]}" stroke="#E8EEF3" stroke-width="2.2" stroke-linecap="round"/>`+run.map(i=>`<line x1="${xs[i]-6}" y1="${ys[i]}" x2="${xs[i]}" y2="${ys[i]}" stroke="#9FB2C2" stroke-width="1.4"/>`).join(''):'';
+  const skin='fill="rgba(231,191,162,.28)" stroke="#D9A98C" stroke-width="1.2"',line='fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1.2" stroke-dasharray="4 3"';
+  const HEAD=st=>`<path d="M111 94 L111 72 L125 72 L125 94 Z" ${st}/><circle cx="122" cy="54" r="19" ${st}/>`,TRUNK=st=>`<path d="M100 196 L97 112 Q99 94 118 92 Q138 94 140 112 L136 196 Z" ${st}/>`,ARM=`<path d="M122 102 L128 150 L134 184" stroke="rgba(231,191,162,.55)" stroke-width="9" fill="none" stroke-linecap="round"/>`;
+  const [a0,a1]=rg==='C'?[0,7]:[0,24];let spRot='',spFix='';for(let i=0;i<24;i++){if(i>=a0&&i<a1)spRot+=vb(i);else spFix+=vb(i);}
+  const rot=rg==='C'?HEAD(skin)+`<circle cx="131" cy="50" r="2" fill="#5A4A3E"/>`+spRot:TRUNK(skin)+ARM+HEAD(skin)+`<circle cx="131" cy="50" r="2" fill="#5A4A3E"/>`+spRot+rod;
+  const fix=`<path d="M100 192 Q118 208 138 192 L136 214 L102 214 Z" ${skin}/><path d="M110 212 L110 284 M128 212 L130 284" stroke="rgba(231,191,162,.5)" stroke-width="12" stroke-linecap="round"/><path d="M110 286 h18 M130 286 h18" stroke="rgba(231,191,162,.7)" stroke-width="6" stroke-linecap="round"/><path d="M103 194 Q108 212 116 214 L112 196 Z" fill="#F3ECDD" stroke="#A89B84" stroke-width=".6"/>`+(rg==='C'?TRUNK(skin)+ARM+spFix+rod:'');
+  const ghost=rg==='C'?HEAD(line):TRUNK(line)+HEAD(line);
+  const arc=(a,b,r,fill)=>{const P=t=>[px+r*Math.sin(t*Math.PI/180),py-r*Math.cos(t*Math.PI/180)],[x0,y0]=P(a),[x1,y1]=P(b);return `<path d="M${px} ${py} L${x0.toFixed(1)} ${y0.toFixed(1)} A${r} ${r} 0 ${b-a>180?1:0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)} Z" fill="${fill}"/>`;};
+  const R=rg==='C'?62:135;
+  const anim=AN(`<animateTransform attributeName="transform" type="rotate" values="${-ex} ${px} ${py};${fl} ${px} ${py};${-ex} ${px} ${py}" dur="4s" repeatCount="indefinite"/>`);
+  return `<div><p class="g-spstat"><b>${F.lab}</b><span style="color:#8FE3A8">可動 ${act}°</span><span style="color:#F2B8B0">正常約 ${F.norm}°・喪失 ${Math.round((1-act/F.norm)*100)}%</span></p><svg viewBox="30 0 250 300" aria-label="側面人體脊柱示意（面向右）">
+    ${arc(-ne,nf,R,'rgba(242,120,110,.18)')}${arc(-ex,fl,R,'rgba(143,227,168,.35)')}
+    <g transform="rotate(${nf} ${px} ${py})">${ghost}</g><g transform="rotate(${-ne} ${px} ${py})">${ghost}</g>
+    ${fix}<g transform="rotate(${reduceMotion?fl:0} ${px} ${py})">${anim}${rot}</g>
+    <circle cx="${px}" cy="${py}" r="3.5" fill="#fff"/>
+</svg><p class="g-spleg"><span><i style="background:#F6B35C"></i>固定的椎體（骨釘＋連桿）</span><span><i style="border:1px dashed #fff"></i>正常可彎到的位置</span><span>人形面向右：往前＝屈曲、往後＝伸展（分配比例示意）</span></p></div>`;
+}
+
+/* ---------- 手指、足趾：關節角度途徑 ---------- */
+// 正常活動度數：暫用參考值（屈曲＋伸展合計），待依使用者提供之舊式角度表核對
+const FA_REF={
+  hand:{T:[['中手指節關節',60,10],['指節間關節',80,10]],_:[['中手指節關節',90,45],['近位指節間關節',100,0]]},
+  foot:{'1':[['中足趾關節',35,60],['趾關節',60,0]],'2':[['中足趾關節',35,40],['第一趾關節',35,0]],_:[['中足趾關節',35,40],['第一趾關節',35,0]]}
+};
+const FA_SEG={hand:{T:[82,60,46],_:[96,66,42,32]},foot:{'1':[92,52,42],_:[92,32,22,18]}};
+const faDigits=k=>k==='hand'?FINGERS.map(f=>[f.k,f.name]):TOES.map(t=>[t.k,t.name]);
+const faRef=s=>(FA_REF[s.kind][s.d]||FA_REF[s.kind]._)[s.j];
+const faStiffMode=s=>s.kind==='foot'&&'345'.includes(s.d);
+function faReset(s){const r=faRef(s);s.norm=r[1]+r[2];s.act=Math.round(s.norm*.4);}
+GT.fangle={
+  title:s=>s.kind==='hand'?'手指喪失機能：關節角度怎麼看？':'足趾喪失機能：關節角度怎麼看？',
+  sub:s=>faStiffMode(s)?'第三～五趾看的是「中足趾關節」和「第一趾關節」是否都完全強直，不看喪失比例。':'選擇指頭與關節，拖曳「實測可活動度數」：可動範圍只剩正常的一半以下（喪失 1/2 以上）就屬喪失機能。',
+  init:p=>{const s={kind:p.kind,d:p.d||(p.kind==='hand'?'I':'1'),j:0,norm:0,act:0,oth:[],st0:false,st1:false};faReset(s);return s;},
+  ctrl:s=>{const js=(FA_REF[s.kind][s.d]||FA_REF[s.kind]._);
+    let h=gSeg('d',faDigits(s.kind),s.d,s.kind==='hand'?'手指':'足趾');
+    if(faStiffMode(s))h+=`<div class="g-row">${gChk('st0','中足趾關節完全強直',s.st0)}${gChk('st1','第一趾關節完全強直',s.st1)}</div>`;
+    else h+=gSeg('j',js.map((x,i)=>[i,x[0]]),s.j,'關節')+`<div class="g-row">${gNum('norm','正常可活動度數',s.norm,'°')}</div>`+gRng('act','實測可活動度數',0,Math.max(1,s.norm),1,Math.min(s.act,s.norm),'°');
+    h+=`<div class="g-row"><span class="g-lab">同${s.kind==='hand'?'手':'足'}其他已喪失機能</span><div class="g-tgs">${faDigits(s.kind).filter(([k])=>k!==s.d).map(([k,n])=>gTog('oth',k,n,s.oth)).join('')}</div></div>`;
+    return h;},
+  act:(s,k)=>{if(k==='d'){s.d=String(s.d);s.j=0;s.oth=s.oth.filter(x=>String(x)!==String(s.d));s.st0=s.st1=false;faReset(s);}else if(k==='j')faReset(s);else if(k==='norm'&&s.act>s.norm)s.act=s.norm;},
+  vis:s=>{
+    if(faStiffMode(s)){const both=s.st0&&s.st1;return `<svg viewBox="0 40 330 130">${faDigitSVG(s,0,0,0,0,true)}</svg><p class="g-cap">${both?'兩個關節都完全強直 → 屬足趾喪失機能':'需「中足趾關節」與「第一趾關節」<b>兩個都</b>完全強直才算'}</p>`;}
+    const r=faRef(s),tot=r[1]+r[2]||1,pf=r[1]/tot,n=s.norm||tot,a=Math.min(s.act,n),fl=a*pf,ex=a*(1-pf),nf=n*pf,ne=n*(1-pf),loss=Math.round((1-a/n)*100);
+    return `<svg viewBox="0 0 330 200">${faDigitSVG(s,fl,ex,nf,ne,false)}
+      <text x="10" y="20" style="font-size:12px;font-weight:700;fill:#2E7D4F">實測 ${a}°／正常 ${n}°</text>
+      <text x="10" y="38" style="font-size:12px;font-weight:700;fill:${loss>=50?'#B02A21':'#5A6B7A'}">喪失 ${loss}%${loss>=50?'（已達 1/2）':'（未達 1/2）'}</text></svg>
+      <p class="g-cap">綠色扇形＝實測可動範圍、淡紅＝喪失的範圍；手指（足趾）會在實測範圍內來回屈伸（示意）。</p>`;},
+  eval:s=>{let meets,why;
+    if(faStiffMode(s)){meets=s.st0&&s.st1;why=meets?`${faDigits(s.kind).find(x=>x[0]===s.d)[1]}：中足趾關節及第一趾關節均完全強直。`:'';}
+    else{const n=s.norm||1,a=Math.min(s.act,n);meets=a<=n/2;why=`可動 ${a}° ÷ 正常 ${n}° ＝ ${Math.round(a/n*100)}%，喪失 ${Math.round((1-a/n)*100)}%${meets?'，已達 1/2 以上':'，未達 1/2'}。`;}
+    const order=faDigits(s.kind).map(x=>x[0]),set=order.filter(k=>(k===s.d&&meets)||s.oth.map(String).includes(k));
+    const notes=[];if(why)notes.push(why);
+    if(!set.length)return {items:[],notes,empty:faStiffMode(s)?'兩個關節尚未都完全強直，不屬足趾喪失機能。':'喪失未達 1/2，不屬喪失機能（附表的手指、足趾未設「運動失能」較輕等級）。'};
+    notes.push('正常活動度數目前為暫用參考值（屈曲＋伸展合計），實際以診斷書「手指／腳趾關節可活動度數表」與勞保局採用之生理運動範圍為準；可在上方自行改成正式數值。');
+    return {items:[s.kind==='hand'?funcItem(set):toeItem(set,'F')],notes};},
+  notes:s=>s.kind==='hand'?['手指喪失機能：拇指之中手指節關節或指節間關節、其他各指之中手指節關節或近位指節間關節，喪失生理運動範圍二分之一以上；或末節切斷達二分之一以上（切斷途徑請看「手指切斷位置」示範）。','遠位指節間關節（末關節）不能屈伸另有 11-60、11-61 項。','同一手指併存機能失能與器質失能時，按其中較高等級給與，不得合併提高等級。','關節機能失能須經治療一年以上（手術者最後一次手術後一年，拔釘除外）始得認定。']:
+    ['足趾喪失機能：第一趾中足趾關節或趾關節、第二趾中足趾關節或第一趾關節，喪失生理運動範圍二分之一以上；第三、四、五趾須中足趾關節及第一趾關節均完全強直。','也可經由切斷途徑認定（第一趾末節切斷 1/2 以上、其他趾末關節以上切斷），請看「足趾切斷位置」示範。','關節機能失能依下肢規定，須經治療一年以上始得認定。'],
+  disc:'正常活動度數為暫用參考值，待依舊式角度表核對；骨骼比例與屈伸方向分配為示意。'
+};
+function faDigitSVG(s,fl,ex,nf,ne,stiff){
+  const seg=(FA_SEG[s.kind][s.d]||FA_SEG[s.kind]._),hand=s.kind==='hand',w=hand?(s.d==='T'?30:25):(s.d==='1'?32:21),y=112,x0=34;
+  const jx=[];let acc=x0;seg.forEach(L=>{acc+=L;jx.push(acc);}); // jx[0]=MP 位置，其後為各指節末端
+  const J=stiff?-1:s.j,piv=jx[J]||0;
+  const bone=(xa,xb,c)=>`<rect x="${xa+2}" y="${y-w*.2}" width="${Math.max(2,xb-xa-4)}" height="${w*.4}" rx="${w*.18}" fill="${c||'#F3ECDD'}" stroke="#A89B84" stroke-width=".8"/>`;
+  const skin=(xa,xb,tip)=>`<rect x="${xa}" y="${y-w/2}" width="${xb-xa}" height="${w}" rx="${tip?w/2:4}" fill="#F1CFB6" fill-opacity=".45" stroke="#B57C5C" stroke-opacity=".6"/>`;
+  let fixed=skin(x0-20,piv||jx[0],false)+bone(x0-20,jx[0],hand?'#EFE6D6':'#EFE6D6');
+  if(stiff){let o=skin(x0-20,acc,true)+bone(x0-20,jx[0]);for(let i=1;i<seg.length+0;i++)o+=bone(jx[i-1],jx[i]);
+    [0,1].forEach(i=>{const on=i?s.st1:s.st0;o+=`<circle cx="${jx[i]}" cy="${y}" r="7" fill="${on?'#C0392B':'#fff'}" fill-opacity="${on?.85:1}" stroke="${on?'#8E2A20':'#2F6B8F'}" stroke-width="1.5"/><text x="${jx[i]}" y="${i?y+32:y-20}" text-anchor="middle" style="font-size:11px;font-weight:700;fill:${on?'#B02A21':'#2F6B8F'}">${i?'第一趾關節':'中足趾關節'}${on?'：強直':''}</text>`;});
+    return o;}
+  for(let i=1;i<=J;i++)fixed+=bone(jx[i-1],jx[i]);
+  let mov=skin(piv,acc,true);for(let i=J+1;i<seg.length;i++)mov+=bone(jx[i-1],jx[i]);
+  const R=Math.min(95,acc-piv),arc=(a0,a1,fill)=>{const P=a=>[piv+R*Math.cos(a*Math.PI/180),y+R*Math.sin(a*Math.PI/180)];const[p0x,p0y]=P(a0),[p1x,p1y]=P(a1);return `<path d="M${piv} ${y} L${p0x} ${p0y} A${R} ${R} 0 ${a1-a0>180?1:0} 1 ${p1x} ${p1y} Z" fill="${fill}" stroke="${fill.replace(/[\d.]+\)$/,'.6)')}" stroke-width="1"/>`;};
+  const ghost=a=>`<g transform="rotate(${a} ${piv} ${y})" opacity=".28">${skin(piv,acc,true)}</g>`;
+  const anim=AN(`<animateTransform attributeName="transform" type="rotate" values="${-ex} ${piv} ${y};${fl} ${piv} ${y};${-ex} ${piv} ${y}" dur="3.2s" repeatCount="indefinite"/>`);
+  return `${arc(-ne,nf,'rgba(192,57,43,.12)')}${arc(-ex,fl,'rgba(46,125,79,.28)')}${ghost(nf)}${ghost(-ne)}${fixed}<g transform="rotate(${reduceMotion?fl:0} ${piv} ${y})">${anim}${mov}</g><circle cx="${piv}" cy="${y}" r="5" fill="#fff" stroke="#234E70" stroke-width="1.6"/>
+    <text x="${piv}" y="${y-w/2-10}" text-anchor="middle" style="font-size:11px;font-weight:700;fill:#234E70">${esc(faRef(s)[0])}</text><text x="10" y="192" style="font-size:10px;fill:#5A6B7A">側面圖：左邊是${hand?'手掌':'腳掌'}，往下彎＝屈曲、往上翹＝伸展</text>`;
+}
+function openFAngle(kind,d,trig){GDEMO['FA-'+kind]={t:'fangle',kind,d};openG('FA-'+kind,trig);$('#gCards').innerHTML=infoCards(kind==='hand'?'finger':'toe');}
+
+/* v3 掛載 */
+const _mTeeth=GT.mouth.vis;GT.mouth.vis=s=>mouthHead(s)+'<p class="g-mh" style="text-align:center">牙齒（限意外傷害）：點牙齒標示缺損</p>'+_mTeeth(s);
+GT.organ.vis=s=>organScene(s);GT.organ.sub='勾選符合的狀況，下圖會畫出切除、造口或功能喪失的位置。';
+const _spV=GT.spine.vis;GT.spine.vis=s=>`<div class="g-spwrap">${spineFigure(s)}<div>${_spV(s)}</div></div>`;
+GT.spine.sub='點右側椎體標示「固定（融合）」節段、拖曳剩餘屈伸度數；左側人形會依可動範圍來回彎腰（固定節段在頸椎時改看點頭）。';
 </script>
 </body>
 </html>
