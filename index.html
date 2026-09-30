@@ -497,6 +497,61 @@ table.qref td.new{font-weight:700;color:var(--navy)}
 .tour-cap{margin-top:6px;font-size:.84rem;line-height:1.55;color:var(--ink);min-height:2.6em}
 @media(prefers-reduced-motion:reduce){.sp-draw{animation:none;stroke-dashoffset:0}}
 
+/* v7 動畫（僅用 transform／opacity，由 GPU 合成；減少動態時全部停用） */
+.lad-hero{width:100%;max-width:420px;height:auto;display:block;margin:0 auto 8px;background:#fff;border:1px solid var(--line);border-radius:12px}
+.mv-glow{animation:mvPulse 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}@keyframes mvPulse{50%{transform:scale(1.18);opacity:.25}}
+.mv-wave{animation:mvScroll 1.6s linear infinite}@keyframes mvScroll{to{transform:translateX(-50px)}}.lad-hero .mv-wave[transform]{animation-name:mvScroll2}@keyframes mvScroll2{to{transform:translate(100px,12px)}}
+.mv-beat{animation:mvBeat 1s ease-in-out infinite;transform-box:fill-box;transform-origin:center}@keyframes mvBeat{0%,100%{transform:scale(1)}30%{transform:scale(var(--sc,1.15))}55%{transform:scale(1.02)}}
+.mv-breath{animation:mvBreath 4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}@keyframes mvBreath{50%{transform:scale(1.07)}}
+.mv-drop{animation:mvDrip 1.4s ease-in infinite}@keyframes mvDrip{0%{transform:translateY(0);opacity:1}100%{transform:translateY(12px);opacity:0}}
+.mv-spark{animation:mvSpark .9s steps(2) infinite}@keyframes mvSpark{50%{opacity:.25}}
+.day-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:8px;margin:8px 0 12px}
+.day-card{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 4px 8px;background:#fff;border:1.5px solid var(--c);border-radius:12px}
+.day-card b{font-size:.8rem;color:var(--ink)}.day-card svg{width:100%;max-width:120px;height:auto}.day-card span{font-size:.72rem;font-weight:700;color:var(--c);padding:1px 8px;border-radius:999px;background:color-mix(in srgb,var(--c) 10%,#fff)}
+.day-card [class^=mv-],.day-card [class*=" mv-"]{transform-box:view-box}
+.mv-eat{animation:mvEat 2.6s ease-in-out infinite}.mv-eat.slow{animation-duration:3.6s}@keyframes mvEat{50%{transform:rotate(-42deg)}}
+.mv-feed{animation:mvFeed 3s ease-in-out infinite}@keyframes mvFeed{50%{transform:translate(-22px,-12px)}}
+.mv-nudge{animation:mvNudge 2.2s ease-in-out infinite}@keyframes mvNudge{50%{transform:translate(-2px,-2px)}}
+.mv-assist{animation:mvAssist 3s ease-in-out infinite}@keyframes mvAssist{50%{transform:rotate(-10deg) translateY(-4px)}}
+.mv-lift{animation:mvLift 3s ease-in-out infinite}@keyframes mvLift{50%{transform:translateY(-12px)}}
+.mv-shower{animation:mvShower 1.1s linear infinite}@keyframes mvShower{0%{transform:translateY(0);opacity:1}100%{transform:translateY(46px);opacity:0}}
+.mv-scrub{animation:mvScrub 1.6s ease-in-out infinite}.mv-scrub.big{animation-duration:1.1s}@keyframes mvScrub{50%{transform:rotate(-24deg)}}
+.mv-shirt{animation:mvShirt 3.2s cubic-bezier(.4,0,.2,1) infinite}@keyframes mvShirt{0%{transform:translateY(-28px);opacity:0}30%{opacity:1}55%,80%{transform:translateY(0);opacity:1}100%{transform:translateY(-28px);opacity:0}}
+.mv-ground{animation:mvGround .8s linear infinite}@keyframes mvGround{to{stroke-dashoffset:16}}
+.mv-leg1{animation:mvLeg .9s ease-in-out infinite}.mv-leg2{animation:mvLeg .9s ease-in-out infinite reverse}.mv-leg1.slow,.mv-leg2.slow{animation-duration:1.6s}@keyframes mvLeg{50%{transform:rotate(26deg)}0%,100%{transform:rotate(-26deg)}}
+.mv-bob{animation:mvBob .9s ease-in-out infinite}@keyframes mvBob{50%{transform:translateY(-2px)}}.mv-walk{animation:mvBob .9s ease-in-out infinite}.mv-walk.slow{animation-duration:1.6s}
+.mv-wheel{animation:mvSpin 1.8s linear infinite}@keyframes mvSpin{to{transform:rotate(360deg)}}
+.mv-type{animation:mvType 1.2s ease-in-out infinite}.mv-type.slow{animation-duration:2.4s}@keyframes mvType{50%{opacity:.25}}
+.mv-typing{animation:mvTyping .5s ease-in-out infinite}@keyframes mvTyping{50%{transform:translateY(1.5px)}}
+.mv-slump{animation:mvSlump 3s ease-in-out infinite}@keyframes mvSlump{50%{transform:rotate(3deg)}}.mv-x{animation:mvSpark 1.2s steps(2) infinite}
+.day-strip.still *,.lad-hero.still *{animation:none!important}
+.oc-wrap{display:flex;flex-direction:column;gap:6px}.oc-stack{position:relative;display:grid}.oc-stack>svg{grid-area:1/1;width:100%;height:auto}
+.oc-chip{position:absolute;left:8px;top:8px;padding:3px 12px;border-radius:999px;background:#fff;border:1.5px solid var(--navy);color:var(--navy);font-size:.78rem;font-weight:700}
+.oc-stack.auto .oc-n,.oc-stack.auto .oc-cn{animation:ocA 7s ease-in-out infinite}.oc-stack.auto .oc-c,.oc-stack.auto .oc-cc{animation:ocB 7s ease-in-out infinite}
+.oc-stack.auto .oc-cc{border-color:var(--seal);color:var(--seal)}
+@keyframes ocA{0%,40%{opacity:1}50%,90%{opacity:0}100%{opacity:1}}@keyframes ocB{0%,40%{opacity:0}50%,90%{opacity:1}100%{opacity:0}}
+.oc-stack.auto:hover *,.oc-stack.auto:focus-within *{animation-play-state:paused}
+.oc-seg{display:flex;gap:4px}.oc-seg button{flex:1;min-height:40px;border:1.5px solid var(--navy);background:#fff;color:var(--navy);border-radius:999px;font:inherit;font-size:.8rem;font-weight:700;cursor:pointer}.oc-seg button.on{background:var(--navy);color:#fff}
+.mv-peri{stroke-dasharray:8 40;animation:mvPeri 2.4s linear infinite}.mv-peri2{animation:mvPeri 3s linear infinite}@keyframes mvPeri{to{stroke-dashoffset:-96}}
+.mv-churn{animation:mvChurn 2.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}@keyframes mvChurn{50%{transform:scale(1.08,.94)}}
+.mv-fill{animation:mvFill 6s ease-in-out infinite}@keyframes mvFill{0%,100%{transform:scale(.55)}55%,70%{transform:scale(1)}}
+.g-oscene svg [stroke="#C0392B"][stroke-dasharray]{animation:gMarch 1.2s linear infinite}
+.nose-scene{max-width:340px;margin:0 auto;display:block;width:100%;height:auto}
+.m-tongue{animation:mTongue 3.2s ease-in-out infinite;transform-box:fill-box;transform-origin:20% 60%}@keyframes mTongue{40%{transform:translate(4px,-5px) scale(1.03)}}
+.m-epi{animation:mEpi 3.2s ease-in-out infinite;transform-box:fill-box;transform-origin:100% 100%}@keyframes mEpi{0%,45%{transform:rotate(0)}58%,72%{transform:rotate(38deg)}100%{transform:rotate(0)}}
+.m-art{animation:mArt 3.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}@keyframes mArt{0%,100%{transform:scale(1)}12%{transform:scale(1.5)}24%{transform:scale(1)}}
+.m-waves path{animation:mWave 1.8s ease-out infinite;transform-box:fill-box;transform-origin:100% 50%;opacity:0}@keyframes mWave{0%{opacity:.9;transform:scale(.4)}100%{opacity:0;transform:scale(1.6)}}
+.f-draw{stroke-dasharray:1;stroke-dashoffset:1;animation:fDraw 1.1s ease-out .2s forwards}@keyframes fDraw{to{stroke-dashoffset:0}}.f-cm{animation:fPop .5s ease-out 1s both}@keyframes fPop{from{opacity:0;transform:translateY(4px)}}
+.sk-drop{animation:skDrop 2.6s ease-in infinite;opacity:0}@keyframes skDrop{0%{opacity:0;transform:translateY(-2px) scale(.5)}20%{opacity:.9;transform:none}80%{opacity:.8;transform:translateY(7px)}100%{opacity:0;transform:translateY(10px)}}
+.sk-note{color:#1F5F91}
+.amp-svg{max-width:340px;margin:0 auto;display:block;width:100%;height:auto}
+.amp-scan{animation:ampScan 7s ease-in-out infinite;will-change:transform,opacity}.amp-dist{will-change:transform,opacity}@keyframes ampScan{0%,8%{transform:translateY(0);opacity:0}12%{opacity:1}42%{transform:translateY(var(--cut));opacity:1}48%,100%{transform:translateY(var(--cut));opacity:0}}
+.amp-dist{animation:ampDist 7s ease-in-out infinite}@keyframes ampDist{0%,44%{opacity:1;transform:none}56%,88%{opacity:.16;transform:translateY(9px)}96%,100%{opacity:1;transform:none}}
+.amp-cut{animation:ampCut 7s ease-in-out infinite}@keyframes ampCut{0%,44%{opacity:.25}54%,88%{opacity:1}100%{opacity:.25}}
+.amp-lab{animation:ampLab 7s ease-in-out infinite}@keyframes ampLab{0%,50%{opacity:0}60%,88%{opacity:1}100%{opacity:0}}
+.amp-scan.still,.amp-dist.still,.amp-cut.still,.amp-lab.still{animation:none;opacity:1;transform:none}.amp-scan.still{opacity:0}.amp-dist.still{opacity:.3}
+@media(prefers-reduced-motion:reduce){.mv-glow,.mv-wave,.mv-beat,.mv-breath,.mv-drop,.mv-spark,.oc-stack.auto *,.mv-peri,.mv-peri2,.mv-churn,.mv-fill,.m-tongue,.m-epi,.m-art,.m-waves path,.f-draw,.f-cm,.sk-drop,.amp-scan,.amp-dist,.amp-cut,.amp-lab{animation:none!important}.f-draw{stroke-dashoffset:0}.oc-stack.auto .oc-n,.oc-stack.auto .oc-cn{opacity:0}.amp-dist{opacity:.3}.amp-scan{opacity:0}}
+
 /* v5 */
 .snd-wrap{margin-top:10px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 10px}
 .snd-row{display:grid;grid-template-columns:52px 1fr;gap:6px;align-items:center;margin:4px 0}.snd-row>b{font-size:.8rem;color:var(--navy);line-height:1.2}.snd-row>b small{display:block;color:var(--sub);font-weight:500}
@@ -2899,6 +2954,110 @@ function tourMount(mid){const m=document.getElementById(mid);if(!m)return;const 
   const _oT=openToe;openToe=function(id,t){_oT(id,t);tourMount('toeModal');};
   const _oD=openDemo;openDemo=function(id,t){_oD(id,t);tourMount('demoModal');};
 })();
+
+/* ================= v7：精神／神經／臟器／鼻／口／臉／皮膚／缺損 動畫重做 ================= */
+const HC5='#2F6B8F',PC5='#234E70',T5=(fn,name)=>{try{fn();}catch(e){console.warn('new5:'+name,e);}};
+/* ---------- 精神／神經／臟器綜合：主視覺 ---------- */
+function ladHero(s){const a=s.lv/4,rm=reduceMotion,cat=s.cat;let o='';
+  if(cat==='mind'){const amp=(3+21*a).toFixed(1),dur=(3.4-1.9*a).toFixed(2),cl=['#B9C2CA','#D2B8C0','#DDAAB6','#E6A2B2','#EE9DB0'][s.lv];
+    o=`<circle cx="78" cy="58" r="32" fill="#F2B8C6" opacity=".5" class="mv-glow" style="animation-duration:${dur}s"/><path d="M58 40 Q42 44 46 60 Q36 70 50 80 Q56 96 74 90 Q92 98 104 84 Q118 76 108 62 Q116 46 98 42 Q84 30 58 40Z" fill="${cl}" stroke="#7E5A6A" stroke-width="1.6"/><path d="M62 52 Q74 60 68 74 M84 46 Q88 62 100 66 M74 84 Q80 74 92 76" stroke="#7E5A6A" stroke-width="1.4" fill="none" opacity=".6"/>
+     <clipPath id="hwc"><rect x="136" y="20" width="150" height="80"/></clipPath><g clip-path="url(#hwc)"><path class="mv-wave" style="animation-duration:${(2.4-1.2*a).toFixed(2)}s" d="M136 60 q12.5 -${amp} 25 0 t25 0 t25 0 t25 0 t25 0 t25 0 t25 0 t25 0 t25 0 t25 0" fill="none" stroke="${a<.3?'#8A97A3':'#B02A7A'}" stroke-width="3" stroke-linecap="round"/></g>
+     <text x="211" y="106" text-anchor="middle" style="font-size:11px;fill:#5A6B7A">思考、記憶、情緒的運轉（示意）</text>`;}
+  else if(cat==='nerve'){const br=[['M150 18 V32','M150 18 V32','M150 18 V32','M150 18 V32'],['M150 18 V42 L112 56','M150 18 V42 L188 56','M150 18 V60','M150 18 V60'],['M150 18 V42','M150 18 V42 L188 56','M150 18 V60','M150 18 V62 L168 104'],null,null][s.lv],full=['M150 18 V42 L112 56','M150 18 V42 L188 56','M150 18 V62 L132 104','M150 18 V62 L168 104'],paths=br||full,ok=(i)=>br?paths[i]===full[i]:true,slow=s.lv===3?2:1;
+    const limb=['M150 42 L112 56','M150 42 L188 56','M150 62 L132 104','M150 62 L168 104'];
+    o=`<g transform="translate(-30 2) scale(1.2)"><circle cx="150" cy="16" r="10" fill="#EAD9CC" stroke="#B57C5C"/><path d="M150 26 V64" stroke="#234E70" stroke-width="5" stroke-linecap="round"/>${limb.map((d,i)=>`<path d="${d}" stroke="${ok(i)?PC5:'#C9D3DC'}" stroke-width="4.4" stroke-linecap="round" fill="none" opacity="${s.lv===3?.6:1}"/>`).join('')}
+     ${paths.map((p,i)=>rm?'':[0,1].map(k=>`<circle r="3.6" opacity="0" fill="${ok(i)?'#F2B92E':'#B02A21'}"><animateMotion dur="${(1.9*slow).toFixed(1)}s" begin="${(k*.95*slow+i*.12).toFixed(2)}s" repeatCount="indefinite" path="${p}"/><animate attributeName="opacity" values="0;1;1;0" dur="${(1.9*slow).toFixed(1)}s" begin="${(k*.95*slow+i*.12).toFixed(2)}s" repeatCount="indefinite"/></circle>`).join('')).join('')}
+     ${s.lv===0?'<g class="mv-spark"><path d="M142 32 l16 0 M144 28 l12 8 M156 28 l-12 8" stroke="#B02A21" stroke-width="2.6" stroke-linecap="round"/></g><text x="176" y="34" style="font-size:11px;font-weight:700;fill:#B02A21">訊號在這裡中斷</text>':''}${s.lv===1?'<g class="mv-spark"><path d="M142 62 h16 M144 58 l12 8 M156 58 l-12 8" stroke="#B02A21" stroke-width="2.6" stroke-linecap="round"/></g><text x="176" y="66" style="font-size:11px;font-weight:700;fill:#B02A21">下肢收不到訊號</text>':''}${s.lv===2?'<text x="22" y="86" style="font-size:11px;font-weight:700;fill:#B02A21">單側收不到訊號</text>':''}
+     </g><text x="150" y="140" text-anchor="middle" style="font-size:11px;fill:#5A6B7A">大腦指令沿脊髓傳到四肢（示意；黃點＝訊號）</text>`;}
+  else{const beat=(1.15-.35*a).toFixed(2),sc=(1.05+.16*a).toFixed(2),hp=s.lv<=1;let w='M150 66';for(let i=0;i<12;i++)w+=` l6 0 l3 -${(4+14*a).toFixed(1)} l3 ${(8+26*a).toFixed(1)} l3 -${(4+12*a).toFixed(1)} l5 0`;
+    o=`<path d="M58 14 Q100 6 142 14 L150 60 Q152 96 140 104 L60 104 Q48 96 50 60 Z" fill="#F7E6DA" stroke="#C99A85" stroke-width="1.5"/><path d="M64 26 Q80 22 88 34 Q92 56 78 62 Q64 58 62 40Z" fill="#E8B9B5" stroke="#B57C5C" class="mv-breath"/><ellipse cx="112" cy="34" rx="16" ry="12" fill="#E8B9B5" stroke="#B57C5C" class="mv-breath"/><path d="M84 66 Q98 60 112 64 Q118 76 100 78 Q86 78 84 66Z" fill="#B0683F" opacity=".85"/>
+     <path d="M96 40 q-9 -8 -3 -16 q9 -5 13 2 q4 -8 12 -3 q6 9 -4 17 l-9 9 z" fill="#D2665F" class="mv-beat" style="animation-duration:${beat}s;--sc:${sc}"/>
+     <clipPath id="hec"><rect x="162" y="20" width="128" height="76"/></clipPath><g clip-path="url(#hec)"><path class="mv-wave" style="animation-duration:${(1.8+1*(1-a)).toFixed(2)}s" d="${w}" fill="none" stroke="${a<.3?'#8A97A3':'#256B42'}" stroke-width="3.2" stroke-linecap="round" transform="translate(150 14)"/></g>
+     ${hp?'<g transform="translate(236 6)"><rect x="0" y="0" width="30" height="20" rx="4" fill="#fff" stroke="#2F6B8F"/><circle cx="15" cy="34" r="0"/><circle cx="15" cy="26" r="3" fill="#6FA8D6" class="mv-drop"/><text x="15" y="14" text-anchor="middle" style="font-size:9px;fill:#2F6B8F">點滴</text></g>':''}
+     <text x="212" y="106" text-anchor="middle" style="font-size:11px;fill:#5A6B7A">臟器功能運轉（示意）</text>`;}
+  return `<svg viewBox="0 0 300 ${cat==='nerve'?146:116}" class="lad-hero${rm?' still':''}" role="img" aria-label="${LAD[cat].name}失能程度示意動畫">${o}</svg>`;}
+/* ---------- 一天的生活：六格微動畫 ---------- */
+const fg5=(x,y,c,cls='',ox)=>`<g class="${cls}" ${ox?`style="transform-origin:${ox}"`:''}><circle cx="${x}" cy="${y}" r="7" fill="${c}"/><path d="M${x} ${y+7}V${y+29}M${x} ${y+29}l-7 16M${x} ${y+29}l7 16" stroke="${c}" stroke-width="4.2" stroke-linecap="round" fill="none"/></g>`;
+const ln5=(d,c,w,cls='',ox)=>`<path class="${cls}" ${ox?`style="transform-origin:${ox}"`:''} d="${d}" stroke="${c}" stroke-width="${w||3.4}" stroke-linecap="round" fill="none"/>`;
+function dayScene(k,st){const H=st==='h',A=st==='a',P=PC5;let o='<path d="M4 78H96" stroke="#DCE4EA" stroke-width="2"/>';
+  if(k===0){o+='<rect x="50" y="54" width="44" height="4" rx="2" fill="#B57C5C"/><path d="M56 58v20M88 58v20" stroke="#B57C5C" stroke-width="3"/><path d="M58 47h16a8 8 0 0 1-16 0z" fill="#fff" stroke="#8E5A40" stroke-width="1.4"/>';
+    if(A)o+=fg5(30,28,P)+fg5(84,28,HC5)+`<g class="mv-feed">${ln5('M84 40L64 44',HC5,3.4)}${ln5('M64 44L56 40','#8E5A40',2.6)}</g>`;
+    else o+=fg5(30,28,P)+`<g class="mv-eat${H?' slow':''}" style="transform-origin:30px 40px">${ln5('M30 40L44 48',P)}${ln5('M44 48L50 41','#8E5A40',2.6)}</g>`+(H?fg5(84,28,HC5)+ln5('M84 40L48 50',HC5,3,'mv-nudge'):'');}
+  else if(k===1){o+='<rect x="18" y="42" width="8" height="18" rx="2" fill="#DCE4EA" stroke="#9FB2C2"/><rect x="24" y="60" width="30" height="6" rx="2" fill="#DCE4EA" stroke="#9FB2C2"/><path d="M28 66h22l-4 12H32z" fill="#DCE4EA" stroke="#9FB2C2"/>';
+    const sit=`<circle cx="38" cy="32" r="7" fill="${P}"/><path d="M38 39V58L52 58V74" stroke="${P}" stroke-width="4.2" stroke-linecap="round" fill="none"/>`;o+=`<g class="${A?'mv-lift':H?'mv-assist':'mv-breath'}" style="transform-origin:38px 58px">${sit}</g>`+(H||A?fg5(80,28,HC5)+ln5('M80 40L48 50',HC5,3.2,A?'mv-nudge':'mv-nudge'):'');}
+  else if(k===2){o+='<path d="M60 8h18v6H60z" fill="#9FB2C2"/><path d="M69 14v4" stroke="#9FB2C2" stroke-width="2"/>'+[0,1,2,3,4].map(i=>`<path class="mv-shower" style="animation-delay:${i*.22}s" d="M${62+i*4} 20v6" stroke="#6FA8D6" stroke-width="2" stroke-linecap="round"/>`).join('');
+    if(A)o+=fg5(66,30,P)+fg5(20,28,HC5)+`<g class="mv-scrub big" style="transform-origin:20px 40px">${ln5('M20 40L44 46',HC5,3.4)}<circle cx="47" cy="47" r="4" fill="#E4B85C"/></g>`;
+    else o+=fg5(66,30,P)+`<g class="mv-scrub" style="transform-origin:66px 42px">${ln5('M66 42L52 50',P)}</g>`+(H?fg5(20,28,HC5)+ln5('M20 40L44 46',HC5,3.2,'mv-nudge'):'');}
+  else if(k===3){o+=fg5(50,28,P)+`<g class="mv-shirt${A?' ':''}"><path d="M38 40l8-5h8l8 5-5 8-3-3v18H46V45l-3 3z" fill="#E4B85C" stroke="#8F6508" stroke-width="1.4"/></g>`;
+    if(H||A)o+=fg5(88,28,HC5)+ln5('M88 40L58 52',HC5,3.2,'mv-nudge')+(A?fg5(12,28,HC5)+ln5('M12 40L42 52',HC5,3.2,'mv-nudge'):'');}
+  else if(k===4){o+='<path class="mv-ground" d="M0 78H100" stroke="#9FB2C2" stroke-width="2" stroke-dasharray="8 8"/>';
+    if(A)o+=`<rect x="26" y="46" width="22" height="6" rx="2" fill="#9FB2C2"/><path d="M26 30v22" stroke="#9FB2C2" stroke-width="3"/><circle cx="38" cy="28" r="7" fill="${P}"/><path d="M38 35V46" stroke="${P}" stroke-width="4.2" stroke-linecap="round"/><g class="mv-wheel" style="transform-origin:38px 66px"><circle cx="38" cy="66" r="11" fill="none" stroke="#5A6B7A" stroke-width="2.4"/><path d="M38 55v22M27 66h22" stroke="#5A6B7A" stroke-width="1.6"/></g><path d="M26 34h-8" stroke="#9FB2C2" stroke-width="3"/>`+fg5(12,24,HC5,'mv-walk')+'';
+    else{o+=`<g class="mv-bob"><circle cx="34" cy="28" r="7" fill="${P}"/><path d="M34 35V57" stroke="${P}" stroke-width="4.2" stroke-linecap="round"/>${ln5('M34 57L27 74',P,4.2,'mv-leg1'+(H?' slow':''),'34px 57px')}${ln5('M34 57L41 74',P,4.2,'mv-leg2'+(H?' slow':''),'34px 57px')}</g>`+(H?ln5('M36 42L48 54L48 76','#8E5A40',3)+fg5(78,28,HC5,'mv-walk slow'):'');}}
+  else{o+='<rect x="34" y="58" width="52" height="4" rx="2" fill="#B57C5C"/><path d="M40 62v16M80 62v16" stroke="#B57C5C" stroke-width="3"/><rect x="52" y="52" width="22" height="3" rx="1.5" fill="#9FB2C2"/>';
+    const ok=st==='s'||st==='w'||st==='l',rows=st==='l'?2:4;o+=`<rect x="54" y="34" width="18" height="18" rx="2" fill="${ok?'#EAF5EE':'#F1F4F7'}" stroke="${ok?'#256B42':'#9FB2C2'}" stroke-width="1.6"/>`;
+    if(ok)o+=Array.from({length:rows},(_,i)=>`<path class="mv-type${st==='l'?' slow':''}" style="animation-delay:${i*.3}s" d="M57 ${38+i*4}h${10-i}" stroke="#256B42" stroke-width="1.8" stroke-linecap="round"/>`).join('');
+    else o+='<path class="mv-x" d="M57 38l12 10M69 38l-12 10" stroke="#B02A21" stroke-width="3" stroke-linecap="round"/>';
+    o+=`<g class="${ok?'mv-typing':'mv-slump'}" style="transform-origin:28px 44px"><circle cx="28" cy="${ok?32:38}" r="7" fill="${P}"/><path d="M28 ${ok?39:45}V58" stroke="${P}" stroke-width="4.2" stroke-linecap="round"/>${ln5('M28 46L50 54',P)}</g>`;}
+  return o;}
+function ladDay(s){const st=LADACT[s.lv];return `<div class="day-strip${reduceMotion?' still':''}" role="list" aria-label="日常生活六件事">${ACTS.map(([n],k)=>{const c=st[k],[lab,col]=ACT_ST[c]||['',PC5];return `<div class="day-card" role="listitem" style="--c:${col}"><b>${n}</b><svg viewBox="0 0 100 86" aria-hidden="true">${dayScene(k,c)}</svg><span>${lab}</span></div>`;}).join('')}</div>`;}
+/* ---------- 胸腹部臟器：正常⇄狀況 輪播＋動態 ---------- */
+function organMotion(grp,sel,cond){const h=id=>sel.includes(id),rm=reduceMotion;if(rm)return '';const dots=(path,n,c,dur,r)=>Array.from({length:n},(_,i)=>`<circle r="${r||3}" opacity="0" fill="${c}"><animateMotion dur="${dur}s" begin="${(i*dur/n).toFixed(2)}s" repeatCount="indefinite" path="${path}"/><animate attributeName="opacity" values="0;1;1;0" dur="${dur}s" begin="${(i*dur/n).toFixed(2)}s" repeatCount="indefinite"/></circle>`).join('');
+  if(grp==='腎臟（泌尿器）'){const off=cond&&(h('7-28')||h('7-29'));return (off?'':dots('M98 176 Q116 260 140 290',4,'#E8D36A',3.4)+(cond&&h('7-30')?'':dots('M202 176 Q184 260 160 290',4,'#E8D36A',3.4)))+(cond&&h('7-29')?dots('M80 268 Q100 290 134 296',3,'#E8D36A',3):'');}
+  if(grp==='腸道・肛門'){const C='M104 160 q22 -12 46 0 t46 0 M104 178 q22 -12 46 0 t46 0 M104 196 q22 -12 46 0 t46 0 M104 214 q22 -12 46 0 t46 0 M104 232 q22 -12 46 0 t46 0 M104 250 q22 -12 46 0 t46 0';return `<path d="${C}" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="5" stroke-linecap="round" class="mv-peri"/>`+(cond&&h('7-33')?'':`<path d="M78 262 L78 150 Q80 130 100 130 L200 130 Q220 130 222 150 L222 262 Q218 290 190 296" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="5" stroke-dasharray="6 26" class="mv-peri2"/>`);}
+  if(grp==='胰臟・胃・脾臟'){return (cond&&h('7-26')?'':'<path d="M156 96 Q196 84 214 110 Q226 150 196 170 Q170 180 156 166 Q172 150 178 132 Q170 112 156 110 Z" fill="#fff" fill-opacity=".28" class="mv-churn"/>')+(cond&&(h('7-24'))?'':dots('M118 184 Q150 170 200 184',3,'#E4B85C',3.2,2.6));}
+  if(grp==='膀胱・腎上腺・骨盆'){return cond&&(h('7-36')||h('7-37'))?'':'<ellipse cx="150" cy="282" rx="22" ry="15" fill="#8FB0CC" fill-opacity=".6" class="mv-fill" style="transform-origin:150px 297px"/>';}
+  return '';}
+function organScene(s){const f=OSC[s.grp];if(!f)return `<div class="g-organ">${organFig(s.grp)}</div>`;const sel=s.sel.map(String),N=f([]),C=f(sel),view=s.view||'auto',hasC=sel.length>0,rm=reduceMotion;
+  const svg=(r,cond,cls)=>`<svg viewBox="30 0 270 350" class="oc-layer ${cls}" aria-label="${esc(s.grp)}${cond?'（此狀況）':'（正常）'}">${r.svg}${organMotion(s.grp,sel,cond)}</svg>`;
+  const mode=!hasC?'norm':view==='auto'&&rm?'cond':view;
+  const stack=mode==='auto'?`<div class="oc-stack auto">${svg(N,false,'oc-n')}${svg(C,true,'oc-c')}<span class="oc-chip oc-cn">正常的樣子</span><span class="oc-chip oc-cc">這個狀況</span></div>`:`<div class="oc-stack">${mode==='cond'?svg(C,true,'oc-only'):svg(N,false,'oc-only')}<span class="oc-chip on">${mode==='cond'?'這個狀況':'正常的樣子'}</span></div>`;
+  const seg=hasC?`<div class="oc-seg" role="group" aria-label="對照檢視">${[['auto','自動對照'],['norm','正常'],['cond','這個狀況']].map(([k,t])=>`<button type="button" class="${(view===k)?'on':''}" data-a="set" data-k="view" data-v="${k}">${t}</button>`).join('')}</div>`:'';
+  return `<div class="g-oscene">${'<div class="oc-wrap">'+stack+seg+'</div>'}<div class="g-oside">${C.side.length?C.side.map(([i,t])=>`<p><b>${i}</b>${esc(t)}</p>`).join(''):'<p class="g-cap">勾選上方項目，圖上會標出切除、造口或功能喪失的位置，並與正常對照。</p>'}<p class="g-cap" style="text-align:left">紅色虛線＝已切除或失去功能（示意）</p></div></div>`;}
+/* ---------- 鼻：鼻腔剖面 ---------- */
+function noseScene(s){const blk=!!s.func,def=!!s.def,rm=reduceMotion,ap='M64 108 L92 106 Q142 100 160 118 L168 176',sp='M46 94 Q80 92 100 88 L112 80';
+  const dot=(path,dur,c,r,delay,kp)=>rm?'':`<circle r="${r}" opacity="0" fill="${c}"><animateMotion dur="${dur}s" begin="${delay}s" repeatCount="indefinite" path="${path}" keyPoints="${kp}" keyTimes="0;.5;1" calcMode="linear"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.85;1" dur="${dur}s" begin="${delay}s" repeatCount="indefinite"/></circle>`;
+  const air=Array.from({length:5},(_,i)=>dot(blk?'M56 108 L82 106':ap,4,'#2F6B8F',3.4,i*.55,'0;1;0')).join(''),sc=Array.from({length:3},(_,i)=>dot(sp,4,'#8E3F98',3.2,i*1.3,'0;1;1')).join('');
+  const glow=(!blk&&!rm)?`<animate attributeName="opacity" values=".35;.35;1;.35" keyTimes="0;.45;.6;1" dur="4s" repeatCount="indefinite"/>`:'';
+  return `<svg viewBox="0 0 260 192" class="nose-scene" role="img" aria-label="${blk?'鼻孔閉塞或嗅覺喪失':'鼻腔的呼吸與嗅覺'}">
+   <path d="M180 14 C222 16 236 70 230 110 C226 140 214 158 208 186 L114 186 C114 176 106 168 102 158 C98 150 94 148 94 142 C88 141 86 137 90 134 C86 131 86 127 92 125 C88 121 84 117 84 112 C62 112 46 108 46 98 C46 90 62 80 80 68 C100 40 126 16 180 14 Z" fill="#F7E6DA" stroke="#C99A85" stroke-width="2"/>
+   <circle cx="118" cy="52" r="15" fill="#E8A6B4" stroke="#B57C8A"/><text x="118" y="34" text-anchor="middle" style="font-size:10px;font-weight:700;fill:#8A4A5A">大腦</text>
+   <path d="M64 108 L92 106 Q142 100 160 118 L168 180" fill="none" stroke="#F4CFCF" stroke-width="16" stroke-linecap="round"/><path d="M106 102 L112 84" fill="none" stroke="#F4CFCF" stroke-width="10" stroke-linecap="round"/>
+   <ellipse cx="113" cy="80" rx="19" ry="6.5" fill="${blk?'#C9D0D6':'#E4B85C'}" stroke="${blk?'#8A97A3':'#8F6508'}">${glow}</ellipse><path d="M113 74 L116 66" stroke="${blk?'#C9D0D6':'#E4B85C'}" stroke-width="3" stroke-linecap="round"/>
+   ${blk?'<ellipse cx="88" cy="106" rx="8" ry="11" fill="#C98C86" stroke="#A85D67"/><ellipse cx="146" cy="104" rx="8" ry="10" fill="#C98C86" stroke="#A85D67"/>':''}
+   ${def?'<path d="M46 98 C46 90 62 80 80 68 L84 112 C62 112 46 108 46 98Z" fill="#fff" fill-opacity=".6" stroke="#C0392B" stroke-dasharray="4 3" class="g-march"/>':''}
+   ${air}${sc}${rm?(blk?'<circle cx="70" cy="108" r="3.4" fill="#2F6B8F"/>':'<circle cx="120" cy="104" r="3.4" fill="#2F6B8F"/><circle cx="104" cy="88" r="3.2" fill="#8E3F98"/>'):''}
+   <text x="34" y="76" text-anchor="middle" style="font-size:10.5px;font-weight:700;fill:#5A6B7A">鼻孔</text><text x="150" y="60" style="font-size:10.5px;font-weight:700;fill:#7A5A00">嗅覺區</text><text x="176" y="176" style="font-size:10.5px;font-weight:700;fill:#5A6B7A">→ 喉嚨、肺</text>
+   ${blk?'<g><path d="M60 100l18 16M78 100l-18 16" stroke="#C0392B" stroke-width="3" stroke-linecap="round"/></g>'+oTag(150,142,'空氣進不去／氣味感覺不到','#C0392B'):''}${def?oTag(64,52,'鼻部軟骨缺損 ≧ 1/2','#C0392B'):''}
+   <g transform="translate(12 178)"><circle cx="4" cy="0" r="4" fill="#2F6B8F"/><text x="12" y="4" style="font-size:10.5px;fill:#1E2B38">空氣（一吸一呼）</text><circle cx="98" cy="0" r="4" fill="#8E3F98"/><text x="106" y="4" style="font-size:10.5px;fill:#1E2B38">氣味</text></g></svg><p class="g-cap">${blk?'鼻孔閉塞：空氣被擋在鼻腔前；嗅覺喪失：氣味到了嗅覺區也沒有反應（區域不會亮起）。':'正常：吸氣時空氣經鼻腔到喉嚨，氣味飄到上方嗅覺區，嗅覺區亮起、把訊號傳給大腦。'}</p>`;}
+/* ---------- 口：吞嚥、說話動畫（後處理） ---------- */
+function mouthPost(html,s){let n=0;let h=html.replace('<path d="M70 200 C84 182','<path class="m-tongue" d="M70 200 C84 182').replace(/<circle cx="(\d+)" cy="(\d+)" r="5\.4" fill=/g,(m,x,y)=>`<circle class="m-art" style="animation-delay:${(n++)*.45}s" cx="${x}" cy="${y}" r="5.4" fill=`).replace('keyTimes="0;1" calcMode="linear"','keyTimes="0;1" calcMode="spline" keySplines=".45 0 .25 1"').replace('<path d="M168 228 q-8 -8 -4 -18"','<path class="m-epi" d="M168 228 q-8 -8 -4 -18"');
+  if(!s.lar&&!reduceMotion)h=h.replace('</svg>',`<g class="m-waves" aria-hidden="true">${[0,1,2].map(i=>`<path d="M36 178 q-13 12 0 24" fill="none" stroke="#2F6B8F" stroke-width="2.4" stroke-linecap="round" style="animation-delay:${i*.5}s"/>`).join('')}</g></svg>`);return h;}
+/* ---------- 頭臉頸：量測動畫＋判斷尺 ---------- */
+function facePost(html,s){const k=s.reg==='face'?s.type:s.reg,th=FACE_TH[k],P=8,c={head:[120,34],face:[150,110],neck:[120,214]}[s.reg],v=+s.cm||0,hit=v>=th,col=hit?JC.r:JC.g,len=v*P,ln=`<g class="f-cal" aria-hidden="true"><path d="M${c[0]-len/2} ${c[1]} H${c[0]+len/2}" stroke="${col}" stroke-width="2.6" pathLength="1" class="f-draw"/><path d="M${c[0]-len/2} ${c[1]-6}v12M${c[0]+len/2} ${c[1]-6}v12" stroke="${col}" stroke-width="2.4"/><text x="${c[0]}" y="${c[1]-10}" text-anchor="middle" class="f-cm" style="font-size:12px;font-weight:700;fill:${col};paint-order:stroke;stroke:#fff;stroke-width:3px">${v} 公分</text></g>`;
+  const j=judgeHTML('face',{aria:'疤痕大小判斷尺',zones:[ZT(0,th/15,JC.g,'未達門檻'),ZT(th/15,1,JC.r,'達門檻')],pos:v/15,ticks:[{at:0,lab:'0'},{at:th/15,lab:th+' 公分'},{at:1,lab:'15'}],bubble:v+' 公分',vlab:hit?`已達門檻（≧ ${th} 公分）`:`未達門檻（＜ ${th} 公分）`,vtext:hit?'大小符合；仍須經治療一年以上、附量尺彩色照片':'再大一點才會達到門檻',vc:col,vbg:hit?'#FBEEEC':'#E9F1EA'});
+  return html.replace('</svg>',ln+'</svg>')+j;}
+/* ---------- 皮膚：排汗水珠＋判斷尺 ---------- */
+function skinPost(html,s){const C=SKIN_CELLS(),on=new Set(s.cells.map(Number)),rm=reduceMotion;let d='',n=0;
+  if(!rm)C.forEach(([x,y],i)=>{if(!on.has(i)&&i%4===1&&n<44){d+=`<path class="sk-drop" style="animation-delay:${(n*.23%2.6).toFixed(2)}s" d="M${x+4} ${y+1}q3 4 0 6.4q-3 -2.4 0 -6.4z" fill="#3B8FD0"/>`;n++;}});
+  const pc=skinPct(s),it=((GT.skin.eval(s)||{}).items||[])[0],g=it?itemGrade(it):0,max=91,T=[[2,13],[6,12],[11,11],[16,9],[21,7],[31,6],[41,5],[51,4],[61,3],[71,2]],zs=[ZT(0,2/max,'#9FB2C2','')];for(let i=0;i<T.length;i++){const a=T[i][0],b=i<T.length-1?T[i+1][0]:max;zs.push(ZT(a/max,b/max,GRADE_HEX[T[i][1]-1],'第'+CN[T[i][1]-1]+'級'));}
+  const j=judgeHTML('skin',{aria:'排汗功能喪失比例判斷尺',zones:zs,pos:pc/max,ticks:[2,11,21,31,41,51,61,71].map(v=>({at:v/max,lab:v+'%'})),bubble:pc+'%',vlab:it?`${it}　第${CN[g-1]}等級`:'未達 2%',vtext:it?'排汗功能喪失比例對應等級（10-1、10-2 另須終身無工作能力）':'皮膚排汗功能喪失未達 2%，不屬失能項目',vc:it?GRADE_HEX[g-1]:JC.g,vbg:'#F7F9FB'});
+  return html.replace('</svg>',`<g class="sk-sweat" aria-hidden="true">${d}</g></svg>`)+`<p class="g-cap sk-note">💧水珠＝還能排汗的皮膚；塗紅的疤痕處沒有水珠（排汗功能喪失）。</p>`+j;}
+/* ---------- 上肢、下肢缺損：掃描、分離、淡出 ---------- */
+const LIMB5={arm:{h:360,skin:'M44 10 Q60 2 76 10 L80 150 Q76 160 78 170 L74 262 Q84 270 84 300 L80 350 L40 350 L36 300 Q36 270 46 262 L42 170 Q44 160 40 150 Z',joints:[['肩',22],['肘',151],['腕',263]],bones:'<circle cx="60" cy="22" r="12"/><path d="M60 32V146" stroke-width="9"/><circle cx="60" cy="151" r="9"/><path d="M54 160L52 258M66 160L68 258" stroke-width="6"/><circle cx="60" cy="263" r="8"/>'+[[-2,0],[-1,1],[0,2],[1,3],[2,4]].map(([a,b])=>`<path d="M60 274L${60+a*11} ${316+Math.abs(a)*-3}M${60+a*11} ${320-Math.abs(a)*3}L${60+a*13} ${338-Math.abs(a)*6}" stroke-width="4"/>`).join('')},
+  leg:{h:382,skin:'M34 8 Q60 0 86 8 L82 170 Q86 180 80 190 L74 300 Q86 310 90 330 L92 372 L30 372 L34 330 Q40 312 46 300 L40 190 Q34 180 38 170 Z',joints:[['髖',22],['膝',172],['踝',299],['跗蹠',321]],bones:'<circle cx="60" cy="22" r="14"/><path d="M60 36V166" stroke-width="12"/><circle cx="60" cy="172" r="12"/><path d="M54 184L54 296" stroke-width="9"/><path d="M68 184L68 292" stroke-width="5"/><circle cx="60" cy="299" r="9"/><ellipse cx="60" cy="311" rx="14" ry="8"/>'+[-2,-1,0,1,2].map(a=>`<path d="M${60+a*5} 320L${60+a*8} 358" stroke-width="4"/>`).join('')}};
+function ampLimb(limb,cut,ox,idx,lab){const L=LIMB5[limb],rm=reduceMotion,id='ac'+idx+limb,part=(cls,clip)=>`<g clip-path="url(#${id}${clip})" class="${cls}"><path d="${L.skin}" fill="rgba(231,191,162,.22)" stroke="#D9A98C" stroke-width="1.2"/><g fill="#F3ECDD" stroke="#A89B84" stroke-width="1.2" stroke-linecap="round" style="stroke-linejoin:round"><g fill="none" stroke="#F3ECDD">${L.bones}</g></g></g>`;
+  const jl=L.joints.map(([n,y])=>`<text x="106" y="${y+4}" style="font-size:10px;fill:${Math.abs(y-cut)<3?'#F2B92E':'#9FB2C2'};font-weight:${Math.abs(y-cut)<3?700:500}">${n}</text><path d="M96 ${y}H102" stroke="${Math.abs(y-cut)<3?'#F2B92E':'#6B7F92'}" stroke-width="1"/>`).join('');
+  return `<g transform="translate(${ox} 0)" style="--cut:${cut}px"><defs><clipPath id="${id}a"><rect x="0" y="0" width="130" height="${cut}"/></clipPath><clipPath id="${id}b"><rect x="0" y="${cut}" width="130" height="${L.h}"/></clipPath></defs>${part('','a')}${part('amp-dist'+(rm?' still':''),'b')}
+   <g class="amp-scan${rm?' still':''}"><rect x="14" y="-9" width="92" height="12" rx="6" fill="#F2B92E" fill-opacity=".22"/><rect x="18" y="-3" width="84" height="3.6" rx="1.8" fill="#F2B92E"/></g><path class="amp-cut${rm?' still':''}" d="M14 ${cut}H106" stroke="#C0392B" stroke-width="2.6" stroke-dasharray="6 4"/>${jl}<text class="amp-lab${rm?' still':''}" x="60" y="${Math.min(L.h-6,cut+26)}" text-anchor="middle" style="font-size:11px;font-weight:700;fill:#F2B8B0">缺損</text></g>`;}
+function ampScene(s){const Y=s.limb==='arm'?{elbow:151,wrist:263}:{knee:172,ankle:299,tarso:321},cut=Y[s.lv],h=LIMB5[s.limb].h,W=s.both?[10,152]:[80];
+  return `<svg viewBox="0 0 300 ${h+8}" class="amp-svg" role="img" aria-label="${s.limb==='arm'?'上肢':'下肢'}${s.both?'兩側':'單側'}缺損示意">${W.map((x,i)=>ampLimb(s.limb,cut,x,i)).join('')}</svg><button type="button" class="ech-replay" data-replay="1">↻ 重播</button>`;}
+/* ---------- 掛載 ---------- */
+T5(()=>{const _l=GT.ladder.vis;GT.ladder.vis=s=>ladHero(s)+ladDay(s)+_l(s);},'ladder');
+T5(()=>{const _m=mouthHead;mouthHead=function(s){return mouthPost(_m(s),s);};},'mouth');
+T5(()=>{GT.nose.vis=s=>noseScene(s);},'nose');
+T5(()=>{const _f=GT.face.vis;GT.face.vis=s=>facePost(_f(s),s);},'face');
+T5(()=>{const _s=GT.skin.vis;GT.skin.vis=s=>skinPost(_s(s),s);},'skin');
+T5(()=>{GT.amp.vis=s=>ampScene(s);},'amp');
 
 /* v3 掛載 */
 const _mTeeth=GT.mouth.vis;GT.mouth.vis=s=>mouthHead(s)+'<p class="g-mh" style="text-align:center">牙齒（限意外傷害）：點牙齒標示缺損</p>'+_mTeeth(s);
