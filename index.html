@@ -12,7 +12,7 @@
   --paper:#F7F9FB; --card:#FFFFFF; --ink:#1E2B38; --sub:#5A6B7A;
   --line:#DCE4EB; --navy:#234E70; --navy-soft:#EAF1F7;
   --seal:#C0392B; --seal-soft:#FBEEEC;
-  --g1:#B02A21; --g2:#C2571A; --g3:#A8790A; --g4:#2F6B8F; --g5:#6B7684;
+  --g1:#B02A21; --g2:#B24C0E; --g3:#8F6508; --g4:#2F6B8F; --g5:#6B7684;
   --radius:14px;
   font-size:16px;
 }
@@ -81,7 +81,7 @@ h1{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(1.4rem,3.2v
 .cat-block{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:16px;overflow:hidden}
 .cat-head{display:flex;align-items:baseline;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line);background:var(--navy-soft)}
 .cat-no{font-family:'Noto Serif TC',serif;font-weight:900;color:var(--seal);font-size:1.05rem}
-.cat-head h3{font-family:'Noto Serif TC',serif;font-size:1.15rem;color:var(--navy)}
+.cat-head h2{font-family:'Noto Serif TC',serif;font-size:1.15rem;color:var(--navy)}
 .cat-head .cnt{margin-left:auto;font-size:.75rem;color:var(--sub)}
 .notes{padding:10px 18px;background:#FCFDFE;border-bottom:1px solid var(--line);font-size:.8rem;color:var(--sub)}
 .notes summary{cursor:pointer;font-weight:700;color:var(--navy);font-size:.8rem}
@@ -166,7 +166,7 @@ h1{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(1.4rem,3.2v
 .g-lrow.on{border-color:var(--seal);background:var(--seal-soft);box-shadow:0 0 0 1px var(--seal) inset}
 .g-ln{font-weight:700;font-size:.84rem;color:var(--ink)}.g-ln small{display:block;font-weight:400;font-size:.7rem;color:var(--sub)}
 .g-bars{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr;gap:3px 8px;font-size:.66rem;color:var(--sub);align-items:center}
-.g-bars i{font-style:normal}.g-bars em{height:6px;background:#E3E9EF;border-radius:4px;overflow:hidden;display:block}.g-bars s{display:block;height:100%;background:#2E7D4F;text-decoration:none}
+.g-bars i{font-style:normal}.g-bars em{height:6px;background:#E3E9EF;border-radius:4px;overflow:hidden;display:block}.g-bars s{display:block;height:100%;background:#256B42;text-decoration:none}
 .g-eyes{display:grid;grid-template-columns:1fr 1fr;gap:10px}.g-eye{text-align:center;font-size:.78rem}.g-eye i{font-style:normal;color:var(--sub);font-size:.72rem}
 .g-chart{background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 4px;margin:4px 0;position:relative;overflow:hidden;font-family:Georgia,serif;font-weight:700;color:#111;line-height:1.3}
 .g-chart span{display:block}.g-chart .l1{font-size:30px}.g-chart .l2{font-size:21px}.g-chart .l3{font-size:15px}.g-chart .l4{font-size:11px}.g-chart .l5{font-size:8px}
@@ -213,8 +213,8 @@ h1{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(1.4rem,3.2v
 .fg-chip b{display:block;font-size:.8rem}
 .fg-chip i{font-style:normal;color:var(--sub);font-size:.64rem;display:block}
 .fg-chip:focus-visible{outline:2px solid var(--navy);outline-offset:1px}
-.fg-chip[data-lv="1"]{border-color:#A8790A;background:#FBF4E4}.fg-chip[data-lv="1"] i{color:#8A6308}
-.fg-chip[data-lv="2"]{border-color:#C2571A;background:#FBEDE4}.fg-chip[data-lv="2"] i{color:#A04513}
+.fg-chip[data-lv="1"]{border-color:#8F6508;background:#FBF4E4}.fg-chip[data-lv="1"] i{color:#8A6308}
+.fg-chip[data-lv="2"]{border-color:#B24C0E;background:#FBEDE4}.fg-chip[data-lv="2"] i{color:#A04513}
 .fg-chip[data-lv="3"]{border-color:#B02A21;background:#FBEBEA}.fg-chip[data-lv="3"] i{color:#B02A21}
 .fg-tools{display:flex;align-items:center;gap:10px;margin:10px 0;font-size:.82rem;flex-wrap:wrap}
 .fg-tools label{display:flex;align-items:center;gap:6px;cursor:pointer}
@@ -241,7 +241,7 @@ h1{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(1.4rem,3.2v
 .demo3d canvas{display:block;width:100%;height:auto;touch-action:pan-y;cursor:grab;border-radius:12px}
 .demo3d canvas.grab{cursor:grabbing}
 .d3-lbl{position:absolute;transform:translate(-50%,-50%);font-size:12.5px;font-weight:700;white-space:nowrap;pointer-events:none;padding:2px 9px;border-radius:999px;background:rgba(255,255,255,.88);box-shadow:0 1px 3px rgba(30,43,56,.12)}
-.d3-lbl.av{color:#2E7D4F}.d3-lbl.lo{color:#C0392B}
+.d3-lbl.av{color:#256B42}.d3-lbl.lo{color:#C0392B}
 .d3-lbl.el{color:var(--sub);font-weight:500;background:transparent;box-shadow:none}
 .d3-read{position:absolute;right:14px;top:10px;text-align:right;pointer-events:none}
 .d3-read b{display:block;font-family:'Noto Serif TC',serif;font-size:1.7rem;color:var(--navy);font-variant-numeric:tabular-nums;line-height:1.1}
@@ -261,7 +261,7 @@ td.amt{text-align:right;white-space:nowrap;font-weight:700;color:var(--navy);fon
 .lifelong{display:inline-block;margin-left:6px;font-size:.68rem;color:var(--seal);border:1px solid var(--seal);border-radius:4px;padding:0 4px;white-space:nowrap}
 
 .ref-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin-top:4px}
-.ref-card h3{font-family:'Noto Serif TC',serif;color:var(--navy);font-size:1rem;margin-bottom:8px}
+.ref-card h2{font-family:'Noto Serif TC',serif;color:var(--navy);font-size:1rem;margin-bottom:8px}
 .ref-card p.small,.footer-note{font-size:.75rem;color:var(--sub);margin-top:10px}
 .footer-note a{color:var(--navy)}
 .empty{padding:40px;text-align:center;color:var(--sub);background:var(--card);border:1px dashed var(--line);border-radius:var(--radius)}
@@ -290,11 +290,11 @@ svg.organs{width:100%;max-width:430px;height:auto;display:block;margin:0 auto}
 .crit-grade-title{display:flex;align-items:center;gap:8px;margin-bottom:5px}
 .crit-mode{font-size:.68rem;font-weight:700;padding:1px 8px;border-radius:999px}
 .crit-mode.all{background:#FBEEEC;color:var(--seal)}
-.crit-mode.any{background:#E9F1EA;color:#2E7D4F}
+.crit-mode.any{background:#E9F1EA;color:#256B42}
 .crit-list{list-style:none;margin-left:0;font-size:.83rem;color:var(--ink)}
 .crit-list li{position:relative;padding:2px 0 2px 20px}
 .crit-list.all li::before{content:'✓';position:absolute;left:0;color:var(--seal);font-weight:700}
-.crit-list.any li::before{content:'○';position:absolute;left:0;color:#2E7D4F;font-weight:700}
+.crit-list.any li::before{content:'○';position:absolute;left:0;color:#256B42;font-weight:700}
 .crit-single{font-size:.83rem;color:var(--ink);padding-left:2px}
 .crit-ref{margin-top:8px}
 .crit-ref summary{cursor:pointer;font-size:.76rem;color:var(--navy);font-weight:700}
@@ -329,7 +329,7 @@ table.qref td.new{font-weight:700;color:var(--navy)}
 .g-diets{display:flex;gap:6px}
 .g-diet{flex:1 1 0;display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 4px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:.74rem;text-align:center}
 .g-diet b{font-size:1.2rem;line-height:1.2}.g-diet i{font-style:normal;font-weight:700;font-size:.72rem}
-.g-diet.ok i{color:#2E7D4F}.g-diet.no{background:#FBEEEC;opacity:.7}.g-diet.no i{color:#B02A21}
+.g-diet.ok i{color:#256B42}.g-diet.no{background:#FBEEEC;opacity:.7}.g-diet.no i{color:#B02A21}
 .g-snds{display:grid;gap:3px}
 .g-snd{display:flex;align-items:center;gap:6px;font-size:.78rem;padding:3px 6px;border-radius:8px;background:#fff;border:1px solid var(--line)}
 .g-snd em{font-style:normal;width:18px;height:18px;border-radius:50%;background:#2F6B8F;color:#fff;font-size:.68rem;display:inline-flex;align-items:center;justify-content:center;flex:none}
@@ -366,7 +366,7 @@ table.qref td.new{font-weight:700;color:var(--navy)}
 .wiz-steps{display:flex;gap:6px;list-style:none;margin:6px 0 12px;padding:0}
 .wiz-steps li{flex:1;display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--sub);padding:6px 8px;border-radius:10px;background:#F1F4F7}
 .wiz-steps li b{width:20px;height:20px;border-radius:50%;background:#C9D3DC;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.72rem;flex:none}
-.wiz-steps li.on{background:var(--navy-soft);color:var(--navy);font-weight:700}.wiz-steps li.on b{background:var(--navy)}.wiz-steps li.done b{background:#2E7D4F}
+.wiz-steps li.on{background:var(--navy-soft);color:var(--navy);font-weight:700}.wiz-steps li.on b{background:var(--navy)}.wiz-steps li.done b{background:#256B42}
 .wiz-q{font-weight:700;color:var(--navy);margin:4px 0 10px;font-size:1rem}
 .wiz-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:8px}
 .wiz-opt{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer;font:inherit;font-size:.85rem;color:var(--ink)}
@@ -395,7 +395,7 @@ table.qref td.new{font-weight:700;color:var(--navy)}
 .mg-steps{list-style:none;padding:0;margin:4px 0 10px;display:grid;gap:6px}
 .mg-steps li{background:#F7F9FB;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:.84rem;line-height:1.6}
 .mg-steps li>b:first-child{display:block;color:var(--navy);font-size:.8rem}.mg-steps .warn{color:var(--seal)}
-.mg-tiers{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}.mg-tiers span{padding:2px 8px;border-radius:999px;background:#E3E9EF;font-size:.74rem}.mg-tiers span.ok{background:#DDF1E4;color:#2E7D4F;font-weight:700}
+.mg-tiers{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}.mg-tiers span{padding:2px 8px;border-radius:999px;background:#E3E9EF;font-size:.74rem}.mg-tiers span.ok{background:#DDF1E4;color:#256B42;font-weight:700}
 .mg-res{border:2px solid var(--gc);border-radius:14px;padding:12px 14px;background:#fff;margin-bottom:10px}
 .mg-big{font-size:1.9rem;font-weight:900;color:var(--navy);font-family:'Noto Serif TC',serif;line-height:1.3}.mg-big small{font-size:.78rem;color:var(--sub);margin-left:6px;font-family:inherit}
 .mg-amt{font-size:.88rem}.mg-tag{margin-left:6px;font-size:.72rem;padding:1px 8px;border-radius:999px;background:#FFF1D6;color:#8A5A00;font-weight:700}
@@ -428,6 +428,126 @@ table.qref td.new{font-weight:700;color:var(--navy)}
 
 @media(max-width:360px){.res-bar .rb-amt{display:none}}
 
+/* v5 */
+.snd-wrap{margin-top:10px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 10px}
+.snd-row{display:grid;grid-template-columns:52px 1fr;gap:6px;align-items:center;margin:4px 0}.snd-row>b{font-size:.8rem;color:var(--navy);line-height:1.2}.snd-row>b small{display:block;color:var(--sub);font-weight:500}
+.snd-list{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.snd{position:relative;display:flex;flex-direction:column;align-items:center;gap:0;padding:5px 2px;border-radius:10px;border:1.5px solid var(--line);text-align:center;line-height:1.25}
+.snd i{font-style:normal;font-size:1.35rem}.snd em{font-style:normal;font-size:.62rem;color:var(--ink)}.snd small{font-size:.58rem;color:var(--sub)}.snd u{text-decoration:none;font-size:.62rem;font-weight:700}
+.snd.ok{border-color:#256B42;background:#EAF5EE}.snd.ok u{color:#1F6B3F}.snd.ok i{animation:sndPulse 1.6s ease-in-out infinite;animation-delay:var(--d)}
+.snd.edge{border-color:#B98A1A;background:#FFF7E0}.snd.edge u{color:#7A5A00}.snd.no{background:#F1F4F7;border-style:dashed}.snd.no i{filter:grayscale(1);opacity:.4}.snd.no u{color:#8A2A22}.snd.no em,.snd.no small{color:#4A5560}
+@keyframes sndPulse{50%{transform:scale(1.18)}}
+.ech{display:grid;grid-template-columns:1fr 34px 1fr;gap:4px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 8px}
+.ech-col{display:flex;flex-direction:column;align-items:center;gap:4px;position:relative}.ech-col>b{font-size:.85rem;color:var(--navy)}.ech-col>i{font-style:normal;font-size:.74rem;color:var(--sub);text-align:center}
+.ech-chart{width:100%;position:relative}.ech-row{display:flex;align-items:center;justify-content:center;gap:6px;border-bottom:1px dashed #E3E9EF;position:relative}
+.ech-e{font-family:Arial,sans-serif;font-weight:900;color:#1E2B38;line-height:1}.ech-m{position:absolute;right:2px;font-weight:900;font-size:1rem;opacity:0;animation:echIn .35s forwards;animation-delay:calc(var(--i)*.32s + .2s)}
+.ech-row.ok .ech-m{color:#1F6B3F}.ech-row.no .ech-m{color:#B02A21}.ech-row.no .ech-e{color:#6B7684}
+.ech-row.after{opacity:.35}.ech-row.after .ech-m{display:none}.ech-row .ech-e{animation:echIn .3s both;animation-delay:calc(var(--i)*.32s)}
+@keyframes echIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.ech-mid{display:flex;flex-direction:column;padding-top:26px}.ech-mid span{display:flex;align-items:center;justify-content:center;font-size:.66rem;color:var(--sub);border-bottom:1px dashed transparent}
+.ech-col.blind .ech-chart{background:#111;border-radius:8px}.ech-blind{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-weight:700;text-align:center;padding:8px;font-size:.9rem}.ech-blind small{font-weight:400;font-size:.66rem;opacity:.85;margin-top:4px}
+.eye-walk{animation:eyeWalk 6.5s linear infinite}.eye-walk.still{animation:none;transform:translateX(90px)}
+@keyframes eyeWalk{from{transform:translateX(392px)}to{transform:translateX(-30px)}}
+.lv-wrap{display:grid;gap:8px}.lv-scene{max-width:340px;margin:0 auto;display:block;width:100%;height:auto}
+.lv-wave{animation:lvWave 3.4s linear infinite}.lv-wave.still{animation:none}@keyframes lvWave{to{transform:translate(-60px,var(--ty,0))}}
+.lv-wave{--ty:0}.lv-fog circle{animation:lvFog 2.4s ease-in-out infinite}@keyframes lvFog{50%{transform:translateY(-4px);fill-opacity:.35}}
+.lv-drip{animation:lvDrip 1.5s ease-in infinite}@keyframes lvDrip{0%{transform:translateY(0);opacity:1}100%{transform:translateY(22px);opacity:0}}
+.lv-fog.still circle,.lv-drip.still{animation:none}
+.nose-flow{max-width:300px;margin:6px auto 0;display:block;width:100%;height:auto}
+.g-march{animation:gMarch 1.1s linear infinite}@keyframes gMarch{to{stroke-dashoffset:-14}}
+.g-lrow.on .g-act{animation:tilePop .5s cubic-bezier(.3,1.5,.5,1) both}.g-lrow.on .g-act:nth-child(2){animation-delay:.07s}.g-lrow.on .g-act:nth-child(3){animation-delay:.14s}.g-lrow.on .g-act:nth-child(4){animation-delay:.21s}.g-lrow.on .g-act:nth-child(5){animation-delay:.28s}.g-lrow.on .g-act:nth-child(6){animation-delay:.35s}
+@keyframes tilePop{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+.rb-lad{position:relative;display:inline-flex;gap:1.5px;align-items:flex-end;height:14px;margin:0 2px;flex:none}.rb-lad i{width:5px;height:10px;border-radius:1.5px;background:#E3E9EF;display:block}
+.rb-mk{position:absolute;top:-6px;left:50%;width:0;height:0;margin-left:-5px;border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid #C0392B}
+@media(max-width:400px){.rb-lad{display:none}}
+@media(prefers-reduced-motion:reduce){.snd.ok i,.ech-m,.ech-row .ech-e,.g-march,.g-lrow.on .g-act,.eye-walk,.lv-wave,.lv-fog circle,.lv-drip{animation:none!important}.ech-m{opacity:1}.ech-row .ech-e{opacity:1}}
+/* 手機觸控目標 */
+@media(max-width:640px){#gradeFilter,.controls select,.controls input[type=number]{min-height:44px;font-size:1rem}.wrap summary,.demo-box summary{min-height:44px;display:flex;align-items:center}.mg-add,.demo-btn{min-height:40px;padding-top:6px;padding-bottom:6px}
+ .demo-box button:not(.g-tooth):not(.demo-close),.demo-box select,.demo-box .seg button{min-height:40px}.demo-box input[type=checkbox],.demo-box input[type=radio]{width:24px;height:24px}
+ .demo-box label{min-height:32px;display:inline-flex;align-items:center;gap:6px}.demo-close{min-width:44px;min-height:44px}}
+.teeth-quick{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:8px 0;font-size:.8rem;color:var(--sub)}.teeth-quick span{flex:1 1 100%}
+.teeth-quick button{min-width:64px;min-height:44px;padding:0 14px;border:1.5px solid var(--navy);border-radius:999px;background:#fff;color:var(--navy);font:inherit;font-weight:700;cursor:pointer}
+.teeth-quick button:hover,.teeth-quick button:focus-visible{background:var(--navy-soft);outline:2px solid var(--seal);outline-offset:2px}
+@media(max-width:640px){.demo-box input[type=range],.g-rng input[type=range]{height:32px}}
+.demo-box .teeth-quick button{min-height:44px}
+.snd.ok i{animation-iteration-count:2}
+.ech-replay{display:block;margin:6px auto 0;min-height:40px;padding:0 16px;border:1.5px solid var(--navy);border-radius:999px;background:#fff;color:var(--navy);font:inherit;font-weight:700;cursor:pointer}
+.ech-replay:hover,.ech-replay:focus-visible{background:var(--navy-soft);outline:2px solid var(--seal);outline-offset:2px}
+/* 截肢：截斷線脈動＋缺損部分虛線流動，提示「從這裡以下都缺損」 */
+#gVis svg line[stroke="#C0392B"][stroke-width="3"]{animation:cutPulse 1.4s ease-in-out infinite}
+#gVis svg path[stroke="#C0392B"][stroke-dasharray="4 3"]{animation:gMarch 1.1s linear infinite}
+@keyframes cutPulse{50%{stroke-width:6;opacity:.55}}
+@media(prefers-reduced-motion:reduce){#gVis svg line[stroke="#C0392B"][stroke-width="3"],#gVis svg path[stroke="#C0392B"][stroke-dasharray="4 3"]{animation:none!important}}
+
+/* v6：判斷尺、心肺、導覽 */
+.jg{margin:10px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 12px 10px}
+.jg-bar{position:relative;height:30px;border-radius:8px;overflow:visible;display:block;margin:20px 6px 0}
+.jg-bar>i{position:absolute;top:0;bottom:0;display:flex;align-items:center;justify-content:center}.jg-bar>i:first-child{border-radius:8px 0 0 8px}.jg-bar>i:nth-last-of-type(1){border-radius:0 8px 8px 0}
+.jg-bar>i em{font-style:normal;font-size:.66rem;font-weight:700;color:#fff;white-space:nowrap}
+.jg-pin{position:absolute;top:-7px;width:0;height:0;margin-left:-8px;border-left:8px solid transparent;border-right:8px solid transparent;border-top:12px solid #1E2B38;filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
+.jg-pin b{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);white-space:nowrap;background:#1E2B38;color:#fff;font-size:.72rem;padding:2px 8px;border-radius:999px;font-weight:700}
+.jg-ticks{position:relative;height:16px;margin:2px 6px 0}.jg-ticks u{position:absolute;text-decoration:none;transform:translateX(-50%);top:0;font-size:.66rem;color:var(--sub)}.jg-ticks u b{font-weight:500}
+.jg-verdict{display:flex;flex-direction:column;gap:2px;margin-top:8px;padding:8px 12px;border-left:5px solid var(--vc);background:var(--vbg);border-radius:8px;font-size:.84rem}.jg-verdict strong{color:var(--vc);font-size:.92rem}
+.g-heartwrap,.g-lungwrap{display:grid;gap:6px}.g-pumpfig,.g-lungfig,.g-spiro{max-width:340px;margin:0 auto;width:100%;height:auto;display:block}
+.sp-draw{stroke-dasharray:1;stroke-dashoffset:1;animation:spDraw 2.4s ease-out forwards}@keyframes spDraw{to{stroke-dashoffset:0}}
+.tour{margin:8px 0;padding:8px 10px;background:var(--navy-soft);border:1px solid #C9D9E6;border-radius:12px}
+.tour-btns{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.tour-btns button{min-height:40px;padding:0 14px;border:1.5px solid var(--navy);border-radius:999px;background:#fff;color:var(--navy);font:inherit;font-weight:700;cursor:pointer}
+.tour-btns .tour-play{background:var(--navy);color:#fff}.tour-btns button:focus-visible{outline:3px solid var(--seal);outline-offset:2px}
+.tour-dots{display:inline-flex;gap:5px;margin-left:auto}.tour-dots i{width:9px;height:9px;border-radius:50%;background:#C9D3DC}.tour-dots i.on{background:var(--seal);transform:scale(1.3)}
+.tour-cap{margin-top:6px;font-size:.84rem;line-height:1.55;color:var(--ink);min-height:2.6em}
+@media(prefers-reduced-motion:reduce){.sp-draw{animation:none;stroke-dashoffset:0}}
+
+/* v5 */
+.snd-wrap{margin-top:10px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 10px}
+.snd-row{display:grid;grid-template-columns:52px 1fr;gap:6px;align-items:center;margin:4px 0}.snd-row>b{font-size:.8rem;color:var(--navy);line-height:1.2}.snd-row>b small{display:block;color:var(--sub);font-weight:500}
+.snd-list{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.snd{position:relative;display:flex;flex-direction:column;align-items:center;gap:0;padding:5px 2px;border-radius:10px;border:1.5px solid var(--line);text-align:center;line-height:1.25}
+.snd i{font-style:normal;font-size:1.35rem}.snd em{font-style:normal;font-size:.62rem;color:var(--ink)}.snd small{font-size:.58rem;color:var(--sub)}.snd u{text-decoration:none;font-size:.62rem;font-weight:700}
+.snd.ok{border-color:#256B42;background:#EAF5EE}.snd.ok u{color:#1F6B3F}.snd.ok i{animation:sndPulse 1.6s ease-in-out infinite;animation-delay:var(--d)}
+.snd.edge{border-color:#B98A1A;background:#FFF7E0}.snd.edge u{color:#7A5A00}.snd.no{background:#F1F4F7;border-style:dashed}.snd.no i{filter:grayscale(1);opacity:.4}.snd.no u{color:#8A2A22}.snd.no em,.snd.no small{color:#4A5560}
+@keyframes sndPulse{50%{transform:scale(1.18)}}
+.ech{display:grid;grid-template-columns:1fr 34px 1fr;gap:4px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 8px}
+.ech-col{display:flex;flex-direction:column;align-items:center;gap:4px;position:relative}.ech-col>b{font-size:.85rem;color:var(--navy)}.ech-col>i{font-style:normal;font-size:.74rem;color:var(--sub);text-align:center}
+.ech-chart{width:100%;position:relative}.ech-row{display:flex;align-items:center;justify-content:center;gap:6px;border-bottom:1px dashed #E3E9EF;position:relative}
+.ech-e{font-family:Arial,sans-serif;font-weight:900;color:#1E2B38;line-height:1}.ech-m{position:absolute;right:2px;font-weight:900;font-size:1rem;opacity:0;animation:echIn .35s forwards;animation-delay:calc(var(--i)*.32s + .2s)}
+.ech-row.ok .ech-m{color:#1F6B3F}.ech-row.no .ech-m{color:#B02A21}.ech-row.no .ech-e{color:#6B7684}
+.ech-row.after{opacity:.35}.ech-row.after .ech-m{display:none}.ech-row .ech-e{animation:echIn .3s both;animation-delay:calc(var(--i)*.32s)}
+@keyframes echIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.ech-mid{display:flex;flex-direction:column;padding-top:26px}.ech-mid span{display:flex;align-items:center;justify-content:center;font-size:.66rem;color:var(--sub);border-bottom:1px dashed transparent}
+.ech-col.blind .ech-chart{background:#111;border-radius:8px}.ech-blind{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-weight:700;text-align:center;padding:8px;font-size:.9rem}.ech-blind small{font-weight:400;font-size:.66rem;opacity:.85;margin-top:4px}
+.eye-walk{animation:eyeWalk 6.5s linear infinite}.eye-walk.still{animation:none;transform:translateX(90px)}
+@keyframes eyeWalk{from{transform:translateX(392px)}to{transform:translateX(-30px)}}
+.lv-wrap{display:grid;gap:8px}.lv-scene{max-width:340px;margin:0 auto;display:block;width:100%;height:auto}
+.lv-wave{animation:lvWave 3.4s linear infinite}.lv-wave.still{animation:none}@keyframes lvWave{to{transform:translate(-60px,var(--ty,0))}}
+.lv-wave{--ty:0}.lv-fog circle{animation:lvFog 2.4s ease-in-out infinite}@keyframes lvFog{50%{transform:translateY(-4px);fill-opacity:.35}}
+.lv-drip{animation:lvDrip 1.5s ease-in infinite}@keyframes lvDrip{0%{transform:translateY(0);opacity:1}100%{transform:translateY(22px);opacity:0}}
+.lv-fog.still circle,.lv-drip.still{animation:none}
+.nose-flow{max-width:300px;margin:6px auto 0;display:block;width:100%;height:auto}
+.g-march{animation:gMarch 1.1s linear infinite}@keyframes gMarch{to{stroke-dashoffset:-14}}
+.g-lrow.on .g-act{animation:tilePop .5s cubic-bezier(.3,1.5,.5,1) both}.g-lrow.on .g-act:nth-child(2){animation-delay:.07s}.g-lrow.on .g-act:nth-child(3){animation-delay:.14s}.g-lrow.on .g-act:nth-child(4){animation-delay:.21s}.g-lrow.on .g-act:nth-child(5){animation-delay:.28s}.g-lrow.on .g-act:nth-child(6){animation-delay:.35s}
+@keyframes tilePop{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+.rb-lad{position:relative;display:inline-flex;gap:1.5px;align-items:flex-end;height:14px;margin:0 2px;flex:none}.rb-lad i{width:5px;height:10px;border-radius:1.5px;background:#E3E9EF;display:block}
+.rb-mk{position:absolute;top:-6px;left:50%;width:0;height:0;margin-left:-5px;border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid #C0392B}
+@media(max-width:400px){.rb-lad{display:none}}
+@media(prefers-reduced-motion:reduce){.snd.ok i,.ech-m,.ech-row .ech-e,.g-march,.g-lrow.on .g-act,.eye-walk,.lv-wave,.lv-fog circle,.lv-drip{animation:none!important}.ech-m{opacity:1}.ech-row .ech-e{opacity:1}}
+/* 手機觸控目標 */
+@media(max-width:640px){#gradeFilter,.controls select,.controls input[type=number]{min-height:44px;font-size:1rem}.wrap summary,.demo-box summary{min-height:44px;display:flex;align-items:center}.mg-add,.demo-btn{min-height:40px;padding-top:6px;padding-bottom:6px}
+ .demo-box button:not(.g-tooth):not(.demo-close),.demo-box select,.demo-box .seg button{min-height:40px}.demo-box input[type=checkbox],.demo-box input[type=radio]{width:24px;height:24px}
+ .demo-box label{min-height:32px;display:inline-flex;align-items:center;gap:6px}.demo-close{min-width:44px;min-height:44px}}
+.teeth-quick{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:8px 0;font-size:.8rem;color:var(--sub)}.teeth-quick span{flex:1 1 100%}
+.teeth-quick button{min-width:64px;min-height:44px;padding:0 14px;border:1.5px solid var(--navy);border-radius:999px;background:#fff;color:var(--navy);font:inherit;font-weight:700;cursor:pointer}
+.teeth-quick button:hover,.teeth-quick button:focus-visible{background:var(--navy-soft);outline:2px solid var(--seal);outline-offset:2px}
+@media(max-width:640px){.demo-box input[type=range],.g-rng input[type=range]{height:32px}}
+.demo-box .teeth-quick button{min-height:44px}
+.snd.ok i{animation-iteration-count:2}
+.ech-replay{display:block;margin:6px auto 0;min-height:40px;padding:0 16px;border:1.5px solid var(--navy);border-radius:999px;background:#fff;color:var(--navy);font:inherit;font-weight:700;cursor:pointer}
+.ech-replay:hover,.ech-replay:focus-visible{background:var(--navy-soft);outline:2px solid var(--seal);outline-offset:2px}
+/* 截肢：截斷線脈動＋缺損部分虛線流動，提示「從這裡以下都缺損」 */
+#gVis svg line[stroke="#C0392B"][stroke-width="3"]{animation:cutPulse 1.4s ease-in-out infinite}
+#gVis svg path[stroke="#C0392B"][stroke-dasharray="4 3"]{animation:gMarch 1.1s linear infinite}
+@keyframes cutPulse{50%{stroke-width:6;opacity:.55}}
+@media(prefers-reduced-motion:reduce){#gVis svg line[stroke="#C0392B"][stroke-width="3"],#gVis svg path[stroke="#C0392B"][stroke-dasharray="4 3"]{animation:none!important}}
+
 
 /* 對外版：提醒與聯絡 */
 .pub-note{display:flex;gap:14px;align-items:flex-start;background:var(--seal-soft);border:1px solid #EBC7C2;border-left:5px solid var(--seal);border-radius:10px;padding:12px 16px;margin:-4px 0 16px;font-size:.9rem;line-height:1.7}
@@ -445,7 +565,7 @@ table.qref td.new{font-weight:700;color:var(--navy)}
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap" role="main">
 
 <header class="top">
   <span class="brand">安欣理賠顧問｜老劉理賠說</span>
@@ -485,7 +605,7 @@ table.qref td.new{font-weight:700;color:var(--navy)}
 
 <nav class="cat-cards" id="catCards" aria-label="失能種類快速選單"></nav>
 
-<main class="panel" id="panel"></main>
+<div class="panel" id="panel"></div>
 
 <button class="more-toggle" id="moreToggle" type="button" aria-expanded="false">
   <span>更多保險金額對照表</span>
@@ -495,24 +615,24 @@ table.qref td.new{font-weight:700;color:var(--navy)}
 <div class="more-body" id="moreBody"><div class="more-body-inner">
 
 <section class="ref-card">
-  <h3>失能等級 × 給付日數速查</h3>
+  <h2>失能等級 × 給付日數速查</h2>
   <svg class="bar-chart" id="refChart" viewBox="0 0 700 460" role="img" aria-label="失能等級與給付日數長條圖"></svg>
   <p class="small">普通事故：勞工保險失能給付標準第 5 條（平均月投保薪資 ÷ 30 × 日數，勞保月投保薪資上限 45,800 元）。職業傷病：勞工職業災害保險及保護法之失能一次金日數（災保月投保薪資上限 72,800 元），即普通日數加給五成。111.4.30 前診斷之職災失能，適用勞保條例規定（普通日數加給 50%，日數相同）。</p>
-  <p class="small"><b>併合升等原則（標準第 5 條）：</b>符合兩項目以上按最高等級核定；其中兩項目以上均在第 14 級至第 1 級間者升一等級；均在第 8 級至第 1 級間者升二等級；均在第 5 級至第 1 級間者升三等級（升等後日數不得超過各項分別計算之合計額，最高第 1 級）。</p>
+  <p class="small"><b>併合升等原則（勞保失能給付標準第 6 條第 2 項）：</b>符合兩項目以上按最高等級核定；其中兩項目以上均在第 14 級至第 1 級間者升一等級；均在第 8 級至第 1 級間者升二等級；均在第 5 級至第 1 級間者升三等級（升等後日數不得超過各項分別計算之合計額，最高第 1 級）。</p>
   <p class="footer-note">資料來源：<a href="https://www.bli.gov.tw/0005867.html" target="_blank" rel="noopener">勞保局失能種類圖示說明</a>、勞工保險失能給付標準第三條附表（111.3.30 修正）。本工具為輔助試算與查詢之用，實際失能等級與核付金額以勞動部勞工保險局審定為準。◆ 安欣理賠顧問製作</p>
 </section>
 
 <div class="ref-flex">
   <section class="ref-card">
-    <h3>強制險失能等級 × 給付金額速查</h3>
+    <h2>強制險失能等級 × 給付金額速查</h2>
     <p class="small" style="margin-top:0">依「強制汽車責任保險給付標準」第 3 條。<b style="color:var(--seal)">以事故發生日判斷適用版本</b>：115.7.1（含）以後發生之交通事故適用新制（115.5.29 修正）；115.6.30 以前事故適用舊制（101.3.2 修正）。</p>
     <div class="qref-wrap"><table class="qref" id="caliTable"></table></div>
     <svg class="bar-chart" id="caliChart" viewBox="0 0 700 420" role="img" aria-label="強制險新舊制給付金額比較長條圖" style="margin-top:10px"></svg>
-    <p class="small">新制同步調整：死亡給付 200 萬 → <b>300 萬</b>；每人每事故死亡＋失能＋傷害醫療合計上限 220 萬 → <b>320 萬</b>（傷害醫療維持 20 萬）。強制險失能標準表為獨立之 15 等級標準（現行 110.6.24 修正版 205 項），與勞保附表項目、等級認定不通用。併合升等原則與勞保同（升一、二、三等級規則）。</p>
+    <p class="small">新制同步調整：死亡給付 200 萬 → <b>300 萬</b>；每人每事故死亡＋失能＋傷害醫療合計上限 220 萬 → <b>320 萬</b>（傷害醫療維持 20 萬）。強制險失能標準表為獨立之 15 等級標準（現行附表為 115.2.25 修正版），與勞保附表項目、等級認定不通用。併合升等原則與勞保同（給付標準第 4 條：升一、二、三等級、合計額上限）。</p>
   </section>
 
   <section class="ref-card">
-    <h3>團險／意外險／學平險 失能等級 × 給付百分比</h3>
+    <h2>團險／意外險／學平險 失能等級 × 給付百分比</h2>
     <p class="small" style="margin-top:0">依「傷害保險單示範條款」附表：失能程度與保險金給付表（<b>11 等級 80 項</b>，與勞保、強制險之 15 等級標準不同，不可互相套用）。團體傷害險、個人意外險、學生團體保險（學平險）之失能保險金原則上均按投保保額乘以下列百分比計算，實際以各保單條款約定為準。</p>
     <div class="mini-input">
       <label for="ahSum">試算保額（元）</label>
@@ -917,7 +1037,7 @@ function organMapHTML(){
   return `<div class="organ-map">
   <p>點選臟器可只顯示該臟器之失能項目${organFilter?'（目前：<b style="color:var(--seal)">'+esc(organFilter)+'</b>）':''}</p>
   ${organFilter?'<button type="button" class="organ-reset">顯示全部臟器項目</button>':''}
-  <svg class="organs" viewBox="0 0 340 340" role="img" aria-label="胸腹部臟器示意圖">
+  <svg class="organs" viewBox="0 0 340 340" role="group" aria-label="胸腹部臟器示意圖，點選臟器篩選項目">
     <path d="M100 22 Q170 8 240 22 L250 120 Q248 210 235 262 L230 312 Q170 328 110 312 L105 262 Q92 210 90 120 Z" fill="#F3F6F9" stroke="#C4D0DA" stroke-width="1.4"/>
     <g class="ozone ochip${sel('胸腹部臟器（綜合機能）')}" data-grp="胸腹部臟器（綜合機能）" tabindex="0" role="button" aria-label="綜合機能">
       <rect x="4" y="8" width="82" height="24" rx="12" class="org" fill="#fff"/>
@@ -964,7 +1084,7 @@ function critLevelHTML(lv){
       inner+=`<div style="font-size:.78rem;color:var(--seal);font-weight:700;margin-bottom:2px">${esc(lv.baseLabel||'需同時符合下列各項：')}</div><ul class="crit-list all">${lv.base.map(t=>'<li>'+esc(t)+'</li>').join('')}</ul>`;
     }
     if(lv.any){
-      inner+=`<div style="font-size:.78rem;color:#2E7D4F;font-weight:700;margin:6px 0 2px">${esc(lv.anyLabel||'符合下列情況之一即可：')}</div><ul class="crit-list any">${lv.any.map(t=>'<li>'+esc(t)+'</li>').join('')}</ul>`;
+      inner+=`<div style="font-size:.78rem;color:#256B42;font-weight:700;margin:6px 0 2px">${esc(lv.anyLabel||'符合下列情況之一即可：')}</div><ul class="crit-list any">${lv.any.map(t=>'<li>'+esc(t)+'</li>').join('')}</ul>`;
     }
   }
   let modeTag='';
@@ -1006,7 +1126,7 @@ function catHTML(cat,filterFn,showOrganMap){
   if(!total&&!(cat.k==='organ'&&showOrganMap))return '';
   const notes=cat.notes&&cat.notes.length?`<details class="notes"><summary>審核重點（摘錄）</summary><ul>${cat.notes.map(n=>'<li>'+esc(n)+'</li>').join('')}</ul></details>`:'';
   const omap=(cat.k==='organ'&&showOrganMap)?organMapHTML():'';
-  return `<section class="cat-block"><div class="cat-head"><span class="cat-no">${cat.no}</span><h3>${cat.name}</h3><span class="cnt">符合 ${total} 項</span></div>${omap}${notes}${body}</section>`;
+  return `<section class="cat-block"><div class="cat-head"><span class="cat-no">${cat.no}</span><h2>${cat.name}</h2><span class="cnt">符合 ${total} 項</span></div>${omap}${notes}${body}</section>`;
 }
 function render(){
   const filterFn=it=>{
@@ -1203,7 +1323,7 @@ function demoRenderSVG(st){
   const wrap=$('#demoSvgWrap');wrap.hidden=false;$('#demo3d').hidden=true;
   wrap.innerHTML=`<svg class="demo-svg" viewBox="0 0 420 285" role="img" aria-label="${J.name}活動範圍示意（簡化）">
     <path d="${sectorPath(cx,cy,R,lo,hi)}" fill="none" stroke="#B7C5D1" stroke-dasharray="4 5"/>
-    ${st.lost<1?`<path d="${sectorPath(cx,cy,R,alo,ahi)}" fill="rgba(46,125,79,.13)" stroke="#2E7D4F" stroke-width="1.6"/>`:''}
+    ${st.lost<1?`<path d="${sectorPath(cx,cy,R,alo,ahi)}" fill="rgba(46,125,79,.13)" stroke="#256B42" stroke-width="1.6"/>`:''}
     ${st.lost>0?`<path d="${sectorPath(cx,cy,R,ahi,hi)}" fill="rgba(192,57,43,.12)" stroke="#C0392B"/><path d="${sectorPath(cx,cy,R,lo,alo)}" fill="rgba(192,57,43,.12)" stroke="#C0392B"/>`:''}
     <line x1="${cx}" y1="${cy}" x2="${cx+R}" y2="${cy}" stroke="#234E70" stroke-dasharray="5 4"/>
     <g id="demoFore"><rect x="${cx}" y="${cy-9}" width="${R-10}" height="18" rx="9" fill="#E7C3A8" stroke="#B57C5C"/><line x1="${cx}" y1="${cy}" x2="${cx+R-10}" y2="${cy}" stroke="#EFE6D2" stroke-width="5"/></g>
@@ -1532,8 +1652,8 @@ const FINGERS=[
 ];
 const FLV=[
   {label:'正常',color:'#9FB2C2'},
-  {label:'指骨一部分缺損',sub:'指骨部分損失、未達末節 1/2（X 光可見）',color:'#A8790A'},
-  {label:'末節切斷 ≧ 1/2',sub:'屬「手指喪失機能」',color:'#C2571A'},
+  {label:'指骨一部分缺損',sub:'指骨部分損失、未達末節 1/2（X 光可見）',color:'#8F6508'},
+  {label:'末節切斷 ≧ 1/2',sub:'屬「手指喪失機能」',color:'#B24C0E'},
   {label:'手指缺損',sub:'拇指由指節間關節、其他指由近位指節間關節以上切斷',color:'#B02A21'}
 ];
 /* 各項目預設示範狀態：C＝缺損、F＝末節切斷≧1/2（喪失機能）、P＝指骨一部分缺損 */
@@ -1673,7 +1793,7 @@ const TOES=[
 ];
 const TLV=[
   {label:'正常',color:'#9FB2C2'},
-  {label:'足趾喪失機能（切斷）',sub:'第一趾末節切斷 1/2 以上；第二～五趾自末關節以上切斷',color:'#C2571A'},
+  {label:'足趾喪失機能（切斷）',sub:'第一趾末節切斷 1/2 以上；第二～五趾自末關節以上切斷',color:'#B24C0E'},
   {label:'足趾缺損',sub:'自中足趾關節切斷，足趾全部缺損',color:'#B02A21'}
 ];
 const TOE_DEMOS={
@@ -1905,7 +2025,7 @@ function gItems(items,notes,empty){
 const bestOf=ids=>ids.filter(Boolean).sort((a,b)=>itemGrade(a)-itemGrade(b)).slice(0,1);
 const gSeg=(k,opts,cur,label)=>`<div class="g-row">${label?`<span class="g-lab">${label}</span>`:''}<div class="g-seg">${opts.map(([v,l])=>`<button type="button" data-a="set" data-k="${k}" data-v="${v}" class="${String(cur)===String(v)?'on':''}">${l}</button>`).join('')}</div></div>`;
 const gChk=(k,label,on)=>`<label class="g-chk"><input type="checkbox" data-k="${k}"${on?' checked':''}> ${label}</label>`;
-const gRng=(k,label,min,max,step,v,unit)=>`<div class="g-row g-rng"><span class="g-lab">${label}</span><input type="range" data-k="${k}" min="${min}" max="${max}" step="${step}" value="${v}"><b><span id="gv_${k}">${v}</span>${unit||''}</b></div>`;
+const gRng=(k,label,min,max,step,v,unit)=>`<div class="g-row g-rng"><span class="g-lab">${label}</span><input type="range" aria-label="${label}" data-k="${k}" min="${min}" max="${max}" step="${step}" value="${v}"><b><span id="gv_${k}">${v}</span>${unit||''}</b></div>`;
 const gNum=(k,label,v,unit)=>`<label class="g-num"><span>${label}</span><input type="number" inputmode="decimal" data-k="${k}" value="${v==null?'':v}" placeholder="未填"><i>${unit||''}</i></label>`;
 const gSel=(k,label,opts,cur)=>`<label class="g-num"><span>${label}</span><select data-k="${k}" data-n="1">${opts.map((o,i)=>`<option value="${i}"${+cur===i?' selected':''}>${o}</option>`).join('')}</select></label>`;
 const gTog=(k,v,label,arr)=>`<button type="button" class="g-tg${arr.map(String).includes(String(v))?' on':''}" data-a="tog" data-k="${k}" data-v="${v}">${label}</button>`;
@@ -1950,7 +2070,7 @@ const LAD={
   organ:{ids:rngIds(7,1,5),name:'胸腹部臟器（綜合機能）',last:'胸腹部臟器遺存失能（工作上確有明顯阻害）',notes:['原則須經治療六個月以上；器質性切除或初次透析於出院日／初次透析日審定。','二種以上臟器同時併存失能，須綜合全部症狀衡量，不得按各臟器等級分別計算後合併提高等級。','心、肺、肝另有客觀指標，請改看各該臟器項目的示範計算器。','階梯中的長條為示意。']}
 };
 const ACTS=[['吃飯','<path d="M5 13h14a7 7 0 0 1-14 0z"/><path d="M8 4l3 7M16 3l-3 8"/>'],['如廁','<path d="M7 4h7v6H7zM5 10h13a5 5 0 0 1-5 5h-3l1 5H8l1-5a4 4 0 0 1-4-4z"/>'],['洗澡','<path d="M5 20v-9a5 5 0 0 1 10 0"/><path d="M13 12h6M14 15v2M17 15v3M20 15v2"/>'],['穿衣','<path d="M8 4l-4 3 2 4 2-1v10h8V10l2 1 2-4-4-3a4 4 0 0 1-8 0z"/>'],['外出','<circle cx="13" cy="4" r="2"/><path d="M12 7l-3 6h4l-2 7M12 13l4 2M9 9l-3 3"/>'],['工作','<rect x="3" y="8" width="18" height="12" rx="2"/><path d="M9 8V5h6v3M3 13h18"/>']];
-const ACT_ST={s:['自己可以','#2E7D4F'],h:['需要協助','#C2571A'],a:['全靠他人','#B02A21'],x:['不能工作','#B02A21'],l:['輕便工作','#2F6B8F'],w:['可以工作','#2E7D4F']};
+const ACT_ST={s:['自己可以','#256B42'],h:['需要協助','#B24C0E'],a:['全靠他人','#B02A21'],x:['不能工作','#B02A21'],l:['輕便工作','#2F6B8F'],w:['可以工作','#256B42']};
 const LADACT=['aaaaax','shhhhx','sssssx','sssssl','sssssw'];
 const LADV=[['極度失能',0,0,'日常生活全須他人扶助，經常須醫療護理及專人周密照護'],['高度失能',40,0,'日常生活之一部須他人扶助'],['顯著失能',100,0,'日常生活尚可自理，但終身無工作能力'],['僅能從事輕便工作',100,35,'終身僅能從事輕便工作'],['輕度失能',100,85,'']];
 GT.ladder={
@@ -1964,7 +2084,7 @@ reg(LAD.mind.ids,'ladder',(id,i)=>({cat:'mind',lv:i}));reg(LAD.nerve.ids,'ladder
 /* ---------- 眼 ---------- */
 const VA=['正常（高於 0.4）','0.4 以下','0.1 以下','0.06 以下','0.02 以下（未失明）','失明'],VAB=[0,1.2,2.8,4.2,6.5,0];
 function eyeScene(o){const hemi=o.includes('3-14')||o.includes('3-15'),dip=o.includes('3-18'),gl=o.includes('3-19'),acc=o.includes('3-16')||o.includes('3-17'),lid=o.includes('3-22')||o.includes('3-23');
-  const sc=`<rect width="360" height="200" fill="#CFE4F2"/><rect x="0" y="40" width="70" height="110" fill="#9FB2C2"/><rect x="80" y="20" width="60" height="130" fill="#B7C5D1"/><rect x="250" y="30" width="80" height="120" fill="#A7B8C7"/>${[0,1,2,3].map(i=>`<rect x="${92+i%2*24}" y="${34+Math.floor(i/2)*30}" width="14" height="18" fill="#EAF1F7"/>`).join('')}<rect x="0" y="150" width="360" height="50" fill="#6B7684"/>${[0,1,2,3,4,5].map(i=>`<rect x="${120+i*20}" y="158" width="12" height="34" fill="#F4F4F4"/>`).join('')}<rect x="190" y="126" width="70" height="26" rx="8" fill="#C0392B"/><circle cx="205" cy="154" r="7" fill="#333"/><circle cx="245" cy="154" r="7" fill="#333"/><circle cx="60" cy="118" r="7" fill="#5A4A3E"/><path d="M60 125v22M52 132h16M60 147l-6 12M60 147l6 12" stroke="#5A4A3E" stroke-width="4" stroke-linecap="round"/><rect x="300" y="80" width="10" height="70" fill="#555"/><rect x="294" y="60" width="22" height="34" rx="4" fill="#333"/><circle cx="305" cy="70" r="5" fill="#2E7D4F"/>`;
+  const sc=`<rect width="360" height="200" fill="#CFE4F2"/><rect x="0" y="40" width="70" height="110" fill="#9FB2C2"/><rect x="80" y="20" width="60" height="130" fill="#B7C5D1"/><rect x="250" y="30" width="80" height="120" fill="#A7B8C7"/>${[0,1,2,3].map(i=>`<rect x="${92+i%2*24}" y="${34+Math.floor(i/2)*30}" width="14" height="18" fill="#EAF1F7"/>`).join('')}<rect x="0" y="150" width="360" height="50" fill="#6B7684"/>${[0,1,2,3,4,5].map(i=>`<rect x="${120+i*20}" y="158" width="12" height="34" fill="#F4F4F4"/>`).join('')}<rect x="190" y="126" width="70" height="26" rx="8" fill="#C0392B"/><circle cx="205" cy="154" r="7" fill="#333"/><circle cx="245" cy="154" r="7" fill="#333"/><circle cx="60" cy="118" r="7" fill="#5A4A3E"/><path d="M60 125v22M52 132h16M60 147l-6 12M60 147l6 12" stroke="#5A4A3E" stroke-width="4" stroke-linecap="round"/><rect x="300" y="80" width="10" height="70" fill="#555"/><rect x="294" y="60" width="22" height="34" rx="4" fill="#333"/><circle cx="305" cy="70" r="5" fill="#256B42"/>`;
   return `<svg viewBox="0 0 360 200" style="max-width:420px;border-radius:10px"><g style="filter:blur(${acc?1.6:0}px)">${sc}</g>${dip?`<g opacity=".45" transform="translate(14 6)">${sc}</g>`:''}${hemi?'<rect x="180" y="0" width="180" height="200" fill="#111"/>':''}${gl?'<rect width="360" height="200" fill="url(#glr)"/><defs><radialGradient id="glr"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity=".25"/></radialGradient></defs>':''}${lid?'<path d="M0 0H360V70Q180 20 0 70Z" fill="#3E2E26" fill-opacity=".85"/>':''}</svg><p class="g-cap">患眼所見（示意）：${[hemi&&'半盲＝一半視野看不見',dip&&'複視＝影像重疊',gl&&'散瞳＝畏光刺眼',acc&&'調節失能＝看不清楚',lid&&'眼瞼運動失能＝眼瞼無法正常開合'].filter(Boolean).join('、')||'請勾選上方狀況'}</p>`;}
 const EYE_OTHER=rngIds(3,14,23);
 function eyeVA(L,R){const a=Math.max(L,R),b=Math.min(L,R);
@@ -1994,11 +2114,11 @@ GT.ear={
   ctrl:s=>gRng('R','右耳',0,110,5,s.R,' dB')+gRng('L','左耳',0,110,5,s.L,' dB')+gChk('aur','一側耳廓大部分缺損（軟骨缺損 1/2 以上）',s.aur)+
     `<div class="g-row"><span class="g-lab">聽聽看</span><button type="button" class="g-tg" data-a="fn" data-v="n">▶ 正常聽力</button><button type="button" class="g-tg" data-a="fn" data-v="R">▶ 右耳聽到的</button><button type="button" class="g-tg" data-a="fn" data-v="L">▶ 左耳聽到的</button></div><p class="g-cap" style="text-align:left">以音量衰減示意（建議戴耳機、先調到舒適音量），不是醫學聽力檢查。</p>`,
   fn:{n:s=>earPlay(0,0),R:s=>earPlay(s.R,1),L:s=>earPlay(s.L,-1)},
-  vis:s=>{const ear=(k,v)=>{const x=k==='R'?90:270,waves=[40,60,80].map((th,i)=>`<path d="M${x+(k==='R'?34:-34)+(k==='R'?i*14:-i*14)} 60 q${k==='R'?12:-12} 30 0 60" fill="none" stroke="${v<th?'#2E7D4F':'#C9D3DC'}" stroke-width="4" stroke-linecap="round"/>`).join('');
+  vis:s=>{const ear=(k,v)=>{const x=k==='R'?90:270,waves=[40,60,80].map((th,i)=>`<path d="M${x+(k==='R'?34:-34)+(k==='R'?i*14:-i*14)} 60 q${k==='R'?12:-12} 30 0 60" fill="none" stroke="${v<th?'#256B42':'#C9D3DC'}" stroke-width="4" stroke-linecap="round"/>`).join('');
       const gx=a=>30+a/110*300;
       return `<g><path d="M${x-14} 50 q${k==='R'?-30:30} 10 ${k==='R'?-22:22} 50 q${k==='R'?4:-4} 22 ${k==='R'?22:-22} 30 q${k==='R'?18:-18} -30 0 -80" fill="#E7BFA2" stroke="#B57C5C" stroke-width="2" ${s.aur&&k==='R'?'stroke-dasharray="4 3" fill-opacity=".35"':''}/>${waves}<text x="${x}" y="30" text-anchor="middle" style="font-size:13px;font-weight:700;fill:#234E70">${k==='R'?'右耳':'左耳'} ${v} dB</text></g>`;};
-    const bar=(y,v,lab)=>`<text x="24" y="${y+4}" text-anchor="end" style="font-size:11px;fill:#5A6B7A">${lab}</text><rect x="30" y="${y-5}" width="300" height="10" rx="5" fill="#E3E9EF"/><rect x="30" y="${y-5}" width="${v/110*300}" height="10" rx="5" fill="${v>=90?'#B02A21':v>=70?'#C2571A':'#2F6B8F'}"/>`;
-    return `<svg viewBox="0 0 360 230">${ear('R',s.R)}${ear('L',s.L)}${bar(170,s.R,'右')}${bar(192,s.L,'左')}<line x1="${30+70/110*300}" y1="158" x2="${30+70/110*300}" y2="204" stroke="#C2571A" stroke-dasharray="3 3"/><line x1="${30+90/110*300}" y1="158" x2="${30+90/110*300}" y2="204" stroke="#B02A21" stroke-dasharray="3 3"/><text x="${30+70/110*300}" y="220" text-anchor="middle" style="font-size:10px;fill:#C2571A">70 dB</text><text x="${30+90/110*300}" y="220" text-anchor="middle" style="font-size:10px;fill:#B02A21">90 dB</text></svg><p class="g-cap">綠色聲波表示仍可聽見的音量層級（示意）。</p>`;},
+    const bar=(y,v,lab)=>`<text x="24" y="${y+4}" text-anchor="end" style="font-size:11px;fill:#5A6B7A">${lab}</text><rect x="30" y="${y-5}" width="300" height="10" rx="5" fill="#E3E9EF"/><rect x="30" y="${y-5}" width="${v/110*300}" height="10" rx="5" fill="${v>=90?'#B02A21':v>=70?'#B24C0E':'#2F6B8F'}"/>`;
+    return `<svg viewBox="0 0 360 230">${ear('R',s.R)}${ear('L',s.L)}${bar(170,s.R,'右')}${bar(192,s.L,'左')}<line x1="${30+70/110*300}" y1="158" x2="${30+70/110*300}" y2="204" stroke="#B24C0E" stroke-dasharray="3 3"/><line x1="${30+90/110*300}" y1="158" x2="${30+90/110*300}" y2="204" stroke="#B02A21" stroke-dasharray="3 3"/><text x="${30+70/110*300}" y="220" text-anchor="middle" style="font-size:10px;fill:#B24C0E">70 dB</text><text x="${30+90/110*300}" y="220" text-anchor="middle" style="font-size:10px;fill:#B02A21">90 dB</text></svg><p class="g-cap">綠色聲波表示仍可聽見的音量層級（示意）。</p>`;},
   eval:s=>{const {L,R}=s,id=L>=90&&R>=90?'4-1':L>=70&&R>=70?'4-2':(L>=90||R>=90)?'4-3':(L>=70||R>=70)?'4-4':null,items=[id,s.aur?'4-5':null].filter(Boolean);
     return {items,notes:items.length>1?['同一耳同時遺存聽覺失能與耳廓缺損者，得依規定提高等級；不同耳則依第五條併合規定審定。']:[],empty:'兩耳聽力未達 70 dB，未達失能標準。'};},
   notes:['應附最近 3 個月內二次純音聽力檢查（PTA，間隔 24 小時以上）、語言聽閾測試（SRT）及聽性腦幹聽力檢查（ABR）。','平均閾值以 500Hz、1kHz、2kHz 閾值平均計算；以兩次 PTA 較佳者為準。','兩次 PTA 各頻率相差須在 10 dB 以內，較佳 PTA 與 ABR 或 SRT 相差須在 15 dB 以內，始具可信度。','兩耳程度不同時綜合審定，例如一耳 90 dB 以上、他耳 70 dB 以上，按 4-2 第七等級。']
@@ -2046,7 +2166,7 @@ GT.face={
   vis:s=>{const k=s.reg==='face'?s.type:s.reg,th=FACE_TH[k],P=8,c={head:[120,34],face:[150,110],neck:[120,214]}[s.reg],isLine=k==='line'||k==='total';
     const mark=(v,ref)=>isLine?(k==='total'?`<line x1="${c[0]-v*P*.3}" y1="${c[1]-8}" x2="${c[0]+v*P*.25}" y2="${c[1]-8}" ${ref}/><line x1="${c[0]-v*P*.25}" y1="${c[1]+8}" x2="${c[0]+v*P*.2}" y2="${c[1]+8}" ${ref}/>`:`<line x1="${c[0]-v*P/2}" y1="${c[1]}" x2="${c[0]+v*P/2}" y2="${c[1]}" ${ref}/>`):`<circle cx="${c[0]}" cy="${c[1]}" r="${v*P/2}" ${ref}/>`;
     return `<svg viewBox="0 0 240 318"><ellipse cx="120" cy="100" rx="66" ry="84" fill="#E7BFA2" stroke="#B57C5C" stroke-width="2"/><rect x="92" y="180" width="56" height="56" rx="10" fill="#E7BFA2" stroke="#B57C5C" stroke-width="2"/><ellipse cx="96" cy="92" rx="9" ry="5" fill="#5A4A3E"/><ellipse cx="144" cy="92" rx="9" ry="5" fill="#5A4A3E"/><path d="M104 140 q16 10 32 0" stroke="#8E5A40" stroke-width="3" fill="none"/>
-      ${mark(th,'fill="none" stroke="#234E70" stroke-width="1.5" stroke-dasharray="4 3"')}<g transform="translate(8 250)"><rect width="${8.56*P}" height="${5.4*P}" rx="5" fill="#DCE6F0" stroke="#2F6B8F"/><rect x="6" y="10" width="14" height="10" rx="2" fill="#E8C468"/><text x="${8.56*P/2}" y="${5.4*P+11}" text-anchor="middle" style="font-size:9px;fill:#2F6B8F">信用卡 8.56 公分</text><circle cx="${8.56*P+50}" cy="${5.4*P/2}" r="${1.3*P}" fill="#E4C98C" stroke="#A8790A"/><text x="${8.56*P+50}" y="${5.4*P/2+3}" text-anchor="middle" style="font-size:8px;fill:#7A5A08">10</text><text x="${8.56*P+50}" y="${5.4*P+11}" text-anchor="middle" style="font-size:9px;fill:#A8790A">十元硬幣 2.6 公分</text></g>${mark(s.cm,k==='dep'?'fill="#8E5A40" fill-opacity=".45" stroke="#6B3F2A" stroke-width="2"':isLine?'stroke="#C0392B" stroke-width="4" stroke-linecap="round"':'fill="#C0392B" fill-opacity=".35" stroke="#C0392B" stroke-width="2"')}</svg><p class="g-cap">虛線＝門檻 ${th} 公分；下方信用卡與十元硬幣為同比例參照。</p>`;},
+      ${mark(th,'fill="none" stroke="#234E70" stroke-width="1.5" stroke-dasharray="4 3"')}<g transform="translate(8 250)"><rect width="${8.56*P}" height="${5.4*P}" rx="5" fill="#DCE6F0" stroke="#2F6B8F"/><rect x="6" y="10" width="14" height="10" rx="2" fill="#E8C468"/><text x="${8.56*P/2}" y="${5.4*P+11}" text-anchor="middle" style="font-size:9px;fill:#2F6B8F">信用卡 8.56 公分</text><circle cx="${8.56*P+50}" cy="${5.4*P/2}" r="${1.3*P}" fill="#E4C98C" stroke="#8F6508"/><text x="${8.56*P+50}" y="${5.4*P/2+3}" text-anchor="middle" style="font-size:8px;fill:#7A5A08">10</text><text x="${8.56*P+50}" y="${5.4*P+11}" text-anchor="middle" style="font-size:9px;fill:#8F6508">十元硬幣 2.6 公分</text></g>${mark(s.cm,k==='dep'?'fill="#8E5A40" fill-opacity=".45" stroke="#6B3F2A" stroke-width="2"':isLine?'stroke="#C0392B" stroke-width="4" stroke-linecap="round"':'fill="#C0392B" fill-opacity=".35" stroke="#C0392B" stroke-width="2"')}</svg><p class="g-cap">虛線＝門檻 ${th} 公分；下方信用卡與十元硬幣為同比例參照。</p>`;},
   eval:s=>{const k=s.reg==='face'?s.type:s.reg;return s.cm>=FACE_TH[k]?{items:['9-1']}:{items:[],empty:`未達門檻（${FACE_TH[k]} 公分），不符合頭臉頸缺損。`};},
   notes:['指眼瞼、鼻、耳廓以外，遺存於頭、臉、頸日常露出部位之缺損。','頭部：直徑 8 公分以上瘢痕；顏面部：直徑 5 公分以上瘢痕、8 公分以上線狀痕、不同部分線狀痕合計 12 公分以上，或直徑 3 公分以上組織凹陷；頸部、下頷部：直徑 8 公分以上瘢痕。三部位符合其一即可。','須經治療一年以上（手術者自最後一次手術後一年）始得認定；應附症狀固定後 4×6 近距離彩色照片（附量尺及拍攝日期）。']
 };
@@ -2099,14 +2219,14 @@ GT.spine={
   act:(s,k)=>{},
   vis:s=>{const f=s.fused.map(String),run=spRun(s.fused);let y=58,o='';const pos=[];
     VERT.forEach((v,i)=>{const w=v[0]==='C'?26:v[0]==='T'?32:40,h=v[0]==='C'?10:v[0]==='T'?12:15,x=150+20*Math.sin(i/23*Math.PI*2.1+.9)-w/2;pos.push([x+w/2,y+h/2,w]);
-      const on=f.includes(String(i));o+=`<g data-a="tog" data-k="fused" data-v="${i}" style="cursor:pointer"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="3" fill="${on?'#F6D9A8':'#F3ECDD'}" stroke="${on?'#C2571A':'#A89B84'}" stroke-width="${on?2:1}"/><rect x="${x+w}" y="${y+2}" width="${w*.5}" height="${h-4}" rx="3" fill="#E4DACA"/>${i%6===0||v==='T1'||v==='L1'?`<text x="${x-8}" y="${y+h-2}" text-anchor="end" style="font-size:9px;fill:#C9D6E2">${v}</text>`:''}</g>`;y+=h+4;});
+      const on=f.includes(String(i));o+=`<g data-a="tog" data-k="fused" data-v="${i}" style="cursor:pointer"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="3" fill="${on?'#F6D9A8':'#F3ECDD'}" stroke="${on?'#B24C0E':'#A89B84'}" stroke-width="${on?2:1}"/><rect x="${x+w}" y="${y+2}" width="${w*.5}" height="${h-4}" rx="3" fill="#E4DACA"/>${i%6===0||v==='T1'||v==='L1'?`<text x="${x-8}" y="${y+h-2}" text-anchor="end" style="font-size:9px;fill:#C9D6E2">${v}</text>`:''}</g>`;y+=h+4;});
     o+=`<path d="M${150+20*Math.sin(2.1*Math.PI+.9)-26} ${y} q26 34 52 0 Z" fill="#F3ECDD" stroke="#A89B84"/><text x="${150+20*Math.sin(2.1*Math.PI+.9)+36}" y="${y+14}" style="font-size:9px;fill:#C9D6E2">薦椎</text>`;
     if(run.length>1){const a=pos[run[0]],b=pos[run[run.length-1]];o+=`<line x1="${a[0]+a[2]*.2}" y1="${a[1]}" x2="${b[0]+b[2]*.2}" y2="${b[1]}" stroke="#9FB2C2" stroke-width="4" stroke-linecap="round"/>`+run.map(i=>`<circle cx="${pos[i][0]+pos[i][2]*.2}" cy="${pos[i][1]}" r="3.2" fill="#DCE4EB" stroke="#5A6B7A"/>`).join('');}
     const dd=s.def.map(String),pan=[];const L='stroke="#F3ECDD" fill="none" stroke-width="2"';
     if(dd.includes('c'))pan.push(`<svg viewBox="0 0 140 150"><path d="M70 10 Q110 50 70 80 Q30 110 70 140" ${L} stroke-width="8" stroke-linecap="round" stroke-dasharray="6 3"/><line x1="40" y1="22" x2="110" y2="42" stroke="#F2B8B0" stroke-width="2"/><line x1="30" y1="128" x2="100" y2="108" stroke="#F2B8B0" stroke-width="2"/><text x="70" y="78" text-anchor="middle" style="font-size:12px;font-weight:700;fill:#fff">Cobb ≧ 30°</text><text x="70" y="148" text-anchor="middle" style="font-size:9px;fill:#C9D6E2">正面：側彎角</text></svg>`);
     if(dd.includes('k'))pan.push(`<svg viewBox="0 0 140 150"><path d="M40 20 Q110 75 40 130" ${L} stroke-width="8" stroke-linecap="round" stroke-dasharray="6 3"/><line x1="30" y1="30" x2="100" y2="12" stroke="#F2B8B0" stroke-width="2"/><line x1="30" y1="120" x2="100" y2="138" stroke="#F2B8B0" stroke-width="2"/><text x="96" y="80" text-anchor="middle" style="font-size:12px;font-weight:700;fill:#fff">≧ 50°</text><text x="70" y="148" text-anchor="middle" style="font-size:9px;fill:#C9D6E2">側面：前傾（後凸）角</text></svg>`);
-    if(dd.includes('h'))pan.push(`<svg viewBox="0 0 140 150"><rect x="30" y="20" width="80" height="34" rx="3" fill="#F3ECDD"/><path d="M30 64 L110 64 L110 98 L30 81 Z" fill="#F6D9A8" stroke="#C2571A" stroke-width="2"/><rect x="30" y="108" width="80" height="34" rx="3" fill="#F3ECDD"/><text x="70" y="86" text-anchor="middle" style="font-size:10px;font-weight:700;fill:#8A4A10">高度喪失 ≧ 50%</text><text x="70" y="148" text-anchor="middle" style="font-size:9px;fill:#C9D6E2">椎體壓迫變形</text></svg>`);
-    if(dd.includes('s'))pan.push(`<svg viewBox="0 0 140 150"><rect x="30" y="30" width="80" height="36" rx="3" fill="#F6D9A8" stroke="#C2571A" transform="translate(22 0)"/><rect x="30" y="76" width="80" height="36" rx="3" fill="#F3ECDD"/><line x1="110" y1="24" x2="110" y2="118" stroke="#F2B8B0" stroke-dasharray="3 3"/><text x="70" y="130" text-anchor="middle" style="font-size:10px;font-weight:700;fill:#fff">滑脫 ≧ 25%</text><text x="70" y="148" text-anchor="middle" style="font-size:9px;fill:#C9D6E2">上位椎體向前滑移</text></svg>`);
+    if(dd.includes('h'))pan.push(`<svg viewBox="0 0 140 150"><rect x="30" y="20" width="80" height="34" rx="3" fill="#F3ECDD"/><path d="M30 64 L110 64 L110 98 L30 81 Z" fill="#F6D9A8" stroke="#B24C0E" stroke-width="2"/><rect x="30" y="108" width="80" height="34" rx="3" fill="#F3ECDD"/><text x="70" y="86" text-anchor="middle" style="font-size:10px;font-weight:700;fill:#8A4A10">高度喪失 ≧ 50%</text><text x="70" y="148" text-anchor="middle" style="font-size:9px;fill:#C9D6E2">椎體壓迫變形</text></svg>`);
+    if(dd.includes('s'))pan.push(`<svg viewBox="0 0 140 150"><rect x="30" y="30" width="80" height="36" rx="3" fill="#F6D9A8" stroke="#B24C0E" transform="translate(22 0)"/><rect x="30" y="76" width="80" height="36" rx="3" fill="#F3ECDD"/><line x1="110" y1="24" x2="110" y2="118" stroke="#F2B8B0" stroke-dasharray="3 3"/><text x="70" y="130" text-anchor="middle" style="font-size:10px;font-weight:700;fill:#fff">滑脫 ≧ 25%</text><text x="70" y="148" text-anchor="middle" style="font-size:9px;fill:#C9D6E2">上位椎體向前滑移</text></svg>`);
     return `${pan.length?`<div class="g-panels">${pan.join('')}</div>`:''}<svg viewBox="0 0 300 ${y+46}">${o}<text x="290" y="24" text-anchor="end" style="font-size:12px;font-weight:700;fill:#fff">連續固定 ${run.length} 椎體・${Math.max(0,run.length-1)} 椎間盤</text><text x="290" y="42" text-anchor="end" style="font-size:10px;fill:${run.length>=4?'#8FE3A8':'#F2B8B0'}">${run.length>=4?'已達 4 椎體 3 椎間盤':'未達 4 椎體 3 椎間盤'}</text></svg>`;},
   eval:s=>{const run=spRun(s.fused),R=SP_ROM[run.length&&run[0]<7?'C':'TL'],notes=[];let mot=null;
     if(run.length>=4){if(!s.frac)notes.push('運動失能須 X 光可見明顯骨折或脫位，始能依運動失能等級審定。');else mot=s.rem<=R.t2?'8-1':s.rem<=R.t3?'8-2':null;}
@@ -2182,7 +2302,7 @@ GT.heart={
   ctrl:s=>gSeg('nyha',[[1,'第一度'],[2,'第二度'],[3,'第三度'],[4,'第四度']],s.nyha,'機能損害')+gSeg('hosp',[['none','無'],['lt2','未超過 2 週'],['2w','2 週以上'],['4w','4 週以上']],s.hosp,'住院機械輔助／強心藥')+
     `<div class="g-row">${gNum('lvef','LVEF（核醫）',s.lvef,'%')}${gChk('chf','無法控制之進行性慢性心衰竭',s.chf)}</div><div class="g-row">${gChk('cause','符合病因之一（冠狀動脈、瓣膜、心肌、主動脈、其他經專科醫師評估）',s.cause)}${gChk('tx','心臟移植或心室輔助器植入',s.tx)}</div>`,
   vis:s=>{const v=Math.max(0,Math.min(80,s.lvef==null?0:s.lvef)),a=Math.PI*(1-v/80),x=150+100*Math.cos(a),y=130-100*Math.sin(a),arc=(v0,v1,c)=>{const p=t=>[150+100*Math.cos(Math.PI*(1-t/80)),130-100*Math.sin(Math.PI*(1-t/80))];const [x0,y0]=p(v0),[x1,y1]=p(v1);return `<path d="M${x0} ${y0} A100 100 0 0 1 ${x1} ${y1}" stroke="${c}" stroke-width="16" fill="none"/>`;};
-    return `<svg viewBox="0 0 300 160">${arc(0,25,'#B02A21')}${arc(25,49,'#C2571A')}${arc(49,80,'#2E7D4F')}<line x1="150" y1="130" x2="${x}" y2="${y}" stroke="#234E70" stroke-width="3"/><circle cx="150" cy="130" r="6" fill="#234E70"/><text x="150" y="154" text-anchor="middle" style="font-size:13px;font-weight:700;fill:#234E70">LVEF ${s.lvef==null?'—':s.lvef+'%'}｜第${['','一','二','三','四'][s.nyha]}度</text><text x="40" y="146" style="font-size:9px;fill:#B02A21">≦25%</text><text x="236" y="146" style="font-size:9px;fill:#2E7D4F">≧50%</text></svg>`;},
+    return `<svg viewBox="0 0 300 160">${arc(0,25,'#B02A21')}${arc(25,49,'#B24C0E')}${arc(49,80,'#256B42')}<line x1="150" y1="130" x2="${x}" y2="${y}" stroke="#234E70" stroke-width="3"/><circle cx="150" cy="130" r="6" fill="#234E70"/><text x="150" y="154" text-anchor="middle" style="font-size:13px;font-weight:700;fill:#234E70">LVEF ${s.lvef==null?'—':s.lvef+'%'}｜第${['','一','二','三','四'][s.nyha]}度</text><text x="40" y="146" style="font-size:9px;fill:#B02A21">≦25%</text><text x="236" y="146" style="font-size:9px;fill:#256B42">≧50%</text></svg>`;},
   eval:s=>{const lv=s.lvef==null?999:s.lvef,b4=s.nyha===4&&s.chf&&lv<=25,c=[];
     if(b4&&s.hosp==='4w')c.push('7-6');if(b4&&s.hosp==='2w')c.push('7-7');if(b4&&s.hosp==='lt2')c.push('7-8');
     if(s.nyha>=3&&lv<=25&&s.cause)c.push('7-9');if(s.tx)c.push('7-10');if(s.nyha>=2&&lv>=26&&lv<=49&&s.cause)c.push('7-11');
@@ -2208,7 +2328,7 @@ GT.lung={
     gSeg('res',[['none','無'],['lobe2','兩葉以上'],['side','一側以上']],s.res,'肺臟切除')+`<div class="g-row">${gChk('support','需氧氣或呼吸器維持生命、日常生活限於病床',s.support)}${gChk('help','日常生活須他人協助照顧',s.help)}${gChk('rad','放射性肺炎兩葉以上',s.rad)}${gChk('tx','肺臟移植',s.tx)}</div>`,
   vis:s=>{const v=s.fev1==null?100:Math.max(0,Math.min(100,s.fev1));return `<svg viewBox="0 0 300 150"><path d="M140 20 Q100 22 88 70 Q82 110 96 130 Q124 136 138 124 Z" fill="#E8B9B5" stroke="#B57C5C"/><path d="M160 20 Q200 22 212 70 Q218 110 204 130 Q176 136 162 124 Z" fill="#E8B9B5" stroke="#B57C5C"/><rect x="146" y="10" width="8" height="40" rx="4" fill="#D9A0A0"/>
     ${s.res!=='none'?`<path d="M160 20 Q200 22 212 70 Q218 110 204 130 Q176 136 162 124 Z" fill="#fff" stroke="#C0392B" stroke-dasharray="4 3" ${s.res==='lobe2'?'transform="translate(0 40) scale(1 .7)"':''}/>`:''}
-    <text x="20" y="146" style="font-size:10px;fill:#5A6B7A">FEV1</text><rect x="52" y="138" width="200" height="8" rx="4" fill="#E3E9EF"/><rect x="52" y="138" width="${v*2}" height="8" rx="4" fill="${v<31?'#B02A21':v<60?'#A8790A':v<80?'#2F6B8F':'#2E7D4F'}"/><text x="258" y="146" style="font-size:10px;fill:#234E70">${s.fev1==null?'未填':s.fev1+'%'}</text></svg>`;},
+    <text x="20" y="146" style="font-size:10px;fill:#5A6B7A">FEV1</text><rect x="52" y="138" width="200" height="8" rx="4" fill="#E3E9EF"/><rect x="52" y="138" width="${v*2}" height="8" rx="4" fill="${v<31?'#B02A21':v<60?'#8F6508':v<80?'#2F6B8F':'#256B42'}"/><text x="258" y="146" style="font-size:10px;fill:#234E70">${s.fev1==null?'未填':s.fev1+'%'}</text></svg>`;},
   eval:s=>{const h=lungHits(s),G2ID={1:'7-12',2:'7-13',3:'7-14',7:'7-15',12:'7-17'},c=h.map(([g])=>G2ID[g]);if(s.tx)c.push('7-16');
     const notes=h.length?['符合指標：'+h.map(([g,t])=>`${t}（第${CN[g-1]}等級）`).join('、')]:[];notes.push('FEV1、FEV1/FVC、DLCO/VA 等為不同指標，本示範採「符合其中一項即可」之判讀（醫學專業判讀，非正式函釋）。');
     return {items:bestOf(c),notes,empty:'尚未符合肺臟失能各等級條件。'};},
@@ -2224,7 +2344,7 @@ GT.liver={
   ctrl:s=>CP.map((r,i)=>gSeg('c'+i,[[1,`1分 ${r[1]}`],[2,`2分 ${r[2]}`],[3,`3分 ${r[3]}`]],s['c'+i],r[0])).join('')+gSeg('asc',[['none','無'],['persist','持續存在'],['refr','頑固難治']],s.asc,'腹水')+gSeg('he',[[0,'未曾'],[1,'曾經'],[2,'二次以上']],s.he,'肝腦病變')+
     `<div class="g-row">${gChk('bleed','胃或食道靜脈瘤（曲張）破裂出血',s.bleed)}${gChk('portal','門脈高壓且內視鏡證實胃或食道靜脈瘤',s.portal)}${gChk('tx','肝臟移植',s.tx)}</div>`,
   vis:s=>{const sc=[0,1,2,3,4].reduce((a,i)=>a+s['c'+i],0),cl=sc>=10?'C':sc>=7?'B':'A',x=30+(sc-5)/10*240;
-    return `<svg viewBox="0 0 300 90"><rect x="30" y="30" width="${240*2/10}" height="16" fill="#2E7D4F"/><rect x="${30+48}" y="30" width="${240*3/10}" height="16" fill="#C2571A"/><rect x="${30+120}" y="30" width="${240*.5+1}" height="16" fill="#B02A21"/><text x="54" y="62" style="font-size:10px;fill:#2E7D4F">A（≦6）</text><text x="110" y="62" style="font-size:10px;fill:#C2571A">B（7～9）</text><text x="200" y="62" style="font-size:10px;fill:#B02A21">C（≧10）</text><path d="M${x} 26 l-6 -10 h12 z" fill="#234E70"/><text x="${x}" y="12" text-anchor="middle" style="font-size:12px;font-weight:700;fill:#234E70">${sc} 分・${cl} 級</text></svg>`;},
+    return `<svg viewBox="0 0 300 90"><rect x="30" y="30" width="${240*2/10}" height="16" fill="#256B42"/><rect x="${30+48}" y="30" width="${240*3/10}" height="16" fill="#B24C0E"/><rect x="${30+120}" y="30" width="${240*.5+1}" height="16" fill="#B02A21"/><text x="54" y="62" style="font-size:10px;fill:#256B42">A（≦6）</text><text x="110" y="62" style="font-size:10px;fill:#B24C0E">B（7～9）</text><text x="200" y="62" style="font-size:10px;fill:#B02A21">C（≧10）</text><path d="M${x} 26 l-6 -10 h12 z" fill="#234E70"/><text x="${x}" y="12" text-anchor="middle" style="font-size:12px;font-weight:700;fill:#234E70">${sc} 分・${cl} 級</text></svg>`;},
   eval:s=>{const sc=[0,1,2,3,4].reduce((a,i)=>a+s['c'+i],0),C=sc>=10,BC=sc>=7,refr=s.asc==='refr',pers=s.asc!=='none',c=[];
     if(C&&refr&&s.he===2&&s.bleed)c.push('7-18');if(C&&refr&&(s.he===2||s.bleed))c.push('7-19');if(C&&refr)c.push('7-20');
     if(BC&&s.he>=1&&(pers||s.bleed))c.push('7-21');if(s.tx)c.push('7-22');if(s.portal)c.push('7-23');
@@ -2316,7 +2436,7 @@ const OSC={
    o+=`<ellipse cx="150" cy="298" rx="22" ry="15" fill="#8FB0CC" stroke="#5D7F9C"/>${oLab(150,302,'膀胱','#fff')}`;
    o+=oLab(84,146,'腎','#6B4A38')+oLab(216,146,'腎',one?'#C0392B':'#6B4A38');
    if(one)o+=oTag(216,236,'一側切除／萎縮','#C0392B');
-   if(tx)o+=`<path d="M92 252 q-18 4 -18 22 q0 18 18 22 q10 -2 10 -10 q-6 -12 0 -24 q0 -8 -10 -10 Z" fill="#8FC79E" stroke="#2E7D4F" stroke-width="1.6"/><path d="M100 272 Q120 292 134 296" stroke="#2E7D4F" stroke-width="2.5" fill="none"/>`+oTag(84,242,'移植腎','#2E7D4F');
+   if(tx)o+=`<path d="M92 252 q-18 4 -18 22 q0 18 18 22 q10 -2 10 -10 q-6 -12 0 -24 q0 -8 -10 -10 Z" fill="#8FC79E" stroke="#256B42" stroke-width="1.6"/><path d="M100 272 Q120 292 134 296" stroke="#256B42" stroke-width="2.5" fill="none"/>`+oTag(84,242,'移植腎','#256B42');
    if(dial){o+=`<g transform="translate(250 196)"><rect x="-4" y="0" width="44" height="64" rx="6" fill="#fff" stroke="#2F6B8F" stroke-width="1.5"/><rect x="4" y="8" width="28" height="14" rx="2" fill="#DCEBF6"/><circle cx="12" cy="40" r="7" fill="none" stroke="#2F6B8F"/><circle cx="28" cy="40" r="7" fill="none" stroke="#2F6B8F"/></g>
      <path d="M246 210 Q226 190 206 186" stroke="#C0392B" stroke-width="3" fill="none" class="g-anim-flow"/><path d="M246 240 Q224 236 206 206" stroke="#2F6B8F" stroke-width="3" fill="none" class="g-anim-flow"/>`+oTag(150,120,'兩側腎臟無機能','#C0392B')+oLab(270,276,'透析機','#2F6B8F');}
    const side=[];if(dial)side.push(['🔁','須終身定期透析（洗腎）']);if(tx)side.push(['🟢','移植腎放在下腹部，原本的腎臟通常留在原位']);if(one)side.push(['➖','只剩一側腎臟工作']);
@@ -2333,7 +2453,7 @@ const OSC={
    if(anal)o+=`<g transform="translate(150 340)">${drops(0,6,'#9C6B3F')}</g>`+oTag(212,316,'括約肌不全','#C0392B');
    if(sb)o+=oTag(150,150,'小腸切除 ≧ 50%','#C0392B');
    if(col)o+=oTag(150,124,'大腸全切除','#C0392B');
-   if(sto)o+=`<path d="M222 236 Q220 248 212 250" stroke="#C99466" stroke-width="8" fill="none"/><path d="M222 262 Q218 290 190 296 Q160 304 152 322" stroke="#F7E6DA" stroke-width="18" fill="none" opacity=".75"/><circle cx="210" cy="250" r="7" fill="#D98E97" stroke="#A85D67"/><g><rect x="222" y="238" width="30" height="42" rx="10" fill="#FFF7EC" stroke="#A8790A"/><rect x="224" y="262" width="26" height="16" rx="7" fill="#C99466" class="g-pulse"/></g>`+oTag(236,228,'永久性人工肛門','#A8790A');
+   if(sto)o+=`<path d="M222 236 Q220 248 212 250" stroke="#C99466" stroke-width="8" fill="none"/><path d="M222 262 Q218 290 190 296 Q160 304 152 322" stroke="#F7E6DA" stroke-width="18" fill="none" opacity=".75"/><circle cx="210" cy="250" r="7" fill="#D98E97" stroke="#A85D67"/><g><rect x="222" y="238" width="30" height="42" rx="10" fill="#FFF7EC" stroke="#8F6508"/><rect x="224" y="262" width="26" height="16" rx="7" fill="#C99466" class="g-pulse"/></g>`+oTag(236,228,'永久性人工肛門','#8F6508');
    const bar=`<g transform="translate(92 316)"></g>`;
    const side=[];if(sb){side.push(['📏','小腸長度切除一半以上']);side.push(h('7-31')?['⚠','併短腸症候群：吸收不良、腹瀉、體重下降（第七等級）']:['✔','無短腸症候群，營養吸收尚可維持（第九等級）']);}
    if(col)side.push(['➖','大腸全切除、未裝人工肛門（小腸直接接到直腸或肛門）']);if(sto)side.push(['👜','糞便改由腹部造口排到造口袋（術後六個月始得認定）']);if(anal)side.push(['💧','肛門括約肌斷裂等造成大便失禁']);
@@ -2343,7 +2463,7 @@ const OSC={
    o+=`<path d="M60 250 Q70 300 110 318 L190 318 Q230 300 240 250 Q210 270 190 262 L150 300 L110 262 Q90 270 60 250 Z" fill="#EDE3D3" stroke="#A89B84" stroke-width="1.4"/>${oLab(80,300,'骨盆','#8A7B64','end')}`;
    if(pel)o+=`<path d="M120 270 l8 10 l-6 8 l8 10" stroke="#C0392B" stroke-width="2.5" fill="none"/>`+oTag(92,248,'骨盆環骨折','#C0392B');
    [[98,1],[202,-1]].forEach(([x,d])=>{o+=`<path d="M${x} 130 q${-22*d} 4 ${-22*d} 30 q0 26 ${22*d} 30 q${12*d} -2 ${12*d} -12 q${-8*d} -18 0 -36 q0 -10 ${-12*d} -12 Z" fill="#A9846B" stroke="#7E5A48" stroke-opacity=".5"/>`;
-     o+=`<path d="M${x-14*d} 132 l${10*d} -16 l${12*d} 14 Z" ${adr?orgSt.gone:'fill="#E4B85C" stroke="#A8790A"'}/>`;});
+     o+=`<path d="M${x-14*d} 132 l${10*d} -16 l${12*d} 14 Z" ${adr?orgSt.gone:'fill="#E4B85C" stroke="#8F6508"'}/>`;});
    o+=oLab(150,112,'腎上腺（腎臟上方）',adr?'#C0392B':'#8A6A10');
    o+=`<path d="M100 190 Q118 236 138 272" stroke="#C4A38E" stroke-width="3" fill="none"/><path d="M200 190 Q182 236 162 272" stroke="#C4A38E" stroke-width="3" fill="none"/>`;
    const r=small?9:22;o+=`<ellipse cx="150" cy="282" rx="${r}" ry="${small?7:15}" ${blad?orgSt.weak:'fill="#8FB0CC" stroke="#5D7F9C"'}/>`;
@@ -2377,7 +2497,7 @@ function spineFigure(s){
   const run=spRun(s.fused),rg=run.length&&run[0]<7?'C':'TL',F=SP_FIG[rg],f=s.fused.map(Number),[px,py]=F.piv;
   const act=Math.min(s.rem,F.norm),fl=+(act*F.pf).toFixed(1),ex=+(act*(1-F.pf)).toFixed(1),nf=F.norm*F.pf,ne=F.norm*(1-F.pf);
   const ys=[],xs=[];for(let i=0;i<24;i++){const y=i<7?70+i*3.4:i<19?95+(i-7)*5.3:161+(i-19)*6.6;ys.push(y);xs.push(i<7?113:i<19?109-Math.sin((i-7)/11*Math.PI)*4:108+Math.sin((i-19)/4.5*Math.PI)*4);}
-  const vb=i=>{const on=f.includes(i),h=i<7?2.6:i<19?4.2:5.2;return `<rect x="${xs[i]-3.5}" y="${ys[i]-h/2}" width="7" height="${h}" rx="1" fill="${on?'#F6B35C':'#F3ECDD'}" stroke="${on?'#C2571A':'#A89B84'}" stroke-width="${on?1:.5}"/>`;};
+  const vb=i=>{const on=f.includes(i),h=i<7?2.6:i<19?4.2:5.2;return `<rect x="${xs[i]-3.5}" y="${ys[i]-h/2}" width="7" height="${h}" rx="1" fill="${on?'#F6B35C':'#F3ECDD'}" stroke="${on?'#B24C0E':'#A89B84'}" stroke-width="${on?1:.5}"/>`;};
   const rod=run.length>1?`<line x1="${xs[run[0]]-6}" y1="${ys[run[0]]}" x2="${xs[run[run.length-1]]-6}" y2="${ys[run[run.length-1]]}" stroke="#E8EEF3" stroke-width="2.2" stroke-linecap="round"/>`+run.map(i=>`<line x1="${xs[i]-6}" y1="${ys[i]}" x2="${xs[i]}" y2="${ys[i]}" stroke="#9FB2C2" stroke-width="1.4"/>`).join(''):'';
   const skin='fill="rgba(231,191,162,.28)" stroke="#D9A98C" stroke-width="1.2"',line='fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1.2" stroke-dasharray="4 3"';
   const HEAD=st=>`<path d="M111 94 L111 72 L125 72 L125 94 Z" ${st}/><circle cx="122" cy="54" r="19" ${st}/>`,TRUNK=st=>`<path d="M100 196 L97 112 Q99 94 118 92 Q138 94 140 112 L136 196 Z" ${st}/>`,ARM=`<path d="M122 102 L128 150 L134 184" stroke="rgba(231,191,162,.55)" stroke-width="9" fill="none" stroke-linecap="round"/>`;
@@ -2430,9 +2550,8 @@ GT.fangle={
     if(faStiffMode(s)){const both=s.st0&&s.st1;return `<svg viewBox="0 40 330 130">${faDigitSVG(s,0,0,0,0,true)}</svg><p class="g-cap">${both?'兩個關節都完全強直 → 屬足趾喪失機能':'需「中足趾關節」與「第一趾關節」<b>兩個都</b>完全強直才算'}</p>`;}
     const r=faRef(s),pf=r[4]/(r[4]+r[5]),n=s.norm||r[1],a=Math.min(s.act,n),fl=a*pf,ex=a*(1-pf),nf=n*pf,ne=n*(1-pf),loss=Math.round((1-a/n)*100),ok=a<=s.half;
     return `<svg viewBox="0 0 330 200">${faDigitSVG(s,fl,ex,nf,ne,false)}
-      <text x="10" y="20" style="font-size:12px;font-weight:700;fill:#2E7D4F">實測 ${a}°／正常 ${n}°</text>
-      <text x="10" y="38" style="font-size:12px;font-weight:700;fill:${ok?'#B02A21':'#5A6B7A'}">門檻 ≦ ${s.half}°：${ok?'已達喪失 1/2':'未達喪失 1/2'}</text></svg>
-      <p class="g-cap">綠色扇形＝實測可動範圍、淡紅＝喪失的範圍；手指（足趾）會在實測範圍內來回屈伸（示意）。</p>`;},
+      <text x="10" y="20" style="font-size:13px;font-weight:700;fill:#1E2B38">實測 ${a}°／正常 ${n}°</text></svg>
+      <p class="g-cap">側面圖：左邊是${s.kind==='hand'?'手掌':'腳掌'}，往下彎＝屈曲、往上翹＝伸展。綠色扇形＝實測可動範圍、淡紅＝喪失的範圍；手指（足趾）會在實測範圍內來回屈伸（示意）。</p>`;},
   eval:s=>{let meets,why;const notes0=[];
     if(faStiffMode(s)){meets=s.st0&&s.st1;why=meets?`${faDigits(s.kind).find(x=>x[0]===s.d)[1]}：中足趾關節及第一趾關節均完全強直。`:'';}
     else{const r=faRef(s),n=s.norm||1,a=Math.min(s.act,n);meets=a<=s.half;why=`${r[0]}：實測可動 ${a}°；舊式角度表生理運動範圍 ${r[2]}，喪失 1/2 門檻為可動 ≦ ${s.half}°${meets?'，已達喪失 1/2 以上':'，未達喪失 1/2'}。`;if(r[6])notes0.push(r[6]);}
@@ -2460,7 +2579,7 @@ function faDigitSVG(s,fl,ex,nf,ne,stiff){
   const ghost=a=>`<g transform="rotate(${a} ${piv} ${y})" opacity=".28">${skin(piv,acc,true)}</g>`;
   const anim=AN(`<animateTransform attributeName="transform" type="rotate" values="${-ex} ${piv} ${y};${fl} ${piv} ${y};${-ex} ${piv} ${y}" dur="3.2s" repeatCount="indefinite"/>`);
   return `${arc(-ne,nf,'rgba(192,57,43,.12)')}${arc(-ex,fl,'rgba(46,125,79,.28)')}${ghost(nf)}${ghost(-ne)}${fixed}<g transform="rotate(${reduceMotion?fl:0} ${piv} ${y})">${anim}${mov}</g><circle cx="${piv}" cy="${y}" r="5" fill="#fff" stroke="#234E70" stroke-width="1.6"/>
-    <text x="${piv}" y="${y-w/2-10}" text-anchor="middle" style="font-size:11px;font-weight:700;fill:#234E70">${esc(faRef(s)[0])}</text><text x="10" y="192" style="font-size:10px;fill:#5A6B7A">側面圖：左邊是${hand?'手掌':'腳掌'}，往下彎＝屈曲、往上翹＝伸展</text>`;
+    <text x="${piv}" y="${y-w/2-10}" text-anchor="middle" style="font-size:12px;font-weight:700;fill:#234E70">${esc(faRef(s)[0])}</text>`;
 }
 function openFAngle(kind,d,trig){GDEMO['FA-'+kind]={t:'fangle',kind,d};openG('FA-'+kind,trig);$('#gCards').innerHTML=infoCards(kind==='hand'?'finger':'toe');}
 
@@ -2470,7 +2589,7 @@ function spineColumn(s){
   VERT.forEach((v,i)=>{const t=v[0],w=t==='C'?44:t==='T'?50:58,h=t==='C'?13:t==='T'?15:18,x=96-w/2+(t==='T'?Math.sin((i-7)/11*Math.PI)*-5:t==='L'?Math.sin((i-19)/4*Math.PI)*4:0),on=f.includes(String(i));
     pos.push([x+w,y+h/2]);
     o+=`<g data-a="tog" data-k="fused" data-v="${i}" style="cursor:pointer" role="button" aria-label="${v}${on?' 已標示固定':''}"><rect x="0" y="${y-1.5}" width="200" height="${h+3}" fill="${on?'rgba(246,179,92,.12)':'transparent'}"/>
-      <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="3" fill="${on?'#F6B35C':'#F3ECDD'}" stroke="${on?'#C2571A':'#A89B84'}" stroke-width="${on?2:1}"/>
+      <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="3" fill="${on?'#F6B35C':'#F3ECDD'}" stroke="${on?'#B24C0E':'#A89B84'}" stroke-width="${on?2:1}"/>
       <rect x="${x+w}" y="${y+2}" width="${w*.42}" height="${h-4}" rx="3" fill="${on?'#E9A24A':'#DCD2C0'}"/>
       <text x="22" y="${y+h/2+3.5}" style="font-size:10px;font-weight:${on?700:500};fill:${on?'#F6B35C':'#C9D6E2'}">${v}</text></g>`;
     y+=h+3;});
@@ -2581,7 +2700,7 @@ function mergeRender(){const b=$('#mgBody'),r=mergeCalc(MERGE),m=salary();
     ${m&&r.its.length>1?`<p class="small">驗算：若只按最高等級 ${fmt(days(r.gMax))} 日 ＝ NT$ ${fmt(Math.round(m/30*days(r.gMax)))}，併合後多 NT$ ${fmt(Math.round(m/30*r.dRes)-Math.round(m/30*days(r.gMax)))}</p>`:''}</div>
    <p class="mg-why">怎麼算出來的？</p><ol class="mg-steps">${steps.join('')}</ol>
    ${warns.length?`<div class="mg-warn">${warns.map(w=>'<div>⚠ '+w+'</div>').join('')}</div>`:''}
-   <details class="notes"><summary>計算依據與提醒</summary><ul><li>依勞工保險失能給付標準第 5 條第 2 項第 1～5、7 款試算（查證日 2026-09-29，全國法規資料庫）。</li><li>本試算僅套用第 5 條通則；同一部位、同一種類、器質與機能併存等情形，附表審核基準另有規定。</li><li>職業傷病日數依勞工職業災害保險失能給付標準；其升等審核方式本工具比照同一規則試算【AI推論】，實際以勞保局審定為準。</li><li>符合「終身無工作能力」項目者可能改領失能年金，本試算僅為一次金。</li></ul></details>
+   <details class="notes"><summary>計算依據與提醒</summary><ul><li>依勞工保險失能給付標準第 6 條第 2 項第 1～5、7 款試算（查證日 2026-09-30，全國法規資料庫）；強制險併合規定為強制汽車責任保險給付標準第 4 條，規則相同。</li><li>本試算僅套用第 6 條第 2 項通則；同一部位、同一種類、器質與機能併存等情形，附表審核基準另有規定。</li><li>職業傷病（111.5.1 起）日數依勞工職業災害保險失能給付標準；該標準明定失能等級之審核依勞保失能標準第 6 條第 2 項辦理，故併合升等規則相同。實際以勞保局審定為準。</li><li>符合「終身無工作能力」項目者可能改領失能年金，本試算僅為一次金。</li></ul></details>
    <button type="button" class="wiz-back" id="mgClear">清空全部項目</button>`;
   b.innerHTML=h;bindMgQ();animLadder(b);}
 function bindMgQ(){const q=$('#mgQ');q.addEventListener('input',()=>{const v=q.value.trim();if(!v){$('#mgSug').innerHTML='';return;}const out=[];
@@ -2626,6 +2745,160 @@ document.addEventListener('DOMContentLoaded',()=>{
   const re=()=>{syncMerge();};$('#salary').addEventListener('input',re);$('#btnOrd').addEventListener('click',re);$('#btnOcc').addEventListener('click',re);
   ensureBars();render();
   new MutationObserver(()=>ensureBars()).observe(document.body,{childList:true});});
+
+/* ================= v5：判斷動畫、無障礙 ================= */
+/* ---------- 聽力：生活聲音對照 ---------- */
+const SND=[['🤫','耳語',30],['💬','一般說話',60],['🧹','吸塵器',75],['🚗','馬路車流',85],['🛵','機車經過',95],['🚑','救護車鳴笛',108]];
+function earSounds(s){
+  const row=(k,v)=>`<div class="snd-row"><b>${k==='R'?'右耳':'左耳'}<small>${v} dB</small></b><div class="snd-list">${SND.map(([ic,n,db],i)=>{const st=db>v+4?'ok':db>=v-4?'edge':'no',tx={ok:'聽得到',edge:'勉強',no:'聽不到'}[st];
+    return `<span class="snd ${st}" style="--d:${i*110}ms" role="img" aria-label="${n}約 ${db} 分貝：${tx}"><i>${ic}</i><em>${n}</em><small>${db} dB</small><u>${tx}</u></span>`;}).join('')}</div></div>`;
+  return `<div class="snd-wrap"><p class="g-mh">生活中的聲音，這隻耳朵聽不聽得到？</p>${row('R',s.R)}${row('L',s.L)}<p class="g-cap">依常見聲音的音量對照（示意，不是聽力檢查）。附表門檻：平均聽力閾值 ≧ 70 dB 或 ≧ 90 dB。</p></div>`;}
+/* ---------- 視力：視力表逐行掃描 ---------- */
+const EROWS=[[0.02,66],[0.06,48],[0.1,35],[0.2,25],[0.4,17],[0.8,11]],EACU=[9,0.4,0.1,0.06,0.02,-1];
+function eyeChart(s){
+  const col=(k,lv)=>{const a=EACU[lv];let fail=-1;const rows=EROWS.map(([lab,h],i)=>{const ok=lab<=a;if(!ok&&fail<0)fail=i;return {lab,h,ok,i};});
+    const cells=rows.map(r=>{const show=fail<0||r.i<=fail,blur=r.ok?0:1.5+r.i*.55;return `<div class="ech-row ${r.ok?'ok':'no'}${show?'':' after'}" style="--i:${r.i};height:${r.h+10}px"><span class="ech-e" style="font-size:${r.h*1.18}px;filter:blur(${blur}px)">${lv===5?'':'E'}</span><span class="ech-m" aria-hidden="true">${r.ok?'✓':'✗'}</span></div>`;}).join('');
+    return `<div class="ech-col${lv===5?' blind':''}"><b>${k==='R'?'右眼':'左眼'}</b><div class="ech-chart">${cells}${lv===5?'<p class="ech-blind">看不見<small>僅辨明暗，或只能辨眼前 1 公尺內手動、5 公分內指數</small></p>':''}</div><i>${VA[lv]}</i></div>`;};
+  const mid=`<div class="ech-mid" aria-hidden="true">${EROWS.map(([lab,h])=>`<span style="height:${h+10}px">${lab}</span>`).join('')}</div>`;
+  return `<div class="ech">${col('R',s.R)}${mid}${col('L',s.L)}</div><p class="g-cap">從最大的 E 開始一行一行往下讀：✓ 看得清楚、✗ 看不清（模糊）。左邊數字是「這一行要視力多少才看得到」。實際視力以萬國式視力表矯正後為準，畫面為示意。</p><button type="button" class="ech-replay" data-replay="1">↻ 再讀一次</button>`;}
+/* ---------- 視野：走進盲區就消失的人 ---------- */
+function eyeWalker(html,o){const hemi=o.includes('3-14')||o.includes('3-15');if(!(hemi||!(o.includes('3-19')||o.includes('3-22')||o.includes('3-23'))))return html;
+  const w=`<g class="eye-walk${reduceMotion?' still':''}" aria-hidden="true"><circle cx="0" cy="118" r="8" fill="#234E70"/><path d="M0 126 v22 M0 132 l-9 12 M0 132 l9 12 M0 148 l-7 18 M0 148 l7 18" stroke="#234E70" stroke-width="4" stroke-linecap="round" fill="none"/></g>`;
+  const k=html.indexOf('<rect x="180" y="0" width="180" height="200" fill="#111"/>');
+  const out=k>=0?html.slice(0,k)+w+html.slice(k):html.replace('</svg>',w+'</svg>');
+  return out.replace('</p>',hemi&&!reduceMotion?'　▶ 看畫面：從右邊走來的人，走到中間才看得到。</p>':'</p>');}
+/* ---------- 肝臟：身體剖面 ---------- */
+function liverScene(s){
+  const sc=[0,1,2,3,4].reduce((a,i)=>a+s['c'+i],0),cls=sc>=10?'C':sc>=7?'B':'A',asc=s.asc==='refr'?66:s.asc==='persist'?36:0,he=s.he,liver=cls==='A'?'#A8674A':cls==='B'?'#8A4F3A':'#5E3428';
+  const nod=cls==='A'?'':[[128,102],[148,98],[168,104],[138,110],[160,112]].slice(0,cls==='B'?3:5).map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3.2" fill="#00000030"/>`).join('');
+  const wave=asc?`<g clip-path="url(#lvClip)"><g class="lv-wave${reduceMotion?' still':''}" transform="translate(0 ${188-asc})"><path d="M60 0 q15 -7 30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 V80 H60 Z" fill="#6FA8D6" fill-opacity=".62"/></g></g>${oTag(206,188-asc+4,s.asc==='refr'?'頑固腹水':'腹水','#2F6B8F')}`:'';
+  const fog=he?`<g class="lv-fog${reduceMotion?' still':''}">${[[128,20,13],[146,12,15],[166,20,13]].map(([x,y,r],i)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#9FB2C2" fill-opacity=".62" style="animation-delay:${i*.35}s"/>`).join('')}</g>${oTag(206,26,he===2?'肝腦病變（二次以上）':'肝腦病變（曾有）','#7A5A00')}`:'';
+  const vari=(s.bleed||s.portal)?[0,1,2,3].map(i=>`<circle cx="${150+(i%2?4:-4)}" cy="${62+i*7}" r="3.4" fill="#C0392B"/>`).join(''):'';
+  const drip=s.bleed?[0,1,2].map(i=>`<circle cx="150" cy="82" r="2.6" fill="#C0392B" class="lv-drip${reduceMotion?' still':''}" style="animation-delay:${i*.5}s"/>`).join('')+oTag(72,70,'靜脈曲張出血','#C0392B'):(s.portal?oTag(72,70,'門脈高壓＋靜脈瘤','#B24C0E'):'');
+  return `<svg viewBox="0 0 300 214" class="lv-scene" role="img" aria-label="肝臟示意：Child-Pugh ${cls} 級${asc?'、有腹水':''}${he?'、曾有肝腦病變':''}${s.bleed?'、靜脈曲張出血':''}"><defs><clipPath id="lvClip"><path d="M92 122 Q150 112 208 122 L214 176 Q214 196 190 198 L110 198 Q86 196 86 176 Z"/></clipPath></defs>
+   <path d="M70 46 Q150 26 230 46 L246 124 Q252 190 230 204 L70 204 Q48 190 54 124 Z" fill="#F7E6DA" stroke="#C99A85" stroke-width="1.6"/>
+   <circle cx="150" cy="22" r="17" fill="#F3D8C8" stroke="#C99A85"/>${fog}
+   <path d="M150 40 V86" stroke="#D98E7F" stroke-width="7" stroke-linecap="round"/>${vari}${drip}
+   <path d="M104 96 Q150 84 198 100 Q206 116 176 124 Q134 130 110 118 Q100 108 104 96 Z" fill="${liver}" stroke="#4A2A20" stroke-opacity=".5"/>${nod}
+   <text x="150" y="112" text-anchor="middle" style="font-size:10.5px;font-weight:700;fill:#fff">肝臟 ${cls} 級</text>
+   <path d="M92 122 Q150 112 208 122 L214 176 Q214 196 190 198 L110 198 Q86 196 86 176 Z" fill="#fff" fill-opacity=".35" stroke="#C99A85" stroke-dasharray="3 3"/>${wave}
+   ${s.portal?`<path d="M150 124 v34" stroke="#C0392B" stroke-width="5" stroke-linecap="round"/><path d="M144 150 l6 8 l6 -8" stroke="#C0392B" stroke-width="2.4" fill="none"/>`+oTag(150,170,'門脈壓力↑','#C0392B'):''}
+  </svg><p class="g-cap">依下方勾選即時變化：水位＝腹水、灰霧＝肝腦病變、紅點＝食道靜脈瘤。分級為示意。</p>`;}
+/* ---------- 鼻：氣流與氣味（鼻腔剖面示意） ---------- */
+function noseFlow(s){const blk=!!s.func,rm=reduceMotion;
+  const dot=(path,dur,c,r,delay)=>rm?'':`<circle r="${r}" fill="${c}"><animateMotion dur="${dur}s" begin="${delay}s" repeatCount="indefinite" path="${path}"/><animate attributeName="opacity" values="0;1;1;0" dur="${dur}s" begin="${delay}s" repeatCount="indefinite"/></circle>`;
+  const airP=blk?'M2 100 H30':'M2 100 H118 Q152 100 152 146',scP=blk?'M2 100 H30':'M2 100 H96 V52';
+  const air=[0,1,2,3].map(i=>dot(airP,blk?1.4:2.6,'#2F6B8F',3.6,i*.65)).join(''),sc=[0,1,2].map(i=>dot(scP,blk?1.6:3.2,'#8E3F98',3.4,i*1.05)).join('');
+  const still=rm?(blk?`<circle cx="18" cy="100" r="3.6" fill="#2F6B8F"/>`:`<circle cx="60" cy="100" r="3.6" fill="#2F6B8F"/><circle cx="96" cy="76" r="3.4" fill="#8E3F98"/>`):'';
+  return `<svg viewBox="0 0 250 168" class="nose-flow" role="img" aria-label="${blk?'鼻孔閉塞或嗅覺喪失：空氣與氣味進不去':'空氣與氣味正常進入鼻腔'}">
+   <path d="M2 100 H118 Q152 100 152 146" fill="none" stroke="#F4CFCF" stroke-width="24" stroke-linecap="round"/><path d="M96 100 V50" fill="none" stroke="#F4CFCF" stroke-width="18" stroke-linecap="round"/>
+   <ellipse cx="96" cy="40" rx="24" ry="9" fill="#E4B85C" stroke="#8F6508"/><text x="96" y="22" text-anchor="middle" style="font-size:10.5px;font-weight:700;fill:#7A5A00">嗅覺區</text>
+   <text x="30" y="72" text-anchor="middle" style="font-size:10.5px;font-weight:700;fill:#5A6B7A">鼻孔</text><path d="M30 76 V88" stroke="#5A6B7A" stroke-width="1.4"/><text x="196" y="150" text-anchor="middle" style="font-size:10.5px;font-weight:700;fill:#5A6B7A">往喉嚨、肺</text>
+   ${air}${sc}${still}
+   ${blk?`<rect x="28" y="86" width="12" height="28" rx="4" fill="#6B7684"/><path d="M20 90 l28 20 M48 90 l-28 20" stroke="#C0392B" stroke-width="3.2" stroke-linecap="round"/>`+oTag(130,78,'進不去','#C0392B'):''}
+   <g transform="translate(6 152)"><circle cx="4" cy="0" r="4" fill="#2F6B8F"/><text x="12" y="4" style="font-size:10.5px;fill:#1E2B38">空氣</text><circle cx="58" cy="0" r="4" fill="#8E3F98"/><text x="66" y="4" style="font-size:10.5px;fill:#1E2B38">氣味</text></g></svg><p class="g-cap">${blk?'鼻孔閉塞：空氣進不了鼻腔；嗅覺喪失：氣味到不了上方的嗅覺區。':'正常：空氣經鼻腔往下到喉嚨、肺，氣味往上到嗅覺區。'}</p>`;}
+/* ---------- 結果列：迷你等級階梯＋數字跳動 ---------- */
+function barLadder(g){let h='';for(let i=15;i>=1;i--)h+=`<i${i>=g?` style="background:${GRADE_HEX[g-1]}"`:''}></i>`;return `<span class="rb-lad" aria-hidden="true">${h}<b class="rb-mk"></b></span>`;}
+function animBar(bar,g,d,pg,pd){const mk=bar.querySelector('.rb-mk'),num=bar.querySelector('.rb-d');if(!mk)return;const pos=x=>((15-x)+.5)/15*100+'%';
+  if(reduceMotion||!pg||pg===g){mk.style.left=pos(g);}else{mk.style.left=pos(g);try{mk.animate([{left:pos(pg)},{left:pos(g)}],{duration:650,easing:'cubic-bezier(.3,1.35,.5,1)'});}catch(e){}}
+  if(num&&!reduceMotion&&pd!=null&&pd!==d){const t0=performance.now(),D=520;(function step(t){const k=Math.min(1,(t-t0)/D),e=1-Math.pow(1-k,3);num.textContent=fmt(Math.round(pd+(d-pd)*e));if(k<1&&num.isConnected)requestAnimationFrame(step);else if(num.isConnected)num.textContent=fmt(d);})(t0);}}
+/* ---------- 掛載 ---------- */
+(function(){
+  const _e=GT.ear.vis;GT.ear.vis=s=>_e(s)+earSounds(s);
+  const _ev=GT.eye.vis;GT.eye.vis=s=>s.tab==='other'?eyeWalker(_ev(s),s.oth.map(String)):eyeChart(s);
+  const _l=GT.liver.vis;GT.liver.vis=s=>`<div class="lv-wrap">${liverScene(s)}${_l(s)}</div>`;
+  const _n=GT.nose.vis;GT.nose.vis=s=>_n(s)+noseFlow(s);
+  const _f=GT.face.vis;GT.face.vis=s=>_f(s).replace('stroke="#234E70" stroke-width="1.5" stroke-dasharray="4 3"','stroke="#234E70" stroke-width="1.5" stroke-dasharray="4 3" class="g-march"');
+  const _ub=updBar;updBar=function(bar){const pg=bar._g,pd=bar._d;_ub(bar);const id=(bar.querySelector('.item-id')||{}).textContent;if(!id||!itemInfo(id))return;const g=itemGrade(id),d=days(g),num=bar.querySelector('.rb-num');
+    if(num&&!bar.querySelector('.rb-lad'))bar.insertBefore(Object.assign(document.createElement('span'),{innerHTML:barLadder(g)}).firstChild,num);
+    const rd=bar.querySelector('.rb-num');if(rd&&!rd.querySelector('.rb-d'))rd.innerHTML=rd.innerHTML.replace(/^[\d,]+/,'<b class="rb-d">$&</b>');
+    animBar(bar,g,d,pg,pd);bar._g=g;bar._d=d;};
+  /* 無障礙：焦點陷阱＋背景 inert */
+  const openM=()=>[...document.querySelectorAll('.demo-modal')].filter(m=>m.classList.contains('open')||m.style.display==='flex').pop();
+  const sync=()=>{const m=openM();['.wrap','#mgPill'].forEach(q=>{const e=document.querySelector(q);if(e)e.inert=!!m;});};
+  const FOC='button:not([disabled]),[href],input:not([disabled]),select:not([disabled]),summary,[tabindex]:not([tabindex="-1"])';
+  document.addEventListener('keydown',e=>{if(e.key!=='Tab')return;const m=openM();if(!m)return;const f=[...m.querySelectorAll(FOC)].filter(x=>x.offsetParent!==null&&getComputedStyle(x).visibility!=='hidden');if(!f.length)return;
+    const a=document.activeElement;if(!m.contains(a)){e.preventDefault();f[0].focus();return;}if(e.shiftKey&&a===f[0]){e.preventDefault();f[f.length-1].focus();}else if(!e.shiftKey&&a===f[f.length-1]){e.preventDefault();f[0].focus();}});
+  const mo=new MutationObserver(sync);const watch=()=>document.querySelectorAll('.demo-modal').forEach(m=>{if(!m._w){m._w=1;mo.observe(m,{attributes:true,attributeFilter:['class','style']});}});
+  new MutationObserver(()=>{watch();sync();}).observe(document.body,{childList:true});watch();sync();
+  document.querySelectorAll('.demo-modal').forEach(m=>{if(!m.getAttribute('role')){m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');}});
+})();
+/* ---------- 牙齒：快速設定顆數（手機好按） ---------- */
+(function(){const ORDER=['11','12','13','14','15','21','22','23','24','25','16','17','26','27','41','42','43','44','45','31','32','33','34','35'];
+  const _m=GT.mouth.vis;GT.mouth.vis=s=>_m(s)+(s.acc?`<div class="teeth-quick" role="group" aria-label="快速設定牙齒缺損顆數"><span>快速設定缺損顆數（目前 ${(s.teeth||[]).length} 顆）</span>${[[0,'清除'],[5,'5 顆'],[10,'10 顆']].map(([n,t])=>`<button type="button" data-teeth-n="${n}">${t}</button>`).join('')}</div>`:'');
+  document.addEventListener('click',e=>{const b=e.target.closest('[data-teeth-n]');if(!b||typeof G==='undefined'||G.t!=='mouth')return;G.s.teeth=ORDER.slice(0,+b.dataset.teethN);gRender(false);});})();
+
+document.addEventListener('click',e=>{if(e.target.closest('[data-replay]')&&typeof G!=='undefined'&&G.t)gRender(false);});
+
+/* ================= v6：判斷尺、心肺動畫、依序播放導覽 ================= */
+const JC={r:'#B02A21',o:'#B24C0E',a:'#8F6508',g:'#256B42'},JG_LAST={};
+function judgeHTML(key,o){ // o:{aria,zones:[{a,b,c,lab}],pos,ticks:[{at,lab}],bubble,vlab,vtext,vc,vbg}
+  const pos=Math.max(0,Math.min(1,o.pos)),prev=JG_LAST[key]==null?pos:JG_LAST[key];JG_LAST[key]=pos;
+  const zones=o.zones.map(z=>{const w=(z.b-z.a)*100;return `<i style="left:${z.a*100}%;width:${w}%;background:${z.c}">${w>=14?`<em>${z.lab}</em>`:''}</i>`;}).join('');
+  const ticks=(o.ticks||[]).map(t=>`<u style="left:${t.at*100}%"><b>${t.lab}</b></u>`).join('');
+  return `<div class="jg" data-from="${prev}" data-to="${pos}" role="img" aria-label="${esc(o.aria)}"><div class="jg-bar">${zones}<span class="jg-pin" style="left:${pos*100}%"><b>${esc(o.bubble)}</b></span></div><div class="jg-ticks">${ticks}</div><div class="jg-verdict" style="--vc:${o.vc};--vbg:${o.vbg}"><strong>${esc(o.vlab)}</strong><span>${esc(o.vtext)}</span></div></div>`;}
+function animJudge(root){if(!root)return;root.querySelectorAll('.jg').forEach(j=>{const p=j.querySelector('.jg-pin'),f=+j.dataset.from,t=+j.dataset.to;if(reduceMotion||f===t||!p)return;try{p.animate([{left:f*100+'%'},{left:t*100+'%'}],{duration:750,easing:'cubic-bezier(.3,1.3,.5,1)'});}catch(e){}});}
+const ZT=(a,b,c,lab)=>({a,b,c,lab});
+/* ---------- 心臟：收縮擠血動畫＋LVEF 判斷尺 ---------- */
+function heartPump(s){const has=!(s.lvef==null||s.lvef===''),ef=Math.max(0,Math.min(80,has?+s.lvef:0))/100,nf=.6,rm=reduceMotion,efc=ef<=.25?JC.r:ef<.5?JC.o:JC.g;
+  const ch=(x,e,c,lab,sub)=>{const h=92,y0=36,rem=1-e,yS=y0+h*e,hS=h*rem,an=(a,v)=>rm?'':`<animate attributeName="${a}" values="${v}" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;.42;1" keySplines=".5 0 .5 1;.5 0 .5 1"/>`;
+    const sq=rm?'':`<animateTransform attributeName="transform" type="scale" additive="sum" values="1 1;.93 .96;1 1" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;.42;1" keySplines=".5 0 .5 1;.5 0 .5 1"/>`;
+    return `<g transform="translate(${x} 0)"><g><rect x="0" y="${y0}" width="62" height="${h}" rx="18" fill="#FBEEEC" stroke="#B57C5C" stroke-width="1.8"/><rect x="4" y="${rm?yS:y0+4}" width="54" height="${rm?hS:h-8}" rx="14" fill="${c}">${an('y',`${y0+4};${yS};${y0+4}`)}${an('height',`${h-8};${hS};${h-8}`)}</rect></g>
+     <path d="M31 ${y0-4} v-10" stroke="${c}" stroke-width="3" stroke-linecap="round" marker-end="url(#pmA)" opacity="${rm?1:.9}">${rm?'':`<animate attributeName="opacity" values=".15;1;.15" dur="2.2s" repeatCount="indefinite" keyTimes="0;.42;1"/>`}</path>
+     <text x="31" y="${y0+h+15}" text-anchor="middle" style="font-size:12.5px;font-weight:700;fill:#1E2B38">${lab}</text><text x="31" y="${y0+h+31}" text-anchor="middle" style="font-size:12.5px;font-weight:700;fill:${c}">${sub}</text></g>`;};
+  return `<svg viewBox="0 0 240 180" class="g-pumpfig" role="img" aria-label="心室收縮時擠出血量比較：正常約 60%，此患者${has?Math.round(ef*100)+'%':'尚未填入'}"><defs><marker id="pmA" markerWidth="7" markerHeight="7" refX="3.5" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 Z" fill="context-stroke"/></marker></defs>
+   <text x="120" y="12" text-anchor="middle" style="font-size:12.5px;font-weight:700;fill:#1E2B38">每次心跳，心室擠出多少血</text>${ch(22,nf,JC.g,'正常心臟','擠出約 60%')}${ch(156,ef,efc,'這位患者',has?`擠出 ${Math.round(ef*100)}%`:'尚未填入')}
+   <path d="M92 84 h56" stroke="#9FB2C2" stroke-width="2" stroke-dasharray="3 3"/><text x="120" y="78" text-anchor="middle" style="font-size:11px;fill:#5A6B7A">≦ 25% 最重</text></svg>`;}
+function heartJudge(s){const has=!(s.lvef==null||s.lvef===''||isNaN(+s.lvef)),v=has?Math.max(0,Math.min(80,+s.lvef)):0;
+  const z=!has?['尚未填入 LVEF','輸入核醫左心室射出分率（LVEF）後判斷',JC.a,'#F1F4F7']:v<=25?['LVEF ≦ 25%','符合第一～三等級的 LVEF 要件（另須其他條件同時符合）',JC.r,'#FBEEEC']:v<50?['LVEF 26～49%','可能符合第十二等級（第七等級須 ≦ 25%）',JC.o,'#FBEFE6']:['LVEF ≧ 50%','此項未達失能等級',JC.g,'#E9F1EA'];
+  return judgeHTML('heart',{aria:'LVEF 判斷尺',zones:[ZT(0,25/80,JC.r,'≦25%'),ZT(25/80,50/80,JC.o,'26～49%'),ZT(50/80,1,JC.g,'≧50%')],pos:v/80,ticks:[{at:0,lab:'0'},{at:25/80,lab:'25'},{at:50/80,lab:'50'},{at:1,lab:'80%'}],bubble:has?`LVEF ${v}%`:'未填',vlab:z[0],vtext:z[1],vc:z[2],vbg:z[3]});}
+/* ---------- 肺臟：呼吸動畫＋第 1 秒吐氣曲線＋FEV1 判斷尺 ---------- */
+function lungBreath(s){const has=s.fev1!=null&&s.fev1!==''&&!isNaN(+s.fev1),v=has?Math.max(0,Math.min(100,+s.fev1)):100,amp=1+.17*(v/100),full=1.17,rm=reduceMotion;
+  const L='M140 20 Q100 22 88 70 Q82 110 96 130 Q124 136 138 124 Z',R='M160 20 Q200 22 212 70 Q218 110 204 130 Q176 136 162 124 Z';
+  return `<svg viewBox="0 0 300 172" class="g-lungfig" role="img" aria-label="肺臟呼吸示意：實線為此患者，虛線為正常吸氣範圍"><g transform="translate(150 78) scale(${full}) translate(-150 -78)" fill="none" stroke="#2F6B8F" stroke-width="1.6" stroke-dasharray="5 4"><path d="${L}"/><path d="${R}"/></g>
+   <path d="M150 6 v44 M150 50 l-16 12 M150 50 l16 12" stroke="#B57C5C" stroke-width="5" fill="none" stroke-linecap="round"/>
+   <g transform="translate(150 78)"><g ${rm?`transform="scale(${amp})"`:''}>${rm?'':`<animateTransform attributeName="transform" type="scale" values="1;${amp};1" dur="4.2s" repeatCount="indefinite" calcMode="spline" keySplines=".4 0 .6 1;.4 0 .6 1"/>`}<g transform="translate(-150 -78)"><path d="${L}" fill="#E8B9B5" stroke="#B57C5C" stroke-width="1.4"/><path d="${R}" fill="#E8B9B5" stroke="#B57C5C" stroke-width="1.4"/></g></g></g>
+   <text x="150" y="150" text-anchor="middle" style="font-size:12.5px;font-weight:700;fill:#1E2B38">${rm?'吸氣到最大時':'一吸一呼'}：${has?`只能吸到正常的約 ${Math.round(v)}%`:'正常肺（輸入 FEV1 看變化）'}</text><text x="150" y="166" text-anchor="middle" style="font-size:11px;fill:#5A6B7A">藍色虛線＝正常吸氣範圍　實線＝這位患者</text></svg>`;}
+function spiroChart(s){const has=s.fev1!=null&&s.fev1!==''&&!isNaN(+s.fev1),v=has?Math.max(0,Math.min(100,+s.fev1)):100,fN=.8,fP=Math.max(.03,Math.min(.99,fN*v/100)),rm=reduceMotion;
+  const X=t=>34+t/3*244,Y=q=>108-q*88,tau=f=>-1/Math.log(1-f),cur=f=>{const k=tau(f);let d='';for(let i=0;i<=30;i++){const t=i/10,q=(1-Math.exp(-t/k))/(1-Math.exp(-3/k));d+=(i?'L':'M')+X(t).toFixed(1)+' '+Y(q*1).toFixed(1);}return d;};
+  const q1=f=>(1-Math.exp(-1/tau(f)))/(1-Math.exp(-3/tau(f))),qn=q1(fN),qp=q1(fP),dr=rm?'':' pathLength="1" class="sp-draw"';
+  return `<svg viewBox="0 0 300 136" class="g-spiro" role="img" aria-label="第 1 秒吐氣量：正常約 ${Math.round(qn*100)}%，此患者約 ${Math.round(qp*100)}%"><text x="150" y="12" text-anchor="middle" style="font-size:12px;font-weight:700;fill:#1E2B38">用力吐氣：第 1 秒能吐出多少</text>
+   <path d="M34 20 V108 H278" fill="none" stroke="#9FB2C2"/><text x="24" y="24" text-anchor="end" style="font-size:10px;fill:#5A6B7A">多</text><text x="24" y="108" text-anchor="end" style="font-size:10px;fill:#5A6B7A">少</text>
+   <line x1="${X(1)}" y1="20" x2="${X(1)}" y2="108" stroke="#234E70" stroke-dasharray="4 3"/><text x="${X(1)}" y="122" text-anchor="middle" style="font-size:10.5px;font-weight:700;fill:#234E70">第 1 秒（FEV1）</text><text x="${X(3)}" y="122" text-anchor="middle" style="font-size:10px;fill:#5A6B7A">3 秒</text>
+   <path d="${cur(fN)}" fill="none" stroke="${JC.g}" stroke-width="2.6" stroke-linecap="round"${dr}/><path d="${cur(fP)}" fill="none" stroke="${v<60?JC.r:v<80?JC.a:JC.g}" stroke-width="3" stroke-linecap="round"${dr}/>
+   <circle cx="${X(1)}" cy="${Y(qn)}" r="4" fill="${JC.g}"/><circle cx="${X(1)}" cy="${Y(qp)}" r="4.4" fill="${v<60?JC.r:v<80?JC.a:JC.g}" stroke="#fff" stroke-width="1.5"/>
+   <text x="${X(1)-8}" y="${Y(qn)-8}" text-anchor="end" style="font-size:10.5px;font-weight:700;fill:${JC.g}">正常 ${Math.round(qn*100)}%</text><text x="${X(1)+8}" y="${Y(qp)+13}" style="font-size:10.5px;font-weight:700;fill:${v<60?JC.r:JC.a}">${has?`患者 ${Math.round(qp*100)}%`:'未填'}</text></svg>`;}
+function lungJudge(s){const has=s.fev1!=null&&s.fev1!==''&&!isNaN(+s.fev1),v=has?Math.max(0,Math.min(100,+s.fev1)):100;
+  const cur=!has?['尚未填入 FEV1','輸入 FEV1 佔預測值百分比後判斷',JC.a,'#F1F4F7']:v<25?['FEV1 ＜ 25%','符合第二等級（FEV1 ＜ 25%）',JC.r,'#FBEEEC']:v<=30?['FEV1 25～30%','符合第三等級',JC.o,'#FBEFE6']:v<60?['FEV1 31～59%','符合第七等級',JC.o,'#FBEFE6']:v<80?['FEV1 60～79%','符合第十二等級',JC.a,'#FBF3DD']:['FEV1 ≧ 80%','此項未達失能等級',JC.g,'#E9F1EA'];
+  return judgeHTML('lung',{aria:'FEV1 判斷尺',zones:[ZT(0,.25,JC.r,'第二級'),ZT(.25,.31,JC.r,''),ZT(.31,.6,JC.o,'第七級'),ZT(.6,.8,JC.a,'第十二級'),ZT(.8,1,JC.g,'未達')],pos:v/100,ticks:[{at:.25,lab:'25'},{at:.6,lab:'60'},{at:.8,lab:'80'}],bubble:has?`FEV1 ${v}%`:'未填',vlab:cur[0],vtext:(has?cur[1]:'尚未填入數值')+'；此圖只看 FEV1，其他指標符合其一也可',vc:cur[2],vbg:cur[3]});}
+/* ---------- 脊柱、手指關節：剩餘活動範圍判斷尺 ---------- */
+function romJudge(key,rem,norm,third,half,unitLab){const p=Math.max(0,Math.min(1,rem/norm)),fH=half/norm,fT=third/norm,st=rem<=half?['喪失 ≧ 1/2','已達「顯著運動失能」門檻',JC.r,'#FBEEEC']:rem<=third?['喪失 ≧ 1/3','已達「運動失能」門檻（未達 1/2）',JC.o,'#FBEFE6']:['喪失未達 1/3','未達運動失能門檻',JC.g,'#E9F1EA'];
+  return judgeHTML(key,{aria:'剩餘活動範圍判斷尺',zones:[ZT(0,fH,JC.r,'≦1/2'),ZT(fH,fT,JC.o,'≦1/3'),ZT(fT,1,JC.g,'正常範圍')],pos:p,ticks:[{at:0,lab:'0'},{at:fH,lab:half+'°'},{at:fT,lab:third+'°'},{at:1,lab:norm+'°'}],bubble:`剩 ${rem}${unitLab}`,vlab:st[0],vtext:st[1],vc:st[2],vbg:st[3]});}
+/* ---------- 依序播放導覽（手指／足趾／關節 3D） ---------- */
+const TOUR={fingerModal:{},toeModal:{},demoModal:{}};let TT=null;
+function tourSteps(mid){
+  if(mid==='fingerModal'){const d=FINGERS.map(f=>f.k).find(k=>fState[k]>0)||'I',nm=(FINGERS.find(f=>f.k===d)||{}).name||'食指';return [[0,'正常：手指完整。'],[1,'指骨一部分缺損：末節少了一小段、未達 1/2；不算「手指缺損」，但屬「指骨一部分缺損」項目（等級較輕）。'],[2,'末節切斷 ≧ 1/2：屬「手指喪失機能」。'],[3,'手指缺損：拇指自指節間關節、其他指自近位指節間關節以上切斷。']].map(([lv,t])=>({t:`${nm}｜${t}`,run:()=>{FINGERS.forEach(f=>fState[f.k]=0);fState[d]=lv;fBoth=false;fingerRender();const it=(fingerEval().items||[])[0];return it?`→ 對應 ${it.id||it}`:'→ 不屬失能項目';}}));}
+  if(mid==='toeModal'){const d=TOES.map(t=>t.k).find(k=>tState[k]>0)||'1',nm=(TOES.find(t=>t.k===d)||{}).name||'第一趾';return [[0,'正常：足趾完整。'],[1,'喪失機能（切斷）：第一趾末節切斷 1/2 以上；第二～五趾自末關節以上切斷。'],[2,'足趾缺損：自中足趾關節切斷，足趾全部缺損。']].map(([lv,t])=>({t:`${nm}｜${t}`,run:()=>{TOES.forEach(x=>tState[x.k]=0);tState[d]=lv;tBoth=false;toeRender();const it=(toeEval().items||[])[0];return it?`→ 對應 ${it.id||it}`:'→ 不屬失能項目';}}));}
+  const bs=[...document.querySelectorAll('#demoSeg button')];return bs.map((b,i)=>({t:`${b.textContent.trim()}：`,run:()=>{b.click();const d=document.querySelector('#demoInfo .di-desc');return d?d.textContent.trim().slice(0,70):'';}}));}
+function tourGo(box,mid,i,auto){const st=tourSteps(mid);if(!st.length)return;i=(i+st.length)%st.length;box._i=i;const r=st[i].run();box.querySelector('.tour-cap').textContent=`${i+1}／${st.length}　${st[i].t}${r?' '+r:''}`;
+  box.querySelectorAll('.tour-dots i').forEach((d,k)=>d.classList.toggle('on',k===i));if(!auto)tourStop(box);}
+function tourStop(box){if(box._t){clearInterval(box._t);box._t=null;}const p=box.querySelector('.tour-play');if(p)p.textContent='▶ 依序播放';}
+function tourMount(mid){const m=document.getElementById(mid);if(!m)return;const bx=m.querySelector('.demo-box');if(!bx)return;const old=bx.querySelector('.tour');if(old){tourStop(old);old.remove();}
+  const n=(tourSteps(mid)||[]).length||4,t=document.createElement('div');t.className='tour';t.setAttribute('role','group');t.setAttribute('aria-label','依序播放示範');
+  t.innerHTML=`<div class="tour-btns"><button type="button" class="tour-play">▶ 依序播放</button><button type="button" class="tour-prev" aria-label="上一步">◀</button><button type="button" class="tour-next">下一步 ▶</button><span class="tour-dots" aria-hidden="true">${Array.from({length:n},()=>'<i></i>').join('')}</span></div><p class="tour-cap" aria-live="polite">按「依序播放」，一步一步看出各種狀態的差別。</p>`;
+  const sub=bx.querySelector('.demo-sub')||bx.querySelector('.demo-head');sub.insertAdjacentElement('afterend',t);t._i=-1;
+  t.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.classList.contains('tour-next'))tourGo(t,mid,t._i+1);else if(b.classList.contains('tour-prev'))tourGo(t,mid,t._i-1);else if(b.classList.contains('tour-play')){if(t._t){tourStop(t);return;}b.textContent='❚❚ 暫停';tourGo(t,mid,t._i+1,true);t._t=setInterval(()=>{if(!m.classList.contains('open')){tourStop(t);return;}tourGo(t,mid,t._i+1,true);},reduceMotion?3200:2600);}});}
+/* ---------- 掛載 ---------- */
+(function(){
+  GT.heart.vis=s=>`<div class="g-heartwrap">${heartPump(s)}${heartJudge(s)}</div>`;
+  GT.lung.vis=s=>`<div class="g-lungwrap">${lungBreath(s)}${spiroChart(s)}${lungJudge(s)}</div>`;
+  const _sv=GT.spine.vis;GT.spine.vis=s=>{const html=_sv(s),run=spRun(s.fused),tl=!(run.length&&run[0]<7),norm=tl?75:110,act=Math.min(s.rem,norm),third=Math.round(norm*2/3),half=Math.round(norm/2);return romJudge('spine',act,norm,third,half,'°')+html;};
+  const _fv=GT.fangle.vis;GT.fangle.vis=s=>{const h=_fv(s);if(faStiffMode(s))return h;const r=faRef(s),n=s.norm||r[1],a=Math.min(s.act,n);return h+romJudge('fa',a,n,Math.round(n*2/3),s.half,'°');};
+  const _gR=gRender;gRender=function(f){_gR(f);animJudge($('#gVis'));};
+  const _oF=openFinger;openFinger=function(id,t){_oF(id,t);tourMount('fingerModal');};
+  const _oT=openToe;openToe=function(id,t){_oT(id,t);tourMount('toeModal');};
+  const _oD=openDemo;openDemo=function(id,t){_oD(id,t);tourMount('demoModal');};
+})();
 
 /* v3 掛載 */
 const _mTeeth=GT.mouth.vis;GT.mouth.vis=s=>mouthHead(s)+'<p class="g-mh" style="text-align:center">牙齒（限意外傷害）：點牙齒標示缺損</p>'+_mTeeth(s);
