@@ -552,6 +552,20 @@ table.qref td.new{font-weight:700;color:var(--navy)}
 .amp-scan.still,.amp-dist.still,.amp-cut.still,.amp-lab.still{animation:none;opacity:1;transform:none}.amp-scan.still{opacity:0}.amp-dist.still{opacity:.3}
 @media(prefers-reduced-motion:reduce){.mv-glow,.mv-wave,.mv-beat,.mv-breath,.mv-drop,.mv-spark,.oc-stack.auto *,.mv-peri,.mv-peri2,.mv-churn,.mv-fill,.m-tongue,.m-epi,.m-art,.m-waves path,.f-draw,.f-cm,.sk-drop,.amp-scan,.amp-dist,.amp-cut,.amp-lab{animation:none!important}.f-draw{stroke-dashoffset:0}.oc-stack.auto .oc-n,.oc-stack.auto .oc-cn{opacity:0}.amp-dist{opacity:.3}.amp-scan{opacity:0}}
 
+/* v8 three.js 立體 */
+.t3-wrap{display:flex;flex-direction:column;gap:6px}.t3-tools{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.t3-tools button{min-height:40px;padding:0 14px;border:1.5px solid var(--navy);border-radius:999px;background:#fff;color:var(--navy);font:inherit;font-size:.8rem;font-weight:700;cursor:pointer}.t3-tools button.on{background:var(--navy);color:#fff}
+.t3-tools span{font-size:.74rem;color:var(--sub);margin-left:auto}
+.t3-box{position:relative;width:100%;height:min(62vh,420px);min-height:300px;border-radius:14px;overflow:hidden;background:radial-gradient(ellipse at 50% 35%,#2a3c4f 0%,#14202c 75%);touch-action:pan-y}
+.t3-box[hidden],.t3-fb[hidden]{display:none}.t3-cv{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab}.t3-cv:active{cursor:grabbing}
+.t3-lab{position:absolute;left:0;top:0;pointer-events:none;padding:2px 8px;margin:-10px 0 0 6px;border-radius:999px;background:rgba(20,32,44,.78);border:1px solid #6B7F92;color:#DCE4EA;font-size:.7rem;font-weight:700;white-space:nowrap;will-change:transform;transition:opacity .35s}
+.t3-lab.hot{background:#F2B92E;color:#1E2B38;border-color:#F2B92E}.t3-lab.bad{background:#C0392B;color:#fff;border-color:#C0392B;opacity:0}
+.g-oscene .t3-box{min-height:340px}
+
+.t3-lab.warn{background:#C0392B;color:#fff;border-color:#C0392B}
+.eye-close{max-width:360px;display:block;margin:8px auto 0;background:#fff;border:1px solid var(--line);border-radius:12px;width:100%;height:auto}
+.fg-stage[hidden]{display:none}
+
 /* v5 */
 .snd-wrap{margin-top:10px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 10px}
 .snd-row{display:grid;grid-template-columns:52px 1fr;gap:6px;align-items:center;margin:4px 0}.snd-row>b{font-size:.8rem;color:var(--navy);line-height:1.2}.snd-row>b small{display:block;color:var(--sub);font-weight:500}
@@ -3064,6 +3078,343 @@ const _mTeeth=GT.mouth.vis;GT.mouth.vis=s=>mouthHead(s)+'<p class="g-mh" style="
 GT.organ.vis=s=>organScene(s);GT.organ.sub='勾選符合的狀況（在圖的下方），上圖會畫出切除、造口或功能喪失的位置。';
 const _spV=GT.spine.vis;GT.spine.vis=s=>{const v=_spV(s),k=v.lastIndexOf('<svg viewBox="0 0 300 ');return `<div class="g-spwrap">${spineFigure(s)}<div>${spineColumn(s)}${k>0?v.slice(0,k):''}</div></div>`;};
 GT.spine.sub='點右側椎體標示「固定（融合）」節段、拖曳剩餘屈伸度數；左側人形會依可動範圍來回彎腰（固定節段在頸椎時改看點頭）。X 光變形的示意小圖會出現在椎體下方。';
+
+/* ================= v8：three.js 立體示範（共用單一 WebGL 畫布；失敗自動退回平面版） ================= */
+const T3={ok:null,pref:'3d',tok:0,cur:null,raf:0,cv:null,r:null,rx:0,drag:null,
+  want(){return T3.pref==='3d'&&T3.ok!==false&&typeof window.WebGLRenderingContext!=='undefined';},
+  async init(){if(T3.ok!==null)return T3.ok;try{const ok=await loadThree();if(!ok||!window.THREE){T3.ok=false;return false;}const cv=document.createElement('canvas');cv.className='t3-cv';cv.setAttribute('aria-hidden','true');const r=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});r.setPixelRatio(Math.min(window.devicePixelRatio||1,1.75));r.localClippingEnabled=true;T3.r=r;T3.cv=cv;T3.ok=true;
+      cv.addEventListener('pointerdown',e=>{T3.drag={x:e.clientX,y:e.clientY};cv.setPointerCapture(e.pointerId);});
+      cv.addEventListener('pointermove',e=>{if(!T3.drag||!T3.cur)return;T3.cur.ry+=(e.clientX-T3.drag.x)*.011;T3.cur.rx=Math.max(-.6,Math.min(.6,T3.cur.rx+(e.clientY-T3.drag.y)*.006));T3.drag={x:e.clientX,y:e.clientY};T3.cur.touched=true;if(T3.cur.rm)T3.frame();});
+      const up=()=>{T3.drag=null;};cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);return true;}catch(e){T3.ok=false;return false;}},
+  stop(){if(T3.raf){cancelAnimationFrame(T3.raf);T3.raf=0;}},
+  dispose(c){if(!c)return;c.sc.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material)(Array.isArray(o.material)?o.material:[o.material]).forEach(m=>m.dispose());});c.labs.forEach(l=>l.el.remove());},
+  frame(){const c=T3.cur;if(!c)return;const t=c.rm?99:(performance.now()-c.t0)/1000;c.api.update(t,c);
+    c.root.rotation.y=c.base+c.ry+(c.touched||c.rm?0:Math.sin(t*.45)*.35);c.root.rotation.x=c.rx;
+    const w=c.box.clientWidth,h=c.box.clientHeight;if(w&&(w!==c.w||h!==c.h)){c.w=w;c.h=h;T3.r.setSize(w,h,false);c.cam.aspect=w/h;c.cam.updateProjectionMatrix();}
+    c.root.updateMatrixWorld(true);if(c.api.post)c.api.post();c.labs.forEach(l=>{const v=l.v.clone();c.root.localToWorld(v);v.project(c.cam);const lw=l.el.offsetWidth||60;let x=(v.x*.5+.5)*c.w;x=Math.max(2,Math.min(x,c.w-lw-12));l.el.style.transform=`translate(${x.toFixed(1)}px,${((-v.y*.5+.5)*c.h).toFixed(1)}px)`;});
+    T3.r.render(c.sc,c.cam);},
+  async mount(box,build){const my=++T3.tok;if(!await T3.init()||my!==T3.tok||!box.isConnected)return false;T3.stop();T3.dispose(T3.cur);
+    const sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(34,1,.1,60);sc.add(new THREE.HemisphereLight(0xffffff,0x39485a,.9));const dl=new THREE.DirectionalLight(0xffffff,.95);dl.position.set(3,5,5);sc.add(dl);
+    const root=new THREE.Group();sc.add(root);box.querySelectorAll('.t3-lab').forEach(e=>e.remove());box.appendChild(T3.cv);
+    const c={sc,cam,root,box,api:null,labs:[],ry:0,rx:0,base:0,t0:performance.now(),rm:reduceMotion,touched:false,w:0,h:0};T3.cur=c;
+    c.api=build(THREE,sc,cam,root,c);(c.api.labels||[]).forEach(([txt,v,cls])=>{const el=document.createElement('span');el.className='t3-lab'+(cls?' '+cls:'');el.textContent=txt;box.appendChild(el);c.labs.push({el,v});});
+    c.api.labEls=c.labs;T3.frame();
+    if(!c.rm){const tick=()=>{if(T3.cur!==c||!c.box.isConnected||c.box.offsetParent===null){T3.raf=0;return;}if(!document.hidden)T3.frame();T3.raf=requestAnimationFrame(tick);};T3.raf=requestAnimationFrame(tick);}
+    return true;}};
+function t3wrap(k,fb,hint){const w=T3.want();return `<div class="t3-wrap" data-k="${k}"><div class="t3-tools" role="group" aria-label="檢視方式"><button type="button" data-t3="3d" class="${w?'on':''}">3D 立體</button><button type="button" data-t3="flat" class="${w?'':'on'}">平面</button><span>${w?'拖曳可旋轉':'立體檢視不可用時顯示平面'}</span></div><div class="t3-box" ${w?'':'hidden'} role="img" aria-label="${esc(hint||'立體示意')}"></div><div class="t3-fb" ${w?'hidden':''}>${fb}</div></div>`;}
+async function t3start(k,build){const box=document.querySelector(`#gVis .t3-wrap[data-k="${k}"] .t3-box`);if(!box||box.hidden)return;const ok=await T3.mount(box,build);const w=box.closest('.t3-wrap');if(!w)return;if(!ok){box.hidden=true;const fb=w.querySelector('.t3-fb');if(fb)fb.hidden=false;const sp=w.querySelector('.t3-tools span');if(sp)sp.textContent='立體檢視載入失敗，已改用平面';}}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-t3]');if(!b||typeof G==='undefined'||b.closest('[data-inline]'))return;T3.pref=b.dataset.t3;gRender(false);});
+/* ---------- 共用：跟隨物件的裁切平面（避免旋轉／傾斜後與骨頭錯位） ---------- */
+function cutPair3(T,frame,cut){const lk=new T.Plane(new T.Vector3(0,-1,0),cut),ld=new T.Plane(new T.Vector3(0,1,0),-cut),keep=new T.Plane(),drop=new T.Plane();return {keep,drop,cut,sync(){keep.copy(lk).applyMatrix4(frame.matrixWorld);drop.copy(ld).applyMatrix4(frame.matrixWorld);}};}
+/* ---------- 共用：骨頭、關節球 ---------- */
+const bm3=(T,pl)=>new T.MeshStandardMaterial({color:0xF3ECDD,roughness:.55,metalness:.05,transparent:true,clippingPlanes:pl});
+function cyl3(T,m,r1,r2,y1,y2,x=0,z=0){const g=new T.Mesh(new T.CylinderGeometry(r1,r2,Math.abs(y1-y2),14),m);g.position.set(x,(y1+y2)/2,z);return g;}
+function ball3(T,m,r,x,y,z=0,sx=1,sy=1,sz=1){const g=new T.Mesh(new T.SphereGeometry(r,16,12),m);g.position.set(x,y,z);g.scale.set(sx,sy,sz);return g;}
+/* ---------- 上下肢缺損 ---------- */
+const AMP3={arm:{top:3.5,joints:[['肩',3.38],['肘',2.09],['腕',.97]],skin:[[0,3.42],[.12,3.4],[.17,3.2],[.16,2.2],[.14,2.0],[.13,1.2],[.09,.98],[.1,.9],[.11,.6],[.1,.3],[0,.22]],R:{elbow:.16,wrist:.10}},
+  leg:{top:3.7,joints:[['髖',3.6],['膝',2.1],['踝',.83],['跗蹠',.61]],skin:[[0,3.64],[.2,3.6],[.21,3.0],[.17,2.2],[.15,2.0],[.12,1.0],[.1,.84],[.12,.62],[.13,.3],[0,.2]],R:{knee:.19,ankle:.11,tarso:.13}}};
+function limb3(T,arm,cut,pl){const m=bm3(T,pl),g=new T.Group(),sk=new T.Mesh(new T.LatheGeometry(AMP3[arm?'arm':'leg'].skin.map(([r,y])=>new T.Vector2(r,y)),28),new T.MeshStandardMaterial({color:0xE7BFA2,transparent:true,opacity:.26,side:T.DoubleSide,depthWrite:false,clippingPlanes:pl}));g.add(sk);
+  if(arm){g.add(ball3(T,m,.12,0,3.36),cyl3(T,m,.055,.05,3.28,2.16),ball3(T,m,.075,0,2.09),cyl3(T,m,.035,.03,2.0,1.02,-.06),cyl3(T,m,.03,.028,2.0,1.02,.06),ball3(T,m,.065,0,.97));[...Array(4)].forEach((_,i)=>g.add(ball3(T,m,.04,-.08+i*.055,.86,0)));
+    [-2,-1,0,1,2].forEach(a=>{g.add(cyl3(T,m,.022,.02,.82,.56,a*.06,0));g.add(cyl3(T,m,.02,.018,.54,.3,a*.07,0));g.add(cyl3(T,m,.017,.015,.28,.14,a*.075,0));});}
+  else{g.add(ball3(T,m,.14,0,3.6),cyl3(T,m,.075,.065,3.46,2.2),ball3(T,m,.09,0,2.1),cyl3(T,m,.06,.05,1.98,.92,-.04),cyl3(T,m,.03,.025,1.98,.9,.075),ball3(T,m,.07,0,.83),ball3(T,m,.14,0,.66,.03,1,.55,1.3));
+    [-2,-1,0,1,2].forEach(a=>{g.add(cyl3(T,m,.026,.02,.58,.3,a*.06,.07));g.add(ball3(T,m,.028,a*.07,.25,.1));});}
+  return g;}
+function amp3dBuild(s){return (T,sc,cam,root,c)=>{const arm=s.limb==='arm',A=AMP3[arm?'arm':'leg'],cut={elbow:2.09,wrist:.97,knee:2.1,ankle:.83,tarso:.61}[s.lv],xs=s.both?[-.85,.85]:[0],mid=A.top/2,rm=reduceMotion;
+    const R=A.R[s.lv],L=[];
+    xs.forEach(x=>{const w=new T.Group();w.position.x=x;root.add(w);const cp=cutPair3(T,w,cut),pk=new T.Plane(),pd=new T.Plane(),prox=limb3(T,arm,cut,[pk]),dist=limb3(T,arm,cut,[pd]),dg=new T.Group();dg.position.y=cut;dist.position.y=-cut;dg.add(dist);w.add(prox,dg);
+      const ring=new T.Mesh(new T.TorusGeometry(R+.02,.016,10,56),new T.MeshBasicMaterial({color:0xC0392B,transparent:true}));ring.rotation.x=Math.PI/2;ring.position.y=cut;w.add(ring);
+      const scan=new T.Mesh(new T.CircleGeometry(R+.22,40),new T.MeshBasicMaterial({color:0xF2B92E,transparent:true,opacity:.34,side:T.DoubleSide,depthWrite:false}));scan.rotation.x=-Math.PI/2;w.add(scan);L.push({dg,ring,scan,distMats:[],w,pk,pd,lk:new T.Plane(new T.Vector3(0,1,0),-cut),ld:new T.Plane(new T.Vector3(0,-1,0),cut)});
+      dist.traverse(o=>{if(o.material&&o.material.transparent)L[L.length-1].distMats.push([o.material,o.material.opacity]);});});
+    cam.position.set(0,mid,s.both?6.4:5.3);cam.lookAt(0,mid,0);c.base=0;
+    const ease=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
+    const labs=[];A.joints.forEach(([n,y])=>labs.push([n,new T.Vector3((s.both?-.85:0)-.34,y,0),Math.abs(y-cut)<.05?'hot':'']));labs.push(['缺損（遠端）',new T.Vector3(s.both?0:.45,Math.max(.3,cut-.5),0),'bad']);
+    return {labels:labs,post(){L.forEach(o=>{o.pk.copy(o.lk).applyMatrix4(o.w.matrixWorld);o.pd.copy(o.ld).applyMatrix4(o.w.matrixWorld);});},update(t){const u=rm?4.5:t%7,k=rm?1:u<3?0:u<3.9?ease((u-3)/.9):u<6?1:1-ease((u-6)/1),sy=u<1?0:ease((u-1)/2);
+      L.forEach(o=>{o.dg.position.y=cut-.13*k;o.dg.rotation.z=.06*k;o.distMats.forEach(([m,op])=>{m.opacity=op*(1-.82*k);});o.ring.material.opacity=.25+.75*k;o.scan.position.y=A.top-(A.top-cut)*sy;o.scan.visible=!rm&&u>=1&&u<3.2;o.scan.material.opacity=.34*(u<3?1:1-(u-3)/.2);});
+      this.labEls&&this.labEls.forEach((l,i)=>{if(l.el.classList.contains('bad'))l.el.style.opacity=k>.6?1:0;});}};};}
+/* ---------- 脊柱：固定的節段成為剛體，其餘節段分擔彎曲 ---------- */
+const VN3=['C1','C2','C3','C4','C5','C6','C7','T1','T2','T3','T4','T5','T6','T7','T8','T9','T10','T11','T12','L1','L2','L3','L4','L5'];
+function spine3dBuild(s){return (T,sc,cam,root,c)=>{const fused=new Set(s.fused.map(Number)),run=spRun(s.fused),isC=run.length&&run[0]<7,norm=isC?110:75,act=Math.min(s.rem,norm),pf=isC?.54:.59,fl=act*pf,ex=act*(1-pf),rm=reduceMotion;
+    const H=[],Wd=[];for(let i=0;i<24;i++){H.push(i<7?.06:i<19?.08:.1);Wd.push(i<7?.18:i<19?.23+(i-7)*.009:.38);}
+    const gap=.032,P=[],Pz=[];let y=.25;for(let i=23;i>=0;i--){P[i]=y+H[i]/2;y+=H[i]+gap;}const top=y;for(let i=0;i<24;i++){const f=i<7?(i/6):i<19?(i-7)/11:(i-19)/4;Pz[i]=i<7?.06*Math.cos(f*Math.PI*.9):i<19?-.12*Math.sin(f*Math.PI):.09*Math.sin(f*Math.PI);}
+    const mat=on=>new T.MeshStandardMaterial({color:on?0xF6B35C:0xF3ECDD,roughness:.55,emissive:on?0x6b3300:0x000000,emissiveIntensity:.25}),dm=new T.MeshStandardMaterial({color:0x8a97a3,roughness:.8}),rm2=new T.MeshStandardMaterial({color:0xDCE4EB,metalness:.6,roughness:.3}),vs=[];
+    for(let i=0;i<24;i++){const g=new T.Group(),on=fused.has(i),b=new T.Mesh(new T.CylinderGeometry(Wd[i]/2,Wd[i]/2*1.06,H[i],20),mat(on)),d=new T.Mesh(new T.CylinderGeometry(Wd[i]/2*.88,Wd[i]/2*.88,gap*.9,16),dm);d.position.y=-(H[i]+gap)/2;const sp=new T.Mesh(new T.BoxGeometry(.03,H[i]*.7,.1),mat(on));sp.position.set(0,.01,-Wd[i]/2-.03);g.add(b,sp);if(i<23)g.add(d);
+      if(on){[-1,1].forEach(sd=>{g.add(cyl3(T,rm2,.012,.012,-(H[i]+gap)/2-.01,(H[i]+gap)/2+.01,sd*(Wd[i]/2+.05),-Wd[i]/2-.02));const sc2=cyl3(T,rm2,.014,.01,0,0,0,0);const scw=new T.Mesh(new T.CylinderGeometry(.014,.01,.2,8),rm2);scw.rotation.z=Math.PI/2;scw.position.set(sd*(Wd[i]/4+.05),0,-Wd[i]/4);g.add(scw);});}
+      root.add(g);vs.push(g);}
+    const lo=isC?0:7,hi=isC?6:22,free=[];for(let g=lo;g<=hi;g++)if(!(fused.has(g)&&fused.has(g+1)))free.push(g);const nf=Math.max(1,free.length);
+    cam.position.set(5.6,top/2,0);cam.lookAt(0,top/2,0);c.base=Math.PI/2*0+Math.PI/2*0;root.position.set(0,0,0);
+    const LI=(run.length>1?[0,run[0],run[run.length-1],23]:[0,7,19,23]).filter((v,i,a)=>a.indexOf(v)===i),labs=LI.map(i=>[VN3[i],new T.Vector3(0,P[i],Pz[i]+.3),fused.has(i)?'hot':'']);
+    return {labels:labs,update(t){const mid=(fl-ex)/2,amp=(fl+ex)/2,A=(rm?fl:mid+amp*Math.sin(t*1.1))*Math.PI/180,d=A/nf;let yy=P[23],zz=Pz[23],th=0;
+      const ang=new Array(24).fill(0);for(let i=23;i>=0;i--){if(i<23&&free.includes(i))th+=d;ang[i]=th;}
+      let py=P[23],pz=Pz[23];vs[23].position.set(0,py,pz);vs[23].rotation.x=0;for(let i=22;i>=0;i--){const dy=P[i]-P[i+1],dz=Pz[i]-Pz[i+1],a=ang[i+1],ry=dy*Math.cos(a)-dz*Math.sin(a),rz=dy*Math.sin(a)+dz*Math.cos(a);py+=ry;pz+=rz;vs[i].position.set(0,py,pz);vs[i].rotation.x=ang[i];}
+      this.labEls&&this.labEls.forEach((l,k)=>{const i=LI[k];l.v.set(0,vs[i].position.y,vs[i].position.z+.3);});}};};}
+/* ---------- 胸腹部臟器：立體器官，切除處顯示紅色線框 ---------- */
+function organ3dBuild(s){return (T,sc,cam,root,c)=>{const sel=s.sel.map(String),h=id=>sel.includes(id),grp=s.grp,rm=reduceMotion,view=s.view==='norm'?'norm':'cond',cond=sel.length>0&&view!=='norm';
+    const body=new T.Mesh(new T.CylinderGeometry(.95,.82,3.3,36,1,true),new T.MeshStandardMaterial({color:0xE7BFA2,transparent:true,opacity:.13,side:T.DoubleSide,depthWrite:false}));body.position.y=1.65;body.scale.z=.62;root.add(body);
+    const mk=(col,hl)=>new T.MeshStandardMaterial({color:col,roughness:.6,transparent:true,opacity:hl?.96:.34,emissive:hl?0x222222:0,emissiveIntensity:.3});
+    const OR=[];const add=(name,g,col,pos,scl,inGrp,state)=>{const m=state==='gone'?new T.MeshBasicMaterial({color:0xC0392B,wireframe:true,transparent:true,opacity:.85}):state==='weak'?mk(0x9aa5ae,true):state==='new'?mk(0x2E9D5F,true):mk(col,inGrp);const o=new T.Mesh(g,m);o.position.set(...pos);o.scale.set(...scl);root.add(o);OR.push({o,name,state,inGrp});return o;};
+    const sph=()=>new T.SphereGeometry(1,24,18),G=(n)=>grp===n,st=(id,ok='ok')=>cond&&h(id)?'gone':ok;
+    add('肺L',sph(),0xE8B9B5,[-.4,2.45,0],[.34,.64,.3],G('肺臟'),'ok');add('肺R',sph(),0xE8B9B5,[.4,2.45,0],[.34,.64,.3],G('肺臟'),'ok');
+    const heart=add('心',sph(),0xD2665F,[-.1,2.2,.12],[.26,.3,.24],G('心臟'),'ok');
+    add('肝',sph(),0xA8674A,[.32,1.9,.05],[.58,.24,.32],G('肝臟'),'ok');
+    add('胃',sph(),0xE9A99A,[-.38,1.85,.12],[.3,.26,.2],G('胰臟・胃・脾臟'),cond&&h('7-26')?'gone':'ok');add('脾',sph(),0xB98CC7,[-.66,1.85,-.08],[.11,.22,.1],G('胰臟・胃・脾臟'),cond&&h('7-27')?'gone':'ok');
+    const pan=add('胰',new T.CylinderGeometry(.07,.07,.62,12),0xE4B85C,[0,1.62,-.02],[1,1,1],G('胰臟・胃・脾臟'),cond&&h('7-24')?'gone':'ok');pan.rotation.z=Math.PI/2;
+    const kd=cond&&(h('7-28')||h('7-29'))?'weak':'ok';add('腎L',sph(),0xA9846B,[-.42,1.5,-.22],[.1,.2,.09],G('腎臟（泌尿器）'),kd);add('腎R',sph(),0xA9846B,[.42,1.5,-.22],[.1,.2,.09],G('腎臟（泌尿器）'),cond&&h('7-30')?'gone':kd);
+    if(cond&&h('7-29'))add('移植腎',sph(),0x2E9D5F,[.4,.62,.18],[.1,.19,.09],true,'new');
+    const bl=add('膀胱',sph(),0x8FB0CC,[0,.5,.12],[.2,.2,.18],G('膀胱・腎上腺・骨盆'),cond&&(h('7-36')||h('7-37'))?'gone':'ok');
+    add('子宮',sph(),0xE3A4A8,[0,.86,.08],[.16,.22,.12],G('生殖器・乳腺'),cond&&(h('7-41-1'))?'gone':'ok');add('卵巢L',sph(),0xF0C3A0,[-.3,.9,.06],[.07,.05,.05],G('生殖器・乳腺'),cond&&(h('7-41')||h('7-42'))?'gone':'ok');add('卵巢R',sph(),0xF0C3A0,[.3,.9,.06],[.07,.05,.05],G('生殖器・乳腺'),cond&&h('7-41')?'gone':'ok');
+    add('乳L',sph(),0xF1CDBA,[-.34,2.5,.36],[.2,.2,.1],G('生殖器・乳腺'),cond&&(h('7-43'))?'gone':'ok');add('乳R',sph(),0xF1CDBA,[.34,2.5,.36],[.2,.2,.1],G('生殖器・乳腺'),cond&&(h('7-43')||h('7-44'))?'gone':'ok');
+    const ig=G('腸道・肛門'),pts=[];for(let i=0;i<=40;i++){const a=i/40;pts.push(new T.Vector3(Math.sin(a*Math.PI*7)*.42,1.28-a*.62,.12+Math.cos(a*Math.PI*7)*.06));}
+    const sbState=cond&&(h('7-31')||h('7-32'))?'gone':'ok',curve=new T.CatmullRomCurve3(pts);add('小腸',new T.TubeGeometry(curve,120,.075,10,false),0xE2A76F,[0,0,0],[1,1,1],ig,sbState);
+    const lp=[new T.Vector3(.55,.7,.1),new T.Vector3(.55,1.55,.1),new T.Vector3(-.55,1.58,.1),new T.Vector3(-.55,.7,.1)],lc=new T.CatmullRomCurve3(lp);add('大腸',new T.TubeGeometry(lc,60,.085,10,false),0xC99466,[0,0,0],[1,1,1],ig,cond&&h('7-33')?'gone':'ok');
+    if(cond&&h('7-34')){const b=add('造口袋',new T.BoxGeometry(.2,.3,.08),0xFFF7EC,[.62,1.0,.52],[1,1,1],true,'ok');b.material.opacity=.95;add('造口',sph(),0xD98E97,[.55,1.05,.42],[.05,.05,.05],true,'ok');}
+    const bead=new T.Mesh(new T.SphereGeometry(.1,12,10),new T.MeshBasicMaterial({color:0xFFFFFF,transparent:true,opacity:.8}));bead.visible=ig&&sbState!=='gone';root.add(bead);
+    cam.position.set(0,1.7,6.0);cam.lookAt(0,1.7,0);
+    const hb=heart.scale.clone();const seen={},labs=[];OR.forEach(x=>{const base=x.name.replace(/[LR]$/,'');if(!(x.inGrp||x.state==='gone'||x.state==='new')||seen[base])return;seen[base]=1;const sfx=x.state==='gone'?'（切除）':x.state==='weak'?'（無功能）':x.state==='new'?'（移植）':'';labs.push([base+sfx,new T.Vector3(.8,x.o.position.y,x.o.position.z+.2),x.state==='gone'?'warn':x.state==='new'?'hot':'']);});
+    return {labels:labs,update(t){const b=rm?0:Math.sin(t*5);{const k=1+(rm?0:.08*Math.max(0,Math.sin(t*6)));heart.scale.set(hb.x*k,hb.y*k,hb.z*k);}OR.forEach(x=>{if(x.name.startsWith('肺'))x.o.scale.y=.64*(1+(rm?0:.05*Math.sin(t*1.6)));});bl.scale.y=.2*(.6+(rm?.4:.4*(.5+.5*Math.sin(t*.9))));
+      OR.forEach(x=>{if(x.state==='gone'&&x.o.material)x.o.material.opacity=rm?.85:.5+.4*Math.abs(Math.sin(t*2.2));});if(bead.visible){const u=(t*.12)%1,p=curve.getPoint(u);bead.position.copy(p);}}};};}
+/* ---------- 掛載到既有示範（保留平面版為備援） ---------- */
+function t3Hook(type,key,buildFn,hint){const T=GT[type],_v=T.vis,_m=T.mount;T.vis=s=>t3wrap(key,_v(s),hint);T.mount=s=>{if(_m)_m(s);t3start(key,buildFn(s));};}
+T5(()=>t3Hook('amp','amp',amp3dBuild,'上下肢缺損的立體骨骼：掃描後遠端分離'),'amp3d');
+T5(()=>{const _v=GT.spine.vis,_m=GT.spine.mount;GT.spine.vis=s=>{const h=_v(s);return h.replace(/(<div class="g-spwrap">)(<div>[\s\S]*?<\/div>)/,(m,a,b)=>a+t3wrap('spine',b,'脊柱立體示意：固定的節段成為剛體'));};GT.spine.mount=s=>{if(_m)_m(s);t3start('spine',spine3dBuild(s));};},'spine3d');
+T5(()=>{const _v=GT.organ.vis,_m=GT.organ.mount;GT.organ.vis=s=>t3wrap('organ',_v(s),'胸腹部臟器立體示意');GT.organ.mount=s=>{if(_m)_m(s);t3start('organ',organ3dBuild(s));};},'organ3d');
+T5(()=>{const _c=closeG;closeG=function(){T3.stop();_c();};},'t3close');
+/* 強制險新制查證註記 */
+document.addEventListener('DOMContentLoaded',()=>{const t=document.getElementById('caliTable');if(!t)return;const p=document.createElement('p');p.className='small';p.innerHTML='<b>查證（2026-09-30）：</b>金管會修正「強制汽車責任保險給付標準」，115.7.1 起死亡及第一等級失能由 200 萬提高至 300 萬，其餘各等級同比例增加（第十五等級 5 萬 → 8 萬），死亡＋失能＋傷害醫療合計上限 220 萬 → 320 萬（來源：行政院／金管會新聞稿；聯合報 2026-05-28）。<b>第二～十四等級金額為依同比例換算，請以條文附表為準。</b>';t.closest('.qref-wrap').insertAdjacentElement('afterend',p);});
+
+/* ================= v9：手指／足趾／下肢縮短／假關節與畸形（three.js）＋眼睛特寫 ================= */
+const ez3=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
+function link3(T,m,r,a,b,seg=10){const d=new T.Vector3().subVectors(b,a),L=d.length(),g=new T.Mesh(new T.CylinderGeometry(r,r,L,seg),m);g.position.copy(a).add(b).multiplyScalar(.5);g.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),d.normalize());return g;}
+/* 內嵌立體區（插在既有視窗的平面示範前，保留平面備援） */
+function t3Inline(mid,stageSel,key,build,hint){const modal=document.getElementById(mid),st=document.querySelector(stageSel);if(!modal||!st)return;const stage=st.closest('.fg-stage');if(!stage)return;
+  let w=modal.querySelector(`.t3-wrap[data-k="${key}"]`);if(!w){w=document.createElement('div');w.className='t3-wrap';w.dataset.k=key;w.dataset.inline='1';w.innerHTML=`<div class="t3-tools" role="group" aria-label="檢視方式"><button type="button" data-t3="3d">3D 立體</button><button type="button" data-t3="flat">平面 X 光</button><span></span></div><div class="t3-box" role="img" aria-label="${esc(hint)}"></div>`;stage.insertAdjacentElement('beforebegin',w);}
+  const want=T3.want(),box=w.querySelector('.t3-box'),sp=w.querySelector('.t3-tools span');w.querySelector('[data-t3="3d"]').classList.toggle('on',want);w.querySelector('[data-t3="flat"]').classList.toggle('on',!want);
+  box.hidden=!want;stage.hidden=want;sp.textContent=want?'拖曳可旋轉':'立體檢視不可用時顯示平面';
+  if(want)T3.mount(box,build).then(ok=>{if(!ok){box.hidden=true;stage.hidden=false;sp.textContent='立體檢視載入失敗，已改用平面';}});}
+document.addEventListener('click',e=>{const b=e.target.closest('.t3-wrap[data-inline] [data-t3]');if(!b)return;T3.pref=b.dataset.t3;({finger:()=>fingerRender(),toe:()=>toeRender(),lld:()=>lldRender()})[b.closest('.t3-wrap').dataset.k]();});
+/* ---------- 手指／足趾：每指獨立裁切，切除部分分離淡出 ---------- */
+const HAND3=[{k:'T',n:'拇指',p:[-.8,-.2],a:44,seg:[.55,.5,.42],r:.078,th:1},{k:'I',n:'食指',p:[-.5,.62],a:7,seg:[.62,.38,.28],r:.066},{k:'M',n:'中指',p:[-.16,.7],a:1,seg:[.68,.42,.3],r:.07},{k:'R',n:'無名指',p:[.2,.65],a:-5,seg:[.6,.38,.28],r:.065},{k:'L',n:'小指',p:[.52,.52],a:-12,seg:[.46,.28,.24],r:.057}];
+const FOOT3=[{k:'1',n:'第一趾',p:[-.36,.95],a:3,seg:[.4,.36],r:.13},{k:'2',n:'第二趾',p:[-.1,1.04],a:0,seg:[.32,.2,.15],r:.08},{k:'3',n:'第三趾',p:[.1,1.0],a:-2,seg:[.3,.18,.14],r:.075},{k:'4',n:'第四趾',p:[.29,.92],a:-5,seg:[.28,.16,.13],r:.07},{k:'5',n:'第五趾',p:[.45,.8],a:-9,seg:[.24,.14,.12],r:.065}];
+function cutPos3(hand,d,lv){if(!lv)return null;const S=d.seg,tot=S.reduce((a,b)=>a+b,0),ds=S[S.length-1],pre=tot-ds;
+  if(hand){if(lv===1)return pre+ds*.8;if(lv===2)return pre+ds*.4;return d.th?S[0]+S[1]:S[0];}
+  if(lv===1)return d.k==='1'?pre+ds*.4:pre;return .03;}
+function digitMesh3(T,d,pl){const g=new T.Group(),m=bm3(T,pl),sm=new T.MeshStandardMaterial({color:0xE7BFA2,transparent:true,opacity:.3,depthWrite:false,clippingPlanes:pl}),S=d.seg,r=d.r,J=[0];let y=0;S.forEach(l=>{y+=l;J.push(y);});
+  const skin=new T.Mesh(new T.CylinderGeometry(r*1.9,r*2.2,y,16),sm);skin.position.y=y/2;const tip=new T.Mesh(new T.SphereGeometry(r*1.9,14,10),sm);tip.position.y=y;g.add(skin,tip,ball3(T,m,r*1.3,0,0));
+  S.forEach((l,i)=>{g.add(cyl3(T,m,r*(1-i*.08),r*(1-(i+1)*.08),J[i]+.03,J[i+1]-.03));g.add(ball3(T,m,r*1.25,0,J[i+1]-.02));});return g;}
+function digit3Build(hand){return (T,sc,cam,root,c)=>{const D=hand?HAND3:FOOT3,ST=hand?fState:tState,rm=reduceMotion,sk=new T.MeshStandardMaterial({color:0xE7BFA2,transparent:true,opacity:.3,depthWrite:false}),bm=bm3(T,[]),cuts=[],labs=[],TX=hand?['','部分缺損','≥ 1/2','手指缺損']:['','喪失機能','足趾缺損'];
+    if(hand){root.add(ball3(T,sk,1,0,-.1,0,.95,1,.2),cyl3(T,bm,.12,.14,-1.7,-.95,0,0));[[-.35,-.9],[-.1,-.95],[.15,-.9],[.38,-.88]].forEach(([x,y])=>root.add(ball3(T,bm,.09,x,y,0)));D.slice(1).forEach(d=>root.add(link3(T,bm,.055,new T.Vector3(0,-.95,0),new T.Vector3(d.p[0],d.p[1]-.02,0))));}
+    else{root.add(ball3(T,sk,1,0,.05,0,.6,1.15,.22),ball3(T,sk,1,0,-.95,0,.5,.55,.2));D.forEach(d=>root.add(link3(T,bm,.07,new T.Vector3(0,-.55,0),new T.Vector3(d.p[0],d.p[1]-.02,0))));root.add(ball3(T,bm,.16,0,-.6,0,1,.9,.8));}
+    D.forEach(d=>{const lv=ST[d.k]|0,cut=cutPos3(hand,d,lv),fg=new T.Group();fg.position.set(d.p[0],d.p[1],0);fg.rotation.z=d.a*Math.PI/180;fg.updateMatrix();root.add(fg);const tot=d.seg.reduce((a,b)=>a+b,0);
+      if(cut==null){fg.add(digitMesh3(T,d,[]));return;}
+      const cp=cutPair3(T,fg,cut),prox=digitMesh3(T,d,[cp.keep]),dist=digitMesh3(T,d,[cp.drop]),dg=new T.Group();dg.position.y=cut;dist.position.y=-cut;dg.add(dist);fg.add(prox,dg);
+      const ring=new T.Mesh(new T.TorusGeometry(d.r*2.3,.012,8,32),new T.MeshBasicMaterial({color:0xC0392B,transparent:true}));ring.rotation.x=Math.PI/2;ring.position.y=cut;fg.add(ring);
+      const mats=[];dist.traverse(o=>{if(o.material&&o.material.transparent)mats.push([o.material,o.material.opacity]);});cuts.push({fg,cp,dg,ring,mats,cut});
+      const tip=new T.Vector3(0,tot+.12,0).applyMatrix4(fg.matrix);labs.push([`${d.n}｜${TX[lv]}`,tip,lv>=2?'hot':'']);});
+    if(!cuts.length)labs.push(['全部正常（點下方手指切換狀態）',new T.Vector3(0,hand?1.7:1.9,0),'']);
+    cam.position.set(hand?-.3:0,hand?.35:.3,hand?7.0:6.6);cam.lookAt(hand?-.3:0,hand?.35:.3,0);
+    return {labels:labs,dbg:()=>cuts,post(){cuts.forEach(o=>o.cp.sync());},update(t){const u=rm?4:t%6,k=u<1?0:u<1.9?ez3((u-1)/.9):u<5?1:1-ez3((u-5)/1);cuts.forEach(o=>{o.dg.position.y=o.cut+.2*k;o.dg.rotation.z=.25*k;o.mats.forEach(([m,op])=>{m.opacity=op*(1-.86*k);});o.ring.material.opacity=.3+.7*k;});}};};}
+/* ---------- 下肢縮短：骨盆隨腿長差傾斜，補高墊展示如何拉平 ---------- */
+function lld3Build(){return (T,sc,cam,root,c)=>{const cm=lldCm,dd=cm*.05,L=3,W=.8,rm=reduceMotion,xs=lldSide==='R'?-W/2:W/2,mk=(col)=>new T.MeshStandardMaterial({color:col,roughness:.6}),legL=mk(0x5B8DB8),legS=mk(0xE0873A),skin=mk(0xE7BFA2);
+    const gr=new T.Mesh(new T.CircleGeometry(1.7,40),new T.MeshStandardMaterial({color:0x2c3b4a,roughness:1}));gr.rotation.x=-Math.PI/2;root.add(gr);
+    const mkLeg=(m,x)=>{const g=new T.Mesh(new T.CylinderGeometry(.13,.1,1,14),m);root.add(g);const f=new T.Mesh(new T.BoxGeometry(.26,.1,.42),m);root.add(f);const hip=new T.Mesh(new T.SphereGeometry(.15,14,10),skin);root.add(hip);return {g,f,hip,x};},long=mkLeg(legL,-xs),sh=mkLeg(legS,xs);
+    const pel=new T.Mesh(new T.BoxGeometry(W+.3,.16,.3),mk(0xDCE4EB));root.add(pel);const tor=new T.Mesh(new T.CylinderGeometry(.3,.34,1.3,18),skin);root.add(tor);const hd=new T.Mesh(new T.SphereGeometry(.22,18,14),skin);root.add(hd);
+    const blk=new T.Mesh(new T.BoxGeometry(.46,1,.56),mk(0x2E9D5F));root.add(blk);
+    cam.position.set(0,2.25,10.8);cam.lookAt(0,2.25,0);const sinMax=Math.min(.6,dd/W),th0=Math.asin(sinMax)*180/Math.PI;
+    const labs=[[`長腿 88.0 公分`,new T.Vector3(-xs+(xs>0?-.2:.2),1.5,.2),''],[`短腿 ${(88-cm).toFixed(1)} 公分`,new T.Vector3(xs+(xs>0?.2:-.2),1.2,.2),'hot'],[`補高 ${cm.toFixed(1)} 公分`,new T.Vector3(xs,.15,.4),'']];if(cm>0)labs.push([`骨盆傾斜（示意放大）`,new T.Vector3(0,L+.05,0),'warn']);
+    const place=(k)=>{const dE=dd*(1-k),s=Math.min(.6,dE/W),th=Math.asin(s),yp=L-dE/2,hx=(W/2)*Math.cos(th),sgn=xs>0?-1:1;pel.position.set(0,yp,0);pel.rotation.z=sgn*th;
+      const hL=L,hS=L-dE,fs=dd*k;long.hip.position.set(-xs>0?hx:-hx,hL,0);sh.hip.position.set(xs>0?hx:-hx,hS,0);
+      long.g.scale.y=hL-.1;long.g.position.set(long.hip.position.x,(hL+.1)/2,0);long.f.position.set(long.hip.position.x,.05,.08);
+      sh.g.scale.y=Math.max(.05,hS-fs-.1);sh.g.position.set(sh.hip.position.x,(hS+fs+.1)/2,0);sh.f.position.set(sh.hip.position.x,fs+.05,.08);
+      tor.position.set(0,yp+.8,0);tor.rotation.z=-sgn*th*.45;hd.position.set(tor.position.x-sgn*th*.55*(-1)*0,yp+1.65,0);blk.scale.y=Math.max(.001,fs);blk.position.set(sh.hip.position.x,fs/2,.05);blk.visible=fs>.01;};
+    place(0);
+    return {labels:labs,update(t){const u=rm?3:t%7,k=u<1.5?0:u<3?ez3((u-1.5)/1.5):u<6?1:1-ez3((u-6)/1);place(rm?1:k);}};};}
+/* ---------- 假關節、長管骨畸形 ---------- */
+function lbone3Build(s){return (T,sc,cam,root,c)=>{const rm=reduceMotion,xs=s.both?[-.8,.8]:[0],bm=bm3(T,[]),ghost=new T.MeshBasicMaterial({color:0x6FA8D6,wireframe:true,transparent:true,opacity:.4}),band=new T.MeshStandardMaterial({color:0xD98E97,transparent:true,opacity:.55}),call=new T.MeshStandardMaterial({color:0xE4B85C,roughness:.8}),mal=s.type==='mal',H=3.2,items=[];const labs=[];
+    xs.forEach((x,i)=>{const g=new T.Group();g.position.x=x;root.add(g);g.add(ball3(T,bm,.26,0,H+.05,0,1,.8,1),ball3(T,bm,.26,0,-.05,0,1,.8,1));
+      if(mal){g.add(cyl3(T,bm,.14,.14,H,H/2));const piv=new T.Group();piv.position.y=H/2;g.add(piv);piv.add(cyl3(T,bm,.14,.14,0,-H/2));const cb=new T.Mesh(new T.SphereGeometry(.22,14,10),call);cb.scale.set(1,.8,1);piv.add(cb);
+        const gh=new T.Mesh(new T.CylinderGeometry(.14,.14,H,12,6),ghost);gh.position.y=H/2;g.add(gh);items.push({piv});}
+      else{g.add(cyl3(T,bm,.14,.14,H,H/2+.12));const piv=new T.Group();piv.position.y=H/2+.12;g.add(piv);const lo=cyl3(T,bm,.14,.14,0,-(H/2+.12));piv.add(lo);const bd=new T.Mesh(new T.CylinderGeometry(.17,.17,.24,14,1,true),band);bd.position.y=H/2;g.add(bd);items.push({piv,band:bd});}
+      if(i===0){labs.push([mal?'成角畸形（約 24°）':'斷端未癒合，可異常活動',new T.Vector3(x+.55,H/2,0),'warn']);if(mal)labs.push(['虛線＝正常骨線',new T.Vector3(x+.55,H/2+.7,0),'']);if(s.type==='pjm')labs.push(['顯著運動失能',new T.Vector3(x+.55,H/2-.7,0),'hot']);}});
+    cam.position.set(0,H/2,s.both?8.4:6.8);cam.lookAt(0,H/2,0);
+    return {labels:labs,update(t){const u=rm?3:t%6;items.forEach((o,i)=>{if(mal){const k=rm?1:u<2?ez3(u/2):u<5?1:1-ez3((u-5)/1);o.piv.rotation.z=-.42*k;}else{o.piv.rotation.z=rm?.14:Math.sin(t*2.2+i)*.24;}});}};};}
+/* ---------- 眼睛特寫：眼瞼、眼球追視與複視、散瞳 ---------- */
+function eyeClose(o){const rm=reduceMotion,has=id=>o.includes(id),mot=has('3-16')||has('3-17')||has('3-18'),both=has('3-16'),lidMov=has('3-22')||has('3-23'),lidDef=has('3-20')||has('3-21'),mydr=has('3-19'),dip=has('3-18'),any=mot||lidMov||lidDef||mydr;
+  const an=(a)=>rm?'':a,aff=k=>k==='R'?(both||has('3-17')||has('3-18')):both,KT='0;.2;.4;.6;.8;1',tf=(amp,gx,gy)=>`${0} 0;${gx*amp} 0;${-gx*amp} 0;0 ${-gy*amp};0 ${gy*amp};0 0`;
+  const eye=(cx,k)=>{const a=mot&&aff(k),amp=a?.25:1,pr=mydr&&(k==='R'||has('3-16'))?17:9,id='ec'+k,lidO=lidMov?-14:-52,lidC=lidMov?-6:lidDef?-12:0;
+    return `<clipPath id="${id}"><path d="M${cx-55} 62 Q${cx} 16 ${cx+55} 62 Q${cx} 108 ${cx-55} 62Z"/></clipPath><path d="M${cx-55} 62 Q${cx} 16 ${cx+55} 62 Q${cx} 108 ${cx-55} 62Z" fill="#fff" stroke="#B57C5C" stroke-width="2"/>
+     <g clip-path="url(#${id})"><g>${an(`<animateTransform attributeName="transform" type="translate" values="${tf(amp,22,11)}" keyTimes="${KT}" dur="8s" repeatCount="indefinite"/>`)}<circle cx="${cx}" cy="62" r="24" fill="#6B4A2E"/><circle cx="${cx}" cy="62" r="${pr}" fill="#111">${mydr?an(`<animate attributeName="r" values="${pr};${pr};${k==='R'||has('3-16')?pr:5};${k==='R'||has('3-16')?pr:5};${pr}" keyTimes="0;.5;.58;.8;.9" dur="4s" repeatCount="indefinite"/>`):''}</circle><circle cx="${cx-6}" cy="55" r="4" fill="#fff" opacity=".8"/></g>
+      <g><rect x="${cx-62}" y="${-30}" width="124" height="${96}" fill="#E7BFA2" stroke="#B57C5C" stroke-width="1.5" transform="translate(0 ${rm?lidO:lidO})">${an(`<animateTransform attributeName="transform" type="translate" values="0 ${lidO};0 ${lidO};0 ${lidC};0 ${lidO}" keyTimes="0;.86;.92;1" dur="${lidMov?5:4}s" repeatCount="indefinite"/>`)}</rect></g></g>
+     <path d="M${cx-55} 62 Q${cx} 16 ${cx+55} 62" fill="none" stroke="${lidDef?'#C0392B':'#8E5A40'}" stroke-width="${lidDef?3:2}" ${lidDef?'stroke-dasharray="5 4"':''}/><text x="${cx}" y="122" text-anchor="middle" style="font-size:11px;font-weight:700;fill:${a||(mydr&&pr>9)||lidMov||lidDef?'#B02A21':'#5A6B7A'}">${k==='R'?'右眼':'左眼'}${a?'（動不了）':mydr&&pr>9?'（瞳孔放大）':lidDef?'（眼瞼缺損）':lidMov?'（眼瞼不動）':''}</text>`;};
+  const dot=(c,op,extra)=>`<circle cx="150" cy="168" r="6" fill="${c}" opacity="${op}"><animateTransform attributeName="transform" type="translate" values="${tf(1,70,10)}${extra||''}" keyTimes="${KT}" dur="8s" repeatCount="indefinite"/></circle>`;
+  return `<svg viewBox="0 0 300 196" class="eye-close" role="img" aria-label="眼睛特寫：${any?'依勾選項目顯示':'正常眼的眨眼與追視'}">${eye(80,'R')}${eye(220,'L')}<rect x="50" y="146" width="200" height="46" rx="10" fill="#F1F4F7" stroke="#C9D3DC"/><text x="58" y="158" style="font-size:10px;fill:#5A6B7A">追視目標（兩眼跟著點走）</text>
+   ${rm?'<circle cx="150" cy="168" r="6" fill="#234E70"/>':dot('#234E70',1)}${dip&&!rm?`<g><circle cx="150" cy="168" r="6" fill="#C0392B" opacity=".55"><animateTransform attributeName="transform" type="translate" values="0 0;86 0;-54 0;0 -10;0 10;0 0" keyTimes="${KT}" dur="8s" repeatCount="indefinite"/></circle></g><text x="244" y="184" text-anchor="end" style="font-size:10px;font-weight:700;fill:#C0392B">紅點＝重影（複視）</text>`:''}</svg>`;}
+/* ---------- 掛載 ---------- */
+T5(()=>{const _f=fingerRender;fingerRender=function(){_f();t3Inline('fingerModal','#fgSvg','finger',digit3Build(true),'立體手：各手指依狀態切除');};},'finger3d');
+T5(()=>{const _f=toeRender;toeRender=function(){_f();t3Inline('toeModal','#tfSvg','toe',digit3Build(false),'立體腳：各足趾依狀態切除');};},'toe3d');
+T5(()=>{const _f=lldRender;lldRender=function(){_f();t3Inline('lldModal','#llSvg','lld',lld3Build(),'立體站姿：腿長差使骨盆傾斜，補高墊可拉平');};},'lld3d');
+T5(()=>t3Hook('lbone','lbone',lbone3Build,'立體長骨：假關節的異常活動與畸形成角'),'lbone3d');
+T5(()=>{const _e=GT.eye.vis;GT.eye.vis=s=>s.tab==='other'?_e(s)+eyeClose(s.oth.map(String)):_e(s);},'eyeclose');
+
+/* ================= v10：脊柱畸形與變形 3D、其他體幹骨、末關節鎖定 3D ================= */
+/* ---------- 其他體幹骨（鎖骨、胸骨、肋骨、肩胛骨、骨盆骨）：被選取者以橘色顯示並帶骨痂 ---------- */
+function trunkBones3(T,root,oth,P,labs){const on=new T.MeshStandardMaterial({color:0xF6B35C,roughness:.55,emissive:0x6b3300,emissiveIntensity:.25}),cal=new T.MeshStandardMaterial({color:0xE4B85C,roughness:.8}),yT=P[7],yB=P[13];
+  if(oth.has('肋骨')){for(let k=0;k<6;k++){const g=new T.Group(),t=new T.Mesh(new T.TorusGeometry(.5-.012*k,.024,8,24,Math.PI*1.25),on);t.rotation.x=Math.PI/2;g.add(t);g.rotation.y=-Math.PI*.12;g.position.set(0,P[8+k]+.02,.1);root.add(g);}
+    const bump=new T.Mesh(new T.SphereGeometry(.05,10,8),cal);bump.position.set(.52,P[10],.22);root.add(bump);labs.push(['肋骨畸形',new T.Vector3(.6,P[10],.3),'warn']);}
+  if(oth.has('胸骨')){const m=new T.Mesh(new T.BoxGeometry(.12,.8,.05),on);m.position.set(0,(yT+yB)/2,.58);root.add(m);const b=new T.Mesh(new T.SphereGeometry(.06,10,8),cal);b.position.set(0,(yT+yB)/2+.05,.6);root.add(b);labs.push(['胸骨畸形',new T.Vector3(.2,(yT+yB)/2,.6),'warn']);}
+  if(oth.has('鎖骨')){[-1,1].forEach(sd=>{const m=link3(T,on,.03,new T.Vector3(sd*.08,yT+.14,.55),new T.Vector3(sd*.62,yT+.2,.32));root.add(m);});const b=new T.Mesh(new T.SphereGeometry(.05,10,8),cal);b.position.set(.34,yT+.17,.44);root.add(b);labs.push(['鎖骨畸形',new T.Vector3(.5,yT+.34,.4),'warn']);}
+  if(oth.has('肩胛骨')){[-1,1].forEach(sd=>{const m=new T.Mesh(new T.BoxGeometry(.34,.42,.03),on);m.position.set(sd*.46,(yT+yB)/2+.05,-.42);m.rotation.z=sd*.25;root.add(m);});labs.push(['肩胛骨畸形',new T.Vector3(.5,(yT+yB)/2+.2,-.5),'warn']);}
+  if(oth.has('骨盤骨')){const m=new T.Mesh(new T.TorusGeometry(.5,.07,10,32),on);m.rotation.x=Math.PI/2;m.position.set(0,.3,0);root.add(m);const b=new T.Mesh(new T.SphereGeometry(.09,10,8),cal);b.position.set(.5,.3,0);root.add(b);labs.push(['骨盆骨畸形',new T.Vector3(.55,.5,0),'warn']);}}
+/* ---------- 脊柱：固定、壓迫、滑脫、側彎、前傾、棘突切除 ---------- */
+function spine3dBuild2(s){return (T,sc,cam,root,c)=>{const fused=new Set(s.fused.map(Number)),run=spRun(s.fused),isC=run.length&&run[0]<7,norm=isC?110:75,act=Math.min(s.rem,norm),pf=isC?.54:.59,fl=act*pf,ex=act*(1-pf),rm=reduceMotion,df=new Set(s.def||[]),oth=new Set(s.oth||[]);
+    const tgtC=(df.has('h')||s.frac)?(run.length?run[0]:18):-1,SPN=[17,18,19],H=[],Wd=[];for(let i=0;i<24;i++){H.push(i<7?.06:i<19?.08:.1);Wd.push(i<7?.18:i<19?.23+(i-7)*.009:.38);}if(tgtC>=0)H[tgtC]*=.5;
+    const gap=.032,P=[],Pz=[],Px=new Array(24).fill(0);let y=.25;for(let i=23;i>=0;i--){P[i]=y+H[i]/2;y+=H[i]+gap;}const top=y;
+    for(let i=0;i<24;i++){const f=i<7?(i/6):i<19?(i-7)/11:(i-19)/4;Pz[i]=i<7?.06*Math.cos(f*Math.PI*.9):i<19?-(.12+(df.has('k')?.3:0))*Math.sin(f*Math.PI):.09*Math.sin(f*Math.PI);if(df.has('c')&&i>=6&&i<=20)Px[i]=.3*Math.sin(Math.PI*(i-6)/14);}
+    const tb=[],tz=[];for(let i=0;i<24;i++){const a=Math.max(0,i-1),b=Math.min(23,i+1),dy=(P[a]-P[b])||1;tb.push(Math.atan2(Pz[a]-Pz[b],dy));tz.push(-Math.atan2(Px[a]-Px[b],dy));}
+    if(df.has('s'))for(let i=0;i<=22;i++)Pz[i]+=.36*Wd[22];
+    const mat=(on,red)=>new T.MeshStandardMaterial({color:red?0xE0705F:on?0xF6B35C:0xF3ECDD,roughness:.55,emissive:on?0x6b3300:0,emissiveIntensity:.25}),dm=new T.MeshStandardMaterial({color:0x8a97a3,roughness:.8}),rod=new T.MeshStandardMaterial({color:0xDCE4EB,metalness:.6,roughness:.3}),gh=new T.MeshBasicMaterial({color:0xC0392B,wireframe:true}),vs=[];
+    for(let i=0;i<24;i++){const g=new T.Group(),on=fused.has(i),red=i===tgtC,b=new T.Mesh(new T.CylinderGeometry(Wd[i]/2,Wd[i]/2*1.06,H[i],20),mat(on,red)),d=new T.Mesh(new T.CylinderGeometry(Wd[i]/2*.88,Wd[i]/2*.88,gap*.9,16),dm),spn=df.has('sp')&&SPN.includes(i),sp=new T.Mesh(new T.BoxGeometry(.03,H[i]*.7,.1),spn?gh:mat(on,red));
+      d.position.y=-(H[i]+gap)/2;sp.position.set(0,.01,-Wd[i]/2-.03);g.add(b,sp);if(i<23)g.add(d);
+      if(on)[-1,1].forEach(sd=>{g.add(cyl3(T,rod,.012,.012,-(H[i]+gap)/2-.01,(H[i]+gap)/2+.01,sd*(Wd[i]/2+.05),-Wd[i]/2-.02));const w=new T.Mesh(new T.CylinderGeometry(.014,.01,.2,8),rod);w.rotation.z=Math.PI/2;w.position.set(sd*(Wd[i]/4+.05),0,-Wd[i]/4);g.add(w);});
+      if(df.has('s')&&i===22){const ar=new T.ArrowHelper(new T.Vector3(0,0,1),new T.Vector3(0,0,Wd[i]/2+.02),.42,0xC0392B,.14,.1);g.add(ar);}
+      root.add(g);vs.push(g);}
+    const lo=isC?0:7,hi=isC?6:22,free=[];for(let g=lo;g<=hi;g++)if(!(fused.has(g)&&fused.has(g+1)))free.push(g);const nf=Math.max(1,free.length),af=(fused.size||s.rem<norm)?1:.22;
+    cam.position.set(5.6,top/2,0);cam.lookAt(0,top/2,0);c.base=df.has('c')?Math.PI/2:0;
+    const LI=(run.length>1?[0,run[0],run[run.length-1],23]:[0,7,19,23]).filter((v,i,a)=>a.indexOf(v)===i),labs=LI.map(i=>[VN3[i],new T.Vector3(0,P[i],Pz[i]+.3),fused.has(i)?'hot':'']),tags=[];
+    const tag=(txt,i,ox,oz)=>{labs.push([txt,new T.Vector3(ox,P[i],Pz[i]+oz),'warn']);tags.push({n:labs.length-1,i,ox,oz});};
+    if(tgtC>=0)tag('壓迫 ≥ 50%',tgtC,.3,.3);if(df.has('s'))tag('滑脫 ≥ 25%',22,.3,.5);if(df.has('c'))tag('側彎 ≥ 30°',12,.45,.1);if(df.has('k'))tag('前傾 ≥ 50°',12,.3,-.4);if(df.has('sp'))tag('棘突切除 ≥ 3 個',18,.3,-.4);
+    trunkBones3(T,root,oth,P,labs);
+    return {labels:labs,update(t){const mid=(fl-ex)/2,amp=(fl+ex)/2,A=(rm?fl:(mid+amp*Math.sin(t*1.1))*af)*Math.PI/180,d=A/nf,ang=new Array(24).fill(0);let th=0;for(let i=23;i>=0;i--){if(i<23&&free.includes(i))th+=d;ang[i]=th;}
+      let py=P[23],pz=Pz[23];vs[23].position.set(Px[23],py,pz);vs[23].rotation.set(tb[23],0,tz[23]);for(let i=22;i>=0;i--){const dy=P[i]-P[i+1],dz=Pz[i]-Pz[i+1],a=ang[i+1],ry=dy*Math.cos(a)-dz*Math.sin(a),rz=dy*Math.sin(a)+dz*Math.cos(a);py+=ry;pz+=rz;vs[i].position.set(Px[i],py,pz);vs[i].rotation.set(ang[i]+tb[i],0,tz[i]);}
+      this.labEls&&this.labEls.forEach((l,k)=>{if(k<LI.length){const i=LI[k];l.v.set(Px[i],vs[i].position.y,vs[i].position.z+.3);}else{const tg=tags.find(x=>x.n===k);if(tg)l.v.set(Px[tg.i]+tg.ox,vs[tg.i].position.y,vs[tg.i].position.z+tg.oz);}});}};};}
+/* ---------- 末關節鎖定：左＝正常（三關節都彎）、右＝末關節強直（末端挺直） ---------- */
+function dip3Build(s){return (T,sc,cam,root,c)=>{const d=HAND3.find(x=>x.k===s.f)||HAND3[1],S=d.seg,r=d.r*1.1,rm=reduceMotion,red=new T.MeshStandardMaterial({color:0xC0392B,roughness:.5,emissive:0x550000,emissiveIntensity:.4});
+    const rig=(x,lock)=>{const g=new T.Group();g.position.x=x;root.add(g);const m=bm3(T,[]),sk=new T.MeshStandardMaterial({color:0xE7BFA2,transparent:true,opacity:.3,depthWrite:false});g.add(ball3(T,m,r*1.6,0,0,0),cyl3(T,m,r*1.2,r*1.3,-1.0,-.05),ball3(T,sk,r*2.2,0,-.6,0,1,2.3,.9));
+      const seg=(par,len,rad)=>{par.add(cyl3(T,m,rad,rad*.92,.03,len-.03));const k=new T.Mesh(new T.CylinderGeometry(rad*1.9,rad*2,len,14),sk);k.position.y=len/2;par.add(k);};
+      const j1=new T.Group();g.add(j1);seg(j1,S[0],r);const j2=new T.Group();j2.position.y=S[0];j1.add(j2);j2.add(ball3(T,m,r*1.3,0,0,0));seg(j2,S[1],r*.92);
+      const j3=new T.Group();j3.position.y=S[1];j2.add(j3);const dj=ball3(T,lock?red:m,r*(lock?1.75:1.3),0,0,0);j3.add(dj);seg(j3,S[2],r*.84);const tip=new T.Mesh(new T.SphereGeometry(r*1.7,12,10),sk);tip.position.y=S[2];j3.add(tip);return {j1,j2,j3,dj,lock};};
+    const A=rig(-1.0,false),B=rig(.7,true),tipY=S[0]+S[1]+S[2]+.15;cam.position.set(-.55,.7,8.6);cam.lookAt(-.55,.7,0);c.base=0;
+    const labs=[['正常',new T.Vector3(-1.45,2.15,0),'hot'],['末關節強直',new T.Vector3(.35,2.15,0),'warn'],['紅點＝末關節（DIP）鎖定',new T.Vector3(.05,-.55,0),'']];
+    return {labels:labs,update(t){const k=rm?.75:.5-.5*Math.cos(t*1.9);[A,B].forEach(f=>{f.j1.rotation.z=k*1.0;f.j2.rotation.z=k*1.45;f.j3.rotation.z=f.lock?0:k*.95;});B.dj.scale.setScalar(rm?1:1+.12*Math.sin(t*5));}};};}
+/* ---------- 掛載 ---------- */
+T5(()=>{spine3dBuild=spine3dBuild2;},'spine3d2');
+T5(()=>{const _m=GT.spine.mount;GT.spine.mount=function(s){if(_m)_m(s);const tl=document.querySelector('#gVis .t3-wrap[data-k="spine"] .t3-tools');if(tl&&!tl.querySelector('[data-t3view]'))tl.insertAdjacentHTML('beforeend','<button type="button" data-t3view="0">側面</button><button type="button" data-t3view="1">正面</button>');};},'spineview');
+document.addEventListener('click',e=>{const b=e.target.closest('[data-t3view]');if(!b||!T3.cur)return;const c=T3.cur,to=b.dataset.t3view==='1'?Math.PI/2:0,from=c.base+c.ry,t0=performance.now();c.touched=true;c.base=0;(function st(n){const k=ez3((n-t0)/380);c.ry=from+(to-from)*k;if(c.rm)T3.frame();if(k<1)requestAnimationFrame(st);})(t0);});
+T5(()=>t3Hook('dip','dip',dip3Build,'立體手指：末關節鎖定與正常手指對照'),'dip3d');
+
+/* ================= v11：心臟／肺臟／肝臟 3D（與既有判斷邏輯、判斷尺連動） ================= */
+const sph9=(T,col,op,sx,sy,sz,x=0,y=0,z=0)=>{const m=new T.Mesh(new T.SphereGeometry(1,24,18),new T.MeshStandardMaterial({color:col,transparent:op<1,opacity:op,roughness:.5,depthWrite:op>=1}));m.scale.set(sx,sy,sz);m.position.set(x,y,z);return m;};
+/* ---------- 心臟：左心室容積隨射出分率收縮，主動脈射出血量與 EF 成正比 ---------- */
+function heart3Build(s){return (T,sc,cam,root,c)=>{const has=!(s.lvef==null||s.lvef===''||isNaN(+s.lvef)),ef=has?Math.max(0,Math.min(80,+s.lvef))/100:.6,rm=reduceMotion,efc=ef<=.25?0xE0453A:ef<.5?0xE0832A:0x2FA36B;
+    const mk=(x,e,col)=>{const g=new T.Group();g.position.x=x;root.add(g);const wall=sph9(T,0xD2665F,.34,.62,.8,.56),blood=new T.Mesh(new T.SphereGeometry(1,24,18),new T.MeshStandardMaterial({color:col,roughness:.35,emissive:col,emissiveIntensity:.25})),rv=sph9(T,0x6F8FD0,.5,.26,.4,.3,.42,.05,.12);blood.scale.set(.46,.6,.4);g.add(wall,blood,rv);
+      const cv=new T.CatmullRomCurve3([new T.Vector3(0,.55,0),new T.Vector3(-.05,1.0,0),new T.Vector3(-.4,1.3,0),new T.Vector3(-.7,1.0,0),new T.Vector3(-.75,.3,0)]);g.add(new T.Mesh(new T.TubeGeometry(cv,30,.1,10,false),new T.MeshStandardMaterial({color:0xC96A5E,transparent:true,opacity:.5,depthWrite:false})));
+      const beads=[0,1,2].map(()=>{const b=new T.Mesh(new T.SphereGeometry(1,10,8),new T.MeshBasicMaterial({color:col}));b.visible=false;g.add(b);return b;});return {g,wall,blood,beads,cv,e,k:Math.cbrt(Math.max(.02,1-e)),br:Math.cbrt(Math.max(.03,e/.6))*.1};},
+      H=[mk(-1.05,.6,0x2FA36B),mk(1.05,ef,efc)],labs=[['正常 擠出約 60%',new T.Vector3(-1.05,-1.0,0),'hot'],[has?`患者 擠出 ${Math.round(ef*100)}%`:'患者（尚未填入 LVEF）',new T.Vector3(1.05,-1.0,0),ef<=.25?'warn':'']];
+    if(s.tx){const pg=H[1].g,dev=new T.Mesh(new T.CylinderGeometry(.16,.16,.5,16),new T.MeshStandardMaterial({color:0x8a97a3,metalness:.5,roughness:.4}));dev.position.set(.62,-.75,0);dev.rotation.z=.5;pg.add(dev);pg.add(link3(T,new T.MeshStandardMaterial({color:0xB8C4CF}),.04,new T.Vector3(.5,-.55,0),new T.Vector3(.2,-.4,0)));labs.push(['心室輔助器／移植心',new T.Vector3(1.95,-.7,0),'hot']);}
+    cam.position.set(0,.15,8.2);cam.lookAt(0,.15,0);const EZ=ez3;
+    return {labels:labs,update(t){const p=rm?.8:(t%1.1)/1.1,cc=p<.5?0:p<.8?EZ((p-.5)/.3):1-EZ((p-.8)/.2);H.forEach(h=>{const f=1-(1-h.k)*cc;h.blood.scale.set(.46*f,.6*f,.4*f);const w=1-.07*cc;h.wall.scale.set(.62*w,.8*w,.56*w);
+      h.beads.forEach((b,i)=>{const u=(p-.5-i*.06)/.5;b.visible=!rm&&u>0&&u<1&&cc>0;if(b.visible){b.position.copy(h.cv.getPoint(u));b.scale.setScalar(h.br*(i===0?1:.7));}});});}};};}
+/* ---------- 肺臟：五個肺葉；切除＝紅色線框、放射性肺炎＝暗紅、移植＝綠；呼吸幅度隨 FEV1 ---------- */
+function lung3Build(s){return (T,sc,cam,root,c)=>{const has=s.fev1!=null&&s.fev1!==''&&!isNaN(+s.fev1),v=has?Math.max(0,Math.min(100,+s.fev1)):100,res=s.res||'none',rm=reduceMotion,amp=s.support?.03:.03+.13*(v/100);
+    const LB=[['RU',.62,.95,.1,.36,.46,.3,'R'],['RM',.66,.4,.18,.33,.26,.28,'R'],['RL',.6,-.3,0,.38,.5,.34,'R'],['LU',-.62,.9,.1,.34,.52,.3,'L'],['LL',-.6,-.28,0,.38,.54,.34,'L']],tr=new T.MeshStandardMaterial({color:0xD9A0A0,roughness:.5}),objs=[];
+    root.add(cyl3(T,tr,.09,.09,2.2,.95,0,0),link3(T,tr,.07,new T.Vector3(0,.95,0),new T.Vector3(.5,.45,0)),link3(T,tr,.07,new T.Vector3(0,.95,0),new T.Vector3(-.5,.45,0)));
+    LB.forEach(([n,x,y,z,sx,sy,sz,side])=>{const gone=(res==='side'&&side==='R')||(res==='lobe2'&&(n==='RU'||n==='RM')),infl=s.rad&&(n==='RL'||n==='LL'),col=s.tx?0x2FA36B:infl?0x8A4A52:0xE8B9B5;
+      const m=gone?new T.Mesh(new T.SphereGeometry(1,16,12),new T.MeshBasicMaterial({color:0xC0392B,wireframe:true,transparent:true,opacity:.8})):sph9(T,col,.92,sx,sy,sz);if(gone){m.scale.set(sx,sy,sz);}m.position.set(-x,y,z);root.add(m);objs.push({m,sx,sy,sz,gone});});
+    const beads=Array.from({length:Math.max(1,Math.round(v/25))},()=>{const b=new T.Mesh(new T.SphereGeometry(.06,8,6),new T.MeshBasicMaterial({color:0x6FA8D6}));root.add(b);return b;});
+    const labs=[[has?`FEV1 ${v}%`:'FEV1 未填（以正常示意）',new T.Vector3(0,2.45,0),v<60?'warn':'hot']];
+    if(res!=='none')labs.push([res==='side'?'右肺切除（一側）':'右肺兩葉切除',new T.Vector3(-1.3,.55,0),'warn']);if(s.rad)labs.push(['放射性肺炎（暗紅）',new T.Vector3(1.0,-.8,0),'warn']);if(s.tx)labs.push(['移植肺（綠）',new T.Vector3(1.2,-.4,0),'hot']);
+    if(s.support){const tk=new T.Mesh(new T.CylinderGeometry(.14,.14,.65,16),new T.MeshStandardMaterial({color:0x4a6fa5,metalness:.4,roughness:.5}));tk.position.set(1.55,1.9,0);root.add(tk,link3(T,new T.MeshStandardMaterial({color:0xB8C4CF}),.03,new T.Vector3(1.45,1.8,0),new T.Vector3(.1,2.1,0)));labs.push(['氧氣／呼吸器維生',new T.Vector3(1.0,1.45,0),'hot']);}
+    cam.position.set(0,.8,7.4);cam.lookAt(0,.8,0);
+    return {labels:labs,update(t){const b=rm?.5:.5+.5*Math.sin(t*1.5),k=1+amp*b;objs.forEach(o=>{if(!o.gone)o.m.scale.set(o.sx*k,o.sy*k,o.sz*k);});beads.forEach((bd,i)=>{const u=rm?.5:.5+.5*Math.sin(t*1.5+i*.9-1.2);bd.position.set(0,2.2-1.25*u,0);bd.visible=true;});}};};}
+/* ---------- 肝臟：質地、腹水、肝腦病變、靜脈瘤出血、門脈高壓 ---------- */
+function liver3Build(s){return (T,sc,cam,root,c)=>{const scr=[0,1,2,3,4].reduce((a,i)=>a+(+s['c'+i]||1),0),cls=scr>=10?'C':scr>=7?'B':'A',rm=reduceMotion,asc=s.asc==='refr'?.82:s.asc==='persist'?.5:0,he=s.he|0,col=s.tx?0x2FA36B:cls==='A'?0xB8764F:cls==='B'?0x8A4F3A:0x5E3428;
+    const body=new T.Mesh(new T.CylinderGeometry(.95,.85,2.9,36,1,true),new T.MeshStandardMaterial({color:0xE7BFA2,transparent:true,opacity:.14,side:T.DoubleSide,depthWrite:false}));body.position.y=1.5;body.scale.z=.62;root.add(body);
+    const head=sph9(T,0xF3D8C8,1,.34,.34,.34,0,3.55,0);root.add(head,cyl3(T,new T.MeshStandardMaterial({color:0xF3D8C8}),.14,.17,3.2,2.95,0,0));
+    root.add(link3(T,new T.MeshStandardMaterial({color:0xD98E7F}),.06,new T.Vector3(0,3.25,0),new T.Vector3(0,1.9,.1)));
+    const lv=sph9(T,col,1,.66,.28,.36,.32,1.55,.1);root.add(lv);const nn=cls==='A'?0:cls==='B'?7:15;for(let k=0;k<nn;k++){const a=k*2.399,y=Math.cos(k*.9),r=Math.sqrt(1-y*y*.5);const nd=new T.Mesh(new T.SphereGeometry(.05,8,6),new T.MeshStandardMaterial({color:0x3a1f17,roughness:.8}));nd.position.set(.32+.62*r*Math.cos(a)*.95,1.55+.27*y,.1+.34*r*Math.sin(a)*.95);root.add(nd);}
+    const aw=sph9(T,0x6FA8D6,.34,.8,.15+asc*.5,.5,0,.72,.05);aw.visible=asc>0;root.add(aw);
+    const fog=Array.from({length:he===2?6:he===1?3:0},(_,i)=>{const f=sph9(T,0x9FB2C2,.55,.13,.13,.13);root.add(f);return {f,i};});
+    const vr=(s.bleed||s.portal)?[0,1,2,3,4].map(i=>{const m=sph9(T,0xC0392B,1,.055,.055,.055,(i%2?.06:-.06),2.35-i*.11,.1);root.add(m);return m;}):[];
+    const drops=s.bleed?[0,1,2].map(i=>{const d=sph9(T,0xC0392B,1,.05,.05,.05);root.add(d);return {d,i};}):[];
+    if(s.portal){root.add(link3(T,new T.MeshStandardMaterial({color:0xC0392B,roughness:.5}),.07,new T.Vector3(.25,1.4,.1),new T.Vector3(-.55,1.25,.0)));}
+    const labs=[[`肝臟 ${cls} 級（${scr} 分）`,new T.Vector3(1.05,1.65,.2),cls==='C'?'warn':'hot']];if(asc)labs.push([s.asc==='refr'?'頑固腹水':'持續腹水',new T.Vector3(1.0,.75,.2),'']);if(he)labs.push([he===2?'肝腦病變（二次以上）':'肝腦病變（曾有）',new T.Vector3(.85,3.7,0),'warn']);if(s.bleed)labs.push(['靜脈瘤出血',new T.Vector3(.7,2.2,.1),'warn']);else if(s.portal)labs.push(['門脈高壓＋靜脈瘤',new T.Vector3(.7,2.2,.1),'warn']);if(s.tx)labs.push(['移植肝（綠）',new T.Vector3(1.05,1.25,.2),'hot']);
+    cam.position.set(0,1.9,8.2);cam.lookAt(0,1.9,0);
+    return {labels:labs,update(t){if(aw.visible){aw.scale.set(.8*(1+(rm?0:.03*Math.sin(t*3))),.15+asc*.5+(rm?0:.025*Math.sin(t*2.4)),.5*(1+(rm?0:.03*Math.cos(t*2.7))));}
+      fog.forEach(o=>{const a=(rm?0:t*.6)+o.i*1.05;o.f.position.set(Math.cos(a)*.52,3.6+Math.sin(a*1.3)*.2,Math.sin(a)*.4);o.f.scale.setScalar(.13*(1+(rm?0:.2*Math.sin(t*2+o.i))));});
+      drops.forEach(o=>{const u=rm?.4:((t*.7+o.i*.33)%1);o.d.position.set(0,2.2-u*1.6,.1);});}};};}
+/* ---------- 掛載（保留平面版為備援；判斷尺與吐氣曲線留在 3D 下方） ---------- */
+T5(()=>{GT.heart.vis=s=>t3wrap('heart',heartPump(s),'立體心臟：正常與患者的收縮對照')+heartJudge(s);GT.heart.mount=s=>{t3start('heart',heart3Build(s));};},'heart3d');
+T5(()=>{GT.lung.vis=s=>`<div class="g-lungwrap">${t3wrap('lung',lungBreath(s),'立體肺臟：呼吸幅度隨 FEV1，切除、肺炎、移植各自標示')}${spiroChart(s)}${lungJudge(s)}</div>`;GT.lung.mount=s=>{t3start('lung',lung3Build(s));};},'lung3d');
+T5(()=>{const _v=GT.liver.vis;GT.liver.vis=s=>{const h=_v(s),k=h.indexOf('<svg viewBox="0 0 300 90"'),bar=k>=0?h.slice(k).replace(/<\/div>\s*$/,''):'';return `<div class="lv-wrap">${t3wrap('liver',liverScene(s),'立體肝臟：分級、腹水、肝腦病變、靜脈瘤出血')}${bar}</div>`;};GT.liver.mount=s=>{t3start('liver',liver3Build(s));};},'liver3d');
+
+/* ================= v12：關節 3D 補強（減少動態時停止迴圈、手機降載） ================= */
+T5(()=>{const _d=demo3DLoop;demo3DLoop=function(now){_d(now);if(reduceMotion&&D3&&!D3.drag){const ok=Math.abs(D3.yaw-D3.root.rotation.y)<.002&&Math.abs(D3.pitch-D3.root.rotation.x)<.002&&Math.abs(D3.tlo-D3.lo)<=.05&&Math.abs(D3.thi-D3.hi)<=.05;if(ok){cancelAnimationFrame(demoRAF);demoRAF=0;}}};},'joint-rm-loop');
+T5(()=>{const _b=build3D;build3D=function(){_b();const cv=D3.renderer.domElement,wake=()=>{if(reduceMotion&&!demoRAF&&$('#demoModal').classList.contains('open')){D3.last=0;demoRAF=requestAnimationFrame(demo3DLoop);}};
+  ['pointerdown','pointermove','wheel','keydown'].forEach(ev=>cv.addEventListener(ev,wake,{passive:true}));
+  if(window.matchMedia('(max-width:640px)').matches){D3.renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.5));D3.scene.traverse(o=>{if(o.isDirectionalLight&&o.castShadow){o.shadow.mapSize.set(512,512);if(o.shadow.map){o.shadow.map.dispose();o.shadow.map=null;}}});}};},'joint-perf');
+
+/* ================= v13：皮膚（精確貼圖人形）、鼻、口（頭部縱剖面）3D ================= */
+/* ---------- 共用：頭部縱剖面（切開一半，平面隨物件同步） ---------- */
+function head3(T,root,o){const loc=new T.Plane(new T.Vector3(-1,0,0),0),pl=new T.Plane(),P=[pl],sync=()=>pl.copy(loc).applyMatrix4(root.matrixWorld);
+  const mat=(col,op=1,extra={})=>new T.MeshStandardMaterial(Object.assign({color:col,roughness:.6,transparent:op<1,opacity:op,side:T.DoubleSide,clippingPlanes:P,depthWrite:op>=1},extra)),curve=a=>new T.CatmullRomCurve3(a.map(p=>new T.Vector3(...p))),tube=(pts,r,col,op)=>new T.Mesh(new T.TubeGeometry(curve(pts),40,r,12,false),mat(col,op));
+  const shell=new T.Mesh(new T.SphereGeometry(1,40,28),mat(0xE7BFA2,.17,{depthWrite:false}));shell.scale.set(.82,1.0,.9);shell.position.set(0,1.75,-.05);root.add(shell);
+  const neck=new T.Mesh(new T.CylinderGeometry(.42,.46,1.6,28,1,true),mat(0xE7BFA2,.17,{depthWrite:false}));neck.position.set(0,.3,-.05);root.add(neck);
+  const nosePts=[[0,1.5,.92],[0,1.48,.55],[0,1.42,.1],[0,1.2,-.12]];root.add(tube(nosePts,.1,0xE7A5A8,.95));
+  root.add(tube([[0,1.2,-.12],[0,.9,-.14],[0,.6,-.14]],.15,0xD98E97,.95));
+  const oral=new T.Mesh(new T.SphereGeometry(1,24,16),mat(0x8A3340,.9));oral.scale.set(.2,.13,.42);oral.position.set(0,1.0,.5);root.add(oral);
+  const tongue=new T.Mesh(new T.SphereGeometry(1,24,16),mat(o.taste?0x9aa5ae:0xE08A95));tongue.scale.set(.17,.1,.36);tongue.position.set(0,.96,.38);root.add(tongue);
+  const trach=new T.Mesh(new T.CylinderGeometry(.1,.1,1.5,18,1,true),mat(0x9FB8D0,.9));trach.position.set(0,-.1,.05);root.add(trach);
+  const eso=new T.Mesh(new T.CylinderGeometry(.075,.075,1.5,16,1,true),mat(0xD98E7F,.95));eso.position.set(0,-.1,-.2);root.add(eso);
+  const lar=new T.Mesh(new T.TorusGeometry(.12,.025,8,20),mat(o.lar?0xC0392B:0xE9B7A0));lar.rotation.x=Math.PI/2;lar.position.set(0,.62,.04);root.add(lar);
+  const hinge=new T.Group();hinge.position.set(0,.72,-.02);const epi=new T.Mesh(new T.PlaneGeometry(.02,.16),mat(0xE9B7A0,1));epi.rotation.y=Math.PI/2;epi.position.y=.07;hinge.add(epi);root.add(hinge);
+  const brain=new T.Mesh(new T.SphereGeometry(.5,24,18),mat(0xE8A6B4,.4,{depthWrite:false}));brain.position.set(0,2.35,-.1);root.add(brain);
+  const bulb=new T.Mesh(new T.SphereGeometry(.09,14,10),new T.MeshStandardMaterial({color:0xE8A6B4,emissive:0xFFD27A,emissiveIntensity:0,clippingPlanes:P}));bulb.position.set(0,1.95,.48);root.add(bulb);
+  const olf=new T.Mesh(new T.SphereGeometry(1,16,12),mat(o.blk?0x9aa5ae:0xE4B85C,.95));olf.scale.set(.05,.04,.16);olf.position.set(0,1.62,.45);root.add(olf);
+  const tipM=new T.MeshStandardMaterial({color:0xE7BFA2,transparent:true,opacity:.5,depthWrite:false,clippingPlanes:P}),tip=new T.Mesh(new T.ConeGeometry(.14,o.def?.2:.4,14),tipM);tip.rotation.x=Math.PI/2;tip.position.set(0,1.55,o.def?1.0:1.12);root.add(tip);
+  if(o.def){const gh=new T.Mesh(new T.ConeGeometry(.14,.4,10),new T.MeshBasicMaterial({color:0xC0392B,wireframe:true,clippingPlanes:P}));gh.rotation.x=Math.PI/2;gh.position.set(0,1.55,1.12);root.add(gh);}
+  return {sync,P,tongue,hinge,lar,bulb,olf,mat,tube,curve,airC:curve([[0,1.5,1.4],[0,1.5,.92],[0,1.48,.55],[0,1.42,.1],[0,1.2,-.12],[0,.8,-.1],[0,.3,.04],[0,-.7,.05]]),scC:curve([[0,1.9,1.6],[0,1.6,1.1],[0,1.58,.7],[0,1.62,.46]]),boC:curve([[0,1.0,.95],[0,.98,.55],[0,.94,.12],[0,.78,-.14],[0,.3,-.2],[0,-.7,-.2]])};}
+function bead3(T,root,r,col){const m=new T.Mesh(new T.SphereGeometry(r,10,8),new T.MeshBasicMaterial({color:col}));root.add(m);return m;}
+/* ---------- 鼻：氣流一吸一呼，氣味抵達嗅覺區才亮；閉塞／嗅覺喪失／缺損 ---------- */
+function nose3Build(s){return (T,sc,cam,root,c)=>{const blk=!!s.func,def=!!s.def,rm=reduceMotion,H=head3(T,root,{blk,def}),air=Array.from({length:6},()=>bead3(T,root,.035,0x2F6B8F)),scent=Array.from({length:3},()=>bead3(T,root,.04,0x8E3F98));
+    if(blk){[[0,1.47,.75],[0,1.44,.3]].forEach(p=>{const m=new T.Mesh(new T.SphereGeometry(.11,14,10),H.mat(0xC98C86,1));m.position.set(...p);m.scale.set(.8,1,1.2);root.add(m);});}
+    cam.position.set(6.2,1.5,.2);cam.lookAt(0,1.4,.2);c.base=0;
+    const labs=[['鼻孔',new T.Vector3(0,1.7,1.1),''],['嗅覺區',new T.Vector3(0,2.0,.5),'hot'],['→ 喉嚨、肺',new T.Vector3(0,.6,.3),'']];if(blk)labs.push(['空氣進不去／嗅覺喪失',new T.Vector3(0,1.15,.9),'warn']);if(def)labs.push(['鼻部軟骨缺損 ≧ 1/2',new T.Vector3(0,1.05,1.2),'warn']);
+    return {labels:labs,post:H.sync,update(t){const b=rm?.5:.5+.5*Math.sin(t*1.4);air.forEach((a,i)=>{let u=blk?Math.min(.18,b*.18)+(i%3)*.01:Math.max(0,Math.min(1,b*1.15-i*.06));a.position.copy(H.airC.getPoint(u));a.visible=!blk||i<3;});
+      const ph=rm?.7:((t*.35)%1);scent.forEach((a,i)=>{const u=Math.max(0,Math.min(1,ph*1.4-i*.18));a.position.copy(H.scC.getPoint(blk&&u>.34?.34:u));});
+      const arrive=!blk&&ph>.62&&ph<.9;H.bulb.material.emissiveIntensity=rm?(blk?0:.6):(arrive?.9:0);H.olf.material.emissive=H.olf.material.emissive||new T.Color();H.olf.material.emissive.setHex(arrive?0xFFB020:0);}};};}
+/* ---------- 口：吞嚥（食物團、舌、會厭）、說話（發音位置、聲波）、全喉切除 ---------- */
+function mouth3Build(s){return (T,sc,cam,root,c)=>{const lar=!!s.lar,taste=!!s.taste,rm=reduceMotion,H=head3(T,root,{lar,taste}),bad=new Set((s.snd||[]).map(Number)),sw=s.sw|0;
+    const ART=[[0,.99,.98],[0,.97,.93],[0,1.03,.78],[0,1.12,.06],[0,1.12,.3],[0,1.1,.58],[0,1.04,.82]],arts=ART.map((p,i)=>{const m=new T.Mesh(new T.SphereGeometry(.045,12,8),new T.MeshStandardMaterial({color:(bad.has(i)||lar)?0xE0453A:0x2F8FD0,emissive:(bad.has(i)||lar)?0x550000:0x0a2a44,emissiveIntensity:.5}));m.position.set(...p);root.add(m);return m;});
+    const bolus=new T.Mesh(new T.SphereGeometry(sw===0?.1:sw===1?.08:.055,14,10),new T.MeshStandardMaterial({color:sw===0?0x8A5A30:sw===1?0xE8C66A:0x6FA8D6,roughness:.7}));root.add(bolus);
+    const waves=[0,1,2].map(()=>{const w=new T.Mesh(new T.TorusGeometry(.12,.012,6,24),new T.MeshBasicMaterial({color:0x2F6B8F,transparent:true,opacity:0}));w.position.set(0,1.0,1.0);root.add(w);return w;});
+    if(lar){const st=new T.Mesh(new T.TorusGeometry(.09,.02,8,16),new T.MeshStandardMaterial({color:0x2F6B8F,clippingPlanes:H.P}));st.position.set(0,.18,.52);root.add(st);root.add(H.tube([[0,.2,.06],[0,.18,.3],[0,.18,.5]],.045,0x6FA8D6,.95));}
+    const air=lar?Array.from({length:3},()=>bead3(T,root,.03,0x6FA8D6)):[];
+    if(s.aph||s.dys){const sp=new T.Mesh(new T.SphereGeometry(.14,14,10),new T.MeshStandardMaterial({color:0xC0392B,emissive:0x660000,emissiveIntensity:.6}));sp.position.set(0,2.3,.3);root.add(sp);root.userData.sp=sp;}
+    cam.position.set(6.2,1.45,.15);cam.lookAt(0,1.3,.15);c.base=0;
+    const labs=[[['一般飯菜','粥、糊狀','流質'][sw]+'吞嚥',new T.Vector3(0,.55,.9),'hot']];if(lar)labs.push(['喉頭已切除・頸部造口呼吸',new T.Vector3(0,.18,.65),'warn']);if(taste)labs.push(['味覺喪失',new T.Vector3(0,.75,.55),'warn']);if(s.sal)labs.push(['唾液減少，須配水吞',new T.Vector3(0,1.35,.9),'warn']);if(s.aph)labs.push([s.aph===2?'言語中樞受損（無法溝通）':'言語中樞受損',new T.Vector3(0,2.7,.2),'warn']);if(s.dys)labs.push(['綴音失能',new T.Vector3(0,2.7,.2),'warn']);
+    if(bad.size&&!lar)labs.push(['紅點＝不能構音的位置',new T.Vector3(0,.78,.95),'warn']);
+    return {labels:labs,post:H.sync,update(t){const u=rm?.55:((t%(sw===0?5:4.2))/(sw===0?5:4.2)),k=ez3(u/.95);bolus.position.copy(H.boC.getPoint(Math.min(1,k)));bolus.visible=u<.97;
+      const pharynx=k>.38&&k<.62;H.hinge.rotation.x=lar?0:(pharynx?1.2:0);H.tongue.position.set(0,.96+(rm?0:(k<.4?.03*Math.sin(Math.min(1,k/.4)*Math.PI):0)),.38);
+      arts.forEach((a,i)=>{const ph=rm?0:Math.max(0,Math.sin(((t*1.1-i*.22)%2.4)/2.4*Math.PI));const sc2=1+(rm?0:.55*ph);a.scale.setScalar(sc2);});
+      waves.forEach((w,i)=>{if(lar||rm){w.material.opacity=0;return;}const p=((t*.8+i*.33)%1);w.position.z=1.0+p*.7;w.scale.setScalar(.6+p*1.4);w.rotation.y=Math.PI/2;w.material.opacity=.7*(1-p);});
+      air.forEach((a,i)=>{const p=rm?.5:.5+.5*Math.sin(t*1.5-i*.5);a.position.set(0,.5-p*.38,.2+p*.34);});
+      const sp=root.userData.sp;if(sp)sp.scale.setScalar(rm?1:1+.25*Math.sin(t*5));}};};}
+/* ---------- 皮膚：身體輪廓擠出的立體人形，正反面貼實際塗色格子；冒汗水珠只出現在未塗色處 ---------- */
+function bodyShape3(T,sc){const sh=new T.Shape(),t=BODY_P.match(/[MLQZ][^MLQZ]*/g);let first=true;const P=(x,y)=>[(x-60)*sc,(258-y)*sc];
+  t.forEach(cmd=>{const k=cmd[0],n=(cmd.slice(1).match(/-?[\d.]+/g)||[]).map(Number);if(k==='M'){const[a,b]=P(n[0],n[1]);sh.moveTo(a,b);}else if(k==='L'){const[a,b]=P(n[0],n[1]);sh.lineTo(a,b);}else if(k==='Q'){const[a,b]=P(n[0],n[1]),[c2,d]=P(n[2],n[3]);sh.quadraticCurveTo(a,b,c2,d);}});return sh;}
+function skin3Build(s){return (T,sc0,cam,root,c)=>{const C=SKIN_CELLS(),on=new Set(s.cells.map(Number)),rm=reduceMotion,SC=.0125,W=120,Hh=262,minF=Math.min(...C.filter(p=>p[0]<140).map(p=>p[0])),minB=Math.min(...C.filter(p=>p[0]>=140).map(p=>p[0])),off=minB-minF;
+    const tex=(back)=>{const cv=document.createElement('canvas');cv.width=W*5;cv.height=Hh*5;const x=cv.getContext('2d');x.fillStyle='#E7BFA2';x.fillRect(0,0,cv.width,cv.height);C.forEach((p,i)=>{const isB=p[0]>=140;if(isB!==back)return;const px=(isB?p[0]-off:p[0]),py=p[1];x.fillStyle=on.has(i)?'#B8402F':'rgba(255,255,255,.18)';x.fillRect(px*5,(py-0)*5,8.4*5,8.4*5);if(on.has(i)){x.strokeStyle='#7a2418';x.lineWidth=2;x.strokeRect(px*5,py*5,8.4*5,8.4*5);}});const t=new T.CanvasTexture(cv);t.anisotropy=4;return t;};
+    const sh=bodyShape3(T,SC),mkCap=(t,back)=>{const g=new T.ShapeGeometry(sh,18),pos=g.attributes.position,uv=g.attributes.uv;for(let i=0;i<pos.count;i++){const X=pos.getX(i)/SC+60,Y=258-pos.getY(i)/SC;uv.setXY(i,X/W,1-Y/Hh);}uv.needsUpdate=true;const m=new T.Mesh(g,new T.MeshStandardMaterial({map:t,roughness:.7,color:0xDDC1A8}));if(back){m.rotation.y=Math.PI;m.position.z=-.061;}else m.position.z=.061;return m;};
+    root.add(mkCap(tex(false),false),mkCap(tex(true),true));const side=new T.Mesh(new T.ExtrudeGeometry(sh,{depth:.12,bevelEnabled:false}),new T.MeshStandardMaterial({color:0xC99A85,roughness:.8}));side.position.z=-.06;root.add(side);
+    const top=(258-38)*SC;root.add(sph9(T,0xE7BFA2,1,.26,.28,.26,0,top-.02+.32,0),cyl3(T,new T.MeshStandardMaterial({color:0xE7BFA2}),.1,.12,top-.05,top+.1,0,0));root.position.y=-top/2+.1;
+    const drops=[];let n=0;if(!rm)C.forEach((p,i)=>{if(on.has(i)||i%5!==2||n>=36)return;const isB=p[0]>=140,px=isB?p[0]-off:p[0],X=(px+4.2-60)*SC,Y=(258-p[1]-4.2)*SC,d=sph9(T,0x3B8FD0,1,.022,.03,.022,isB?-X:X,Y,isB?-.085:.085);root.add(d);drops.push({d,y0:Y,k:n++});});
+    const pc=skinPct(s);cam.position.set(0,.2,6.4);cam.lookAt(0,.1,0);
+    return {labels:[[`疤痕（塗紅）${pc}%`,new T.Vector3(.95,top*.75,0),pc>=2?'warn':'hot'],['💧＝還能排汗',new T.Vector3(-.95,top*.35,0),'']],update(t){drops.forEach(o=>{const p=((t*.45+o.k*.137)%1);o.d.position.y=o.y0-p*.09;{const k=Math.max(.01,Math.sin(Math.PI*p));o.d.scale.set(.022*k,.03*k,.022*k);}});}};};}
+/* ---------- 掛載 ---------- */
+T5(()=>{GT.nose.vis=s=>t3wrap('nose',noseScene(s),'立體鼻腔縱剖面：氣流與氣味');GT.nose.mount=s=>{t3start('nose',nose3Build(s));};},'nose3d');
+T5(()=>{const _mh=mouthHead,_m=GT.mouth.mount;mouthHead=function(s){return _mh(s).replace(/<svg[\s\S]*?<\/svg>/,m=>t3wrap('mouth',m,'立體頭部縱剖面：吞嚥與說話'));};GT.mouth.mount=function(s){if(_m)_m(s);t3start('mouth',mouth3Build(s));};},'mouth3d');
+T5(()=>{const _v=GT.skin.vis,_m=GT.skin.mount;GT.skin.vis=s=>_v(s)+(T3.want()?t3wrap('skin','','立體人形：疤痕範圍與排汗'):'');GT.skin.mount=function(s){if(_m)_m(s);t3start('skin',skin3Build(s));const sv=document.getElementById('skSvg');if(sv){let dirty=false;sv.addEventListener('pointerdown',e=>{if(e.target.dataset&&e.target.dataset.c!=null)dirty=true;});sv.addEventListener('pointerup',()=>{if(dirty){dirty=false;setTimeout(()=>{if(typeof G!=='undefined'&&G.t==='skin')gRender(false);},0);}});}};},'skin3d');
+/* 釋放：材質的貼圖（皮膚的畫布貼圖）也要 dispose，否則每次塗色／開關都會累積顯示記憶體 */
+T5(()=>{const _d=T3.dispose;T3.dispose=function(c){if(c)c.sc.traverse(o=>{if(o.material)(Array.isArray(o.material)?o.material:[o.material]).forEach(m=>{if(m.map)m.map.dispose();});});_d.call(this,c);};},'t3-dispose-maps');
+
 </script>
 </body>
 </html>
