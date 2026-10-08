@@ -704,6 +704,64 @@ table.qref td.new{font-weight:700;color:var(--navy)}
 @keyframes cutPulse{50%{stroke-width:6;opacity:.55}}
 @media(prefers-reduced-motion:reduce){#gVis svg line[stroke="#C0392B"][stroke-width="3"],#gVis svg path[stroke="#C0392B"][stroke-dasharray="4 3"]{animation:none!important}}
 
+/* v26：上下肢缺損／假關節與畸形／末關節 四步故事；3D 改為選配 */
+.x9{width:100%;max-width:440px;background:radial-gradient(ellipse at 50% 40%,#2A3B4B,#141D26);border-radius:12px;padding:10px;display:grid;gap:6px}
+.x9 .t3-tools span{color:#C9D6E2}.x9 .ech-replay{margin:4px auto 0}
+.x9-note{font-size:.76rem;color:#C9D6E2;text-align:center;line-height:1.5}
+.lv9{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.lv9 li{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;font-size:.86rem;line-height:1.45;padding:6px 8px;border-radius:9px;background:#F4F7FA}
+.lv9 li.on{outline:2px solid var(--seal);background:#FFF6F4;font-weight:700}
+.lv9 code{font-family:inherit;font-weight:700;color:var(--navy);white-space:nowrap}
+.f9-fig{max-width:300px;margin:0 auto}
+.lb9-wob{animation:lb9Wob 2.4s ease-in-out infinite;transform-box:view-box}
+@keyframes lb9Wob{0%,100%{transform:rotate(0)}30%{transform:rotate(11deg)}70%{transform:rotate(-9deg)}}
+.dp9-a{animation:dp9A 3s ease-in-out infinite;transform-box:view-box}.dp9-b{animation:dp9B 3s ease-in-out infinite;transform-box:view-box}.dp9-c{animation:dp9C 3s ease-in-out infinite;transform-box:view-box}
+@keyframes dp9A{0%,15%,100%{transform:rotate(0)}50%,65%{transform:rotate(22deg)}}
+@keyframes dp9B{0%,15%,100%{transform:rotate(0)}50%,65%{transform:rotate(48deg)}}
+@keyframes dp9C{0%,15%,100%{transform:rotate(0)}50%,65%{transform:rotate(40deg)}}
+.am9-cut{animation:am9Cut 1.8s ease-in-out infinite}@keyframes am9Cut{0%,100%{opacity:1}50%{opacity:.35}}
+@media(prefers-reduced-motion:reduce){.lb9-wob,.dp9-a,.dp9-b,.dp9-c,.am9-cut{animation:none!important}}
+
+/* v26-2：手指／足趾／下肢縮短 四步故事 */
+.ds9{margin:10px 0 6px;padding:10px;border:1.5px solid var(--line);border-radius:16px;background:#FBFCFD}
+.ds9-h{margin:14px 0 6px;font-size:.84rem;font-weight:700;color:var(--navy);text-align:center}
+.ds9-it{display:grid;gap:6px;padding-bottom:8px;border-bottom:1px dashed var(--line)}.ds9-it:last-of-type{border-bottom:0}
+
+/* v26-3：開合區塊 */
+details.notes{padding:8px 18px}
+details.notes>summary,details.crit-det>summary{list-style:none;display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-height:44px;padding:8px 12px;border:1.5px solid #D9C27A;border-radius:10px;background:#FFF8E1;color:#5C4500;font-size:.86rem;font-weight:700;cursor:pointer}
+details.notes>summary::-webkit-details-marker,details.crit-det>summary::-webkit-details-marker{display:none}
+details.notes>summary::before{content:"📋";font-size:1rem}
+details.notes>summary::after,.fold-hint::after{content:"點開看審核標準 ▼";margin-left:auto;padding:3px 12px;border-radius:999px;background:#B98A1A;color:#fff;font-size:.78rem;white-space:nowrap}
+details.notes[open]>summary::after,details.crit-det[open] .fold-hint::after{content:"收合 ▲";background:#7A8796}
+details.notes>summary:hover,details.crit-det>summary:hover{background:#FFF1C4}
+details.notes>summary:focus-visible,details.crit-det>summary:focus-visible{outline:3px solid var(--seal);outline-offset:2px}
+details.notes[open]>summary{margin-bottom:6px}
+.crit-det{border-color:#D9C27A}.crit-det>summary.crit-head{border:0;border-radius:0}
+.crit-det:not([open])>summary.crit-head{border-radius:0}
+.fold-hint{margin-left:auto}
+
+/* v26-4：分組開合 */
+.grp-det{margin:6px 12px;border:1.5px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}
+.grp-det>summary{list-style:none;display:flex;align-items:center;gap:10px;flex-wrap:wrap;min-height:48px;padding:8px 14px;cursor:pointer;background:#F4F7FA}
+.grp-det>summary::-webkit-details-marker{display:none}
+.grp-det>summary:hover{background:#EAF0F6}.grp-det>summary:focus-visible{outline:3px solid var(--seal);outline-offset:-3px}
+.gd-name{font-size:.92rem;font-weight:700;color:var(--seal);letter-spacing:.06em}
+.gd-cnt{font-size:.8rem;font-weight:700;color:var(--navy);background:#fff;border:1px solid var(--line);border-radius:999px;padding:1px 10px}
+.gd-hint{margin-left:auto}.gd-hint::after{content:"點開看項目 ▼";padding:3px 12px;border-radius:999px;background:var(--navy);color:#fff;font-size:.78rem;font-weight:700;white-space:nowrap}
+.grp-det[open]>summary{border-bottom:1px solid var(--line)}.grp-det[open] .gd-hint::after{content:"收合 ▲";background:#7A8796}
+.grp-det>details.notes,.grp-det>.crit-wrap{margin-left:6px;margin-right:6px}
+.gd-all{margin-left:8px;min-height:36px;padding:0 14px;border:1.5px solid var(--navy);border-radius:999px;background:#fff;color:var(--navy);font:inherit;font-size:.8rem;font-weight:700;cursor:pointer}
+.gd-all[aria-pressed="true"]{background:var(--navy);color:#fff}
+
+/* v26-6：關節活動受限 四步故事 */
+#demoModal:not(.mj-on) .mj9,#demoModal:not(.mj-on) .mj9-h{display:none}
+.mj9-t th,.mj9-t td{text-align:center!important;padding:6px 6px}.mj9-t th:first-child,.mj9-t td:first-child{text-align:left!important}
+.mj9-t .cur{background:#FFF1EE;outline:2px solid var(--seal);outline-offset:-2px;font-weight:700;color:#8A2A22}
+.mj9-t tr.sel td:first-child{color:var(--seal)}
+.mj9-t{table-layout:fixed;font-size:.76rem}.mj9-t th{white-space:normal!important;font-size:.7rem}.mj9-t td{word-break:keep-all}
+@media(max-width:420px){.mj9-t th,.mj9-t td{padding:5px 3px}.mj9-t{font-size:.7rem}}
+
 
 /* 對外版：提醒與聯絡 */
 .pub-note{display:flex;gap:14px;align-items:flex-start;background:var(--seal-soft);border:1px solid #EBC7C2;border-left:5px solid var(--seal);border-radius:10px;padding:12px 16px;margin:-4px 0 16px;font-size:.9rem;line-height:1.7}
@@ -717,6 +775,7 @@ table.qref td.new{font-weight:700;color:var(--navy)}
 .pub-cta a.go:hover{background:var(--seal-soft);color:var(--seal)}
 .pub-cta a.go:focus-visible,.pub-note a:focus-visible{outline:3px solid var(--seal);outline-offset:3px}
 @media(max-width:640px){.pub-cta{grid-template-columns:1fr}.pub-note{flex-direction:column;gap:4px}}
+
 
 </style>
 </head>
@@ -3909,6 +3968,247 @@ function spineScenes(s){const P=spineParts(s),run=spRun(s.fused),R=SP_ROM[run.le
    {t:'③ 認定條件逐項檢查',svg:m3,cap:'脊柱的認定分三類：「運動失能」（固定的節段多、活動範圍喪失多）、「畸形」（明顯變形）、以及「其他軀幹骨畸形」。畸形與運動失能屬同一種類，不得合併升等，按較重者定之。',bul:['脊柱失能須治療一年以上（多次手術者自最後一次手術後一年，拔釘除外）','須經 X 光檢查才能診斷']},
    {t:'④ 認定結果與金額',svg:`<div class="story-resbox">${res9('spine',s)}</div>`,cap:'實際等級與金額以勞保局與保險公司審定為準。畸形併脊髓壓迫致四肢麻痺（他覺可證明），以及脊柱失能與 8-4 體幹骨畸形，可依規定合併提高等級。',bul:[]}];}
 T5(()=>{GT.spine._old=GT.spine.vis;const _m=GT.spine.mount;GT.spine.vis=s=>{const S=spineScenes(s);ST9.spine=S;storyStop();return storyHTML('spine',S,Math.min(ST9I.spine==null?1:ST9I.spine,S.length-1));};GT.spine.mount=function(s){if(!document.querySelector('#gVis .g-spwrap'))return;if(_m)_m(s);};},'spine-story');
+
+
+/* ================= v26：3D 改為選配（預設平面）；上下肢缺損、假關節與畸形、末關節 四步故事 ================= */
+T3.pref='flat';
+{const _w=t3wrap;t3wrap=function(k,fb,hint){return _w(k,fb,hint).replace('立體檢視不可用時顯示平面',T3.ok===false?'立體檢視不可用，顯示平面':'想看立體可按「3D 立體」（可拖曳旋轉）');};}
+{const _ti=t3Inline;t3Inline=function(mid,sel,key,build,hint){_ti(mid,sel,key,build,hint);const m=document.getElementById(mid),sp=m&&m.querySelector(`.t3-wrap[data-k="${key}"] .t3-tools span`);if(sp&&!T3.want())sp.textContent=T3.ok===false?'立體檢視不可用，顯示平面':'想看立體可按「3D 立體」（可拖曳旋轉）';};}
+const gName9=g=>'第'+CN[g-1]+'等級';
+const bulL9=(t,s)=>{const n=GT[t].notes;return (typeof n==='function'?n(s):n||[]).slice(0,3);};
+function lvRow9(id,on,extra){const x=itemCat(id),g=x.it[2];return `<li class="${on?'on':''}"><code>${id}</code><span>${esc(x.it[1])}${extra?`<br><small>${esc(extra)}</small>`:''}</span><span class="badge ${badgeCls(g)}">${gName9(g)}</span></li>`;}
+/* ---------- 上下肢：淺色示意肢體（可畫切斷線） ---------- */
+const AM9={arm:{J:[['肩關節',20],['肘關節',94],['腕關節',162]],cut:{elbow:90,wrist:160}},leg:{J:[['髖關節',18],['膝關節',98],['足關節（踝）',176]],cut:{knee:94,ankle:172,tarso:null}}};
+function limb9(limb,cx,uid,cutKey){const arm=limb==='arm',L=AM9[limb],y=L.J.map(j=>j[1]);
+  const skin=arm?`<path d="M${cx-20} ${y[0]-8}Q${cx} ${y[0]-20} ${cx+20} ${y[0]-8}L${cx+17} ${y[1]}L${cx+15} ${y[2]}L${cx+22} ${y[2]+8}L${cx+22} ${y[2]+36}L${cx-22} ${y[2]+36}L${cx-22} ${y[2]+8}L${cx-15} ${y[2]}L${cx-17} ${y[1]}Z" fill="#F4DCCB" stroke="#C99A85" stroke-width="1.6"/>`+[-16,-8,0,8,16].map((d,i)=>`<path d="M${cx+d} ${y[2]+34}V${y[2]+(i===0?50:62)}" stroke="#F4DCCB" stroke-width="7" stroke-linecap="round"/><path d="M${cx+d} ${y[2]+34}V${y[2]+(i===0?50:62)}" stroke="#C99A85" stroke-width="1" stroke-linecap="round" fill="none" opacity=".5"/>`).join('')
+    :`<path d="M${cx-24} ${y[0]-6}Q${cx} ${y[0]-18} ${cx+24} ${y[0]-6}L${cx+19} ${y[1]}L${cx+13} ${y[2]}L${cx+16} ${y[2]+18}L${cx+70} ${y[2]+28}Q${cx+78} ${y[2]+38} ${cx+68} ${y[2]+42}L${cx-16} ${y[2]+42}Q${cx-22} ${y[2]+30} ${cx-14} ${y[2]+14}L${cx-13} ${y[2]}L${cx-19} ${y[1]}Z" fill="#F4DCCB" stroke="#C99A85" stroke-width="1.6"/>`;
+  const bone=(d,w)=>`<path d="${d}" stroke="#A89B84" stroke-width="${w+2.5}" stroke-linecap="round" fill="none"/><path d="${d}" stroke="#F7F1E5" stroke-width="${w}" stroke-linecap="round" fill="none"/>`;
+  const bones=arm?bone(`M${cx} ${y[0]+6}V${y[1]-6}`,8)+bone(`M${cx-5} ${y[1]+7}V${y[2]-5}`,5)+bone(`M${cx+5} ${y[1]+7}V${y[2]-5}`,5)+bone(`M${cx-12} ${y[2]+8}L${cx+12} ${y[2]+8}`,6)
+    :bone(`M${cx} ${y[0]+6}V${y[1]-6}`,9)+bone(`M${cx-3} ${y[1]+7}V${y[2]-5}`,7)+bone(`M${cx+6} ${y[1]+9}V${y[2]-8}`,3.5)+bone(`M${cx} ${y[2]+8}L${cx+22} ${y[2]+24}`,6)+bone(`M${cx+30} ${y[2]+28}L${cx+62} ${y[2]+34}`,5);
+  const jt=L.J.map(([n,yy])=>`<circle cx="${cx}" cy="${yy}" r="7" fill="#fff" stroke="#234E70" stroke-width="2.4"/>`).join('')+(arm?'':`<circle cx="${cx+26}" cy="${y[2]+26}" r="5.5" fill="#fff" stroke="#8A5A00" stroke-width="2.2"/>`);
+  const body=skin+bones+jt;if(!cutKey)return body;
+  const tar=cutKey==='tarso',cy=tar?0:L.cut[cutKey],keep=tar?`<path d="M0 0H300V${y[2]+19}H${cx+26}V250H0Z"/>`:`<rect x="0" y="0" width="300" height="${cy}"/>`,drop=tar?`<path d="M${cx+26} ${y[2]+19}H300V250H${cx+26}Z"/>`:`<rect x="0" y="${cy}" width="300" height="${250-cy}"/>`;
+  const line=tar?`<path class="am9-cut" d="M${cx+26} ${y[2]+12}V${y[2]+48}" stroke="#C0392B" stroke-width="3" stroke-dasharray="6 4"/>`:`<path class="am9-cut" d="M${cx-34} ${cy}H${cx+34}" stroke="#C0392B" stroke-width="3" stroke-dasharray="6 4"/>`;
+  return `<defs><clipPath id="k${uid}">${keep}</clipPath><clipPath id="d${uid}">${drop}</clipPath></defs><g clip-path="url(#k${uid})">${body}</g><g clip-path="url(#d${uid})" opacity=".22" style="filter:grayscale(1)">${body}</g>${line}`;}
+function ampFig9(s,cut){const arm=s.limb==='arm',L=AM9[s.limb],xs=s.both&&cut?[88,212]:[arm?140:120];
+  let h=xs.map((x,i)=>limb9(s.limb,x,'a'+i+(cut?'c':'n'),cut?s.lv:null)).join('');
+  if(xs.length===1)h+=L.J.map(([n,yy])=>`<path d="M${xs[0]+10} ${yy}H${xs[0]+(arm?52:96)}" stroke="#9FB2C2" stroke-dasharray="3 3"/>${txt9(xs[0]+(arm?56:100),yy+4,n,'#234E70')}`).join('')+(arm?'':`${txt9(xs[0]+100,L.J[2][1]+30,'跗蹠關節','#8A5A00')}`);
+  else h+=L.J.map(([n,yy])=>txt9(150,yy+4,n.replace(/（.*）/,''),'#234E70','middle')).join('');
+  if(cut){const lab=AMP[s.limb].lv.find(v=>v[0]===s.lv)[1];h+=txt9(150,246,`紅色虛線：${lab}切斷；淡灰色＝已缺損的部分`,'#C0392B','middle');}
+  else h+=txt9(150,246,arm?'上肢三大關節：肩、肘、腕':'下肢三大關節：髖、膝、足（踝）','#3E4A56','middle');
+  return sv9(h,(arm?'上肢':'下肢')+(cut?'切斷位置示意':'關節位置示意'));}
+function ampScenes(s){const arm=s.limb==='arm',lab=AMP[s.limb].lv.find(v=>v[0]===s.lv)[1],side=s.both?'兩側':'單側';
+  const rows=AMP[s.limb].lv.map(([k])=>[1,0].map(b=>lvRow9(AMP[s.limb].id[b][k],k===s.lv&&(s.both?1:0)===b)).join('')).join('');
+  return [{t:arm?'① 上肢平常怎麼動':'① 下肢平常怎麼動',svg:ampFig9(s,false),cap:arm?'上肢靠<strong>肩、肘、腕</strong>三大關節把上臂、前臂和手連起來，才能舉手、彎手肘、轉手腕、拿東西。':'下肢靠<strong>髖、膝、足（踝）</strong>三大關節支撐身體、走路；腳背中段還有<strong>跗蹠關節</strong>，是足部切斷位置的分界。'},
+   {t:'② 發生了什麼：從哪裡切斷',svg:`<div class="x9">${GT.amp._v(s)}<p class="x9-note">X 光透視示意：掃描線走過後，紅線以下的骨頭與肢體分離（${side}・${lab}）。</p></div>`,cap:`${side}${arm?'上肢':'下肢'}在<strong>${lab}</strong>的位置切斷（截肢）。「以上」是指在這個關節，或比它<strong>更靠近身體</strong>的地方切斷。`},
+   {t:'③ 怎麼認定：切斷位置決定等級',svg:`<div class="story-html"><div class="f9-fig">${ampFig9(s,true)}</div><p class="sh-t">${arm?'上肢':'下肢'}缺損的項目（紅框是你目前選的）：</p><ul class="lv9">${rows}</ul></div>`,cap:'切得越靠近身體、兩側都缺損，等級越高。器質性缺損（截肢）於出院日即可審定，不必等治療一年。',bul:['請依 X 光結果，在失能診斷書的肢體圖上標示切斷位置',arm?'切斷未達腕關節者，改看手指缺損的項目':'切斷未達跗蹠關節者，改看足趾缺損的項目']},
+   {t:'④ 認定結果與金額',svg:`<div class="story-resbox">${res9('amp',s)}</div>`,cap:'實際等級與金額以勞保局與保險公司審定為準。',bul:bulL9('amp',s)}];}
+/* ---------- 假關節、長管骨畸形 ---------- */
+function bone9(x0,y,len,kind,uid){const x1=x0+len,mid=x0+len/2,end=(x)=>`<ellipse cx="${x}" cy="${y}" rx="11" ry="15" fill="#F7F1E5" stroke="#A89B84" stroke-width="2"/>`;
+  const shaft=(a,b)=>`<rect x="${a}" y="${y-7}" width="${b-a}" height="14" rx="5" fill="#F7F1E5" stroke="#A89B84" stroke-width="2"/>`;
+  if(kind==='ok')return shaft(x0+6,x1-6)+end(x0)+end(x1);
+  if(kind==='fx')return shaft(x0+6,mid-2)+shaft(mid+3,x1-6)+end(x0)+end(x1)+`<path d="M${mid} ${y-12}L${mid-3} ${y-4}L${mid+3} ${y+3}L${mid} ${y+12}" stroke="#C0392B" stroke-width="2.4" fill="none"/>`;
+  if(kind==='heal')return `<ellipse cx="${mid}" cy="${y}" rx="17" ry="12" fill="#EADBC0" stroke="#B9A27A" stroke-width="1.5" stroke-dasharray="3 2"/>`+shaft(x0+6,x1-6)+end(x0)+end(x1)+`<ellipse cx="${mid}" cy="${y}" rx="17" ry="12" fill="#EADBC0" fill-opacity=".55" stroke="#B9A27A" stroke-width="1.5"/>`;
+  if(kind==='mal'){const a=-16;return shaft(x0+6,mid+4)+end(x0)+`<g transform="rotate(${a} ${mid} ${y})">${shaft(mid-4,x1-6)}${end(x1)}</g><ellipse cx="${mid}" cy="${y}" rx="12" ry="10" fill="#EADBC0" stroke="#B9A27A" stroke-width="1.5"/><path d="M${mid} ${y}H${x1+4}" stroke="#7F93A6" stroke-width="1.6" stroke-dasharray="5 4"/><path d="M${mid+46} ${y}A46 46 0 0 0 ${(mid+46*Math.cos(a*Math.PI/180)).toFixed(1)} ${(y+46*Math.sin(a*Math.PI/180)).toFixed(1)}" stroke="#C0392B" stroke-width="2" fill="none"/>`;}
+  /* 假關節：斷端不癒合、遠端可異常活動 */
+  const rm=reduceMotion,g=rm?` transform="rotate(10 ${mid+6} ${y})"`:` class="lb9-wob" style="transform-origin:${mid+6}px ${y}px"`;
+  return shaft(x0+6,mid-6)+end(x0)+`<path d="M${mid-6} ${y-9}Q${mid-1} ${y} ${mid-6} ${y+9}" fill="#F7F1E5" stroke="#A89B84" stroke-width="2"/><g${g}>${shaft(mid+6,x1-6)}${end(x1)}<path d="M${mid+6} ${y-9}Q${mid+1} ${y} ${mid+6} ${y+9}" fill="#F7F1E5" stroke="#A89B84" stroke-width="2"/></g><circle cx="${mid}" cy="${y}" r="15" fill="none" stroke="#C0392B" stroke-width="2" stroke-dasharray="4 3"/>`;}
+function lbFig9(s){const L=LB[s.limb],k=s.type==='mal'?'mal':'pj',rows=s.both?[[70,'右'],[170,'左']]:[[110,'']];
+  let h=rows.map(([y,n])=>(n?txt9(18,y+4,n,'#3E4A56'):'')+bone9(46,y,220,k)).join('');
+  h+=k==='mal'?txt9(150,232,'骨頭雖然接起來了，卻歪斜變形（紅弧＝偏離的角度）','#C0392B','middle'):txt9(150,232,'紅圈處斷端沒有長好，像多了一個會晃動的「關節」','#C0392B','middle');
+  if(s.type==='pjm')h+=txt9(150,22,'＋整個肢體的運動功能明顯受影響（顯著運動失能）','#8A2A22','middle');
+  return sv9(h,`${L.bone}${k==='mal'?'長管骨畸形':'假關節'}示意`);}
+function lbScenes(s){const L=LB[s.limb],arm=s.limb==='arm',k=s.type==='mal'?'mal':'pj',side=s.both?'兩側':'單側';
+  const intro=sv9(txt9(14,48,'① 骨折','#C0392B')+bone9(80,44,190,'fx')+txt9(14,128,'② 長骨痂','#8A6A2A')+bone9(80,124,190,'heal')+txt9(14,208,'③ 癒合','#256B42')+bone9(80,204,190,'ok'),'骨折癒合過程示意');
+  const pjBoth=s.both&&k==='pj';
+  const rows=lvRow9(L.pjm,s.type==='pjm')+lvRow9(L.pj,s.type==='pj',pjBoth?'兩側各有假關節：左右各算一項，再依併合規定':'')+lvRow9(L.mal2,s.type==='mal'&&s.both)+lvRow9(L.mal,s.type==='mal'&&!s.both);
+  return [{t:'① 骨折平常怎麼癒合',svg:intro,cap:`${L.bone}屬於「長管骨」。骨折後，斷端會先長出<strong>骨痂</strong>把兩段接起來，慢慢變回一根完整、筆直的骨頭。`},
+   {t:k==='mal'?'② 發生了什麼：長好了，但歪了':'② 發生了什麼：斷端一直沒長好',svg:t3wrap('lbone',lbFig9(s),'立體長骨：假關節的異常活動與畸形成角'),cap:k==='mal'?`${side}${L.bone}癒合後留下<strong>彎曲、成角的變形</strong>（長管骨畸形），要以 X 光判定。`:`${side}${L.bone}骨折後兩個斷端<strong>沒有癒合</strong>，肢體在斷處可以異常活動，形成像關節一樣的狀態，稱為「<strong>假關節</strong>」（和手術放入的人工關節不同）。${s.type==='pjm'?'同時遺存<strong>顯著運動失能</strong>者，適用較高等級。':''}`},
+   {t:'③ 怎麼認定',svg:`<div class="story-html"><p class="sh-t">${arm?'上肢':'下肢'}假關節與畸形的項目（紅框是你目前選的）：</p><ul class="lv9">${rows}</ul></div>`,cap:'假關節、畸形都屬於「機能」類的失能，須<strong>治療一年以上</strong>（手術者自最後一次手術後一年，拔除內固定物除外）才可以認定。',bul:['以 X 光判定；僅有骨痂增生或骨幹肥厚，通常不認定為畸形','請附 X 光報告，並在診斷書標示部位']},
+   {t:'④ 認定結果與金額',svg:`<div class="story-resbox">${pjBoth?lbBoth9(s):res9('lbone',s)}</div>`,cap:'實際等級與金額以勞保局與保險公司審定為準。',bul:bulL9('lbone',s)}];}
+function lbBoth9(s){const id=LB[s.limb][s.type],m=mergeCalc([id,id]);
+  return `${res9('lbone',Object.assign({},s,{both:false}))}<div class="story-res"><b>兩側各一項：依併合規定試算</b><div class="sr-row"><span class="badge ${badgeCls(m.gUp)}">${gName9(m.gUp)}</span><span>勞保 ${fmt(m.dRes)} 日・${fmtAmt(m.dRes)}</span></div><p class="small">${esc(m.rule)}${m.bySum?'（升等後不得超過各項合計，已以合計日數為上限）':''}</p>${caliMergeHTML([id,id])}<p class="small">同屬${s.limb==='arm'?'上肢':'下肢'}的項目，附表另有規定者從其規定；實際等級以勞保局審定為準。</p></div>`;}
+/* ---------- 手指末關節 ---------- */
+const FN9={I:'食指',M:'中指',R:'無名指',L:'小指'};
+function finger9(y,lockDip,ghost){const rm=reduceMotion,J=[100,165,208],T=244,an=(cls,deg,x,inner)=>rm?`<g transform="rotate(${deg} ${x} ${y})">${inner}</g>`:`<g class="${cls}" style="transform-origin:${x}px ${y}px">${inner}</g>`;
+  const seg=(a,b,w)=>`<path d="M${a} ${y}H${b}" stroke="#F4DCCB" stroke-width="${w}" stroke-linecap="round"/><path d="M${a+4} ${y}H${b-4}" stroke="#A89B84" stroke-width="7.5" stroke-linecap="round"/><path d="M${a+4} ${y}H${b-4}" stroke="#F7F1E5" stroke-width="5" stroke-linecap="round"/>`;
+  const jt=(x,c)=>`<circle cx="${x}" cy="${y}" r="6" fill="#fff" stroke="${c||'#234E70'}" stroke-width="2.4"/>`;
+  const lock=`<g transform="translate(${J[2]-7} ${y-28})"><rect x="0" y="7" width="14" height="11" rx="2" fill="#C0392B"/><path d="M3 8V5a4 4 0 0 1 8 0v3" fill="none" stroke="#C0392B" stroke-width="2.2"/></g>`;
+  const tip=`${seg(J[2],T,20)}<path d="M${T-14} ${y-10}H${T-2}" stroke="#E9B9A6" stroke-width="4" stroke-linecap="round"/>`;
+  const ghostTip=ghost?an('dp9-c',40,J[2],`<path d="M${J[2]} ${y}H${T}" stroke="#7F93A6" stroke-width="18" stroke-linecap="round" stroke-dasharray="4 4" fill="none" opacity=".75"/>`):'';
+  const dip=lockDip?`${ghostTip}<g>${tip}</g>${jt(J[2],'#C0392B')}${lock}`:`${an('dp9-c',40,J[2],tip)}${jt(J[2])}`;
+  return `<path d="M20 ${y-14}H${J[0]}V${y+14}H20Z" fill="#F4DCCB" stroke="#C99A85" stroke-width="1.5"/>${seg(24,J[0],26)}${an('dp9-a',22,J[0],`${seg(J[0],J[1],24)}${an('dp9-b',48,J[1],`${seg(J[1],J[2],22)}${dip}${jt(J[1])}`)}${jt(J[0])}`)}`;}
+function dipScenes(s){const fn=FN9[s.f],y=96,lab=(x,t,c)=>`<path d="M${x} ${y-10}V${y-44}" stroke="#9FB2C2" stroke-dasharray="3 3"/>${txt9(x,y-50,t,c||'#234E70','middle')}`;
+  const one=sv9(`${lab(100,'掌指關節')}${lab(165,'近位指節間')}${lab(222,'末關節','#C0392B')}${finger9(y,false)}${txt9(150,226,'手指彎曲時，三個關節一起動','#3E4A56','middle')}${txt9(150,244,'末關節＝最靠近指尖的「遠位指節間關節」','#5A6B7A','middle')}`,'手指三個關節彎曲示意');
+  const two=sv9(`${txt9(150,30,'紅色鎖頭＝末關節卡住不動','#C0392B','middle')}${finger9(y,true,true)}${txt9(150,226,`你的${fn}：前兩個關節還會彎，末關節卻伸直不動`,'#C0392B','middle')}${txt9(150,244,'灰色＝正常手指末節會彎到的位置','#5A6B7A','middle')}`,`${fn}末關節不能屈伸示意`);
+  const rows=lvRow9('11-60',s.f==='I')+lvRow9('11-61',s.f!=='I');
+  return [{t:'① 手指平常怎麼彎',svg:one,cap:'食指到小指，每根手指都有三個關節：<strong>掌指關節</strong>、<strong>近位指節間關節</strong>、<strong>遠位指節間關節（末關節）</strong>。握拳、捏東西時三個關節一起彎。'},
+   {t:'② 發生了什麼：末關節不能屈伸',svg:t3wrap('dip',two,'立體手指：末關節鎖定與正常手指對照'),cap:`${fn}的末關節<strong>強直或不能屈伸</strong>，指尖那一節一直伸直（或固定在某個角度），捏小東西、扣扣子會比較吃力。`},
+   {t:'③ 怎麼認定',svg:`<div class="story-html"><p class="sh-t">末關節不能屈伸的項目（紅框是你目前選的）：</p><ul class="lv9">${rows}</ul></div>`,cap:'關節的機能失能須<strong>治療一年以上</strong>（手術者自最後一次手術後一年）才可以認定，並依 X 光與關節活動度檢查。',bul:['拇指只有一個指節間關節，請看拇指的項目','指尖（末節）切斷達 1/2 以上，屬「手指喪失機能」，請看手指切斷位置示範']},
+   {t:'④ 認定結果與金額',svg:`<div class="story-resbox">${res9('dip',s)}</div>`,cap:'實際等級與金額以勞保局與保險公司審定為準。',bul:bulL9('dip',s)}];}
+/* ---------- 掛載 ---------- */
+T5(()=>{GT.amp._v=GT.amp.vis;
+  [['amp',ampScenes,'用四個步驟看懂：關節在哪 → 從哪裡切斷 → 怎麼認定 → 等級與金額。下方可切換切斷位置與單側／兩側。'],['lbone',lbScenes,'用四個步驟看懂：骨折怎麼癒合 → 假關節／畸形是什麼 → 怎麼認定 → 等級與金額。下方可切換型態與範圍。'],['dip',dipScenes,'用四個步驟看懂：手指的三個關節 → 末關節卡住 → 怎麼認定 → 等級與金額。下方可切換手指。']].forEach(([t,f,sub])=>{
+    GT[t].dark=false;GT[t].sub=sub;GT[t].vis=s=>{const S=f(s);ST9[t]=S;storyStop();return storyHTML(t,S,Math.min(ST9I[t]==null?1:ST9I[t],S.length-1));};});
+  const _sg=storyGo;storyGo=function(el,i,k){const key=el.dataset.key;_sg(el,i,k);if(['amp','lbone','dip'].includes(key)&&typeof G!=='undefined'&&G&&G.t===key&&GT[key].mount)GT[key].mount(G.s);};},'limb-stories');
+
+/* ================= v26-2：手指切斷、足趾、下肢縮短 獨立視窗加上「四步故事」 ================= */
+/* 一根手指／足趾（指尖朝上）：segs＝由近到遠的節長；cut＝切斷處 y（null＝完整） */
+function digit9(cx,base,segs,w,cut,o){o=o||{};const L=segs.reduce((a,b)=>a+b,0),tip=base-L,hw=w/2,J=[];let y=base;segs.forEach((s,i)=>{J.push(y);y-=s;});
+  const skin=(y0,y1,op,dash)=>`<rect x="${cx-hw}" y="${y0}" width="${w}" height="${y1-y0}" rx="${hw*.9}" fill="${op?'#fff':'#F4DCCB'}" fill-opacity="${op?0:1}" stroke="${dash?'#C0392B':'#C99A85'}" stroke-width="1.6" ${dash?'stroke-dasharray="5 4"':''}/>`;
+  let ph='';y=base;segs.forEach((s,i)=>{const a=y-s+3,b=y-3;y-=s;const top=cut==null?a:Math.max(a,cut);if(b>top)ph+=`<rect x="${cx-w*.18}" y="${top}" width="${w*.36}" height="${b-top}" rx="${w*.14}" fill="#F7F1E5" stroke="#A89B84" stroke-width="1.4"/>`;});
+  const vis=cut==null?tip:cut;let h='';
+  if(cut!=null)h+=skin(tip,cut,true,true);
+  h+=`<rect x="${cx-hw}" y="${vis}" width="${w}" height="${base-vis+14}" rx="${cut==null?hw*.9:5}" fill="#F4DCCB" stroke="#C99A85" stroke-width="1.6"/>`+ph;
+  if(cut==null)h+=`<rect x="${cx-hw*.55}" y="${tip+4}" width="${w*.55}" height="${segs[segs.length-1]*.5}" rx="${hw*.4}" fill="#FBEDE3" stroke="#C99A85"/>`;
+  else h+=`<path d="M${cx-hw-6} ${cut}H${cx+hw+6}" stroke="${o.cc||'#C0392B'}" stroke-width="3.2" stroke-linecap="round"/>`;
+  if(o.ref!=null)h+=`<path d="M${cx-hw-12} ${o.ref}H${cx+hw+12}" stroke="#234E70" stroke-width="1.4" stroke-dasharray="3 3"/>`;
+  return {h,J,tip};}
+const DG9={finger:{segs:[60,40,32],w:30},thumb:{segs:[56,46],w:34},toe1:{segs:[46,40],w:34},toe:{segs:[30,20,18],w:24}};
+/* 依等級算切斷位置 */
+function fgCut9(isT,lv,base){const d=DG9[isT?'thumb':'finger'],s=d.segs,L=s.reduce((a,b)=>a+b,0),tip=base-L,pd=s[s.length-1];
+  return lv===3?base-s[0]:lv===2?tip+.6*pd:lv===1?tip+.28*pd:null;}
+function tfCut9(is1,lv,base){const d=DG9[is1?'toe1':'toe'],s=d.segs,L=s.reduce((a,b)=>a+b,0),tip=base-L,pd=s[s.length-1];
+  return lv===2?base:lv===1?(is1?tip+.62*pd:base-s[0]-s[1]):null;}
+function lab9(x,y,t,c,anc,len){const dx=anc==='end'?-1:1;return `<path d="M${x} ${y}h${dx*(len||14)}" stroke="#9FB2C2" stroke-dasharray="2 2"/>${txt9(x+dx*((len||14)+3),y+4,t,c||'#234E70',anc)}`;}
+function resItems9(r,emptyMsg){if(!r.items.length)return `<div class="story-res"><b>${esc(emptyMsg)}</b></div>`;
+  return `<div class="story-res">${r.items.map(o=>{const id=o.id||o,it=itemCat(id).it,g=it[2],d=days(g);return `<div class="ds9-it"><b>${id}　${esc(it[1])}</b><div class="sr-row"><span class="badge ${badgeCls(g)}">第${CN[g-1]}等級</span>${o.tag?`<span class="fg-tag">${esc(o.tag)}</span>`:''}<span>勞保 ${fmt(d)} 日・${fmtAmt(d)}</span></div><div>${caliTag(id,g)}</div></div>`;}).join('')}${(r.notes||[]).length?`<ul class="small">${r.notes.map(n=>`<li>${esc(n)}</li>`).join('')}</ul>`:''}</div>`;}
+function lvPick9(levels,cur){return `<ul class="lv9">${levels.map(([lv,t,s,c])=>`<li class="${lv===cur?'on':''}"><code style="color:${c}">●</code><span><b style="color:${c}">${esc(t)}</b><br><small>${esc(s)}</small></span><span></span></li>`).join('')}</ul>`;}
+/* ---------- 手指 ---------- */
+function fgScenes(){const d=FINGERS.map(f=>f.k).find(k=>fState[k]>0)||null,k=d||'I',isT=k==='T',lv=d?fState[d]:0,nm=fName(k),B=212;
+  const B1=196,T=digit9(100,B1,DG9.thumb.segs,DG9.thumb.w,null,{ref:B1-56}),F=digit9(205,B1,DG9.finger.segs,DG9.finger.w,null,{ref:B1-60});
+  const one=sv9(T.h+F.h+txt9(100,B1+26,'拇指（2 節）','#3E4A56','middle')+txt9(205,B1+26,'其他手指（3 節）','#3E4A56','middle')+
+    lab9(80,T.J[1],'指節間關節','#B02A21','end')+lab9(80,T.J[0],'掌指關節','#234E70','end')+lab9(224,F.J[2],'遠位指節間（末關節）','#234E70')+lab9(224,F.J[1],'近位指節間','#B02A21')+lab9(224,F.J[0],'掌指關節','#234E70')+txt9(150,246,'藍色虛線＝判斷「手指缺損」的基準關節','#234E70','middle'),'手指骨頭與關節示意');
+  const cut=fgCut9(isT,lv,B),D=digit9(110,B,DG9[isT?'thumb':'finger'].segs,DG9[isT?'thumb':'finger'].w,cut,{ref:B-DG9[isT?'thumb':'finger'].segs[0],cc:FLV[lv].color});
+  const two=sv9(D.h+(d?`${txt9(150,30,`${nm}：${FLV[lv].label}`,FLV[lv].color,'middle')}${cut!=null?(lv===3?'':lab9(132,cut,'切斷處',FLV[lv].color))+lab9(132,Math.min((D.tip+cut)/2,cut-20),'少掉的部分（虛線）','#C0392B',null,30):''}`:txt9(150,30,'下方手掌圖點手指，標示切斷位置','#5A6B7A','middle'))+lab9(132,B-DG9[isT?'thumb':'finger'].segs[0]+(lv===3?14:0),lv===3?'在基準關節切斷':(isT?'指節間關節（基準）':'近位指節間（基準）'),lv===3?FLV[3].color:'#234E70')+txt9(110,B+30,nm,'#3E4A56','middle'),`${nm}切斷位置示意`);
+  const lvls=[[1,FLV[1].label,FLV[1].sub,FLV[1].color],[2,FLV[2].label,isT?'拇指末節切斷達 1/2 以上，屬「手指喪失機能」':'末節切斷達 1/2 以上，屬「手指喪失機能」',FLV[2].color],[3,FLV[3].label,isT?'拇指由指節間關節以上切斷':'由近位指節間關節以上切斷',FLV[3].color]];
+  const mini=sv9([0,1,2,3].map((v,i)=>{const x=42+i*72,c=fgCut9(isT,v,196),m=digit9(x,196,DG9[isT?'thumb':'finger'].segs,DG9[isT?'thumb':'finger'].w,c,{ref:196-DG9[isT?'thumb':'finger'].segs[0],cc:FLV[v].color});return (v===lv&&d?`<rect x="${x-34}" y="40" width="68" height="204" rx="10" fill="none" stroke="#C0392B" stroke-width="2"/>`:'')+m.h+txt9(x,232,['正常','一部分缺損','末節≧1/2','手指缺損'][v],FLV[v].color,'middle');}).join(''),`${nm}四種狀態比較`);
+  return [{t:'① 手指的骨頭與關節',svg:one,cap:'拇指有 2 節、其他手指有 3 節。判斷「手指缺損」看的是<strong>基準關節</strong>：拇指＝指節間關節，其他手指＝近位指節間關節（藍色虛線）。'},
+   {t:'② 發生了什麼：切到哪裡',svg:two,cap:d?`${nm}：<strong>${FLV[lv].label}</strong>。${FLV[lv].sub}。${(()=>{const o=FINGERS.filter(f=>f.k!==d&&fState[f.k]>0);return o.length?`這個例子另有：${o.map(f=>f.name+'（'+FLV[fState[f.k]].label+'）').join('、')}；第④步會一起算。`:'';})()}`:'目前還沒有標示。請在下方手掌圖點手指（或按手指名稱按鈕）切換切斷位置。'},
+   {t:'③ 怎麼分：切斷位置決定項目',svg:`<div class="story-html"><div class="f9-fig">${mini}</div>${lvPick9(lvls,lv)}</div>`,cap:'同一根手指只看一種狀態：<strong>越靠近手掌，項目越重</strong>。少了哪幾根手指（拇指、食指最重要）決定是哪一項。',bul:['同一手指併存「機能失能」與「器質失能」時，按較高等級給付，不合併升等','手指缺損由全民健康保險特約醫院或診所出具診斷書即可；須依 X 光在手部圖標示']},
+   {t:'④ 認定結果與金額',svg:`<div class="story-resbox">${resItems9(fingerEval(),'目前未標示切斷位置，尚無對應項目')}</div>`,cap:'實際等級與金額以勞保局與保險公司審定為準。'}];}
+/* ---------- 足趾 ---------- */
+function tfScenes(){const d=TOES.map(t=>t.k).find(k=>tState[k]>0)||null,k=d||'1',is1=k==='1',lv=d?tState[d]:0,nm=tName(k),B=200,dg=DG9[is1?'toe1':'toe'];
+  const A=digit9(102,B,DG9.toe1.segs,DG9.toe1.w,null),Z=digit9(205,B,DG9.toe.segs,DG9.toe.w,null,{ref:B-DG9.toe.segs[0]-DG9.toe.segs[1]});
+  const one=sv9(`<path d="M80 ${B+8}H260" stroke="#B02A21" stroke-width="1.6" stroke-dasharray="5 3"/>`+A.h+Z.h+txt9(102,B+32,'第一趾（2 節）','#3E4A56','middle')+txt9(205,B+32,'第二～五趾（3 節）','#3E4A56','middle')+
+    lab9(82,A.J[1],'趾節間關節','#234E70','end')+lab9(82,B+8,'中足趾關節','#B02A21','end')+lab9(220,Z.J[2],'末關節','#B24C0E')+lab9(220,Z.J[1],'近位趾節間','#234E70')+txt9(150,246,'紅虛線＝「足趾缺損」的切斷基準（中足趾關節）','#B02A21','middle'),'足趾骨頭與關節示意');
+  const cut=tfCut9(is1,lv,B),D=digit9(110,B,dg.segs,dg.w,cut,{cc:TLV[lv].color});
+  const two=sv9(`<path d="M60 ${B+8}H170" stroke="#B02A21" stroke-width="1.2" stroke-dasharray="5 3"/>`+D.h+(d?txt9(150,30,`${nm}：${TLV[lv].label}`,TLV[lv].color,'middle')+lab9(130,lv===2?B:cut,'切斷處',TLV[lv].color)+lab9(130,Math.min((D.tip+(lv===2?B:cut))/2,(lv===2?B:cut)-20),'少掉的部分（虛線）','#C0392B',null,30):txt9(150,30,'下方腳掌圖點足趾，標示切斷位置','#5A6B7A','middle'))+txt9(110,B+32,nm,'#3E4A56','middle'),`${nm}切斷位置示意`);
+  const lvls=[[1,TLV[1].label,TLV[1].sub,TLV[1].color],[2,TLV[2].label,TLV[2].sub,TLV[2].color]];
+  const mini=sv9([0,1,2].map((v,i)=>{const x=60+i*90,c=tfCut9(is1,v,180),m=digit9(x,180,dg.segs,dg.w,c,{cc:TLV[v].color});return (v===lv&&d?`<rect x="${x-36}" y="40" width="72" height="190" rx="10" fill="none" stroke="#C0392B" stroke-width="2"/>`:'')+`<path d="M${x-28} 188H${x+28}" stroke="#B02A21" stroke-width="1.2" stroke-dasharray="4 3"/>`+m.h+txt9(x,218,['正常','喪失機能','足趾缺損'][v],TLV[v].color,'middle');}).join(''),`${nm}三種狀態比較`);
+  return [{t:'① 足趾的骨頭與關節',svg:one,cap:'第一趾（大拇趾）有 2 節，第二～五趾有 3 節。足趾和腳掌相接的是<strong>中足趾關節</strong>；最靠近趾尖的是<strong>末關節</strong>。'},
+   {t:'② 發生了什麼：切到哪裡',svg:two,cap:d?`${nm}：<strong>${TLV[lv].label}</strong>。${TLV[lv].sub}。`:'目前還沒有標示。請在下方腳掌圖點足趾（或按足趾名稱按鈕）切換切斷位置。'},
+   {t:'③ 怎麼分：切斷位置決定項目',svg:`<div class="story-html"><div class="f9-fig">${mini}</div>${lvPick9(lvls,lv)}</div>`,cap:'第一趾：末節切斷 1/2 以上＝喪失機能；第二～五趾：末關節以上切斷＝喪失機能。<strong>從中足趾關節整根切斷</strong>才是「足趾缺損」。',bul:['足趾的關節活動受限也可能屬「喪失機能」，請按下方「看關節角度途徑」','須依 X 光在足部圖標示失能部位']},
+   {t:'④ 認定結果與金額',svg:`<div class="story-resbox">${resItems9(toeEval(),'目前未標示切斷位置，尚無對應項目')}</div>`,cap:'實際等級與金額以勞保局與保險公司審定為準。'}];}
+/* ---------- 下肢縮短 ---------- */
+function legs9(cm,side){const px=1.82*2,d=cm*px,hipY={R:58,L:58};hipY[side]+=d;const X={R:110,L:190},foot=220;
+  const leg=s=>`<path d="M${X[s]} ${hipY[s]}L${X[s]+(s==='R'?-4:4)} ${foot-6}" stroke="#F4DCCB" stroke-width="30" stroke-linecap="round"/><path d="M${X[s]} ${hipY[s]}L${X[s]+(s==='R'?-4:4)} ${foot-6}" stroke="#A89B84" stroke-width="7" stroke-linecap="round"/><path d="M${X[s]} ${hipY[s]}L${X[s]+(s==='R'?-4:4)} ${foot-6}" stroke="#F7F1E5" stroke-width="4.5" stroke-linecap="round"/>`;
+  const tape=s=>{const aff=s===side&&cm>0,c=aff?'#C0392B':'#234E70',x=X[s]+(s==='R'?-26:26);return `<path d="M${x} ${hipY[s]-8}V${foot-12}" stroke="${c}" stroke-width="2" stroke-dasharray="6 4"/><circle cx="${x}" cy="${hipY[s]-8}" r="4" fill="#fff" stroke="${c}" stroke-width="2"/><circle cx="${x}" cy="${foot-12}" r="4" fill="#fff" stroke="${c}" stroke-width="2"/>${txt9(x+(s==='R'?-8:8),(hipY[s]+foot)/2,aff?`患側 短 ${cm} cm`:cm>0?'健側':(s==='R'?'右下肢':'左下肢'),c,s==='R'?'end':'start')}`;};
+  return `<path d="M0 ${foot+2}H300" stroke="#9FB2C2" stroke-width="2"/><path d="M${X.R-22} ${hipY.R-4}L${X.L+22} ${hipY.L-4}" stroke="#2C4760" stroke-width="6" stroke-linecap="round"/>${leg('R')}${leg('L')}${tape('R')}${tape('L')}<ellipse cx="${X.R-6}" cy="${foot-2}" rx="18" ry="6" fill="#F4DCCB" stroke="#C99A85"/><ellipse cx="${X.L+6}" cy="${foot-2}" rx="18" ry="6" fill="#F4DCCB" stroke="#C99A85"/>${txt9(150,20,'腸骨前上棘（骨盆前方突起）→ 內踝下端','#234E70','middle')}`;}
+function llScenes(){const cm=lldCm,id=lldItem(cm),sideN=lldSide==='R'?'右':'左';
+  const pos=v=>30+v/8*240,mk=`<path d="M30 120H270" stroke="#9FB2C2" stroke-width="10" stroke-linecap="round"/><path d="M${pos(3)} 120H${pos(5)}" stroke="#B5832A" stroke-width="10"/><path d="M${pos(5)} 120H270" stroke="#B24C0E" stroke-width="10" stroke-linecap="round"/>${[0,3,5,8].map(v=>txt9(pos(v),148,v+' cm','#3E4A56','middle')).join('')}${txt9((pos(3)+pos(5))/2,100,'12-8','#8A5A00','middle')}${txt9((pos(5)+270)/2,100,'12-7','#8A2A22','middle')}${txt9(pos(1.5),100,'未達','#5A6B7A','middle')}<path d="M${pos(Math.min(8,cm))} 104V136" stroke="#C0392B" stroke-width="3"/><circle cx="${pos(Math.min(8,cm))}" cy="120" r="9" fill="#fff" stroke="#C0392B" stroke-width="3"/>${txt9(pos(Math.min(8,cm)),178,`你的情形：${cm} 公分`,'#C0392B','middle')}`;
+  const rows=lvRow9('12-7',id==='12-7')+lvRow9('12-8',id==='12-8');
+  return [{t:'① 兩腿長度怎麼量',svg:sv9(legs9(0,lldSide),'兩腿等長示意'),cap:'下肢長度是從<strong>腸骨前上棘</strong>（骨盆前方摸得到的突起）量到<strong>內踝下端</strong>，再拿患側和健側比較。正常兩腿差不多一樣長，骨盆是平的。'},
+   {t:'② 發生了什麼：一腿變短',svg:sv9(legs9(cm,lldSide),'下肢縮短示意'),cap:cm>0?`${sideN}下肢比健側短 <strong>${cm} 公分</strong>（圖中差距放大 2 倍）。站立時骨盆會往短腳那一側傾斜，走路容易跛行。`:'目前設定為 0 公分，請在下方拖曳滑桿設定縮短的公分數。'},
+   {t:'③ 怎麼認定：看差幾公分',svg:`<div class="story-html"><svg viewBox="0 84 300 104" class="story-svg" role="img" aria-label="縮短公分數判斷尺">${mk}</svg><ul class="lv9">${rows}</ul></div>`,cap:'一下肢縮短 <strong>3 公分以上</strong>適用 12-8，<strong>5 公分以上</strong>適用 12-7。',bul:['應輔以雙下肢站立全長 X 光片（附長度標尺）佐證','失能診斷書「縮短失能（長短腳）」欄分別填寫左、右下肢公分數']},
+   {t:'④ 認定結果與金額',svg:`<div class="story-resbox">${resItems9({items:id?[id]:[],notes:[]},`短 ${cm} 公分，未達 3 公分，不符合下肢縮短失能`)}</div>`,cap:'實際等級與金額以勞保局與保險公司審定為準。'}];}
+/* ---------- 掛載：放在各視窗說明文字下方，狀態一變就重畫（停在同一步） ---------- */
+const DS9={fg9:['fingerModal',fgScenes],tf9:['toeModal',tfScenes],ll9:['lldModal',llScenes]};
+function ds9Render(key){const [mid,f]=DS9[key],m=document.getElementById(mid);if(!m)return;const bx=m.querySelector('.demo-box');let w=bx.querySelector('.ds9');
+  if(!w){w=document.createElement('section');w.className='ds9';w.setAttribute('aria-label','四步驟看懂');const anc=bx.querySelector('.tour')||bx.querySelector('.demo-sub');anc.insertAdjacentElement('afterend',w);
+    const h=document.createElement('p');h.className='ds9-h';h.textContent='下面可以自己點選、調整，上方四個步驟會跟著改變';const pre=bx.querySelector('#llSide, .t3-wrap[data-inline], .fg-stage');if(pre)pre.insertAdjacentElement('beforebegin',h);}
+  const S=f();ST9[key]=S;const i=Math.min(ST9I[key]==null?1:ST9I[key],S.length-1);w.innerHTML=storyHTML(key,S,i);}
+T5(()=>{[['fingerRender','fg9'],['toeRender','tf9'],['lldRender','ll9']].forEach(([fn,key])=>{const _f=window[fn];const nf=function(){_f.apply(this,arguments);ds9Render(key);};
+  if(fn==='fingerRender')fingerRender=nf;else if(fn==='toeRender')toeRender=nf;else lldRender=nf;});},'digit-stories');
+/* 自動播放：限於所在視窗 */
+let DS9T=null;
+document.addEventListener('click',e=>{const b=e.target.closest('.ds9 [data-st="play"]');if(!b)return;e.stopImmediatePropagation();const w=b.closest('.ds9'),m=b.closest('.demo-modal');
+  const stop=()=>{if(DS9T){clearInterval(DS9T);DS9T=null;}m.querySelectorAll('.ds9 .story-play').forEach(x=>x.textContent='▶ 自動播放');};if(DS9T){stop();return;}
+  const cur=()=>w.querySelector('.story');let el=cur();if(+el.dataset.i>=ST9[el.dataset.key].length-1)storyGo(el,0,true);
+  const pb=()=>{const p=w.querySelector('.story-play');if(p)p.textContent='❚❚ 暫停';};pb();
+  DS9T=setInterval(()=>{const el=cur();if(!el||!m.classList.contains('open')){stop();return;}const k=+el.dataset.i;if(k>=ST9[el.dataset.key].length-1){stop();return;}storyGo(el,k+1,true);pb();},4200);},true);
+
+/* ================= v26-3：審核基準詳解改為可開合（預設收起），審核重點按鈕更明顯 ================= */
+{const _c=critHTML;critHTML=function(gr){const h=_c(gr);if(!h)return h;
+  return h.replace(/^<div class="crit-wrap"><div class="crit-head">([\s\S]*?)<\/div><div class="crit-body">/,(m,head)=>`<details class="crit-wrap crit-det"><summary class="crit-head">${head}<span class="fold-hint" aria-hidden="true"></span></summary><div class="crit-body">`).replace(/<\/div>$/,'</details>');};}
+/* 重畫清單時記住使用者已打開的區塊 */
+const FOLD75=new Set();
+const fold75Key=d=>{const s=d.querySelector(':scope>summary'),c=d.closest('.cat-block');return (c?c.querySelector('h2').textContent:'')+'|'+(s?s.textContent:'');};
+document.addEventListener('toggle',e=>{const d=e.target;if(!(d instanceof HTMLDetailsElement)||!d.closest('#panel'))return;const k=fold75Key(d);if(d.open)FOLD75.add(k);else FOLD75.delete(k);},true);
+T5(()=>{const _r=render;render=function(){_r.apply(this,arguments);if(!FOLD75.size)return;document.querySelectorAll('#panel details.notes,#panel details.crit-det').forEach(d=>{if(FOLD75.has(fold75Key(d)))d.open=true;});};},'fold75');
+
+/* ================= v26-4：主清單各分組預設收起（只顯示分組名稱與項數），點開才看項目 ================= */
+const GRPOPEN=new Set();
+function grpFold76(){const p=document.getElementById('panel');if(!p)return;const searching=!!(query||gradeF);
+  p.querySelectorAll('.cat-block').forEach(sec=>{const ts=[...sec.querySelectorAll(':scope>.grp-title')];if(ts.length<2||searching||sec.querySelectorAll('.item-row').length<=12)return;const cat=sec.querySelector('h2').textContent;
+    ts.forEach(t=>{const name=t.textContent.replace(/^◆\s*/,'').trim(),key=cat+'|'+name,parts=[];let n=t.nextElementSibling;while(n&&!n.classList.contains('grp-title')){parts.push(n);n=n.nextElementSibling;}
+      const cnt=parts.reduce((a,x)=>a+(x.classList.contains('items-list')?x.children.length:0),0),d=document.createElement('details');d.className='grp-det';d.dataset.k=key;d.open=GRPOPEN.has(key);
+      d.innerHTML=`<summary><span class="gd-name">◆ ${esc(name)}</span><span class="gd-cnt">${cnt} 項</span><span class="gd-hint" aria-hidden="true"></span></summary>`;t.replaceWith(d);parts.forEach(x=>d.appendChild(x));});
+    const head=sec.querySelector(':scope>.cat-head');if(head&&!head.querySelector('.gd-all')){const b=document.createElement('button');b.type='button';b.className='gd-all';b.textContent='全部展開';head.appendChild(b);}
+    gdAllSync(sec);});}
+function gdAllSync(sec){const b=sec.querySelector('.gd-all');if(!b)return;const ds=[...sec.querySelectorAll(':scope>.grp-det')],all=ds.length&&ds.every(d=>d.open);b.textContent=all?'全部收合':'全部展開';b.setAttribute('aria-pressed',all?'true':'false');}
+document.addEventListener('toggle',e=>{const d=e.target;if(!(d instanceof HTMLDetailsElement)||!d.classList.contains('grp-det'))return;if(d.open)GRPOPEN.add(d.dataset.k);else GRPOPEN.delete(d.dataset.k);const s=d.closest('.cat-block');if(s)gdAllSync(s);},true);
+document.addEventListener('click',e=>{const b=e.target.closest('.gd-all');if(!b)return;const sec=b.closest('.cat-block'),ds=[...sec.querySelectorAll(':scope>.grp-det')],open=!ds.every(d=>d.open);ds.forEach(d=>{d.open=open;if(open)GRPOPEN.add(d.dataset.k);else GRPOPEN.delete(d.dataset.k);});gdAllSync(sec);});
+T5(()=>{const _r=render;render=function(){_r.apply(this,arguments);grpFold76();};},'fold76');
+
+/* ================= v26-5：精神／神經／胸腹部臟器綜合（階梯）與眼 改為四步故事 ================= */
+/* ---------- 階梯（精神、神經、胸腹部臟器綜合） ---------- */
+const LAD9={mind:['① 精神平常在做什麼','大腦負責思考、記憶、判斷與情緒。這些功能受損後，會影響一個人能不能自己照顧生活、能不能工作。'],
+  nerve:['① 中樞神經平常在做什麼','腦和脊髓把指令傳到全身，讓我們能動、能感覺。中樞神經受傷後，可能出現癱瘓、麻木、平衡或說話困難。'],
+  organ:['① 胸腹部臟器平常在做什麼','心、肺、肝、腸胃、腎等臟器一起維持生命。這一組「綜合機能」項目，看的是臟器受損後對整體生活與工作的影響。']};
+function ladScenes(s){const full=GT.ladder._v(s),k=full.indexOf('<div class="g-legend">'),lad=k>=0?full.slice(k):'',lv=LADV[s.lv],id=LAD[s.cat].ids[s.lv];
+  return [{t:LAD9[s.cat][0],svg:`<div class="story-html">${ladHero(s)}</div>`,cap:LAD9[s.cat][1]},
+   {t:'② 發生了什麼：日常生活六件事',svg:`<div class="story-html">${ladDay(s)}</div>`,cap:`以「${lv[0]}」為例：${esc(lv[3]||LAD[s.cat].last)}。綠色＝自己可以、橘色＝需要協助、紅色＝全靠他人或不能工作（依等級文字的示意推想）。`},
+   {t:'③ 怎麼分等級：看要別人幫多少、還能不能工作',svg:`<div class="story-html">${lad}</div>`,cap:'由重到輕分五級：<strong>日常生活要別人扶助的程度</strong>，加上<strong>還能不能工作</strong>。點任一列可以切換等級。',bul:LAD[s.cat].notes.slice(0,2)},
+   {t:'④ 認定結果與金額',svg:`<div class="story-resbox">${res9('ladder',s)}</div>`,cap:'實際等級與金額以勞保局與保險公司審定為準；實際依診斷書各欄（意識、行動、攝食、大小便、沐浴更衣、工作能力等）個案評估。'}];}
+/* ---------- 眼 ---------- */
+function eyeIntroVA(){const eye=(x,lab)=>`<g><path d="M${x-46} 96Q${x} 52 ${x+46} 96Q${x} 140 ${x-46} 96Z" fill="#fff" stroke="#7A5A48" stroke-width="2.4"/><circle cx="${x}" cy="96" r="22" fill="#6B4A36"/><circle cx="${x}" cy="96" r="10" fill="#1E2B38"/><circle cx="${x+6}" cy="90" r="4" fill="#fff"/>${txt9(x,150,lab,'#234E70','middle')}</g>`;
+  const chart=`<rect x="226" y="34" width="58" height="150" rx="6" fill="#fff" stroke="#9FB2C2" stroke-width="2"/>${[[44,'E',28],[80,'E',18],[106,'E',12],[126,'E',8],[142,'E',6],[156,'E',5]].map(([y,t,f])=>`<text x="255" y="${y+f}" text-anchor="middle" style="font-size:${f}px;font-weight:700;fill:#1E2B38">${t}</text>`).join('')}`;
+  return sv9(eye(70,'右眼')+eye(160,'左眼')+chart+txt9(255,200,'萬國式視力表','#3E4A56','middle')+`<path d="M110 70Q170 30 222 60" fill="none" stroke="#9FB2C2" stroke-dasharray="4 4"/>`+txt9(150,226,'戴上眼鏡或隱形眼鏡後量到的「矯正後視力」','#234E70','middle')+txt9(150,244,'兩眼分開量、分開記','#5A6B7A','middle'),'兩眼與視力表示意');}
+function eyeIntroOther(){const mk=(x,y,n)=>`<circle cx="${x}" cy="${y}" r="9" fill="#C0392B"/><text x="${x}" y="${y+4}" text-anchor="middle" style="font-size:11px;font-weight:700;fill:#fff">${n}</text>`;
+  const leg=(y,n,t,d)=>`${mk(26,y-4,n)}${txt9(42,y,t,'#234E70')}${txt9(42,y+14,d,'#5A6B7A')}`;
+  return sv9(`<path d="M90 70Q150 22 210 70Q150 118 90 70Z" fill="#fff" stroke="#7A5A48" stroke-width="2.4"/><path d="M86 68Q150 12 214 68" fill="none" stroke="#B57C5C" stroke-width="6" stroke-linecap="round"/><circle cx="150" cy="70" r="22" fill="#6B4A36"/><circle cx="150" cy="70" r="9" fill="#1E2B38"/><circle cx="156" cy="64" r="3.5" fill="#fff"/><path d="M60 70h18M240 70h-18" stroke="#2F6B8F" stroke-width="3" marker-end="url(#ar9)"/><defs><marker id="ar9" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#2F6B8F"/></marker></defs>
+    ${mk(150,22,'1')}${mk(176,90,'2')}${mk(60,52,'3')}${mk(150,112,'4')}
+    ${leg(140,'1','眼瞼','開合、保護眼球')}${leg(168,'2','瞳孔與水晶體','控制進光、看遠看近時對焦（調節）')}${leg(196,'3','眼球運動','兩眼一起轉動；不同步會看到兩個影像（複視）')}${leg(224,'4','視野','眼睛不動時看得到的範圍；半盲＝一半看不見')}`,'眼睛構造與功能示意');}
+function eyeScenes(s){if(s.tab==='other'){const o=s.oth.map(String),rows=EYE_OTHER.map(id=>lvRow9(id,o.includes(id))).join('');
+    return [{t:'① 眼睛除了視力，還有哪些功能',svg:eyeIntroOther(),cap:'看得清楚之外，眼睛還要<strong>看得夠廣（視野）</strong>、<strong>能對焦（調節）</strong>、<strong>兩眼一起轉動（運動）</strong>、<strong>眼瞼能正常開合</strong>。這些功能各有失能項目。'},
+     {t:'② 發生了什麼：你勾選的情形',svg:`<div class="story-html">${GT.eye._v(s)}</div>`,cap:o.length?`目前勾選：${o.map(id=>id+' '+esc(itemCat(id).it[1].replace(/者。$/,''))).join('；')}。`:'請在下方勾選視野、調節、運動或眼瞼的失能狀態，這張圖會跟著改變。'},
+     {t:'③ 怎麼認定',svg:`<div class="story-html"><p class="sh-t">視野・調節・運動・眼瞼的項目（紅框是你勾選的）：</p><ul class="lv9">${rows}</ul></div>`,cap:'視野失能要附最近 3 個月內的眼底神經盤照片與視野圖；眼（眼瞼除外）的診斷書須由評鑑合格的醫學中心、區域醫院等適當層級醫院開具（離島除外）。',bul:['視力、視野、調節或運動失能併存時得提高等級，但雙目最高第二等級、一目最高第八等級']},
+     {t:'④ 認定結果與金額',svg:`<div class="story-resbox">${res9('eye',s)}</div>`,cap:'實際等級與金額以勞保局與保險公司審定為準。'}];}
+  const a=Math.max(s.L,s.R),b=Math.min(s.L,s.R),cur=(GT.eye.eval(s).items||[]).map(x=>x.id||x);
+  const grp=a===5?[['一目失明時，看另一眼的視力',['3-1','3-5','3-6','3-7','3-8','3-10']]]:[['兩眼視力都減退',['3-2','3-3','3-4','3-9']],['只有一眼視力減退',['3-11','3-12','3-13']]];
+  const rows=grp.map(([t,ids])=>`<p class="sh-t">${t}：</p><ul class="lv9">${ids.map(id=>lvRow9(id,cur.includes(id))).join('')}</ul>`).join('');
+  return [{t:'① 視力怎麼量',svg:eyeIntroVA(),cap:'勞保看的是<strong>矯正後視力</strong>：戴上眼鏡或隱形眼鏡後，用萬國式視力表量到的數字，兩眼分開記。「失明」包括眼球摘除，或只能分辨明暗、眼前 1 公尺內手動、5 公分內指數。'},
+   {t:'② 發生了什麼：兩眼各看得到哪一行',svg:`<div class="story-html">${GT.eye._v(s)}</div>`,cap:`右眼：<strong>${VA[s.R]}</strong>；左眼：<strong>${VA[s.L]}</strong>。從最大的 E 往下讀，看不清楚的那一行就是視力的極限。`},
+   {t:'③ 怎麼認定：兩眼一起看',svg:`<div class="story-html">${rows}</div>`,cap:'等級看的是<strong>兩眼的組合</strong>：一眼失明時，另一眼越差等級越高；兩眼都減退時，看較好那一眼。',bul:['須通過測盲（Malingering）檢查','本示範取最符合的單一項目；與視野、調節或運動失能併存時得提高等級']},
+   {t:'④ 認定結果與金額',svg:`<div class="story-resbox">${res9('eye',s)}</div>`,cap:'實際等級與金額以勞保局與保險公司審定為準。'}];}
+/* ---------- 掛載 ---------- */
+T5(()=>{GT.ladder._v=GT.ladder.vis;GT.eye._v=GT.eye.vis;
+  [['ladder',ladScenes,'用四個步驟看懂：這個部位在做什麼 → 日常生活受到的影響 → 怎麼分等級 → 等級與金額。'],['eye',eyeScenes,'用四個步驟看懂：怎麼量 → 你的情形 → 怎麼認定 → 等級與金額。下方可切換「視力」或「視野・調節・眼瞼」並調整狀況。']].forEach(([t,f,sub])=>{
+    GT[t].sub=sub;GT[t].vis=s=>{const S=f(s);ST9[t]=S;storyStop();return storyHTML(t,S,Math.min(ST9I[t]==null?1:ST9I[t],S.length-1));};});},'eye-ladder-stories');
+
+/* ================= v26-6：上下肢關節活動受限（36 項）加上四步故事（放在多關節視窗上方） ================= */
+const MJC9={ok:'#2FA36B',rom:'#C98A0E',sig:'#D2621F',loss:'#C0392B'};
+function mjLimb9(withSel){const lb=MJ.lb,js=LIMBS[lb].joints,L=AM9[lb],cx=lb==='arm'?96:86;let h=limb9(lb,cx,'mj'+(withSel?1:0),null);
+  js.forEach((j,i)=>{const y=L.J[i][1],on=withSel&&MJ.sel.has(j),c=on?MJC9[MJ.lv]:withSel?MJC9.ok:'#234E70',d=JDEF[j],tot=d.flex+d.ext,f=on?MJ_F[MJ.lv]:1;
+    const val=!withSel?`正常可動 ${tot}°`:on?(MJ.lv==='loss'?'強直：0°':`受限：剩 ≦ ${Math.round(MJ_TH[MJ.lv]*tot)}°`):`正常 ${tot}°`;
+    h+=`<circle cx="${cx}" cy="${y}" r="11" fill="${on?c:'#fff'}" stroke="${c}" stroke-width="3"/>${on&&MJ.lv==='loss'?`<path d="M${cx-4} ${y-1}v-3a4 4 0 0 1 8 0v3" fill="none" stroke="#fff" stroke-width="2"/><rect x="${cx-5}" y="${y-1}" width="10" height="7" rx="1.5" fill="#fff"/>`:''}<path d="M${cx+14} ${y}H${cx+40}" stroke="${c}" stroke-dasharray="3 3"/>${txt9(cx+44,y-2,d.name,c)}${txt9(cx+44,y+13,val,on?c:'#5A6B7A')}`;});
+  if(withSel&&MJ.both)h+=txt9(150,246,'兩側（左右兩邊都一樣）','#C0392B','middle');
+  return sv9(h,`${LIMBS[lb].limb}三大關節${withSel?'受限情形':'位置'}示意`);}
+function mjScenes(){const lb=MJ.lb,L=LIMBS[lb],js=L.joints,lv=MJ.lv,cnt=MJ.sel.size,id=cnt?romItemId(lb,lv,cnt,MJ.both):null,lvN=MJ_LV.find(x=>x[0]===lv)[1],names=js.filter(j=>MJ.sel.has(j)).map(mjShort).join('＋');
+  const th=`<table class="qref mj9-t"><thead><tr><th>關節（正常）</th>${MJ_LV.map(([k,n])=>`<th class="${k===lv?'cur':''}">${n}</th>`).join('')}</tr></thead><tbody>${js.map(j=>{const d=JDEF[j],t=d.flex+d.ext;return `<tr class="${MJ.sel.has(j)?'sel':''}"><td><b>${mjShort(j)}</b>（${t}°）</td><td class="${lv==='rom'?'cur':''}">剩 ≦ ${Math.round(t*2/3)}°</td><td class="${lv==='sig'?'cur':''}">剩 ≦ ${Math.round(t/2)}°</td><td class="${lv==='loss'?'cur':''}">0°（強直）</td></tr>`;}).join('')}</tbody></table>`;
+  const rows=[[1,3],[1,2],[1,1],[0,3],[0,2],[0,1]].map(([b,c])=>{const x=romItemId(lb,lv,c,!!b);return lvRow9(x,id===x);}).join('');
+  const res=id?(()=>{const g=itemGrade(id),d=days(g);return `<div class="story-res"><b>${id}　${esc(itemCat(id).it[1])}</b><div class="sr-row"><span class="badge ${badgeCls(g)}">第${CN[g-1]}等級</span><span>勞保 ${fmt(d)} 日・${fmtAmt(d)}</span></div><div>${caliTag(id,g)}</div><p class="small">${MJ.both?'兩側':'單側'}：${names}（${['','一','二','三'][cnt]}大關節）都${lvN}。不同關節程度不同時，請分別選擇後用「併合升等試算」。</p></div>`;})():`<div class="story-res"><b>三個關節都正常，不屬失能項目</b><p class="small">請在下方點選受限的關節。</p></div>`;
+  return [{t:`① ${L.limb}三大關節平常能動多少`,svg:mjLimb9(false),cap:`${L.limb}的三大關節是<strong>${js.map(mjShort).join('、')}</strong>。每個關節正常能動的角度不同（依「上、下肢關節生理運動範圍一覽表」，兩個方向的角度相加）。`},
+   {t:'② 發生了什麼：哪幾個關節動不了',svg:mjLimb9(true),cap:cnt?`${MJ.both?'兩側':'單側'}${L.limb}的 <strong>${names}</strong> 受限，程度是「<strong>${lvN}</strong>」。下方的量角器卡會動態顯示還能動的範圍。`:'目前三個關節都正常。請在下方「哪幾個關節受限」點選。'},
+   {t:'③ 怎麼認定：剩多少度、幾個關節',svg:`<div class="story-html"><p class="sh-t">一、看<b>剩下能動的角度</b>（紅框欄是你選的程度）：</p>${th}<p class="sh-t">二、看<b>幾個關節</b>、<b>單側或兩側</b>（${lvN}）：</p><ul class="lv9">${rows}</ul></div>`,cap:'喪失 1/3 以上＝運動失能；喪失 1/2 以上＝顯著運動失能；完全強直或完全麻痺＝喪失機能。須經治療一年以上（手術者自最後一次手術後一年，拔釘除外）。',bul:['以診斷書「關節活動範圍度數表」的實測度數為準','健側關節宜一併測定作為參考']},
+   {t:'④ 認定結果與金額',svg:`<div class="story-resbox">${res}</div>`,cap:'實際等級與金額以勞保局與保險公司審定為準。'}];}
+function mjStory(){const m=document.getElementById('demoModal');if(!m||!MJ)return;let w=m.querySelector('.ds9');
+  if(!w){w=document.createElement('section');w.className='ds9 mj9';w.setAttribute('aria-label','四步驟看懂');const sw=m.querySelector('.mj-switch');(sw||m.querySelector('.demo-sub')).insertAdjacentElement(sw?'beforebegin':'afterend',w);
+    const h=document.createElement('p');h.className='ds9-h mj9-h';h.textContent='下面可以自己點選、調整，上方四個步驟會跟著改變';const mj=m.querySelector('.mj');if(mj)mj.insertAdjacentElement('beforebegin',h);}
+  const S=mjScenes();ST9.mj9=S;const i=Math.min(ST9I.mj9==null?1:ST9I.mj9,S.length-1);w.innerHTML=storyHTML('mj9',S,i);}
+T5(()=>{const _b=mjBuild;mjBuild=function(){const m=document.getElementById('demoModal');if(m)m.querySelectorAll('.ds9,.mj9-h').forEach(e=>e.remove());_b.apply(this,arguments);};
+  const _r=mjRender;mjRender=function(){_r.apply(this,arguments);if(MJ&&!MJ.old)mjStory();};},'mj-story');
 
 </script>
 </body>
