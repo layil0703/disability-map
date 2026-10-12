@@ -4210,6 +4210,14 @@ function mjStory(){const m=document.getElementById('demoModal');if(!m||!MJ)retur
 T5(()=>{const _b=mjBuild;mjBuild=function(){const m=document.getElementById('demoModal');if(m)m.querySelectorAll('.ds9,.mj9-h').forEach(e=>e.remove());_b.apply(this,arguments);};
   const _r=mjRender;mjRender=function(){_r.apply(this,arguments);if(MJ&&!MJ.old)mjStory();};},'mj-story');
 
+/* ================= v26-7：關閉示範後焦點回到「看示範」按鈕（背景 inert 解除是非同步，延後再聚焦；以 MutationObserver 監看各示範視窗） ================= */
+let FOCUS79=null;
+document.addEventListener('click',e=>{const b=e.target.closest('.demo-btn');if(b)FOCUS79={el:b,id:b.dataset.demo};},true);
+function refocus79(){const f=FOCUS79;if(!f)return;setTimeout(()=>{if(document.querySelector('.demo-modal.open'))return;const a=document.activeElement;if(a&&a!==document.body&&!a.closest('.demo-modal'))return;const el=f.el&&f.el.isConnected?f.el:document.querySelector(`.demo-btn[data-demo="${f.id}"]`);if(el)el.focus();},40);}
+const MO79=new MutationObserver(ms=>ms.forEach(m=>{const t=m.target;if(t.classList&&t.classList.contains('demo-modal')&&m.oldValue&&/\bopen\b/.test(m.oldValue)&&!t.classList.contains('open'))refocus79();}));
+const watch79=()=>document.querySelectorAll('.demo-modal').forEach(el=>{if(!el._mo79){el._mo79=1;MO79.observe(el,{attributes:true,attributeFilter:['class'],attributeOldValue:true});}});
+new MutationObserver(watch79).observe(document.body,{childList:true});watch79();
+
 </script>
 </body>
 </html>
