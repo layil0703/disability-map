@@ -880,6 +880,140 @@ svg .dz-march{animation:dz95 1.5s ease-in-out infinite,dzMarch 1.2s linear infin
 svg.dz-many{filter:drop-shadow(0 0 3px rgba(255,64,40,.55))}
 @media (prefers-reduced-motion:reduce){.s99 .snd,.s99 .snd.no::before,svg .dz-march{animation:none!important}}
 
+/* v32：畫面外暫停動畫 */
+.anim-off,.anim-off *{animation-play-state:paused!important}
+
+/* v33：一句話記住、最近看過、3D 角標 */
+.kp103{order:1!important;margin:2px 0 10px;padding:10px 12px;border-radius:12px;background:linear-gradient(135deg,#F3F8FC,#FFF);border:1px solid var(--line);border-left:5px solid var(--navy,#234E70);box-shadow:0 2px 8px rgba(35,78,112,.08)}
+.kp-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.kp-tag{font-size:.7rem;font-weight:800;letter-spacing:.08em;color:#fff;background:var(--navy,#234E70);padding:2px 8px;border-radius:99px}
+.kp-id{font-size:.9rem;font-weight:800;color:var(--navy,#234E70)}.kp-g{font-size:.82rem}
+.kp-txt{margin:2px 0 0;font-size:1rem;line-height:1.6;color:var(--ink,#1E2B38);font-weight:600}
+.kp-txt .kp-s{color:#B02A21;background:linear-gradient(transparent 62%,rgba(224,69,58,.18) 62%);font-weight:800}
+.kp-txt .kp-n{color:#1D5B8F;background:linear-gradient(transparent 62%,rgba(47,107,143,.16) 62%);font-weight:800}
+.kp-near{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px;font-size:.74rem;color:var(--sub,#5A6B7A)}
+.kp-sib,.rc-chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:99px;padding:3px 10px 3px 8px;font:inherit;font-size:.74rem;color:var(--ink);cursor:pointer;max-width:100%}
+.kp-sib:hover,.rc-chip:hover{border-color:var(--navy,#234E70);box-shadow:0 2px 8px rgba(35,78,112,.15)}
+.kp-sib code,.rc-chip code{font-weight:800;color:var(--navy,#234E70)}.kp-sib em{font-style:normal;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:14em}
+.kp-sib .badge,.rc-chip .badge{font-size:.68rem;padding:1px 6px}
+@media(max-width:480px){.kp-sib em{display:none}.kp-txt{font-size:.94rem}}
+.rc103{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 12px;padding:8px 10px;border:1px dashed var(--line);border-radius:12px;background:#FAFCFE}
+.rc-h{font-size:.78rem;font-weight:800;color:var(--navy,#234E70);margin-right:2px}
+.rc-clr{margin-left:auto;border:0;background:none;color:var(--sub);font:inherit;font-size:.72rem;cursor:pointer;text-decoration:underline}
+.t3-box[data-kp]::before,#demo3d[data-kp]::before{content:attr(data-kp);position:absolute;left:10px;top:8px;z-index:3;font-size:.72rem;font-weight:800;color:#E6F2FF;background:rgba(14,32,52,.72);border:1px solid rgba(120,180,240,.45);padding:3px 9px;border-radius:99px;pointer-events:none;letter-spacing:.02em}
+#demo3d{position:relative}
+.kp-sib:focus-visible,.rc-chip:focus-visible,.rc-clr:focus-visible{outline:3px solid var(--seal,#C0392B);outline-offset:2px}
+
+/* v34：正常→受傷 揭示＋喜鵲 */
+svg.rv-on .dz-hot{animation:rv104 8s ease-in-out infinite}
+@keyframes rv104{
+  0%,19%{filter:grayscale(1) brightness(1.08);opacity:.55}
+  27%{filter:grayscale(0) brightness(1.7) drop-shadow(0 0 6px rgba(255,64,40,1)) drop-shadow(0 0 14px rgba(255,64,40,.8));opacity:1}
+  40%,60%,80%,100%{filter:drop-shadow(0 0 2px rgba(255,64,40,.95)) drop-shadow(0 0 6px rgba(255,64,40,.55));opacity:1}
+  50%,70%,90%{filter:drop-shadow(0 0 1px rgba(255,64,40,.55)) drop-shadow(0 0 2px rgba(255,64,40,.25));opacity:1}}
+.rv104 *{animation:none!important}
+.mp3d{position:absolute;left:0;top:0;z-index:4;pointer-events:none;will-change:transform;filter:drop-shadow(0 3px 6px rgba(0,0,0,.45))}
+.mp3d svg{display:block}
+.mp3d.flip svg>g:first-child{transform:scale(-1,1)}
+/* 重點卡精簡成一行 */
+.kp103{padding:7px 10px}.kp103 .kp-tag{display:none}.kp103 .kp-txt{font-size:.9rem;line-height:1.45}
+@media (prefers-reduced-motion:reduce){svg.rv-on .dz-hot{animation:none}}
+
+/* v35：機制、物件、背景 */
+.story-stage,.fg-stage{position:relative}
+/* 按住看正常 */
+svg.rv-hold .dz-hot{animation:none!important;filter:grayscale(1) brightness(1.08)!important;opacity:.55!important}
+svg.rv-hold .rv104{opacity:.25;transition:opacity .15s}
+svg.rv-pop .dz-hot{animation:pop105 .6s ease-out!important}
+@keyframes pop105{0%{filter:brightness(2.2) drop-shadow(0 0 10px #FF4028);opacity:1}100%{filter:drop-shadow(0 0 2px rgba(255,64,40,.9));opacity:1}}
+.hold105{display:flex;align-items:center;gap:6px;font-size:.74rem;color:var(--sub,#5A6B7A);margin:6px 2px 0;flex:1 0 100%;width:100%;grid-column:1/-1;line-height:1.35}
+.hold105 b{color:var(--ink,#1E2B38)}.h105-ic{font-size:.95rem;animation:tap105 1.6s ease-in-out infinite}
+@keyframes tap105{0%,100%{transform:translateY(0)}50%{transform:translateY(3px) scale(.92)}}
+svg.rv-on,svg.rv-user{cursor:pointer;-webkit-user-select:none;user-select:none;touch-action:manipulation}
+/* 點紅色的小卡 */
+.tip105{position:absolute;z-index:6;display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;max-width:250px;padding:7px 10px;border-radius:12px;background:#1B2A3A;color:#fff;font-size:.76rem;box-shadow:0 8px 20px rgba(0,0,0,.28);animation:tipIn .25s ease-out;pointer-events:none}
+.tip105 code{color:#FFD27A;font-weight:800}.tip105 small{flex:1 0 100%;color:#C9D6E2;font-size:.7rem}.tip105 .badge{font-size:.68rem;padding:1px 6px}
+.tip105::after{content:'';position:absolute;left:50%;bottom:-6px;width:12px;height:12px;background:#1B2A3A;transform:translateX(-50%) rotate(45deg)}
+@keyframes tipIn{from{opacity:0;transform:translateY(6px) scale(.95)}}
+/* 等級章 */
+.st105{position:absolute;right:16px;top:10px;width:64px;height:64px;z-index:5;pointer-events:none;opacity:0;transform:scale(1.4) rotate(-28deg);animation:stamp105 .5s cubic-bezier(.2,1.4,.4,1) forwards}
+.st105 svg{display:block;background:rgba(255,248,244,.9);border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.t3-box .st105{filter:drop-shadow(0 0 6px rgba(255,90,74,.55));top:40px}
+.t3-box .st105 svg{background:rgba(255,245,240,.88);border-radius:50%}
+@keyframes stamp105{0%{opacity:0;transform:scale(1.4) rotate(-28deg)}60%{opacity:1;transform:scale(.92) rotate(-11deg)}100%{opacity:.9;transform:scale(1) rotate(-12deg)}}
+.st105.still{animation:none;opacity:.9;transform:rotate(-12deg)}
+.sh105{animation:shake105 .4s ease-in-out}
+@keyframes shake105{20%{transform:translate(-3px,1px)}40%{transform:translate(3px,-1px)}60%{transform:translate(-2px,1px)}80%{transform:translate(2px,0)}}
+/* 3D 按鈕 */
+.hb105{position:absolute;right:10px;bottom:10px;z-index:6;border:1px solid rgba(143,211,255,.6);background:rgba(14,32,52,.78);color:#E6F2FF;font:inherit;font-size:.74rem;font-weight:700;padding:6px 12px;border-radius:99px;cursor:pointer;touch-action:none;-webkit-user-select:none;user-select:none}
+.hb105.on{background:#8FD3FF;color:#0E2034}
+.hb105:focus-visible{outline:3px solid #F5B800;outline-offset:2px}
+.pop105{animation:p3d105 .5s ease-out}
+@keyframes p3d105{0%{box-shadow:inset 0 0 60px rgba(255,64,40,.8)}100%{box-shadow:inset 0 0 0 rgba(255,64,40,0)}}
+@media (prefers-reduced-motion:reduce){.h105-ic,.sh105,.pop105,svg.rv-pop .dz-hot{animation:none!important}.st105{animation:none;opacity:.9;transform:rotate(-12deg)}}
+.story-stage:has(.t3-box:not([hidden])) > .st105,.story-stage:has(.t3-box:not([hidden])) > .hold105{display:none}
+
+/* v36：先猜再揭曉（放在圖上方一列，不遮圖） */
+.gs106{position:relative;z-index:6;display:flex;flex-wrap:wrap;align-items:center;gap:6px;width:100%;flex:1 0 100%;grid-column:1/-1;box-sizing:border-box;margin:0 0 8px;padding:6px 8px;border:2px dashed #C0392B;border-radius:12px;background:rgba(255,248,244,.96);opacity:0;animation:gsIn .35s ease-out forwards}
+.t3-box .gs106{position:absolute;left:8px;right:8px;top:36px;width:auto}
+@keyframes gsIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.gs-q{display:flex;align-items:center;gap:5px;color:#C0392B;font-size:.76rem;font-weight:800;margin-right:2px}
+.gs-q b{font-size:1.1rem;line-height:1}
+.gs106 button{font:inherit;font-size:.76rem;font-weight:800;padding:4px 12px;border-radius:99px;border:1.5px solid #C0392B;background:#fff;color:#8A2A22;cursor:pointer}
+.gs106 button:hover:not(:disabled){background:#FFF0EC}
+.gs106 button:focus-visible{outline:3px solid #F5B800;outline-offset:2px}
+.gs106 button.ok{background:#256B42;border-color:#256B42;color:#fff}.gs106 button.no{background:#F1F4F7;border-color:#9AA5AE;color:#5A6B7A;text-decoration:line-through}
+.gs-fb{font-size:.76rem;font-weight:900;color:#1B2A3A;background:#F5B800;border-radius:99px;padding:3px 10px;animation:gsIn .25s ease-out}
+@media (prefers-reduced-motion:reduce){.gs106,.gs-fb{animation:none;opacity:1}}
+.story-stage:has(.t3-box:not([hidden])) > .gs106{display:none}
+.t3-box .gs106{flex-wrap:nowrap;gap:4px;padding:4px 6px;margin:0;background:rgba(255,248,244,.9)}
+.t3-box .gs-q span{font-size:0}.t3-box .gs-q span::after{content:'猜等級？';font-size:.7rem}
+.t3-box .gs106 button{font-size:.68rem;padding:3px 8px}
+/* 猜的時候先把答案蓋住 */
+.demo-modal:has(.gs106) .res-bar > :not(.item-id),.demo-modal:has(.gs106) .kp103 .kp-g,.demo-modal:has(.gs106) .sc-thumb .badge,.demo-modal:has(.gs106) .sc-stop em,.demo-modal:has(.gs106) .t3-box[data-kp]::before{filter:blur(6px);transition:filter .3s}
+.demo-modal:has(.gs106) .res-bar{position:sticky}
+.demo-modal:has(.gs106) .res-bar::after{content:'猜完揭曉';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:.74rem;font-weight:800;color:#8A2A22;background:#FFF4E8;border:1.5px dashed #C0392B;border-radius:99px;padding:2px 10px;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.demo-modal:has(.gs106) .res-bar > :not(.item-id){transition:none}}
+
+/* v37：嚴重度滑桿 */
+.sc106{order:1!important;margin:0 0 10px;padding:8px 14px 6px;border-radius:12px;background:#fff;border:1px solid var(--line);box-shadow:0 2px 8px rgba(35,78,112,.06)}
+.sc-h{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:.8rem}.sc-h b{color:var(--navy,#234E70)}.sc-h span{font-size:.7rem;color:var(--sub)}
+.sc-track{position:relative;height:46px;margin:4px 6px 0;cursor:pointer;touch-action:none;outline:none}
+.sc-track:focus-visible{box-shadow:0 0 0 3px rgba(245,184,0,.6);border-radius:10px}
+.sc-rail{position:absolute;left:0;right:0;top:27px;height:6px;border-radius:99px;background:linear-gradient(90deg,#CFE3D6,#F6E2A8,#F3C3A4,#E9A39C)}
+.sc-fill{position:absolute;left:0;top:27px;height:6px;border-radius:99px;background:linear-gradient(90deg,#2FA36B,#E0A21A,#E0732A,#C0392B);transition:width .25s}
+.sc-stop{position:absolute;top:21px;transform:translateX(-50%);width:22px;height:22px;display:block}
+.sc-stop i{display:block;width:12px;height:12px;margin:5px auto 0;border-radius:50%;background:#fff;border:2.5px solid currentColor;box-sizing:border-box}
+.sc-stop em{position:absolute;top:22px;left:50%;transform:translateX(-50%);font-style:normal;font-size:.6rem;color:var(--sub);white-space:nowrap}
+.sc-stop.b1{color:#B02A21}.sc-stop.b2{color:#B24C0E}.sc-stop.b3{color:#8F6508}.sc-stop.b4{color:#2F6B8F}.sc-stop.b5{color:#5A6B7A}
+.sc-stop.on i{background:currentColor}
+.sc-thumb{position:absolute;top:0;transform:translateX(-50%);transition:left .25s cubic-bezier(.3,1.4,.5,1);pointer-events:none;white-space:nowrap}
+.sc-thumb .badge{font-size:.68rem;padding:2px 7px;box-shadow:0 3px 8px rgba(0,0,0,.18)}
+.sc-thumb::after{content:'';position:absolute;left:50%;top:19px;width:2px;height:8px;background:#1B2A3A;transform:translateX(-50%)}
+.sc-ends{display:flex;justify-content:space-between;font-size:.66rem;color:var(--sub);margin:6px 2px 0}
+.sc-cap{margin:2px 0 2px;font-size:.78rem;line-height:1.4;color:var(--ink)}.sc-cap code{font-weight:800;color:var(--navy,#234E70)}
+.demo-modal:has(.sc106) .kp-near{display:none}
+@media (prefers-reduced-motion:reduce){.sc-thumb,.sc-fill{transition:none}}
+
+/* v38：真正的正常對照圖 */
+.nrm107{opacity:0}
+svg.rv-on .nrm107{animation:nrm107 8s linear infinite}
+@keyframes nrm107{0%,17%{opacity:1}23%,100%{opacity:0}}
+svg.rv-hold .nrm107{animation:none!important;opacity:1!important}
+svg.rv-hold .rv104{opacity:0!important}
+@media (prefers-reduced-motion:reduce){svg.rv-on .nrm107{animation:none;opacity:0}}
+
+/* v39：3D 正常／喜鵲只出現一次 */
+.mp3d.nobird{display:none!important}
+.t3-box:not(.nrm3-on) .t3-lab.nrm3{display:none!important}
+.t3-box.nrm3-on .t3-lab:not(.nrm3){display:none!important}
+.t3-box.nrm3-on .mp3d,.t3-box.nrm3-on .st105{opacity:0;transition:opacity .15s}
+.nrm3-chip{position:absolute;right:10px;top:8px;z-index:7;display:none;padding:3px 12px;border-radius:99px;background:#256B42;color:#fff;font-size:.78rem;font-weight:800;pointer-events:none;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.t3-box.nrm3-on .nrm3-chip{display:block}
+.hb108{position:absolute;right:10px;bottom:10px;z-index:6;border:1px solid #256B42;background:#fff;color:#256B42;font:inherit;font-size:.74rem;font-weight:800;padding:6px 12px;border-radius:99px;cursor:pointer;touch-action:none;-webkit-user-select:none;user-select:none;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+.hb108.on{background:#256B42;color:#fff}
+.hb108:focus-visible{outline:3px solid #F5B800;outline-offset:2px}
+
 
 /* 對外版：提醒與聯絡 */
 .pub-note{display:flex;gap:14px;align-items:flex-start;background:var(--seal-soft);border:1px solid #EBC7C2;border-left:5px solid var(--seal);border-radius:10px;padding:12px 16px;margin:-4px 0 16px;font-size:.9rem;line-height:1.7}
@@ -4838,7 +4972,7 @@ T5(()=>{if(typeof openLld!=='function')return;const _l=openLld;openLld=function(
       L.forEach(l=>{l.J.forEach((g,i)=>{g.rotation.x=MJ_RNG[js[i]].sgn*th[i]*Math.PI/180;});l.hal.forEach((h,i)=>{const on=cur===i||cur===3;h.material.opacity=on?.85+.15*Math.sin(t*6):.35;});});
       L[0].base.updateMatrixWorld(true);const tmp=new T.Vector3(),rt=new T.Vector3();
       if(cc&&cc.labs.length>=4){js.forEach((j,i)=>{const e=cc.labs[i];L[L.length-1].J[i].getWorldPosition(tmp);rt.setFromMatrixColumn(cam.matrixWorld,0);tmp.addScaledVector(rt,both?.75:.6);root.worldToLocal(tmp);e.v.copy(tmp);
-        const on=(cur===i||cur===3||cur===4),d=JDEF[j],tot=d.flex+d.ext,f=fr(j);e.el.textContent=`${mjShort(j)}｜${S.has(j)?(lv==='loss'?'強直 0°':`剩 ≦ ${Math.floor(tot*f*10)/10}°`):`正常 ${tot}°`}`;e.el.classList.toggle('hot',on&&!S.has(j));e.el.classList.toggle('warn',S.has(j));e.el.style.opacity=on?1:.55;});
+        const on=(cur===i||cur===3||cur===4),d=JDEF[j],tot=d.flex+d.ext,f=fr(j);e.el.textContent=`${mjShort(j)}｜${S.has(j)?(lv==='loss'?'強直 0°':`剩 ≦ ${Math.floor(tot*MJ_TH[lv])}°`):`正常 ${tot}°`}`;e.el.classList.toggle('hot',on&&!S.has(j));e.el.classList.toggle('warn',S.has(j));e.el.style.opacity=on?1:.55;});
         const cap=cc.labs[3];cap.v.set(-.9,bottom+.25,0);cap.el.textContent=cur===3?'三個關節一起動':cur<3?`▶ 現在看：${JDEF[js[cur]].name}`:'';cap.el.className='t3-lab hot';cap.el.style.opacity=cap.el.textContent?1:0;}}};};}
   let SIG='';
   function mount(){const m=document.getElementById('demoModal');if(!m||!MJ||MJ.old)return;const mj=m.querySelector('.mj');if(!mj)return;
@@ -4858,11 +4992,11 @@ T5(()=>{if(typeof openLld!=='function')return;const _l=openLld;openLld=function(
 /* ================= v30-c：假關節與畸形 全息 3D =================
    一（兩）根長骨（上肢＝肱骨、下肢＝股骨）＋發光外殼＋掃描環：
    假關節：斷端不癒合（紅色硬化斷端＋紅光），遠端在斷處異常晃動；合併顯著運動失能時，下方關節亮橘色。
-   畸形：癒合處金色骨痂，遠端逐漸偏折約 24°；白色虛線＝原本正常骨線，角度弧線標示成角。 */
+   畸形：癒合處金色骨痂，遠端逐漸偏折約 20°；白色虛線＝原本正常骨線，角度弧線標示成角。 */
 (function(){
   if(typeof T3==='undefined'||typeof HX==='undefined')return;
   function lboneHX(s){return (T,sc,cam,root,c)=>{
-    const rm=reduceMotion,arm=s.limb==='arm',mal=s.type==='mal',pjm=s.type==='pjm',xs=s.both?[-.85,.85]:[0],H=3.2,M=H/2,gap=mal?0:.16;
+    const rm=reduceMotion,arm=s.limb==='arm',ok=s.type==='ok',mal=s.type==='mal',pjm=s.type==='pjm',xs=s.both?[-.85,.85]:[0],H=3.2,M=H/2,gap=mal||ok?0:.16;
     sc.fog=new T.FogExp2(0x0d1824,.02);HX.floor(T,root,s.both?2.3:1.7,-.75);const dust=HX.dust(T,root,90,4.6,4.4);root.children[root.children.length-1].position.y=-.7;
     const bn=HX.bone(T),red=new T.MeshStandardMaterial({color:0xFF7A6A,roughness:.35,emissive:0xC0392B,emissiveIntensity:.9}),gold=new T.MeshStandardMaterial({color:0xF2C66B,roughness:.5,emissive:0xB8860B,emissiveIntensity:.7,transparent:true,opacity:.92});
     const R=arm?.12:.15;
@@ -4890,14 +5024,15 @@ T5(()=>{if(typeof openLld!=='function')return;const _l=openLld;openLld=function(
       lo.add(HX.ball(T,jm,R*1.25,-R*.9,-.02,0,1,.8,1.1),HX.ball(T,jm,R*1.25,R*.9,-.02,0,1,.8,1.1));
       lo.add(HX.longBone(T,bn,R*.75,[0,-.18,0],[0,-.62,0]));if(!arm)lo.add(HX.longBone(T,bn,R*.35,[R*1.3,-.2,0],[R*1.3,-.6,0]));else lo.add(HX.longBone(T,bn,R*.5,[R*1.1,-.2,0],[R*1.1,-.6,0]));
       let jh=null;if(pjm){jh=HX.halo(T,0xE0732A,1.1);jh.position.y=-.05;lo.add(jh);}
-      let fx=null,hl=HX.halo(T,mal?0xFFC56B:0xFF5A4A,mal?1.1:1.3);hl.position.y=M;g.add(hl);
+      if(s.type==='pj'||s._pj){/* 11-42／12-37：前臂（小腿）兩根骨中只有一根有假關節，另一根完整 */g.add(HX.longBone(T,bn,R*.62,[R*2.3,-.62,0],[R*2.3,H-.25,0]));}
+      let fx=null,hl=HX.halo(T,mal?0xFFC56B:0xFF5A4A,mal?1.1:1.3);hl.position.y=M;hl.visible=!ok;g.add(hl);
       if(mal){/* 骨痂：在斷處的金色膨大環，掛在上段（不動） */
         fx=HX.lathe(T,[[0,M-.2],[R*1.25,M-.18],[R*1.75,M-.06],[R*1.85,M],[R*1.7,M+.08],[R*1.2,M+.2],[0,M+.22]],gold,32);g.add(fx);g.add(HX.lathe(T,[[0,M-.3],[R*2.3,M-.25],[R*2.5,M],[R*2.3,M+.25],[0,M+.3]],shB,32));
         /* 正常骨線：白色虛線 */
         const lg=new T.BufferGeometry().setFromPoints([new T.Vector3(0,M,0),new T.Vector3(0,-.65,0)]);const ln=new T.Line(lg,new T.LineDashedMaterial({color:0xFFFFFF,dashSize:.1,gapSize:.07,transparent:true,opacity:.85}));ln.computeLineDistances();g.add(ln);
         /* 實際骨線（跟著遠端） */
         const lg2=new T.BufferGeometry().setFromPoints([new T.Vector3(0,0,0),new T.Vector3(0,-M-.65,0)]);piv.add(new T.Line(lg2,new T.LineBasicMaterial({color:0xFFC56B})));
-      }else{/* 斷端：紅色硬化端＋縫隙光 */
+      }else if(!ok){/* 斷端：紅色硬化端＋縫隙光 */
         g.add(HX.ball(T,red,R*.95,0,M+gap,0,1,.55,1));lo.add(HX.ball(T,red,R*.95,0,M-gap,0,1,.55,1));
         g.add(HX.lathe(T,[[0,M-.32],[R*2.4,M-.3],[R*2.7,M],[R*2.4,M+.3],[0,M+.32]],shB,32));}
       /* 角度弧線（畸形） */
@@ -4908,22 +5043,24 @@ T5(()=>{if(typeof openLld!=='function')return;const _l=openLld;openLld=function(
     const bone=arm?'肱骨':'股骨',jn=arm?'肘':'膝';
     cam.position.set(0,1.35,s.both?8.6:7.2);cam.lookAt(0,1.35,0);c.base=0;
     const lx=xs[xs.length-1]+.75;
-    const labs=mal?[[`${bone}癒合後成角（約 24°）`,new T.Vector3(lx,M-.45,0),'warn'],['白色虛線＝原本正常骨線',new T.Vector3(lx,-.35,0),''],['金色＝骨痂（癒合處）',new T.Vector3(lx,M+.75,0),'hot']]
+    const pj1=s.type==='pj',bone2=arm?'前臂（橈骨或尺骨）':'小腿（脛骨或腓骨）';
+    const labs=ok&&s._pj?[[`${arm?'前臂橈骨、尺骨':'小腿脛骨、腓骨'}兩根都完整（正常）`,new T.Vector3(lx,M,0),'hot'],['沒有斷端，也沒有成角',new T.Vector3(lx,M+.75,0),'']]:pj1?[[`${bone2}其中一根沒長好`,new T.Vector3(lx,M,0),'warn'],['另一根骨完整（右側細骨）',new T.Vector3(lx,M-.75,0),''],['紅色＝未癒合的斷端',new T.Vector3(lx,M+.75,0),'']]:ok?[[`${bone}完整、筆直（正常）`,new T.Vector3(lx,M,0),'hot'],['沒有斷端，也沒有成角',new T.Vector3(lx,M+.75,0),'']]:mal?[[`${bone}癒合後成角（約 20°）`,new T.Vector3(lx,M-.45,0),'warn'],['白色虛線＝原本正常骨線',new T.Vector3(lx,-.35,0),''],['金色＝骨痂（癒合處）',new T.Vector3(lx,M+.75,0),'hot']]
       :[[`${bone}斷端沒長好，會異常晃動`,new T.Vector3(lx,M,0),'warn'],['紅色＝未癒合的斷端',new T.Vector3(lx,M+.75,0),'']];
     if(pjm)labs.push([`${jn}關節：顯著運動失能`,new T.Vector3(lx,-.05,0),'hot']);
-    const ANG=.42;
+    const ANG=.349;
     return {labels:labs,update(t){if(!rm)dust(t);
       const sy=rm?M:((t*.45)%1)*(H+1.1)-.6;scan.position.y=sy;scan.material.opacity=rm?.3:.75*Math.sin(Math.PI*((t*.45)%1));
       items.forEach((o,i)=>{let a;
         if(mal){const u=rm?3:t%7,k=rm?1:u<2.2?ez3(u/2.2):u<6?1:1-ez3((u-6)/1);a=-ANG*k;o.piv.rotation.z=a;
           const P=o.arc.geometry.attributes.position.array,r=.85;P[0]=0;P[1]=M;P[2]=0;for(let j=0;j<=24;j++){const th=a*j/24;P[(j+1)*3]=r*Math.sin(th);P[(j+1)*3+1]=M-Math.cos(th)*r;P[(j+1)*3+2]=0;}o.arc.geometry.attributes.position.needsUpdate=true;
           o.hl.material.opacity=.55+.3*k;}
-        else{a=rm?.14:Math.sin(t*2.4+i*.9)*.26+Math.sin(t*5.3+i)*.05;o.piv.rotation.z=a;o.piv.rotation.x=rm?0:Math.sin(t*1.7+i)*.12;o.hl.material.opacity=.55+.4*Math.abs(Math.sin(t*2.4+i*.9));}
+        else if(ok){o.piv.rotation.set(0,0,0);}
+        else{const amp=s.type==='pj'?.35:1;a=(rm?.14:Math.sin(t*2.4+i*.9)*.26+Math.sin(t*5.3+i)*.05)*amp;o.piv.rotation.z=a;o.piv.rotation.x=rm?0:Math.sin(t*1.7+i)*.12*amp;o.hl.material.opacity=.55+.4*Math.abs(Math.sin(t*2.4+i*.9));}
         if(o.jh)o.jh.material.opacity=.5+.35*Math.sin(t*4);});}};};}
   let LB_S=null;
   T5(()=>{
     const _m=GT.lbone.mount;GT.lbone.mount=function(st){LB_S=st;return _m?_m.apply(this,arguments):undefined;};
-    const _ts=t3start;t3start=function(k,build){if(k==='lbone'&&LB_S)return _ts(k,lboneHX(LB_S));return _ts(k,build);};
+    const _ts=t3start;t3start=function(k,build){if(k==='lbone'&&LB_S){const b=lboneHX(LB_S),S=LB_S;b._nrm=()=>lboneHX(Object.assign({},S,{type:'ok',_pj:S.type==='pj'}));return _ts(k,b);}return _ts(k,build);};
   },'holo90');
 })();
 
@@ -4976,7 +5113,7 @@ T5(()=>{if(typeof openLld!=='function')return;const _l=openLld;openLld=function(
    切除＝紅色線框＋紅色光暈閃爍，移植＝綠色光暈；地面刻度、光點與掃描環。 */
 (function(){
   if(typeof T3==='undefined'||typeof HX==='undefined'||typeof organ3dBuild!=='function')return;
-  const base=organ3dBuild;
+  const base0=organ3dBuild,base=s=>(window.organ3dBase||base0)(s);
   function holoOrgan(s){const b=base(s);return (T,sc,cam,root,c)=>{
     const n0=root.children.length,api=b(T,sc,cam,root,c),rm=reduceMotion;sc.fog=new T.FogExp2(0x0d1824,.02);
     const added=root.children.slice(n0),halos=[];
@@ -5086,23 +5223,27 @@ T5(()=>{if(typeof openLld!=='function')return;const _l=openLld;openLld=function(
       /* 血室（實體發光，依 EF 收縮） */
       const blood=HX.lathe(T,V.map(([r,y])=>[r*.62,y*.72-.02]),glow(T,col,.55),40);blood.rotation.z=.42;blood.scale.z=.8;g.add(blood);
       /* 主動脈弓與肺動脈 */
-      const aoP=[[.05,.45,0],[.08,.95,0],[-.1,1.28,0],[-.45,1.25,0],[-.62,.85,-.05],[-.64,.1,-.1]];const ao=tube(T,aoP,.085,HX.holo(T,0xFF7A6A,1.6,.08));g.add(ao);
+      const aoP=[[-.02,.45,0],[-.06,.95,.02],[.08,1.3,-.04],[.4,1.26,-.14],[.56,.86,-.24],[.58,.1,-.3]];/* 主動脈弓向病人左側（畫面右）彎、沿脊椎左側下行 */const ao=tube(T,aoP,.085,HX.holo(T,0xFF7A6A,1.6,.08));g.add(ao);
       g.add(tube(T,[[-.12,.48,.12],[-.2,.9,.18],[.18,1.08,.15],[.42,1.02,.05]],.07,HX.holo(T,0x7AA8FF,1.5,.07)));
       const cv=new T.CatmullRomCurve3(aoP.map(p=>new T.Vector3(...p)));
       const beads=[0,1,2,3].map(()=>{const b=new T.Mesh(new T.SphereGeometry(1,12,10),new T.MeshBasicMaterial({color:col,transparent:true,opacity:.95,blending:T.AdditiveBlending,depthWrite:false}));b.visible=false;g.add(b);return b;});
       const hl=HX.halo(T,col,1.1);hl.position.set(0,-.1,.1);g.add(hl);
       /* 心電圖掃描線 */
       const N=120,ep=new Float32Array(N*3),eg=new T.BufferGeometry();eg.setAttribute('position',new T.BufferAttribute(ep,3));const ecg=new T.Line(eg,new T.LineBasicMaterial({color:col,transparent:true,opacity:.9}));ecg.position.set(0,-1.05,.3);g.add(ecg);
-      return {g,blood,ven,beads,cv,hl,ecg,ep,N,k:Math.cbrt(Math.max(.02,1-e)),br:Math.cbrt(Math.max(.03,e/.6))*.07};};
+      /* 上方的杯子：每次心跳擠出去的血（佔整個心室的比例） */
+      const cx=x<0?-.8:.8,cyB=-.2;const cup=new T.Mesh(new T.CylinderGeometry(.24,.24,.56,32,1,true),HX.holo(T,0x9FC8E8,1.2,.06));cup.position.set(cx,cyB+.28,0);g.add(cup);
+      const rim=new T.Mesh(new T.TorusGeometry(.24,.012,6,40),new T.MeshBasicMaterial({color:0x9FC8E8,transparent:true,opacity:.8}));rim.rotation.x=Math.PI/2;rim.position.set(cx,cyB+.56,0);g.add(rim);
+      const fg=new T.CylinderGeometry(.22,.22,.54,32);fg.translate(0,.27,0);const fill=new T.Mesh(fg,new T.MeshStandardMaterial({color:col,emissive:col,emissiveIntensity:.5,transparent:true,opacity:.9}));fill.position.set(cx,cyB+.01,0);fill.scale.y=.001;g.add(fill);
+      return {g,blood,ven,beads,cv,hl,ecg,ep,N,e,fill,k:Math.cbrt(Math.max(.02,1-e)),br:Math.cbrt(Math.max(.03,e/.6))*.07};};
     const H=[mk(-.98,.6,0x3EDB86),mk(.98,ef,efc)];
-    const labs=[['正常 擠出約 60%',new T.Vector3(-.98,-1.55,0),'hot'],[has?`患者 擠出 ${Math.round(ef*100)}%`:'患者（尚未填入 LVEF）',new T.Vector3(.98,-1.55,0),ef<=.25?'warn':'']];
+    const labs=[['旁邊的杯子＝每次心跳擠出去的血',new T.Vector3(-1.2,1.75,0),''],['正常 擠出約 60%',new T.Vector3(-.98,-1.55,0),'hot'],[has?`患者 擠出 ${Math.round(ef*100)}%`:'患者（尚未填入 LVEF）',new T.Vector3(.98,-1.55,0),ef<=.25?'warn':'']];
     if(s.tx){const dev=new T.Mesh(new T.CylinderGeometry(.14,.14,.42,20),new T.MeshStandardMaterial({color:0xDCE6F0,metalness:.7,roughness:.25,emissive:0x2E8FD8,emissiveIntensity:.4}));dev.position.set(.62,-.72,0);dev.rotation.z=.5;H[1].g.add(dev);labs.push(['心室輔助器／移植心',new T.Vector3(2.1,-.8,0),'hot']);}
     cam.position.set(0,.05,9.2);cam.lookAt(0,.05,0);c.base=0;
     const ecgY=u=>{const x=u%1;return x<.08?.05*Math.sin(x/.08*Math.PI):x<.16?0:x<.19?-.06:x<.22?.42:x<.25?-.14:x<.4?0:x<.55?.09*Math.sin((x-.4)/.15*Math.PI):0;};
     return {labels:labs,update(t){if(!rm)dust(t);const p=rm?.8:(t%1.1)/1.1,cc=p<.5?0:p<.8?ez3((p-.5)/.3):1-ez3((p-.8)/.2);
-      H.forEach((h,j)=>{const f=1-(1-h.k)*cc;h.blood.scale.set(f,f,.8*f);const w=1-.06*cc;h.ven.scale.set(w,w,.82*w);h.hl.material.opacity=.25+.45*cc;
+      H.forEach((h,j)=>{const f=1-(1-h.k)*cc;h.blood.scale.set(f,f,.8*f);const w=1-.07*cc*Math.min(1,h.e/.6);h.ven.scale.set(w,w,.82*w);h.fill.scale.y=Math.max(.001,h.e);h.hl.material.opacity=.25+.45*cc;
         h.beads.forEach((b,i)=>{const u=(p-.5-i*.06)/.5;b.visible=!rm&&u>0&&u<1&&cc>0;if(b.visible){b.position.copy(h.cv.getPoint(u));b.scale.setScalar(h.br*(i===0?1:.75));}});
-        for(let i=0;i<h.N;i++){const x=i/(h.N-1);h.ep[i*3]=-.9+1.8*x;h.ep[i*3+1]=ecgY((rm?0:t/1.1)-(1-x)*1.6+.3)*(j?(.5+.5*h.k):1);h.ep[i*3+2]=0;}h.ecg.geometry.attributes.position.needsUpdate=true;});}};};}
+        for(let i=0;i<h.N;i++){const x=i/(h.N-1);h.ep[i*3]=-.9+1.8*x;h.ep[i*3+1]=ecgY((rm?0:t/1.1)-(1-x)*1.6+.3);h.ep[i*3+2]=0;}h.ecg.geometry.attributes.position.needsUpdate=true;});}};};}
 
   /* ---------------- 肺 ---------------- */
   function lungHX(s){return (T,sc,cam,root,c)=>{const has=s.fev1!=null&&s.fev1!==''&&!isNaN(+s.fev1),v=has?Math.max(0,Math.min(100,+s.fev1)):100,res=s.res||'none',rm=reduceMotion,amp=s.support?.03:.03+.11*(v/100);
@@ -5123,7 +5264,8 @@ T5(()=>{if(typeof openLld!=='function')return;const _l=openLld;openLld=function(
     /* 橫膈膜 */
     const dia=new T.Mesh(new T.SphereGeometry(1.2,40,16,0,Math.PI*2,0,Math.PI*.32),HX.holo(T,0x7AB8FF,1.2,.06));dia.scale.set(1.05,.45,.7);dia.position.y=-1.05;root.add(dia);
     const nb=Math.max(2,Math.round(v/12)),beads=Array.from({length:nb},(_,i)=>{const b=new T.Mesh(new T.SphereGeometry(.045,10,8),new T.MeshBasicMaterial({color:0x9FE0FF,transparent:true,opacity:.95,blending:T.AdditiveBlending,depthWrite:false}));b.userData.sd=i%2?1:-1;root.add(b);return b;});
-    const labs=[[has?`FEV1 ${v}%（氣流 ${v<60?'明顯變少':'接近正常'}）`:'FEV1 未填（以正常示意）',new T.Vector3(0,2.55,0),v<60?'warn':'hot']];
+    const po=s.pao2!=null&&s.pao2!==''&&!isNaN(+s.pao2)?+s.pao2:null;
+    const labs=[[has?`FEV1 ${v}%（氣流 ${v<60?'明顯變少':'接近正常'}）`:po!=null?`未給氧時 PaO2 ${po} mmHg（${po<=60?'血氧明顯不足':'接近正常'}）`:s.tx||s.support||res!=='none'||s.rad?'肺功能數值未填':'FEV1 正常（約 80% 以上）',new T.Vector3(0,2.55,0),(has&&v<60)||(po!=null&&po<=60)?'warn':'hot']];
     if(res!=='none')labs.push([res==='side'?'右肺切除（一側）':'右肺兩葉切除',new T.Vector3(-1.45,.6,0),'warn']);if(s.rad)labs.push(['放射性肺炎（暗紅）',new T.Vector3(1.2,-.75,0),'warn']);if(s.tx)labs.push(['移植肺（綠）',new T.Vector3(1.3,-.35,0),'hot']);
     if(s.support){const tk=new T.Mesh(new T.CylinderGeometry(.14,.14,.65,20),new T.MeshStandardMaterial({color:0xDCE6F0,metalness:.7,roughness:.25,emissive:0x2E8FD8,emissiveIntensity:.4}));tk.position.set(1.6,1.9,0);root.add(tk,tube(T,[[1.55,2.2,0],[1.1,2.45,0],[.4,2.4,0],[.08,2.2,0]],.02,glow(T,0xB8DDF5,.3)));labs.push(['氧氣／呼吸器維生',new T.Vector3(1.15,1.45,0),'hot']);}
     cam.position.set(0,.75,7.6);cam.lookAt(0,.75,0);c.base=0;
@@ -5141,7 +5283,7 @@ T5(()=>{if(typeof openLld!=='function')return;const _l=openLld;openLld=function(
     /* 食道 */
     root.add(tube(T,[[0,3.2,.0],[0,2.6,-.05],[.02,2.0,-.02],[-.1,1.75,.05]],.05,HX.holo(T,0xFFB08A,1.4,.08)));
     /* 肝臟：右葉厚、左葉薄 */
-    const lg=new T.SphereGeometry(1,64,40),P=lg.attributes.position;for(let i=0;i<P.count;i++){let x=P.getX(i),y=P.getY(i),z=P.getZ(i);const th=(1-x)/2;y*=1-.55*th;z*=1-.35*th;y-=.18*x*x;if(y<0)y*=.7;P.setXYZ(i,x,y,z);}lg.computeVertexNormals();
+    const lg=new T.SphereGeometry(1,64,40),P=lg.attributes.position;for(let i=0;i<P.count;i++){let x=P.getX(i),y=P.getY(i),z=P.getZ(i);const th=(1+x)/2;/* 右葉（病人右側＝畫面左）厚、左葉薄 */y*=1-.55*th;z*=1-.35*th;y-=.18*x*x;if(y<0)y*=.7;P.setXYZ(i,x,y,z);}lg.computeVertexNormals();
     const lv=new T.Mesh(lg,new T.MeshStandardMaterial({color:col,roughness:.45,emissive:col,emissiveIntensity:.35,transparent:true,opacity:.93}));lv.scale.set(.78,.44,.44);lv.position.set(-.2,1.75,.12);root.add(lv);
     const lvS=new T.Mesh(lg,HX.holo(T,0xFFC09A,1.2,.0));lvS.scale.set(.82,.47,.47);lvS.position.copy(lv.position);root.add(lvS);
     const nn=cls==='A'?0:cls==='B'?10:24;for(let k=0;k<nn;k++){const a=k*2.399,y=Math.cos(k*.77)*.8,r=Math.sqrt(1-y*y*.6);const nd=new T.Mesh(new T.SphereGeometry(.026+.012*(k%3),10,8),glow(T,0x4A2418,.15));nd.position.set(lv.position.x+.74*r*Math.cos(a),lv.position.y+.36*y,lv.position.z+.42*r*Math.sin(a));root.add(nd);}
@@ -5168,14 +5310,14 @@ T5(()=>{if(typeof openLld!=='function')return;const _l=openLld;openLld=function(
    判定只看顏色，不改任何認定資料。尊重「減少動態效果」（只加光暈，不閃爍）。 */
 (function(){
   /* ---------- 共用：顏色是否為「失能紅／橘」 ---------- */
-  const hot=(r,g,b)=>{r/=255;g/=255;b/=255;const mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2,d=mx-mn;if(d<.08)return false;const s=d/(1-Math.abs(2*l-1));let h=mx===r?((g-b)/d)%6:mx===g?(b-r)/d+2:(r-g)/d+4;h=(h*60+360)%360;return (h<=40||h>=340)&&s>=.62&&l>=.25&&l<=.72;};
+  const hot=(r,g,b,L)=>{r/=255;g/=255;b/=255;const mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2,d=mx-mn;if(d<.08)return false;const s=d/(1-Math.abs(2*l-1));let h=mx===r?((g-b)/d)%6:mx===g?(b-r)/d+2:(r-g)/d+4;h=(h*60+360)%360;return (h<=40||h>=340)&&s>=.62&&l>=.25&&l<=(L||.72);};
   const parse=c=>{if(!c||c==='none')return null;let m=c.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?/);if(m){if(m[4]!=null&&+m[4]<.25)return null;return [+m[1],+m[2],+m[3]];}m=c.match(/^#([0-9a-f]{6})$/i);if(m){const n=parseInt(m[1],16);return [n>>16,(n>>8)&255,n&255];}return null;};
 
   /* ---------- 平面 ---------- */
   const SEL='.story-stage svg, #gVis svg, #demoModal svg, .fg-stage svg';
   function mark(svg){if(svg.matches('.bar-chart,.ladder,.icon-inline,.organs,[data-dz-off]'))return;if(svg._dz===svg.childElementCount)return;svg._dz=svg.childElementCount;let n=0;
     svg.querySelectorAll('path,rect,circle,ellipse,polygon,polyline,line').forEach(el=>{if(el.closest('defs,clipPath,mask,pattern,marker'))return;const cs=getComputedStyle(el);const f=parse(cs.fill),st=parse(cs.stroke);
-      const isHot=(f&&hot(...f))||(st&&hot(...st)&&parseFloat(cs.strokeWidth)>=1.5);el.classList.toggle('dz-hot',!!isHot);if(isHot)n++;});
+      const isHot=(f&&hot(f[0],f[1],f[2],.62))||(st&&hot(st[0],st[1],st[2],.62)&&parseFloat(cs.strokeWidth)>=1.5);el.classList.toggle('dz-hot',!!isHot);if(isHot)n++;});
     svg.classList.toggle('dz-has',n>0);
     const host=svg.closest('.story-stage')||svg.closest('.fg-stage');if(host&&n>0&&!host.querySelector('.dz-leg')&&!svg.closest('.t3-fb[hidden]')){const lg=document.createElement('div');lg.className='dz-leg';lg.innerHTML='<i></i>紅色發光＝失能（受損、切除、受限、無法自理）的地方';host.appendChild(lg);}}
   let q=0;const run=()=>{q=0;document.querySelectorAll(SEL).forEach(s=>{if(s.offsetParent!==null&&s.getBoundingClientRect().width>60)try{mark(s);}catch(e){}});};
@@ -5332,7 +5474,7 @@ T5(()=>{if(typeof openLld!=='function')return;const _l=openLld;openLld=function(
       const pu=new T.Mesh(new T.CircleGeometry(R*.17,40),new T.MeshBasicMaterial({color:0x050505}));pu.position.z=R*.89;ball.add(pu);
       if(myd[k]){const rr=new T.Mesh(new T.RingGeometry(R*.32,R*.35,48),new T.MeshBasicMaterial({color:0xFF4A3A}));rr.position.z=R*.91;ball.add(rr);}
       const cor=new T.Mesh(new T.SphereGeometry(R*.52,40,24,0,Math.PI*2,0,Math.PI*.42),new T.MeshPhysicalMaterial({color:0xffffff,roughness:.02,metalness:0,clearcoat:1,clearcoatRoughness:0,transparent:true,opacity:.18}));cor.rotation.x=Math.PI/2;cor.position.z=R*.62;ball.add(cor);
-      const spec=new T.Mesh(new T.CircleGeometry(R*.07,20),new T.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:blind?.25:.9}));spec.position.set(-R*.14,R*.16,R*.99);g.add(spec);
+      const spec=new T.Mesh(new T.CircleGeometry(R*.07,20),new T.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:blind?.25:.9}));spec.position.set(-R*.14,R*.16,R*.99);spec.visible=!lidMov[k];g.add(spec);
       /* 眼瞼（皮膚球殼）＋睫毛 */
       const lidG=(up,def)=>{const p=new T.Group();g.add(p);const geo=new T.SphereGeometry(R*1.07,48,20,def?Math.PI*.4:0,def?Math.PI*1.2:Math.PI*2,0,Math.PI*.5);const m=new T.Mesh(geo,skin);if(!up)m.rotation.x=Math.PI;p.add(m);
         if(def){const e=new T.Mesh(new T.TorusGeometry(R*1.07,.02,6,30,Math.PI*.8),new T.MeshStandardMaterial({color:0xFF4A3A,emissive:0xC0392B,emissiveIntensity:.9}));e.rotation.set(Math.PI/2,0,-Math.PI*.4+Math.PI*.5);p.add(e);}
@@ -5350,13 +5492,13 @@ T5(()=>{if(typeof openLld!=='function')return;const _l=openLld;openLld=function(
     let ghost=null;if(dip){ghost=new T.Mesh(new T.SphereGeometry(.05,16,12),new T.MeshBasicMaterial({color:0xFF5A4A,transparent:true,opacity:.75}));root.add(ghost);ghost.add(HX.halo(T,0xFF5A4A,.3));}
     const labs=[[va?`右眼 ${VA[s.R]}`:'右眼',new T.Vector3(-1.05,-.75,.3),va?(s.R?'warn':'hot'):(mot.R||myd.R||lidDef.R||lidMov.R||hemi.R?'warn':'hot')],[va?`左眼 ${VA[s.L]}`:'左眼',new T.Vector3(1.05,-1.0,.3),va?(s.L?'warn':'hot'):(mot.L||lidDef.L||lidMov.L||hemi.L?'warn':'hot')],['上方卡片＝這隻眼睛看到的樣子',new T.Vector3(0,2.1,.4),'']];
     if(dip)labs.push(['紅點＝重影（複視）',new T.Vector3(0,.75,1.6),'warn']);
-    const ex=[has('3-19')&&'瞳孔放大、不會縮小',(lidDef.R)&&'眼瞼缺一塊（紅邊）',(lidMov.R)&&'眼瞼下垂、不會眨',(hemi.R||hemi.L)&&'卡片黑半邊＝看不到的視野',(mot.R&&!dip)&&'右眼不會跟著轉'].filter(Boolean);
+    const ex=[has('3-19')&&'瞳孔放大、不會縮小',(lidDef.R)&&'眼瞼缺一塊（紅邊）',(lidMov.R)&&'眼瞼下垂：瞳孔被蓋住',(hemi.R||hemi.L)&&'卡片黑半邊＝看不到的視野',(mot.R&&!dip)&&(mot.L?'兩眼':'右眼')+'轉動範圍少一半以上'].filter(Boolean);
     if(ex.length)labs.push([ex.join('・'),new T.Vector3(0,-.35,.8),'warn']);
     cam.position.set(0,.55,6.4);cam.lookAt(0,.55,0);HX._f=1;c.base=0;
     return {labels:labs,update(t){const sx=rm?.35:Math.sin(t*.9)*1.0,sy=rm?0:Math.sin(t*1.7)*.22;tgt.position.set(sx,.15+sy,2.2);
       const blink=rm?0:Math.max(0,1-Math.abs(((t%4.2)-4.0)/.12)),lightP=rm?.5:.5+.5*Math.sin(t*1.3);
-      eyes.forEach((e,i)=>{const dx=tgt.position.x-e.g.position.x,dy=tgt.position.y-e.g.position.y,yaw=Math.atan2(dx,2.2),pit=-Math.atan2(dy,2.2),f=e.mot?.06:1;e.ball.rotation.set(pit*f,yaw*f,0);
-        e.pu.scale.setScalar(e.myd?1.9:(1-.3*lightP));const cl=e.lidMov?.42:blink;e.up.rotation.x=-.55+cl*1.7;e.lo.rotation.x=.5-cl*.45;});
+      eyes.forEach((e,i)=>{const dx=tgt.position.x-e.g.position.x,dy=tgt.position.y-e.g.position.y,yaw=Math.atan2(dx,2.2),pit=-Math.atan2(dy,2.2),f=e.mot?.45:1;e.ball.rotation.set(pit*f,yaw*f,0);
+        e.pu.scale.setScalar(e.myd?1.9:(1-.3*lightP));const cl=e.lidMov?Math.max(.45,blink):blink;e.up.rotation.x=-.55+cl*1.7;e.lo.rotation.x=.5-blink*.45;});
       if(ghost)ghost.position.set(tgt.position.x+.3,tgt.position.y+.1,2.2);}};};}
   T5(()=>{window.eye3Build=eyeFull;if(window.HXB){HXB.eye=()=>eyeFull;HXH.eye='立體眼睛：上方卡片是這隻眼睛看到的樣子';}},'eye97');
 })();
@@ -5458,6 +5600,664 @@ T5(()=>{if(typeof openLld!=='function')return;const _l=openLld;openLld=function(
     try{decorate();}catch(e){}}
   const _x=setXray;setXray=function(on){_x.apply(this,arguments);holo(!!on);};
   const _b=build3D;build3D=function(){const r=_b.apply(this,arguments);orig=null;deco=null;try{if(typeof demoXray!=='undefined')holo(!!demoXray);}catch(e){}return r;};
+})();
+
+/* ================= v32：效能優化（舊手機流暢度） =================
+   1. 平面：示範圖捲出畫面時，CSS 動畫與 SVG 內建動畫（SMIL）自動暫停，捲回來再繼續。
+   2. 3D：畫布捲出畫面時不繪製；連續偵測到掉幀（低於約 30 fps）時自動把解析度降到 1 倍。
+   3. 省電：裝置核心數 ≦ 4 或開啟「節省數據」時，3D 解析度上限 1.25 倍。
+   不改任何內容與認定資料。 */
+(function(){
+  const IO=window.IntersectionObserver;
+  /* ---------- 平面 ---------- */
+  if(IO){const io=new IO(es=>es.forEach(e=>{const el=e.target,on=e.isIntersecting;el.classList.toggle('anim-off',!on);
+      el.querySelectorAll('svg').forEach(s=>{try{on?s.unpauseAnimations():s.pauseAnimations();}catch(x){}});if(el.tagName==='svg'){try{on?el.unpauseAnimations():el.pauseAnimations();}catch(x){}}}),{rootMargin:'60px'});
+    const seen=new WeakSet();let q=0;
+    const scan=()=>{q=0;document.querySelectorAll('.story-stage,.lad98,.day-strip,.snd-list,.fg-stage,.demo-stage,#demoStage').forEach(el=>{if(!seen.has(el)){seen.add(el);io.observe(el);}});};
+    new MutationObserver(()=>{if(!q)q=requestAnimationFrame(scan);}).observe(document.body,{childList:true,subtree:true});scan();}
+
+  /* ---------- 3D ---------- */
+  if(typeof T3==='undefined')return;
+  const low=(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4)||(navigator.connection&&navigator.connection.saveData);
+  const _init=T3.init;T3.init=async function(){const ok=await _init.apply(this,arguments);if(ok&&low&&T3.r&&!T3._lowSet){T3._lowSet=1;T3.r.setPixelRatio(Math.min(window.devicePixelRatio||1,1.25));}return ok;};
+  let vis=new WeakMap(),bio=IO?new IO(es=>es.forEach(e=>vis.set(e.target,e.isIntersecting))):null;
+  const _mount=T3.mount;T3.mount=function(box){if(bio&&box&&!box._io){box._io=1;vis.set(box,true);bio.observe(box);}return _mount.apply(this,arguments);};
+  let last=0,slow=0,acc=0,n=0;
+  const _frame=T3.frame;T3.frame=function(){const c=T3.cur;if(c&&bio&&vis.get(c.box)===false&&!c.rm)return;
+    const now=performance.now();if(last){const dt=now-last;if(dt<250){acc+=dt;n++;if(n>=45){const avg=acc/n;acc=0;n=0;if(avg>34){slow++;if(slow>=2&&T3.r&&T3.r.getPixelRatio()>1){T3.r.setPixelRatio(1);if(c){c.w=0;}slow=0;}}else slow=0;}}}last=now;
+    return _frame.apply(this,arguments);};
+})();
+
+/* ================= v33：容易理解＋記得住＋會記憶 =================
+   1.「一句話記住」重點卡：每個示範標題下方，用大字顯示「目前項目＝等級」與附表原文，關鍵數字／程度詞上色；
+      並列出同一組前後一級的項目（差一點就是哪一級），點了可直接切換。
+   2. 3D 畫面左上角固定顯示「項目編號｜等級」，看 3D 也知道在看哪一項。
+   3. 會記憶（存在使用者自己的瀏覽器，不上傳）：
+      - 記住「3D 立體／平面」的選擇，下次打開沿用；
+      - 主頁上方「最近看過」：最近 6 個示範，一鍵再打開（可清除）。 */
+(function(){
+  if(typeof CATS==='undefined'||typeof itemCat!=='function')return;
+  const LS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v);}catch(e){return d;}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}};
+  const CN9=typeof CN!=='undefined'?CN:['一','二','三','四','五','六','七','八','九','十','十一','十二','十三','十四','十五'];
+  const gN=g=>`第${CN9[g-1]}等級`;
+  const esc9=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  /* 關鍵詞上色：程度詞（紅）、數量／數值（藍） */
+  const SEV=/(永久喪失機能|喪失機能|顯著運動失能|運動失能|顯著失能|永久失能|完全喪失|失明|全廢|強直|缺損|切除|摘除|終身無工作能力|終身不能從事任何工作|全須他人扶助|一部須他人扶助|僅能從事輕便工作|無工作能力|縮短|假關節|畸形|半盲|複視|麻痺|喪失|減退)/g;
+  const NUM=/([0-9０-９]+(?:\.[0-9]+)?\s*(?:公分|分貝|dB|％|%|度|°|c\.c\.|公尺|個)|[0-9]+\/[0-9]+|[一二三四五六七八九十]+分之[一二三四五六七八九十]+|[一二兩三四五六七八九十]+(?:大關節|關節|指|趾|目|眼|耳|側|上肢|下肢|節|椎體|椎間盤|手指|足趾|個)|0\.[0-9]+|以上|以下)/g;
+  const hl=t=>esc9(t).replace(SEV,'<b class="kp-s">$1</b>').replace(NUM,m=>/kp-s/.test(m)?m:`<b class="kp-n">${m}</b>`);
+  const idOf=m=>{const e=m.querySelector('.res-bar .item-id');return e?e.textContent.trim():null;};
+  function sibs(id){const x=itemCat(id);if(!x)return [];const its=x.g.items,i=its.findIndex(it=>it[0]===id);return [its[i-1],its[i+1]].filter(Boolean);}
+  function card(id){const x=itemCat(id);if(!x)return '';const g=x.it[2],txt=x.it[1].replace(/者。$/,'').replace(/。$/,'');
+    const nb=sibs(id).map(it=>`<button type="button" class="kp-sib" data-kp="${it[0]}"><code>${it[0]}</code><span class="badge ${badgeCls(it[2])}">${gN(it[2])}</span><em>${esc9(it[1].replace(/者。$/,'').slice(0,26))}${it[1].length>28?'…':''}</em></button>`).join('');
+    return `<div class="kp103" role="note" aria-label="一句話記住"><div class="kp-top"><span class="kp-tag">一句話記住</span><code class="kp-id">${id}</code><span class="badge ${badgeCls(g)} kp-g">${gN(g)}</span></div><p class="kp-txt">${hl(txt)}</p>${nb?`<div class="kp-near"><span>差一點就是：</span>${nb}</div>`:''}</div>`;}
+  /* 最近看過 */
+  function pushRecent(id){let r=LS.get('dm-recent',[]);r=[id].concat(r.filter(x=>x!==id)).slice(0,6);LS.set('dm-recent',r);}
+  function renderRecent(){const p=document.getElementById('panel');if(!p)return;let w=document.getElementById('recent103');const r=LS.get('dm-recent',[]).filter(id=>itemCat(id));
+    if(!r.length){if(w)w.remove();return;}
+    if(!w){w=document.createElement('div');w.id='recent103';w.className='rc103';p.insertAdjacentElement('afterbegin',w);}
+    w.innerHTML=`<span class="rc-h">最近看過</span>${r.map(id=>{const g=itemGrade(id);return `<button type="button" class="rc-chip" data-kp="${id}"><code>${id}</code><span class="badge ${badgeCls(g)}">${gN(g)}</span></button>`;}).join('')}<button type="button" class="rc-clr" aria-label="清除最近看過">清除</button>`;}
+  const openDemo=id=>{const b=document.createElement('button');b.className='demo-btn';b.dataset.demo=id;b.hidden=true;document.body.appendChild(b);b.click();b.remove();};
+  document.addEventListener('click',e=>{const s=e.target.closest('.kp-sib,.rc-chip');if(s){e.preventDefault();const id=s.dataset.kp,m=s.closest('.demo-modal');if(m){const c=m.querySelector('.demo-close');if(c)c.click();}setTimeout(()=>openDemo(id),m?60:0);return;}
+    if(e.target.closest('.rc-clr')){LS.set('dm-recent',[]);renderRecent();}});
+  /* 每次畫面變動：更新重點卡與 3D 角標 */
+  let q=0;const run=()=>{q=0;document.querySelectorAll('.demo-modal.open').forEach(m=>{const id=idOf(m);let k=m.querySelector(':scope .kp103');
+      if(!id){if(k)k.remove();return;}
+      if(!k||k.dataset.id!==id){const h=document.createElement('div');h.innerHTML=card(id);const n=h.firstElementChild;if(!n)return;n.dataset.id=id;if(k)k.replaceWith(n);else{const anc=m.querySelector('.demo-sub')||m.querySelector('.demo-head');if(anc)anc.insertAdjacentElement('afterend',n);}
+        if(m._kpLast!==id){m._kpLast=id;if(!(window.__scrub&&performance.now()-window.__scrub<2500))pushRecent(id);}}
+      const g=itemGrade(id);m.querySelectorAll('.t3-box,#demo3d').forEach(b=>{const v=`${id}｜${gN(g)}`;if(b.dataset.kp!==v)b.dataset.kp=v;});});
+    if(!document.querySelector('.demo-modal.open'))renderRecent();};
+  const sched=()=>{if(!q)q=requestAnimationFrame(run);};
+  new MutationObserver(sched).observe(document.body,{childList:true,subtree:true});
+  document.addEventListener('click',()=>setTimeout(sched,80),true);document.addEventListener('keydown',()=>setTimeout(sched,120),true);
+  /* 記住 3D／平面 */
+  if(typeof T3!=='undefined'){const p=LS.get('dm-t3pref',null);if(p==='3d'||p==='flat')T3.pref=p;
+    document.addEventListener('click',e=>{const b=e.target.closest('[data-t3],[data-mj3]');if(b)LS.set('dm-t3pref',b.dataset.t3||b.dataset.mj3);},true);}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',renderRecent);else renderRecent();
+})();
+
+/* ================= v34：示範「看得懂、記得住、有趣」——正常→受傷 揭示動畫＋喜鵲小導覽 =================
+   平面（每個示範主圖一隻）：
+     ① 開場先以「正常」呈現（失能部位灰色）→ ② 掃描線掃過 → ③ 失能部位「啪」地變紅、漣漪擴散、黃色瞄準圈＋「！」標出位置；
+     每 8 秒重播一次「正常→受傷」的對比，讓人記住差在哪裡。
+     ④ 品牌吉祥物「喜鵲」從右上角飛進來，停在失能部位旁、嘴巴指著它，對話框「看這裡！」。
+   3D：同樣的節奏——失能部位先是正常色，掃描後變紅並出現衝擊波；喜鵲停在畫面中的失能部位旁（跟著旋轉移動）。
+   開啟「減少動態效果」時：不飛、不掃描，喜鵲與瞄準圈靜態標示。 */
+(function(){
+  const NS='http://www.w3.org/2000/svg',P=8;
+  const rm=()=>typeof reduceMotion!=='undefined'&&reduceMotion;
+  /* v39：每次打開示範，揭示動畫與喜鵲只在剛打開時出現一次；之後點選、切換造成的重畫直接顯示結果（不再重播、不再飛鳥） */
+  const sess=(m,k)=>{if(!m)return {first:true,bird:true};const now=performance.now(),K='_rvT'+k;if(!m[K])m[K]=now;const first=now-m[K]<800;const bird=first&&(!m._rvBird||now-m._rvBird<800);if(bird&&!m._rvBird)m._rvBird=now;return {first,bird};};
+  new MutationObserver(rs=>{rs.forEach(r=>{const t=r.target;if(t.classList&&t.classList.contains('demo-modal')&&!t.classList.contains('open')){t._rvT2=t._rvT3=t._rvBird=0;}});}).observe(document.documentElement,{attributes:true,attributeFilter:['class'],subtree:true});
+  const inN=o=>{for(let p=o;p;p=p.parent)if(p.userData&&p.userData.nrm)return true;return false;};
+  /* 喜鵲（原創簡筆）：朝右，原點在腳 */
+  const BIRD=`<path d="M-13 -6 L-36 -1 L-35 3 L-12 -1Z" fill="#1B2A3A"/><path d="M-30 -1.5 L-36 -1 L-35 3 L-29 1.5Z" fill="#2F6FB0"/>
+    <ellipse cx="0" cy="-9" rx="14" ry="9" fill="#1B2A3A"/><path d="M-7 -5 Q2 3 12 -5 Q4 -2 -7 -5Z" fill="#FFFFFF" stroke="#1B2A3A" stroke-width=".8"/>
+    <path d="M-9 -12 Q1 -20 10 -11 Q1 -7 -9 -12Z" fill="#2F6FB0"/><path d="M-4 -13 q4 -3 8 0" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="12" cy="-16" r="6.5" fill="#1B2A3A"/><circle cx="14.2" cy="-17.2" r="1.9" fill="#FFFFFF"/><circle cx="14.7" cy="-17.2" r="1" fill="#000"/>
+    <path d="M18 -16.5 L25 -14.6 L18 -13Z" fill="#2B2B2B"/><path d="M-2 0 v4 M3 0 v4" stroke="#2B2B2B" stroke-width="1.5" stroke-linecap="round"/>`;
+  const birdSVG=(w,flip,txt)=>`<svg viewBox="-40 -48 80 56" width="${w}" height="${w*.7}" aria-hidden="true" style="overflow:visible"><g transform="scale(${flip?-1:1},1)">${BIRD}</g><g transform="translate(${flip?-30:-6} -44)"><rect x="-6" y="-15" width="50" height="21" rx="10" fill="#FFFFFF" stroke="#234E70" stroke-width="1.8"/><text x="19" y="0.5" text-anchor="middle" style="font:900 12px sans-serif;fill:#234E70">${txt}</text></g></svg>`;
+
+  /* ---------- 平面 ---------- */
+  function vb(svg){const v=svg.viewBox&&svg.viewBox.baseVal;if(v&&v.width)return {x:v.x,y:v.y,w:v.width,h:v.height};const r=svg.getBoundingClientRect();return {x:0,y:0,w:r.width,h:r.height};}
+  function toUser(svg,rect){const m=svg.getScreenCTM();if(!m)return null;const inv=m.inverse(),p=svg.createSVGPoint();const f=(x,y)=>{p.x=x;p.y=y;const q=p.matrixTransform(inv);return [q.x,q.y];};
+    const a=f(rect.left,rect.top),b=f(rect.right,rect.bottom);return {x:Math.min(a[0],b[0]),y:Math.min(a[1],b[1]),w:Math.abs(b[0]-a[0]),h:Math.abs(b[1]-a[1])};}
+  function decorate(svg){if(svg.querySelector(':scope > .rv104'))return;const hots=[...svg.querySelectorAll('.dz-hot')].filter(e=>!e.closest('.rv104'));if(!hots.length)return;
+    const red=e=>{const cs=getComputedStyle(e),c=(cs.stroke!=='none'&&parseFloat(cs.strokeWidth)>=1.5?cs.stroke:cs.fill).match(/\d+/g);if(!c)return 0;const [r,g,b]=c.map(Number);return r>150&&g<110&&b<100?1:0;};
+    let best=null,ba=-1;hots.forEach(e=>{const r=e.getBoundingClientRect();const a=Math.max(r.width,4)*Math.max(r.height,4)*(red(e)?10:1);if(a>ba){ba=a;best=r;}});if(!best)return;
+    const u=toUser(svg,best),V=vb(svg);if(!u)return;svg._rv=1;
+    const tx=u.x+u.w/2,ty=u.y+u.h/2,R=Math.max(10,Math.min(Math.max(u.w,u.h)/2+6,V.w*.22)),S=V.w/300;
+    svg._rvT={tx,ty,R,S,V};
+    const flip=tx<V.x+V.w*.42,bx=flip?tx+R+16*S:tx-R-18*S,by=Math.max(V.y+30*S,ty-R*.4);
+    const g=document.createElementNS(NS,'g');g.setAttribute('class','rv104');g.setAttribute('pointer-events','none');
+    const S0=sess(svg.closest('.demo-modal'),2),KT=(a,b)=>`0;${a};${b};1`,still=rm()||!S0.first||!!(window.__scrub&&performance.now()-window.__scrub<2500);
+    let h=`<defs><linearGradient id="rvg${svg._rvId=(Math.random()*1e6|0)}" x1="0" x2="1"><stop offset="0" stop-color="#8FD3FF" stop-opacity="0"/><stop offset=".5" stop-color="#8FD3FF" stop-opacity=".75"/><stop offset="1" stop-color="#8FD3FF" stop-opacity="0"/></linearGradient></defs>`;
+    if(!still)h+=`<rect x="${V.x-30*S}" y="${V.y}" width="${22*S}" height="${V.h}" fill="url(#rvg${svg._rvId})" opacity=".9"><animateTransform attributeName="transform" type="translate" values="0 0;0 0;${V.w+60*S} 0;${V.w+60*S} 0" keyTimes="${KT(.1,.3)}" dur="${P}s" begin="indefinite" repeatCount="indefinite"/></rect>`;
+    /* 漣漪 */
+    if(!still)[0,1].forEach(k=>{h+=`<circle cx="${tx}" cy="${ty}" r="1" fill="none" stroke="#FF5A4A" stroke-width="${2.5*S}" opacity="0"><animate attributeName="r" values="1;1;${R*2.2};${R*2.2}" keyTimes="${KT(.3+k*.05,.48+k*.05)}" dur="${P}s" begin="indefinite" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;.95;0;0" keyTimes="0;${.3+k*.05};${.305+k*.05};${.48+k*.05};1" dur="${P}s" begin="indefinite" repeatCount="indefinite"/></circle>`;});
+    /* 黃色瞄準圈＋！ */
+    const ring=`<circle cx="${tx}" cy="${ty}" r="${R}" fill="none" stroke="#F5B800" stroke-width="${2.2*S}" stroke-dasharray="${5*S} ${4*S}">${still?'':`<animateTransform attributeName="transform" type="rotate" from="0 ${tx} ${ty}" to="360 ${tx} ${ty}" dur="9s" begin="indefinite" repeatCount="indefinite"/>`}</circle>`;
+    const ex=tx+R*.72,ey=ty-R*.72,badge=`<g><circle cx="${ex}" cy="${ey}" r="${7.5*S}" fill="#F5B800" stroke="#FFFFFF" stroke-width="${1.5*S}"/><text x="${ex}" y="${ey+3.6*S}" text-anchor="middle" style="font:900 ${11*S}px sans-serif;fill:#1B2A3A">!</text></g>`;
+    h+=`<g opacity="${still?1:0}">${ring}${badge}${still?'':`<animate attributeName="opacity" values="0;0;1;1" keyTimes="${KT(.3,.36)}" dur="${P}s" begin="indefinite" repeatCount="indefinite"/>`}</g>`;
+    /* 喜鵲 */
+    const bw=84*S,sx=V.x+V.w+40*S,sy=V.y-10*S;
+    if(S0.bird)h+=`<g class="rv-bird">${still?`<g transform="translate(${bx} ${by})">`:`<g transform="translate(${sx} ${sy})"><animateTransform attributeName="transform" type="translate" values="${sx} ${sy};${(sx+bx)/2} ${Math.min(sy,by)-25*S};${bx} ${by}" dur="1.3s" begin="indefinite" fill="freeze" calcMode="spline" keySplines=".3 0 .4 1;.3 0 .3 1"/>`}
+      <g>${still?'':`<animateTransform attributeName="transform" type="translate" values="0 0;0 ${-2.2*S};0 0" dur="1.6s" begin="indefinite" repeatCount="indefinite"/>`}
+      <g transform="translate(${-bw/2} ${-bw*.6}) scale(${bw/80})">${birdSVG(80,flip,'看這裡！').replace(/^<svg[^>]*>|<\/svg>$/g,'').replace(/^/,'<g transform="translate(40 48)">')+'</g>'}</g></g></g>`;
+    g.innerHTML=h;svg.appendChild(g);
+    if(!still){svg.classList.add('rv-on');svg.style.setProperty('--rvd',P+'s');try{g.querySelectorAll('animate,animateTransform').forEach(a=>a.beginElement());}catch(e){}}}
+  let q=0;const run=()=>{q=0;document.querySelectorAll('.demo-modal.open').forEach(m=>{
+      m.querySelectorAll('.story-stage,.fg-stage,#gVis').forEach(host=>{const cands=[...host.querySelectorAll('svg.dz-has')].filter(s=>!s.closest('.day-card,.snd,.mj-card,.fj-card,.t3-fb[hidden],[hidden],.kp103')&&!s.matches('.dz-many,[data-dz-off]')&&s.getBoundingClientRect().width>=170);
+        if(!cands.length)return;cands.sort((a,b)=>b.getBoundingClientRect().width*b.getBoundingClientRect().height-a.getBoundingClientRect().width*a.getBoundingClientRect().height);
+        if(host.querySelector('svg .rv104'))return;try{decorate(cands[0]);}catch(e){}});});};
+  const sched=()=>{if(!q)q=setTimeout(()=>requestAnimationFrame(run),140);};
+  new MutationObserver(m=>{for(const r of m){if(r.addedNodes.length){sched();break;}}}).observe(document.body,{childList:true,subtree:true});
+  document.addEventListener('click',()=>setTimeout(sched,200),true);
+
+  /* ---------- 3D ---------- */
+  if(typeof T3==='undefined')return;
+  const hotC=c=>{const r=c.r*255,g=c.g*255,b=c.b*255;const mx=Math.max(r,g,b)/255,mn=Math.min(r,g,b)/255,l=(mx+mn)/2,d=mx-mn;if(d<.08)return false;const s=d/(1-Math.abs(2*l-1));let h=mx===r/255?((g-b)/255/d)%6:mx===g/255?(b-r)/255/d+2:(r-g)/255/d+4;h=(h*60+360)%360;return (h<=40||h>=340)&&s>=.62&&l>=.25&&l<=.72;};
+  function enhance(c){const T=THREE;c.box.querySelectorAll('.mp3d').forEach(e=>e.remove());const hot=[];
+    c.root.traverse(o=>{if(!o.isMesh||!o.material||Array.isArray(o.material)||o.material.isShaderMaterial||!o.visible||inN(o))return;if(o.material.blending===T.AdditiveBlending&&!o.material.wireframe)return;if(o.material.color&&hotC(o.material.color))hot.push(o);});
+    if(!hot.length)return;
+    let tgt=null,br=0;hot.forEach(o=>{if(!o.geometry.boundingSphere)o.geometry.computeBoundingSphere();const s=o.geometry.boundingSphere.radius*Math.max(o.scale.x,o.scale.y,o.scale.z);if(s>br){br=s;tgt=o;}});
+    const lc=tgt.geometry.boundingSphere.center.clone(),mats=[...new Set(hot.map(o=>o.material))].map(m=>({m,c:m.color.clone(),e:m.emissive?m.emissive.clone():null,ei:m.emissiveIntensity}));
+    /* 紅色的發光外殼（shader）與光暈（sprite）也一起做「正常→受傷」 */
+    const extra=new Set();c.root.traverse(o=>{const m=o.material;if(!m||Array.isArray(m)||extra.has(m)||inN(o))return;
+      if(m.isShaderMaterial&&m.uniforms&&m.uniforms.c&&m.uniforms.c.value&&m.uniforms.c.value.isColor&&hotC(m.uniforms.c.value))extra.add(m);
+      else if((o.isSprite||m.isSpriteMaterial)&&m.color&&hotC(m.color))extra.add(m);});
+    const ex=[...extra].map(m=>({m,c:(m.uniforms?m.uniforms.c.value:m.color).clone(),u:!!m.uniforms}));
+    const S0=sess(c.box.closest('.demo-modal'),3),neutral=new T.Color(0x9FB6CC),wp=new T.Vector3(),still=rm()||!S0.first||!!(window.__scrub&&performance.now()-window.__scrub<2500),NS3=c.box._nrmSet;
+    const sw=HX.halo(T,0xFF5A4A,1);sw.material.opacity=0;c.sc.add(sw);
+    const el=document.createElement('div');el.className='mp3d'+(S0.bird?'':' nobird');el.innerHTML=birdSVG(78,false,'這裡！');c.box.appendChild(el);let flip=false,fx=null,fy=null;
+    const t0=performance.now(),_u=c.api.update;c.box._rvStart=t0;
+    c.api.update=function(t,cc){const r=_u?_u.apply(this,arguments):undefined;const k=still?.9:(((performance.now()-t0)/1000)%P)/P;
+      /* 正常→受傷 */
+      const hold=!!c.box._hold,nOn=NS3?(k<.2||hold):false,grey=NS3?false:hold;if(NS3)NS3(nOn);c.box.classList.toggle('nrm3-on',nOn);
+      mats.forEach(x=>{if(grey){x.m.color.copy(neutral);if(x.m.emissive){x.m.emissive.setHex(0x1A2A3A);x.m.emissiveIntensity=.2;}}
+        else if(nOn){x.m.color.copy(x.c);if(x.e){x.m.emissive.copy(x.e);x.m.emissiveIntensity=x.ei;}}
+        else if(k<.26&&k>=.2){const f=(k-.2)/.06;x.m.color.copy(neutral).lerp(new T.Color(0xFFFFFF),1-f).lerp(x.c,f);if(x.m.emissive){x.m.emissive.copy(x.c);x.m.emissiveIntensity=1.6-f*.6;}}
+        else{x.m.color.copy(x.c);if(x.e&&k>=.26){x.m.emissive.copy(x.e);x.m.emissiveIntensity=x.ei;}}});
+      ex.forEach(x=>{const col=x.u?x.m.uniforms.c.value:x.m.color;if(grey)col.copy(neutral);else if(!nOn&&k>=.2&&k<.26){col.copy(neutral).lerp(x.c,(k-.2)/.06);}else col.copy(x.c);});
+      tgt.updateMatrixWorld(true);wp.copy(lc);tgt.localToWorld(wp);
+      if(!still&&!hold&&k>=.2&&k<.42){const f=(k-.2)/.22;sw.position.copy(wp);const s=(.3+f*2.6)*(br*2.5+.3);sw.scale.set(s,s,1);sw.material.opacity=(1-f)*.9;}else sw.material.opacity=0;
+      /* 喜鵲跟著失能部位 */
+      const v=wp.clone().project(c.cam),W=c.box.clientWidth,H=c.box.clientHeight;let x=(v.x*.5+.5)*W,y=(-v.y*.5+.5)*H;flip=x<W*.42;
+      let px=flip?x+30:x-108,py=y-82;px=Math.max(4,Math.min(px,W-110));py=Math.max(34,Math.min(py,H-84));
+      const fl=still?1:Math.min(1,(performance.now()-t0)/1300);const e=1-Math.pow(1-fl,3);if(fx===null){fx=W+20;fy=-40;}
+      const cx=fx+(px-fx)*e,cy=fy+(py-fy)*e;el.style.transform=`translate(${cx.toFixed(1)}px,${(cy+(still?0:Math.sin(performance.now()/260)*2)).toFixed(1)}px)`;el.classList.toggle('flip',flip);
+      return r;};}
+  const _mount=T3.mount;T3.mount=function(box,build){const p=_mount.apply(this,arguments);Promise.resolve(p).then(ok=>{if(ok&&T3.cur&&T3.cur.box===box&&typeof HX!=='undefined')try{enhance(T3.cur);}catch(e){}});return p;};
+})();
+
+/* ================= v35：機制、物件、背景——更有趣、記得住 =================
+   【背景】每一類有自己的主題背景：細網格＋該類的大型線稿圖示浮水印（大腦、神經元、眼、耳、鼻、嘴、心、脊椎、臉、手、骨）。
+          平面在示範區、3D 在立體畫面後方（3D 為深色實驗室網格）。
+   【機制】① 按住圖片看「正常」、放開看「受傷」（平面直接按住圖；3D 按住右下角按鈕，不影響拖曳旋轉）。
+          ② 點紅色的失能部位，跳出「這裡 → 項目編號／第幾等級」小卡。
+   【物件】③ 揭示瞬間，失能部位噴出碎片；④ 紅色「等級章」從天而降蓋在右上角（附表等級示意，非核定）。
+   減少動態效果：無碎片、無落章動畫（章直接顯示）。 */
+(function(){
+  const NS='http://www.w3.org/2000/svg',rm=()=>typeof reduceMotion!=='undefined'&&reduceMotion;
+  const CN9=typeof CN!=='undefined'?CN:['一','二','三','四','五','六','七','八','九','十','十一','十二','十三','十四','十五'];
+  const CAT={1:'mind',2:'nerve',3:'eye',4:'ear',5:'nose',6:'mouth',7:'organ',8:'trunk',9:'head',10:'skin',11:'arm',12:'leg'};
+  const GL={mind:'M9 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 2 5 3 3 0 0 0 3 3h1V4z M15 4a3 3 0 0 1 3 3 3 3 0 0 1 2 5 3 3 0 0 1-2 5 3 3 0 0 1-3 3h-1V4z M7 9h3 M14 9h3 M7 14h3 M14 14h3',
+    nerve:'M12 3v18 M12 8l-5 4 M12 8l5 4 M7 12l-2 7 M17 12l2 7 M12 14l-3 4 M12 14l3 4',
+    eye:'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z',
+    ear:'M8 16c0 3 2 5 4 5s3-2 3-4c0-3 4-4 4-9a7 7 0 0 0-14 0 M10 9a2 2 0 0 1 4 0c0 2-2 2-2 4',
+    nose:'M12 3v9l-3 5a3 3 0 0 0 6 0 M9 17c-1 1-2.5 1-3 0 M15 17c1 1 2.5 1 3 0',
+    mouth:'M4 12c3 5 13 5 16 0 M4 12c3-2 6-2 8 0 2-2 5-2 8 0',
+    organ:'M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z',
+    trunk:'M12 2v20 M8.5 4.5h7 M8.5 8.5h7 M8.5 12.5h7 M8.5 16.5h7 M9.5 20h5',
+    head:'M12 3a8 9 0 1 0 0 18 8 9 0 1 0 0-18z M9 10h.01 M15 10h.01 M9 15c2 1.5 4 1.5 6 0',
+    skin:'M8 21v-9 M8 12V5a1.5 1.5 0 0 1 3 0v6 M11 11V4a1.5 1.5 0 0 1 3 0v7 M14 11V6a1.5 1.5 0 0 1 3 0v8c0 4-2 7-6 7H9c-2 0-3-1-4-3l-2-4',
+    arm:'M6.5 3.5a2 2 0 1 0-2.8 2.8 2 2 0 1 0 2.8 2.8l8.4 8.4a2 2 0 1 0 2.8 2.8 2 2 0 1 0 2.8-2.8l-8.4-8.4a2 2 0 1 0-2.8-2.8z',
+    leg:'M6.5 3.5a2 2 0 1 0-2.8 2.8 2 2 0 1 0 2.8 2.8l8.4 8.4a2 2 0 1 0 2.8 2.8 2 2 0 1 0 2.8-2.8l-8.4-8.4a2 2 0 1 0-2.8-2.8z'};
+  const uri=(d,col,op)=>`url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='${col}' stroke-opacity='${op}' stroke-width='.9' stroke-linecap='round' stroke-linejoin='round'><path d='${d}'/></svg>`)}")`;
+  /* 背景樣式注入 */
+  (function(){let css='';Object.entries(GL).forEach(([k,d])=>{
+      css+=`.demo-modal[data-cat="${k}"] .story-stage,.demo-modal[data-cat="${k}"] .fg-stage{background-image:${uri(d,'#234E70',.07)},repeating-linear-gradient(0deg,rgba(35,78,112,.035) 0 1px,transparent 1px 22px),repeating-linear-gradient(90deg,rgba(35,78,112,.035) 0 1px,transparent 1px 22px);background-repeat:no-repeat,repeat,repeat;background-position:right -18px bottom -10px,0 0,0 0;background-size:62% auto,auto,auto}`;
+      css+=`.demo-modal[data-cat="${k}"] .t3-box{background:${uri(d,'#8FD3FF',.09)} no-repeat right -30px bottom 10px/70% auto,repeating-linear-gradient(0deg,rgba(120,180,240,.07) 0 1px,transparent 1px 26px),repeating-linear-gradient(90deg,rgba(120,180,240,.07) 0 1px,transparent 1px 26px),radial-gradient(ellipse at 50% 35%,#2a3c4f 0%,#14202c 75%)}`;});
+    const st=document.createElement('style');st.textContent=css;document.head.appendChild(st);})();
+
+  const curId=m=>{const e=m&&m.querySelector('.res-bar .item-id');return e?e.textContent.trim():null;};
+  const gName=id=>{const g=itemGrade(id);return g?`第${CN9[g-1]}等級`:'';};
+  /* ---------- 等級章 ---------- */
+  function slam(host,id,delay){host.querySelectorAll(':scope > .st105').forEach(e=>e.remove());if(!id)return;const g=itemGrade(id);if(!g)return;
+    const el=document.createElement('div');el.className='st105'+(rm()?' still':'');el.setAttribute('aria-hidden','true');
+    el.innerHTML=`<svg viewBox="0 0 100 100"><defs><filter id="rough105"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="1" seed="3"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter></defs><g filter="url(#rough105)" fill="none" stroke="#C0392B"><circle cx="50" cy="50" r="45" stroke-width="5"/><circle cx="50" cy="50" r="37" stroke-width="1.6"/></g><text x="50" y="27" text-anchor="middle" style="font:800 9px sans-serif;fill:#C0392B;letter-spacing:2px">附表</text><text x="50" y="57" text-anchor="middle" style="font:900 ${CN9[g-1].length>1?15:18}px sans-serif;fill:#C0392B">第${CN9[g-1]}級</text><text x="50" y="83" text-anchor="middle" style="font:700 8px sans-serif;fill:#C0392B;letter-spacing:3px">示意</text></svg>`;
+    el.style.animationDelay=(delay||0)+'ms';host.appendChild(el);
+    if(!rm())setTimeout(()=>{host.classList.add('sh105');setTimeout(()=>host.classList.remove('sh105'),420);},(delay||0)+380);}
+
+  /* ---------- 先猜再揭曉：等級章出現前，先讓人猜（不猜 7 秒後自動揭曉） ---------- */
+  function stamp(host,id,delay){host.querySelectorAll(':scope > .st105,:scope > .gs106').forEach(e=>e.remove());clearTimeout(host._gsT);clearTimeout(host._gsIns);if(!id)return;const g=itemGrade(id);if(!g)return;
+    let hsh=0;for(const ch of id)hsh=(hsh*31+ch.charCodeAt(0))>>>0;
+    const cand=[g-1,g+1,g-2,g+2,g-3,g+3].filter(x=>x>=1&&x<=15);const d1=cand[hsh%2===0?0:1]!=null?cand[hsh%2===0?0:1]:cand[0];const rest=cand.filter(x=>x!==d1&&Math.abs(x-g)>=2);const d2=rest.length?rest[hsh%rest.length]:cand.find(x=>x!==d1);
+    const opts=[g,d1,d2].filter((x,i,a)=>x!=null&&a.indexOf(x)===i);const ord=opts.map((x,i)=>[x,(hsh>>(i*3))&7]).sort((a,b)=>a[1]-b[1]).map(a=>a[0]);
+    const box=document.createElement('div');box.className='gs106';box.setAttribute('role','group');box.setAttribute('aria-label','先猜猜看：這是第幾等級？');
+    box.innerHTML=`<div class="gs-q"><b>？</b><span>先猜猜看：這是第幾等級？</span></div>${ord.map(x=>`<button type="button" data-g="${x}">第${CN9[x-1]}級</button>`).join('')}`;
+    host._gsIns=setTimeout(()=>{if(host.isConnected)host.insertBefore(box,host.firstChild);},Math.max(0,(delay||0)-400));
+    const done=(pick)=>{clearTimeout(host._gsT);box.querySelectorAll('button').forEach(b=>{b.disabled=true;const v=+b.dataset.g;if(v===g)b.classList.add('ok');else if(v===pick)b.classList.add('no');});
+      const fb=document.createElement('div');fb.className='gs-fb';fb.textContent=pick==null?'答案揭曉':pick===g?'猜中了！':`差 ${Math.abs(pick-g)} 級`;box.appendChild(fb);
+      setTimeout(()=>{box.remove();slam(host,id,0);},pick==null?250:900);};
+    box.addEventListener('click',e=>{const b=e.target.closest('button[data-g]');if(!b||b.disabled)return;e.stopPropagation();done(+b.dataset.g);});
+    host._gsT=setTimeout(()=>{if(box.isConnected)done(null);},(delay||0)+7000);}
+  /* ---------- 碎片（加進揭示圖層，每次揭示都噴） ---------- */
+  function shards(svg){const T=svg._rvT,g=svg.querySelector('.rv104');if(!T||!g||g._sh)return;g._sh=1;if(rm()||!svg.classList.contains('rv-on'))return;const {tx,ty,R,S}=T,P=8;let h='';
+    for(let i=0;i<10;i++){const a=i/10*Math.PI*2+.3,d=(R*1.4+18*S)*(0.7+((i*37)%10)/20),x=Math.cos(a)*d,y=Math.sin(a)*d,s=(3+(i%3))*S;
+      h+=`<polygon points="0,${-s} ${s*.8},${s*.6} ${-s*.8},${s*.6}" fill="${i%3?'#FF5A4A':'#F5B800'}" opacity="0" transform="translate(${tx} ${ty})"><animateTransform attributeName="transform" type="translate" values="${tx} ${ty};${tx} ${ty};${tx+x} ${ty+y};${tx+x} ${ty+y}" keyTimes="0;.27;.45;1" dur="${P}s" begin="indefinite" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;.27;.3;.46;1" dur="${P}s" begin="indefinite" repeatCount="indefinite"/></polygon>`;}
+    const w=document.createElementNS(NS,'g');w.innerHTML=h;g.insertBefore(w,g.firstChild.nextSibling);
+    /* 與既有動畫同步：從同一時間點重新開始 */
+    try{g.querySelectorAll('animate,animateTransform').forEach(a=>{if(a.getAttribute('repeatCount')==='indefinite')a.beginElement();});svg.classList.remove('rv-on');void svg.getBoundingClientRect();svg.classList.add('rv-on');}catch(e){}}
+  /* ---------- 按住看正常＋點紅色看項目 ---------- */
+  function hint(host,svg){const can=!!(svg&&svg.querySelector('.nrm107')&&!svg.querySelector('[data-a]'));let h=host.querySelector(':scope > .hold105');if(h&&h._can===can)return;if(!h){h=document.createElement('div');h.className='hold105';host.appendChild(h);}h._can=can;h.innerHTML=can?'<span class="h105-ic" aria-hidden="true">👆</span>按住圖片看<b>正常</b>，放開看<b>受傷</b>；點紅色部位看等級':'<span class="h105-ic" aria-hidden="true">👆</span>點紅色部位，看是哪一項、第幾等級';}
+  function tip(host,x,y,id){host.querySelectorAll('.tip105').forEach(e=>e.remove());if(!id)return;const x0=host.getBoundingClientRect(),t=document.createElement('div');t.className='tip105';
+    const it=itemCat(id),nm=it?it.it[1].replace(/者。$/,'').slice(0,22)+(it.it[1].length>24?'…':''):'';
+    t.innerHTML=`<b>這裡受損 →</b> <code>${id}</code> <span class="badge ${badgeCls(itemGrade(id))}">${gName(id)}</span><small>${nm}</small>`;
+    host.appendChild(t);const w=t.offsetWidth;t.style.left=Math.max(4,Math.min(x-x0.left-w/2,x0.width-w-4))+'px';t.style.top=Math.max(4,y-x0.top-t.offsetHeight-14)+'px';setTimeout(()=>t.remove(),2800);}
+  document.addEventListener('pointerdown',e=>{const svg=e.target.closest&&e.target.closest('svg.rv-on,svg.rv-user');if(!svg||!svg.querySelector('.rv104')||svg.querySelector('[data-a]'))return;if(svg.querySelector('.nrm107'))svg.classList.add('rv-hold');svg._hd=performance.now();
+    const up=ev=>{svg.classList.remove('rv-hold','rv-on');svg.classList.add('rv-user','rv-pop');setTimeout(()=>svg.classList.remove('rv-pop'),650);document.removeEventListener('pointerup',up);document.removeEventListener('pointercancel',up);
+      let hot=false;try{const T=svg._rvT,m=svg.getScreenCTM();if(T&&m){const pt=svg.createSVGPoint();pt.x=ev.clientX;pt.y=ev.clientY;const q=pt.matrixTransform(m.inverse());hot=Math.hypot(q.x-T.tx,q.y-T.ty)<=T.R*1.35;}}catch(x){}
+      if(!hot)hot=document.elementsFromPoint(ev.clientX,ev.clientY).some(el=>el.classList&&el.classList.contains('dz-hot'));if(hot&&performance.now()-svg._hd<450){const m=svg.closest('.demo-modal'),host=svg.closest('.story-stage,.fg-stage');if(host)tip(host,ev.clientX,ev.clientY,curId(m));}};
+    document.addEventListener('pointerup',up);document.addEventListener('pointercancel',up);},true);
+  /* 3D：按住按鈕 */
+  function holdBtn(box){if(box.querySelector('.hb105'))return;const b=document.createElement('button');b.type='button';b.className='hb105';b.textContent='按住隱藏紅色';b.setAttribute('aria-label','按住暫時隱藏紅色標示（3D 為示意，不是正常解剖）');
+    const on=e=>{e.preventDefault();e.stopPropagation();box._hold=true;b.classList.add('on');},off=()=>{if(!box._hold)return;box._hold=false;b.classList.remove('on');box.classList.add('pop105');setTimeout(()=>box.classList.remove('pop105'),500);};
+    b.addEventListener('pointerdown',on);b.addEventListener('pointerup',off);b.addEventListener('pointerleave',off);b.addEventListener('pointercancel',off);
+    b.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();box._hold=true;b.classList.add('on');}});b.addEventListener('keyup',e=>{if(e.key===' '||e.key==='Enter')off();});
+    box.appendChild(b);}
+  /* ---------- 主迴圈 ---------- */
+  let q=0;const run=()=>{q=0;document.querySelectorAll('.demo-modal:not(.open)').forEach(m=>m.querySelectorAll('.gs106,.st105,.tip105,.hold105').forEach(e=>{const h=e.parentElement;if(h){h._stId=null;clearTimeout(h._gsT);clearTimeout(h._gsIns);}e.remove();}));
+  document.querySelectorAll('.demo-modal.open').forEach(m=>{const id=curId(m);m.querySelectorAll('.story-stage,.fg-stage').forEach(h=>{if(h._stId&&h._stId!==id){h.querySelectorAll(':scope > .gs106,:scope > .st105').forEach(e=>e.remove());clearTimeout(h._gsT);clearTimeout(h._gsIns);h._stId=null;h._st=0;}});if(id){const c=CAT[id.split('-')[0]];if(c&&m.dataset.cat!==c)m.dataset.cat=c;}
+      m.querySelectorAll('svg .rv104').forEach(g=>{const svg=g.ownerSVGElement;shards(svg);const host=svg.closest('.story-stage,.fg-stage');if(host){hint(host,svg);if(!host._st||host._stId!==id){host._st=1;host._stId=id;if(window.__scrub&&performance.now()-window.__scrub<2500)slam(host,id,0);else stamp(host,id,rm()?0:2300);}}});
+      m.querySelectorAll('.t3-box').forEach(box=>{if(!box.querySelector('canvas'))return;const hasMp=!!box.querySelector('.mp3d');if(hasMp){holdBtn(box);if(box._stId!==id||box._stT!==box._rvStart){box._stId=id;box._stT=box._rvStart;stamp(box,id,rm()?0:2000);}}else{box.querySelectorAll('.hb105,.st105').forEach(e=>e.remove());box._stId=null;}});});};
+  const sched=()=>{if(!q)q=setTimeout(()=>{q=0;requestAnimationFrame(run);},260);};
+  new MutationObserver(m=>{for(const r of m){if(r.addedNodes.length){sched();break;}}}).observe(document.body,{childList:true,subtree:true});
+  document.addEventListener('click',()=>setTimeout(sched,300),true);
+})();
+
+/* ================= v37：嚴重度滑桿「從輕到重滑滑看」 =================
+   設計理念：讓學員／一般人「親手推」嚴重度，看身體圖與等級一起變——在門檻跨過去的那一刻（等級章重新蓋下、手機輕震）
+   最容易記住「差在哪裡、差幾級」。適用同一組、同一種示範的項目（眼視力、聽力、臟器各組、精神／神經、脊柱、假關節…）。
+   拖曳、點刻度、或用鍵盤左右鍵都可以。 */
+(function(){
+  if(typeof GDEMO==='undefined'||typeof GT==='undefined')return;
+  const CN9=typeof CN!=='undefined'?CN:['一','二','三','四','五','六','七','八','九','十','十一','十二','十三','十四','十五'];
+  const short=t=>t.replace(/者。$/,'').replace(/。$/,'');
+  function sibs(id){const x=itemCat(id),p=GDEMO[id];if(!x||!p)return [];
+    const list=x.g.items.filter(it=>GDEMO[it[0]]&&GDEMO[it[0]].t===p.t).map((it,i)=>({id:it[0],g:it[2],t:it[1],i}));
+    list.sort((a,b)=>b.g-a.g||a.i-b.i);return list;}
+  function switchG(id){const p=GDEMO[id];if(!p||typeof G==='undefined'||!G||p.t!==G.t)return;window.__scrub=performance.now();G.id=id;G.s=JSON.parse(JSON.stringify(GT[p.t].init(p)));gRender(true);
+    try{if(navigator.vibrate)navigator.vibrate(12);}catch(e){}}
+  function render(m,id){const L=sibs(id);let w=m.querySelector('.sc106');if(L.length<3){if(w)w.remove();return;}
+    const i=Math.max(0,L.findIndex(x=>x.id===id)),pct=k=>L.length===1?50:k/(L.length-1)*100,cur=L[i];
+    const html=`<div class="sc-h"><b>從輕到重，滑滑看</b><span>同一組 ${L.length} 項・拖曳或點刻度</span></div>
+      <div class="sc-track" role="slider" tabindex="0" aria-label="同組項目由輕到重" aria-valuemin="0" aria-valuemax="${L.length-1}" aria-valuenow="${i}" aria-valuetext="${cur.id} 第${CN9[cur.g-1]}等級">
+        <div class="sc-rail"></div><div class="sc-fill" style="width:${pct(i)}%"></div>
+        ${L.map((x,k)=>`<span class="sc-stop ${badgeCls(x.g)}${k===i?' on':''}" style="left:${pct(k)}%" data-id="${x.id}" aria-hidden="true"><i></i><em>${x.g}</em></span>`).join('')}
+        <div class="sc-thumb" aria-hidden="true" style="left:${pct(i)}%"><span class="badge ${badgeCls(cur.g)}">第${CN9[cur.g-1]}級</span></div>
+      </div>
+      <div class="sc-ends"><span>輕</span><span>重</span></div>
+      <p class="sc-cap"><code>${cur.id}</code> ${short(cur.t)}</p>`;
+    const key=L.map(x=>x.id).join(',');
+    if(!w){w=document.createElement('div');w.className='sc106';const anc=m.querySelector('.kp103')||m.querySelector('.demo-sub');if(anc)anc.insertAdjacentElement('afterend',w);else return;}
+    if(w._key!==key){w._key=key;w._L=L;w.dataset.id=id;w.innerHTML=html;return;}
+    if(w.dataset.id===id)return;w.dataset.id=id;
+    /* 同一組：原地更新，拖曳不中斷 */
+    const tr=w.querySelector('.sc-track');tr.setAttribute('aria-valuenow',i);tr.setAttribute('aria-valuetext',`${cur.id} 第${CN9[cur.g-1]}等級`);
+    w.querySelector('.sc-fill').style.width=pct(i)+'%';const th=w.querySelector('.sc-thumb');th.style.left=pct(i)+'%';th.innerHTML=`<span class="badge ${badgeCls(cur.g)}">第${CN9[cur.g-1]}級</span>`;
+    w.querySelectorAll('.sc-stop').forEach(b=>b.classList.toggle('on',b.dataset.id===id));w.querySelector('.sc-cap').innerHTML=`<code>${cur.id}</code> ${short(cur.t)}`;}
+  /* 拖曳 */
+  function pick(track,clientX){const r=track.getBoundingClientRect(),w=track.closest('.sc106'),L=w&&w._L;if(!L)return null;const k=Math.round(Math.max(0,Math.min(1,(clientX-r.left)/r.width))*(L.length-1));return L[k];}
+  let drag=null,lastSw=0;
+  document.addEventListener('pointerdown',e=>{const tr=e.target.closest('.sc106 .sc-track');if(!tr)return;e.preventDefault();drag=tr;tr.setPointerCapture&&tr.setPointerCapture(e.pointerId);const x=pick(tr,e.clientX);if(x&&x.id!==G.id)switchG(x.id);});
+  document.addEventListener('pointermove',e=>{if(!drag)return;const x=pick(drag,e.clientX);const now=performance.now();if(x&&x.id!==G.id&&now-lastSw>140){lastSw=now;switchG(x.id);}});
+  const end=()=>{drag=null;};document.addEventListener('pointerup',end);document.addEventListener('pointercancel',end);
+  document.addEventListener('keydown',e=>{const tr=e.target.closest&&e.target.closest('.sc106 .sc-track');if(!tr)return;const L=tr.closest('.sc106')._L;if(!L)return;const i=L.findIndex(x=>x.id===G.id);let j=i;
+    if(e.key==='ArrowRight'||e.key==='ArrowUp')j=Math.min(L.length-1,i+1);else if(e.key==='ArrowLeft'||e.key==='ArrowDown')j=Math.max(0,i-1);else if(e.key==='Home')j=0;else if(e.key==='End')j=L.length-1;else return;
+    e.preventDefault();if(j!==i){switchG(L[j].id);setTimeout(()=>{const t=document.querySelector('#gModal .sc106 .sc-track');if(t)t.focus();},60);}});
+  let q=0;const run=()=>{q=0;const m=document.getElementById('gModal');if(!m||!m.classList.contains('open')||typeof G==='undefined'||!G)return;
+    const e=m.querySelector('.res-bar .item-id'),id=(G.id&&GDEMO[G.id])?G.id:(e&&e.textContent.trim());if(id)render(m,id);};
+  const sched=()=>{if(!q)q=requestAnimationFrame(run);};
+  new MutationObserver(m=>{for(const r of m){if(r.addedNodes.length){sched();break;}}}).observe(document.body,{childList:true,subtree:true});
+  document.addEventListener('click',()=>setTimeout(sched,60),true);
+})();
+
+/* ================= v38：醫學正確性修正（正常／失能的演示） =================
+   依附表審核基準（勞工保險失能給付標準附表）逐項檢查後修正：
+   1. 「正常→受傷」與「按住看正常」：原本只是把紅色變灰（例如切除的胃仍是虛線），並不是真正的正常解剖。
+      改為：以同一示範的「正常狀態」重新畫一張圖疊在上面（器官完整、聽力正常、眼睛正常、脊椎未固定、骨頭筆直…）。
+      做不出真正正常圖的示範（截肢、手指、足趾、下肢縮短、末關節）不再宣稱「看正常」。
+   2. 眼：一眼眼瞼缺損／運動失能原本兩眼都標示 → 只標示該眼；眼瞼下垂須「瞳孔全被蓋住」；
+      眼瞼缺損＝閉眼時蓋不住角膜；眼球運動失能＝注視野減退 1/2 以上（不是完全不動）；
+      視力「正常（高於 0.4）」改為「高於 0.4（未達失能）」。
+   3. 胸腹臟器 3D：原本左右相反（肝臟在左、胃脾在右、升結腸在左）→ 改為正面觀（病人的右邊在畫面左邊）；
+      膀胱機能喪失≠切除、膀胱萎縮≠切除、生殖器失能≠切除、胰臟部分切除、小腸切除一半、腎上腺、肛門括約肌、恥骨上造口、人工膀胱。
+   4. 胸腹臟器平面：7-36 膀胱機能喪失改為「無功能」而非「切除」；7-41-1 生殖器缺損改為缺損（原與失能同圖）。
+   5. 假關節／畸形：補「前臂須橈骨、尺骨兩根都變形」「下腿只看脛骨」。心臟移植的說明標題。神經 2-5 局部頑固症狀標示。 */
+(function(){
+  const NS='http://www.w3.org/2000/svg',rm=()=>typeof reduceMotion!=='undefined'&&reduceMotion;
+
+  /* ---------- 4. 平面臟器 ---------- */
+  if(typeof OGT!=='undefined'){
+    const set=(id,o)=>{if(OGT[id])Object.assign(OGT[id],o);};
+    set('7-36',{st:{bladder:'weak'}});
+    /* 附表審核基準：7-41＝割除兩側卵巢，或因放射線／化學治療致喪失機能（男性：兩側睪丸）；
+       7-41-1＝因傷病割除子宮，或陰道口瘢痕／陰莖大部分缺損致不能性交；7-42＝割除一側卵巢、喪失一側睪丸，或骨盆骨折傷及神經致勃起障礙 */
+    set('7-41',{rep:0,st:{ovL:'weak',ovR:'weak'},hi:['uterus','ovL','ovR'],
+      what:'兩側卵巢都被割除，或因放射線、化學治療而喪失功能（男性則是兩側睪丸喪失或喪失功能）。圖中灰色加紅虛線的卵巢＝已經沒有功能。',
+      life:'失去兩側卵巢（或睪丸）的功能，會失去生育能力，荷爾蒙也會改變，可能需要長期追蹤或補充。'});
+    set('7-41-1',{rep:0,st:{uterus:'gone'},hi:['uterus','ovL','ovR'],
+      what:'生殖器有缺損：例如因傷病割除子宮（圖中紅色虛線），或陰道口嚴重瘢痕、陰莖大部分缺損而無法性交。'});
+    set('7-42',{rep:0,st:{ovR:'gone'},hi:['uterus','ovL','ovR'],
+      what:'一側卵巢被割除（圖中紅色虛線），或喪失一側睪丸；骨盆骨折傷到骨盆神經造成勃起障礙，也屬於這一項。',
+      life:'另一側卵巢（或睪丸）通常仍有功能；實際影響依個人情況而不同。'});
+    set('7-31',{ex:['tpn'],what:'小腸被切掉一半以上，而且有短腸症候群：手術六個月以上，仍因小腸太短吸收不良，需要長期靠靜脈營養（從靜脈打營養液）支持。',
+      life:'光靠吃東西吸收不到足夠的營養，需要長期接受靜脈營養，並由醫療團隊追蹤。'});
+    set('7-32',{what:'小腸被切掉一半以上，但沒有短腸症候群（不需要長期靜脈營養），剩下的小腸還夠用。'});
+    set('7-36-1',{what:'膀胱切除或失去功能後，裝了永久性的人工膀胱（例如用一段腸子做成新的導尿管道，接到腹部的尿袋）。'});
+  }
+  /* 口：喪失咀嚼吞嚥＝除流質外不能攝取；顯著失能＝除粥、糊類外不能攝取 */
+  if(typeof EN9!=='undefined'){
+    if(EN9['6-1'])EN9['6-1'][1]='只能吃流質的食物（例如牛奶、清湯），其他食物都無法咀嚼或吞下；也無法用言語與人溝通。';
+    if(EN9['6-3'])EN9['6-3'][1]='只能吃粥、糊這類的食物，說話含糊，吃飯與溝通都很吃力。';
+  }
+  /* 平面臟器：「無功能」要看得出來（灰色＋紅色虛線＋禁止符號），並畫出靜脈營養 */
+  if(typeof orgSvg==='function'&&typeof OGD!=='undefined'){const _og=orgSvg;
+    orgSvg=function(o){let h=_og.apply(this,arguments);o=o||{};const st=o.st||{},w=Object.keys(st).filter(k=>st[k]==='weak'&&OGD[k]),tpn=(o.ex||[]).includes('tpn');if(!w.length&&!tpn)return h;
+      let a='';const no=(x,y)=>`<g><circle cx="${x}" cy="${y}" r="7" fill="#fff" stroke="#C0392B" stroke-width="2.2"/><path d="M${x-4.6} ${y+4.6}L${x+4.6} ${y-4.6}" stroke="#C0392B" stroke-width="2.2"/></g>`;
+      w.forEach(k=>{const d=OGD[k];if(d[0]==='e'){a+=`<ellipse cx="${d[1]}" cy="${d[2]}" rx="${d[3]+3}" ry="${d[4]+3}" fill="none" stroke="#C0392B" stroke-width="2.2" stroke-dasharray="3 3"/>`+no(d[1]+d[3]+2,d[2]-d[4]-2);}
+        else if(d[0]==='p'){a+=`<path d="${d[1]}" fill="none" stroke="#C0392B" stroke-width="2.2" stroke-dasharray="3 3"/>`;}});
+      if(w.length)a+=`<text x="150" y="27" text-anchor="middle" style="font-size:10px;font-weight:700;fill:#B02A21">灰色＋紅虛線＝器官還在，但沒有功能</text>`;
+      if(tpn)a+=`<g><rect x="250" y="22" width="30" height="40" rx="6" fill="#FFF8E6" stroke="#B8A27A" stroke-width="2"/><path d="M256 34H274M256 42H274" stroke="#E0B93A" stroke-width="3"/><path d="M265 62V80Q265 96 240 104" fill="none" stroke="#B8A27A" stroke-width="2"/><text x="265" y="16" text-anchor="middle" style="font-size:10px;font-weight:700;fill:#B02A21">靜脈營養</text></g>`;
+      return h.replace(/<\/svg>$/,a+'</svg>');};}
+  /* ---------- 2. 視力用語 ---------- */
+  if(typeof VA!=='undefined'&&/正常/.test(VA[0]))VA[0]='高於 0.4（未達失能）';
+
+  /* ---------- 2. 眼睛特寫（平面） ---------- */
+  if(typeof eyeClose==='function'){
+    eyeClose=function(o){const r0=rm(),has=id=>o.includes(id),dip=has('3-18'),mydr=has('3-19');
+      const mot={R:has('3-16')||has('3-17')||has('3-18'),L:has('3-16')},
+        def={R:has('3-20')||has('3-21'),L:has('3-20')},mov={R:has('3-22')||has('3-23'),L:has('3-22')},myd={R:mydr,L:false};
+      const any=mot.R||mot.L||def.R||def.L||mov.R||mov.L||mydr;
+      const an=a=>r0?'':a,KT='0;.2;.4;.6;.8;1',tf=(amp,gx,gy)=>`0 0;${gx*amp} 0;${-gx*amp} 0;0 ${-gy*amp};0 ${gy*amp};0 0`;
+      const eye=(cx,k)=>{const a=mot[k],amp=a?.45:1,pr=myd[k]?17:9,id='ec7'+k,
+          lidO=mov[k]?8:-52,lidC=def[k]?-6:24;   /* 開眼位置／閉眼位置（矩形下緣＝66＋位移） */
+        const lab=a?(dip&&k==='R'?'（眼肌麻痺）':'（轉動範圍變小）'):myd[k]?'（瞳孔放大）':def[k]?'（眼瞼缺損）':mov[k]?'（眼瞼下垂）':'';
+        return `<clipPath id="${id}"><path d="M${cx-55} 62 Q${cx} 16 ${cx+55} 62 Q${cx} 108 ${cx-55} 62Z"/></clipPath><path d="M${cx-55} 62 Q${cx} 16 ${cx+55} 62 Q${cx} 108 ${cx-55} 62Z" fill="#fff" stroke="#B57C5C" stroke-width="2"/>
+         <g clip-path="url(#${id})"><g>${an(`<animateTransform attributeName="transform" type="translate" values="${tf(amp,22,11)}" keyTimes="${KT}" dur="8s" repeatCount="indefinite"/>`)}<circle cx="${cx}" cy="62" r="24" fill="#6B4A2E"/><circle cx="${cx}" cy="62" r="${pr}" fill="#111">${myd[k]?'':an(`<animate attributeName="r" values="9;9;5;5;9" keyTimes="0;.5;.58;.8;.9" dur="4s" repeatCount="indefinite"/>`)}</circle>${myd[k]?`<circle cx="${cx}" cy="62" r="${pr+2}" fill="none" stroke="#C0392B" stroke-width="2.5"/>`:''}<circle cx="${cx-6}" cy="55" r="4" fill="#fff" opacity=".8"/></g>
+          <g><rect x="${cx-62}" y="-30" width="124" height="96" fill="#E7BFA2" stroke="#B57C5C" stroke-width="1.5" transform="translate(0 ${lidO})">${an(`<animateTransform attributeName="transform" type="translate" values="0 ${lidO};0 ${lidO};0 ${lidC};0 ${lidO}" keyTimes="0;.86;.92;1" dur="4s" repeatCount="indefinite"/>`)}</rect></g></g>
+         <path d="M${cx-55} 62 Q${cx} 16 ${cx+55} 62" fill="none" stroke="${def[k]?'#C0392B':'#8E5A40'}" stroke-width="${def[k]?3:2}" ${def[k]?'stroke-dasharray="5 4"':''}/>${mov[k]?`<path d="M${cx-30} ${70} H${cx+30}" stroke="#C0392B" stroke-width="3"/>`:''}
+         <text x="${cx}" y="122" text-anchor="middle" style="font-size:11px;font-weight:700;fill:${lab?'#B02A21':'#5A6B7A'}">${k==='R'?'右眼':'左眼'}${lab}</text>`;};
+      const dot=c=>`<circle cx="150" cy="168" r="6" fill="${c}"><animateTransform attributeName="transform" type="translate" values="${tf(1,70,10)}" keyTimes="${KT}" dur="8s" repeatCount="indefinite"/></circle>`;
+      const note=def.R||def.L?'眼瞼缺損：閉眼時蓋不住角膜（黑眼珠）':mov.R||mov.L?'眼瞼下垂：張眼時瞳孔被整個蓋住':mot.R&&!dip?'注視範圍減半以上（或對焦失能）':dip?'眼肌麻痺：正面看就重影':'';
+      return `<svg viewBox="0 0 300 196" class="eye-close" role="img" aria-label="眼睛特寫：${any?'依勾選項目顯示':'正常眼的眨眼與追視'}">${eye(80,'R')}${eye(220,'L')}<rect x="50" y="146" width="200" height="46" rx="10" fill="#F1F4F7" stroke="#C9D3DC"/><text x="58" y="158" style="font-size:10px;fill:#5A6B7A">${note||'追視目標（兩眼跟著點走）'}</text>
+       ${r0?'<circle cx="150" cy="168" r="6" fill="#234E70"/>':dot('#234E70')}${dip&&!r0?`<circle cx="150" cy="168" r="6" fill="#C0392B" opacity=".55"><animateTransform attributeName="transform" type="translate" values="0 0;86 0;-54 0;0 -10;0 10;0 0" keyTimes="${KT}" dur="8s" repeatCount="indefinite"/></circle><text x="244" y="184" text-anchor="end" style="font-size:10px;font-weight:700;fill:#C0392B">紅點＝重影（複視）</text>`:''}</svg>`;};
+  }
+
+  /* ---------- 3. 胸腹臟器 3D（正面觀：病人右側在畫面左側） ---------- */
+  if(typeof THREE!=='undefined'||true){
+    window.organ3dBase=function(s){return (T,sc,cam,root,c)=>{const sel=s.sel.map(String),h=id=>sel.includes(id),grp=s.grp,r0=rm(),cond=sel.length>0&&s.view!=='norm';
+      const body=new T.Mesh(new T.CylinderGeometry(.95,.82,3.3,36,1,true),new T.MeshStandardMaterial({color:0xE7BFA2,transparent:true,opacity:.13,side:T.DoubleSide,depthWrite:false}));body.position.y=1.65;body.scale.z=.62;root.add(body);
+      const mk=(col,hl)=>new T.MeshStandardMaterial({color:col,roughness:.6,transparent:true,opacity:hl?.96:.34,emissive:hl?0x222222:0,emissiveIntensity:.3});
+      const OR=[];const SUF={gone:'（切除）',weak:'（無功能）',new:'（移植）',tiny:'（萎縮）',part:'（部分切除）',half:'（切除一半以上）',leak:'（失禁）',bad:'（括約肌受損）'};
+      const add=(name,g,col,pos,scl,inGrp,state)=>{const m=state==='gone'?new T.MeshBasicMaterial({color:0xC0392B,wireframe:true,transparent:true,opacity:.85}):state==='weak'?mk(0x9aa5ae,true):state==='new'?mk(0x2E9D5F,true):(state==='tiny'||state==='leak'||state==='bad')?mk(0xD9534F,true):mk(col,inGrp);
+        const o=new T.Mesh(g,m);o.position.set(...pos);o.scale.set(...scl);root.add(o);OR.push({o,name,state,inGrp});return o;};
+      const sph=()=>new T.SphereGeometry(1,24,18),G=n=>grp===n;
+      /* 胸 */
+      add('肺',sph(),0xE8B9B5,[-.4,2.45,0],[.36,.64,.3],G('肺臟'),'ok');add('肺',sph(),0xE8B9B5,[.4,2.45,0],[.32,.62,.3],G('肺臟'),'ok');
+      const heart=add('心',sph(),0xD2665F,[.1,2.2,.12],[.26,.3,.24],G('心臟'),'ok');
+      add('乳腺',sph(),0xF1CDBA,[-.34,2.5,.36],[.2,.2,.1],G('生殖器・乳腺'),cond&&(h('7-43')||h('7-44'))?'gone':'ok');
+      add('乳腺',sph(),0xF1CDBA,[.34,2.5,.36],[.2,.2,.1],G('生殖器・乳腺'),cond&&h('7-43')?'gone':'ok');
+      /* 上腹：肝在病人右側（畫面左）、胃與脾在病人左側（畫面右） */
+      add('肝臟',sph(),0xA8674A,[-.32,1.9,.05],[.58,.24,.32],G('肝臟'),'ok');
+      add('胃',sph(),0xE9A99A,[.36,1.84,.12],[.3,.26,.2],G('胰臟・胃・脾臟'),cond&&h('7-26')?'gone':'ok');
+      add('脾臟',sph(),0xB98CC7,[.66,1.86,-.08],[.11,.22,.1],G('胰臟・胃・脾臟'),cond&&h('7-27')?'gone':'ok');
+      const pz=(x1,x2,st)=>{const p=add('胰臟',new T.CylinderGeometry(.07,.07,Math.abs(x2-x1),12),0xE4B85C,[(x1+x2)/2,1.62,-.02],[1,1,1],G('胰臟・胃・脾臟'),st);p.rotation.z=Math.PI/2;return p;};
+      pz(-.32,.02,cond&&h('7-24')?'gone':'ok');
+      {const tp=add(cond&&h('7-25')&&!h('7-24')?'胰臟尾段':'胰臟',new T.CylinderGeometry(.07,.07,.32,12),0xE4B85C,[.18,1.62,-.02],[1,1,1],G('胰臟・胃・脾臟'),cond&&(h('7-24')||h('7-25'))?'gone':'ok');tp.rotation.z=Math.PI/2;}
+      /* 腎、腎上腺 */
+      const kd=cond&&(h('7-28')||h('7-29'))?'weak':'ok';
+      add('腎臟',sph(),0xA9846B,[-.42,1.48,-.22],[.1,.2,.09],G('腎臟（泌尿器）'),cond&&h('7-30')?'gone':kd);add('腎臟',sph(),0xA9846B,[.42,1.52,-.22],[.1,.2,.09],G('腎臟（泌尿器）'),kd);
+      const adr=cond&&h('7-39')?'gone':'ok';[-1,1].forEach(sd=>{const a=add('腎上腺',new T.ConeGeometry(.07,.09,3),0xE0B060,[sd*.42,sd<0?1.72:1.76,-.22],[1,1,.7],G('膀胱・腎上腺・骨盆'),adr);});
+      if(cond&&h('7-29'))add('移植腎',sph(),0x2E9D5F,[-.42,.68,.18],[.1,.19,.09],true,'new');
+      /* 腸：升結腸在病人右側（畫面左）→ 橫結腸 → 降結腸在左側（畫面右） */
+      const ig=G('腸道・肛門'),pts=[];for(let i=0;i<=40;i++){const a=i/40;pts.push(new T.Vector3(Math.sin(a*Math.PI*7)*.4,1.28-a*.6,.12+Math.cos(a*Math.PI*7)*.06));}
+      const curve=new T.CatmullRomCurve3(pts),sbHalf=cond&&(h('7-31')||h('7-32'));
+      if(sbHalf){const A=new T.CatmullRomCurve3(pts.slice(0,21)),B=new T.CatmullRomCurve3(pts.slice(20));add('小腸',new T.TubeGeometry(B,60,.075,10,false),0xE2A76F,[0,0,0],[1,1,1],true,'gone');OR[OR.length-1].state='half';add('小腸',new T.TubeGeometry(A,60,.075,10,false),0xE2A76F,[0,0,0],[1,1,1],true,'ok');}
+      else add('小腸',new T.TubeGeometry(curve,120,.075,10,false),0xE2A76F,[0,0,0],[1,1,1],ig,'ok');
+      const lc=new T.CatmullRomCurve3([new T.Vector3(-.55,.72,.1),new T.Vector3(-.55,1.55,.1),new T.Vector3(.55,1.58,.1),new T.Vector3(.55,.72,.1),new T.Vector3(.25,.5,.05),new T.Vector3(0,.32,-.05)]);
+      add('大腸',new T.TubeGeometry(lc,80,.085,10,false),0xC99466,[0,0,0],[1,1,1],ig,cond&&h('7-33')?'gone':'ok');
+      add('肛門',new T.TorusGeometry(.05,.022,8,20),0xB46A5A,[0,.22,-.05],[1,1,1],ig,cond&&h('7-35')?'bad':'ok').rotation.x=Math.PI/2;
+      if(cond&&h('7-34')){const b=add('人工肛門造口袋',new T.BoxGeometry(.2,.3,.08),0xFFF7EC,[.62,.92,.52],[1,1,1],true,'ok');b.material.opacity=.95;add('造口',sph(),0xD98E97,[.55,.98,.44],[.05,.05,.05],true,'ok');}
+      /* 膀胱、骨盆 */
+      const blS=cond&&h('7-36-1')?'gone':cond&&h('7-36')?'weak':cond&&h('7-37')?'tiny':cond&&h('7-38')?'leak':'ok';
+      const bl=add('膀胱',sph(),0x8FB0CC,[0,.5,.12],blS==='tiny'?[.08,.08,.07]:[.2,.2,.18],G('膀胱・腎上腺・骨盆'),blS);
+      if(cond&&h('7-36-1')){const b=add('人工膀胱尿袋',new T.BoxGeometry(.2,.28,.08),0xFFF7EC,[-.62,.95,.52],[1,1,1],true,'ok');b.material.opacity=.95;}
+      if(cond&&h('7-40')){root.add(link3(T,new T.MeshStandardMaterial({color:0xE8E0C8}),.018,new T.Vector3(0,.62,.2),new T.Vector3(0,.78,.62)));const b=add('恥骨上膀胱造口',new T.BoxGeometry(.2,.26,.06),0xFFF7EC,[.22,.62,.66],[1,1,1],true,'ok');b.material.opacity=.95;}
+      /* 生殖器（以女性示意）：7-41／7-42 為功能失能（灰），7-41-1 為缺損 */
+      /* 7-41＝兩側卵巢割除或喪失機能；7-42＝割除一側卵巢；7-41-1＝割除子宮（附表審核基準） */
+      const ov2=cond&&h('7-41')?'weak':'ok';
+      add('子宮',sph(),0xE3A4A8,[0,.86,.08],[.16,.22,.12],G('生殖器・乳腺'),cond&&h('7-41-1')?'gone':'ok');
+      add('卵巢',sph(),0xF0C3A0,[-.3,.9,.06],[.07,.05,.05],G('生殖器・乳腺'),ov2);add('卵巢',sph(),0xF0C3A0,[.3,.9,.06],[.07,.05,.05],G('生殖器・乳腺'),ov2==='weak'?'weak':cond&&h('7-42')?'gone':'ok');
+      const bead=new T.Mesh(new T.SphereGeometry(.1,12,10),new T.MeshBasicMaterial({color:0xFFFFFF,transparent:true,opacity:.8}));bead.visible=ig&&!sbHalf&&!(cond&&h('7-33'));root.add(bead);
+      const drops=blS==='leak'?[0,1,2].map(i=>{const d=new T.Mesh(new T.SphereGeometry(.03,10,8),new T.MeshBasicMaterial({color:0x6FA8D6}));root.add(d);return {d,i};}):[];
+      cam.position.set(0,1.7,6.0);cam.lookAt(0,1.7,0);
+      const hb=heart.scale.clone(),pick={},labs=[];OR.forEach(x=>{const special=x.state!=='ok';if(!(x.inGrp||special))return;const p=pick[x.name];if(!p||(special&&p.state==='ok'))pick[x.name]=x;});
+      Object.keys(pick).forEach(n=>{const x=pick[n],special=x.state!=='ok';labs.push([n+(SUF[x.state]||''),new T.Vector3(.8,x.o.position.y,x.o.position.z+.2),special&&x.state!=='new'?'warn':x.state==='new'?'hot':'']);});
+      if(cond&&h('7-31'))labs.push(['短腸症候群：需長期靜脈營養',new T.Vector3(.8,.6,.3),'warn']);
+      return {labels:labs,update(t){{const k=1+(r0?0:.08*Math.max(0,Math.sin(t*6)));heart.scale.set(hb.x*k,hb.y*k,hb.z*k);}OR.forEach(x=>{if(x.name==='肺')x.o.scale.y=(x.o.position.x<0?.64:.62)*(1+(r0?0:.05*Math.sin(t*1.6)));});
+        if(blS==='ok'||blS==='leak')bl.scale.y=.2*(.6+(r0?.4:.4*(.5+.5*Math.sin(t*.9))));
+        drops.forEach(o=>{const u=r0?.5:((t*.6+o.i*.33)%1);o.d.position.set(0,.28-u*.35,.16);});
+        if(bead.visible){const u=(t*.12)%1;bead.position.copy(curve.getPoint(u));}}};};};
+  }
+
+  /* ---------- 5. 心臟移植標題、假關節說明、神經局部症狀 ---------- */
+  T5(()=>{
+    if(typeof heartScenes==='function'){const _h=heartScenes;heartScenes=function(s){const S=_h.apply(this,arguments);if(s&&s.tx&&S[1]){S[1].t='② 發生了什麼：換了心臟，或裝了心室輔助器';S[1].cap='心臟移植或植入心室輔助器（LVAD）後，射出分率可能接近正常，但需要終身服藥、定期追蹤，屬於附表 7-10 的獨立項目，不以 LVEF 判斷。';}return S;};}
+    if(typeof lbScenes==='function'){const _l=lbScenes;lbScenes=function(s){const S=_l.apply(this,arguments);if(S[1]&&s){const add=s.limb==='arm'?'上臂骨畸形即可；<strong>前臂要橈骨、尺骨兩根都變形</strong>才算（只有一根不算）。':'看<strong>大腿骨</strong>或<strong>脛骨</strong>（腓骨單獨變形不算）。';if(s.type==='mal')S[1].cap+=`<br>判定：外觀看得出來，或 X 光顯示附表所稱「約一六五度以上屈曲之不正癒合」（一般理解為骨頭偏離直線約 15 度）；${add}骨痂增生、骨幹變粗不算畸形。`;
+          else{const pj={arm:{pjm:'<strong>上臂骨（肱骨）</strong>有假關節，或<strong>前臂橈骨、尺骨兩根都有</strong>假關節',pj:'前臂<strong>橈骨或尺骨其中一根</strong>有假關節'},leg:{pjm:'<strong>大腿骨（股骨）</strong>有假關節，或<strong>脛骨、腓骨兩根都有</strong>假關節',pj:'小腿<strong>脛骨或腓骨其中一根</strong>有假關節'}}[s.limb==='arm'?'arm':'leg'];
+            S[1].cap+=`<br>審核基準：${pj[s.type==='pjm'?'pjm':'pj']}${s.type==='pjm'?'（第八等級）':'（第九等級）'}；另一個等級是：${pj[s.type==='pjm'?'pj':'pjm']}。`;}}return S;};}
+    if(typeof lbFig9==='function'){const _f=lbFig9;lbFig9=function(s){let o=_f.apply(this,arguments);if(!s||s.type==='mal')return o;const arm=s.limb==='arm';
+        const t=s.type==='pjm'?(arm?'上臂骨，或前臂橈骨、尺骨兩根都有假關節':'大腿骨，或小腿脛骨、腓骨兩根都有假關節'):(arm?'只有前臂其中一根骨（橈骨或尺骨）有假關節':'只有小腿其中一根骨（脛骨或腓骨）有假關節');
+        o=o.replace(/<text[^>]*>＋整個肢體的運動功能明顯受影響（顯著運動失能）<\/text>/,'');
+        if(s.type==='pj'){const rows=s.both?[78,168]:[122];o=o.replace(/<\/svg>$/,rows.map(y=>`<rect x="70" y="${y+22}" width="128" height="6" rx="3" fill="#E9F1F8" stroke="#9FC3E0"/><text x="204" y="${y+28}" style="font-size:9px;fill:#9FE0B8">另一根完整</text>`).join('')+'</svg>');}
+        return o.replace(/<\/svg>$/,`<text x="150" y="46" text-anchor="middle" style="font-size:11px;font-weight:700;fill:#FFD27A">${t}</text></svg>`);};}
+    if(GT.lbone&&GT.lbone.notes){const _n=GT.lbone.notes;GT.lbone.notes=s=>{const a=_n(s).slice(),arm=s.limb==='arm',L=LB[s.limb];a[1]=arm?`假關節：上臂骨，或橈骨與尺骨兩根都有假關節＝${L.pjm}（顯著運動失能）；只有橈骨或尺骨其中一根＝${L.pj}（附表附註）。`:`假關節：大腿骨，或脛骨與腓骨兩根都有假關節＝${L.pjm}（顯著運動失能）；只有脛骨或腓骨其中一根＝${L.pj}（附表附註）。`;
+        a[2]=arm?'長管骨畸形：上臂骨畸形，或前臂橈骨與尺骨兩根都畸形（只有一根不算）；須外觀看得出，或 X 光有「約一六五度以上屈曲之不正癒合」。骨痂增生、骨幹肥厚不算。':'長管骨畸形：大腿骨或脛骨畸形（腓骨不算）；須外觀看得出，或 X 光有「約一六五度以上屈曲之不正癒合」。骨痂增生、骨幹肥厚不算。';return a;};}
+    if(typeof ladHero==='function'){const _lh=ladHero;ladHero=function(s){let o=_lh.apply(this,arguments);if(s&&s.cat==='nerve'&&s.lv===4&&!s._norm)o=o.replace(/<\/svg>$/,`<g><path d="M96 66 l6 -6 l4 8 l5 -9 l4 8 l5 -6" fill="none" stroke="#C0392B" stroke-width="2.4" stroke-linejoin="round"/><text x="70" y="96" style="font-size:10px;font-weight:700;fill:#B02A21">局部麻、痛（頑固神經症狀）</text></g></svg>`);return o;};}
+  },'med107');
+
+  /* ---------- 1. 真正的「正常」對照圖 ---------- */
+  const NORM={
+    organ:s=>Object.assign({},s,{sel:[]}),
+    eye:s=>Object.assign({},s,{L:0,R:0,oth:[]}),
+    ear:s=>Object.assign({},s,{R:20,L:20,aur:false}),
+    nose:s=>Object.assign({},s,{def:false,func:false}),
+    mouth:s=>Object.assign({},s,{sw:0,snd:[],lar:false,dys:false,aph:0,taste:false,sal:false,teeth:[]}),
+    skin:s=>Object.assign({},s,{cells:[],q:0,p:0}),
+    spine:s=>Object.assign({},s,{fused:[],rem:120,frac:false,sig:false,def:[],oth:[]}),
+    heart:s=>Object.assign({},s,{nyha:1,hosp:'none',chf:false,lvef:60,cause:false,tx:false}),
+    lung:s=>{const hp=!(s.pao2==null||s.pao2===''),hf=!(s.fev1==null||s.fev1==='');return Object.assign({},s,{support:false,help:false,ratio:null,dlco:null,vo2:null,res:'none',rad:false,tx:false},hp&&!hf?{pao2:95,fev1:null}:{pao2:null,fev1:100});},
+    liver:s=>Object.assign({},s,{c0:1,c1:1,c2:1,c3:1,c4:1,asc:'none',he:0,bleed:false,portal:false,tx:false}),
+    ladder:s=>Object.assign({},s,{lv:4,_norm:1}),
+    face:s=>Object.assign({},s,{cm:0})};
+  function lboneNormal(s){const L=LB[s.limb],rows=s.both?[[78,'右'],[168,'左']]:[[122,'']];
+    let h=`<rect x="4" y="4" width="292" height="236" rx="10" fill="#0F1A24"/><text x="14" y="24" style="font-size:10px;fill:#7FA6C6;letter-spacing:1px">X-RAY｜${L.bone}</text><defs><linearGradient id="bnN" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".5" stop-color="#E9F1F8"/><stop offset="1" stop-color="#B9D3EA"/></linearGradient></defs>`;
+    rows.forEach(([y,n])=>{const x0=s.both?54:40,x1=214;if(n)h+=`<text x="16" y="${y+4}" style="font-size:12px;font-weight:700;fill:#CFE2F2">${n}</text>`;
+      h+=`<rect x="${x0}" y="${y-5.5}" width="${x1-x0}" height="11" fill="url(#bnN)" stroke="#9FC3E0"/><ellipse cx="${x0}" cy="${y}" rx="15" ry="17" fill="url(#bnN)" stroke="#9FC3E0"/><circle cx="${x1}" cy="${y-8}" r="11" fill="url(#bnN)" stroke="#9FC3E0"/><circle cx="${x1}" cy="${y+8}" r="11" fill="url(#bnN)" stroke="#9FC3E0"/><line x1="${x1+10}" y1="${y}" x2="${x1+34}" y2="${y}" stroke="#9FC3E0" stroke-width="7" stroke-linecap="round" opacity=".7"/>`+(s.type==='pj'?`<rect x="70" y="${y+22}" width="128" height="6" rx="3" fill="#E9F1F8" stroke="#9FC3E0"/>`:'');});
+    h+=`<text x="150" y="226" text-anchor="middle" style="font-size:11px;font-weight:700;fill:#9FE0B8">正常：${s.type==='pj'?'兩根骨都完整、筆直':'骨頭完整、筆直，沒有斷端也沒有成角'}</text>`;
+    return `<svg viewBox="0 0 300 244">${h}</svg>`;}
+  function normalHTML(){if(typeof G==='undefined'||!G||!GT[G.t])return null;const t=G.t,s=G.s;
+    if(t==='lbone')return lboneNormal(s);if(!NORM[t])return null;
+    if(t==='organ'&&typeof breastSvg==='function'&&(s.sel||[]).map(String).some(id=>id==='7-43'||id==='7-44'))return breastSvg(0);
+    const st9=Object.assign({},ST9),st9i=Object.assign({},ST9I),stop=window.storyStop;let html=null;
+    try{window.storyStop=function(){};html=GT[t].vis(NORM[t](JSON.parse(JSON.stringify(s))));}catch(e){html=null;}
+    finally{window.storyStop=stop;Object.keys(ST9).forEach(k=>{if(!(k in st9))delete ST9[k];});Object.assign(ST9,st9);Object.keys(ST9I).forEach(k=>{if(!(k in st9i))delete ST9I[k];});Object.assign(ST9I,st9i);}
+    return html;}
+  const vbOf=svg=>{const v=svg.getAttribute('viewBox');if(v){const a=v.trim().split(/[\s,]+/).map(Number);return {x:a[0],y:a[1],w:a[2],h:a[3],str:v};}const r=svg.getBoundingClientRect();return {x:0,y:0,w:r.width,h:r.height,str:`0 0 ${r.width} ${r.height}`};};
+  function pickSvg(html,target){const d=document.createElement('div');d.innerHTML=html;const tv=target.getAttribute('viewBox'),tc=[...target.classList].filter(c=>!/^(dz|rv|anim)/.test(c));
+    const all=[...d.querySelectorAll('svg')].filter(x=>!x.closest('.day-card,.snd,.kp103'));
+    return all.find(x=>x.getAttribute('viewBox')===tv&&tc.every(c=>x.classList.contains(c)))||all.find(x=>x.getAttribute('viewBox')===tv)||null;}
+  function overlay(svg){if(svg.querySelector(':scope > .nrm107')||svg._nrmTried)return;const m=svg.closest('#gModal');if(!m)return;svg._nrmTried=1;
+    const html=normalHTML();if(!html)return;const n=pickSvg(html,svg);if(!n)return;
+    const V=vbOf(svg),S=V.w/300,suf='__n'+(Math.random()*1e5|0);let inner=n.innerHTML.replace(/\bid="([^"]+)"/g,(a,b)=>`id="${b}${suf}"`).replace(/url\(#([^)]+)\)/g,(a,b)=>`url(#${b}${suf})`).replace(/href="#([^"]+)"/g,(a,b)=>`href="#${b}${suf}"`);
+    let bg='#FFFFFF';for(let e=svg.parentElement;e&&e!==m;e=e.parentElement){const c=getComputedStyle(e),gi=/gradient\(/.test(c.backgroundImage)&&c.backgroundImage.match(/rgba?\([^)]*\)|#[0-9a-f]{3,8}/i);
+      const op=v=>{const m=v.match(/rgba\(([^,]+),([^,]+),([^,]+),([^)]+)\)/);if(!m)return v;const al=+m[4];if(al>=.97)return v;const f=i=>Math.round(+m[i]*al+255*(1-al));return al<.04?null:`rgb(${f(1)},${f(2)},${f(3)})`;};
+      if(gi){const v=op(gi[0]);if(v){bg=v;break;}}const v2=c.backgroundColor&&!/transparent/.test(c.backgroundColor)?op(c.backgroundColor):null;if(v2){bg=v2;break;}}
+    const g=document.createElementNS(NS,'g');g.setAttribute('class','nrm107');g.setAttribute('aria-hidden','true');g.setAttribute('pointer-events','none');
+    g.innerHTML=`<rect x="${V.x}" y="${V.y}" width="${V.w}" height="${V.h}" fill="${bg}"/><svg x="${V.x}" y="${V.y}" width="${V.w}" height="${V.h}" viewBox="${n.getAttribute('viewBox')||V.str}" preserveAspectRatio="xMidYMid meet">${inner}</svg>
+      <g transform="translate(${V.x+6*S} ${V.y+6*S}) scale(${S})"><rect width="54" height="22" rx="11" fill="#256B42"/><text x="27" y="15.5" text-anchor="middle" style="font:800 12px sans-serif;fill:#fff">正常</text></g>`;
+    const rv=svg.querySelector(':scope > .rv104');svg.insertBefore(g,rv||null);
+    g.querySelectorAll('.dz-hot').forEach(e=>e.classList.remove('dz-hot'));
+    /* 與揭示動畫同步重新開始 */
+    if(svg.classList.contains('rv-on')&&!svg.classList.contains('rv-user')){svg.classList.remove('rv-on');void svg.getBoundingClientRect();svg.classList.add('rv-on');try{svg.querySelectorAll('.rv104 animate,.rv104 animateTransform').forEach(a=>{if(a.getAttribute('repeatCount')==='indefinite')a.beginElement();});}catch(e){}}}
+  let q=0;const run=()=>{q=0;document.querySelectorAll('#gModal.open svg').forEach(svg=>{if(svg.querySelector(':scope > .rv104'))try{overlay(svg);}catch(e){}});};
+  const sched=()=>{if(!q)q=setTimeout(()=>{q=0;requestAnimationFrame(run);},180);};
+  new MutationObserver(m=>{for(const r of m){if(r.addedNodes.length){sched();break;}}}).observe(document.body,{childList:true,subtree:true});
+  document.addEventListener('click',()=>setTimeout(sched,250),true);
+})();
+
+/* ================= v39：平面與 3D 的「正常／失能」一致＋喜鵲只出現一次 =================
+   1. 3D 也有真正的正常：同一個 3D 建模函式用「正常狀態」再建一份（放在同一場景、預設隱藏），
+      揭示循環的開場與「按住看正常」時切換成正常那一份（不再用灰色假裝正常）。沒有正常版本的 3D（截肢、手指等）不做假的正常階段。
+   2. 心臟輸出：平面與 3D 都加「杯子」＝每次心跳擠出去的血（佔整個心室的比例），正常 60%、患者依 LVEF；
+      箭頭粗細也依擠出量；3D 心電圖不再隨 LVEF 縮小（心電圖振幅與射出分率無關）。
+   3. 喜鵲：每次打開示範只在剛打開時出現一次（改在 story104）。 */
+(function(){
+  const rm=()=>typeof reduceMotion!=='undefined'&&reduceMotion;
+
+  /* ---------- 2. 平面心臟 ---------- */
+  if(typeof heartPump==='function'){
+    heartPump=function(s){const has=!(s.lvef==null||s.lvef===''||isNaN(+s.lvef)),ef=Math.max(0,Math.min(80,has?+s.lvef:0))/100,nf=.6,r0=rm(),efc=ef<=.25?JC.r:ef<.5?JC.o:JC.g;
+      const ch=(x,e,c,lab,sub)=>{const h=92,y0=60,yS=y0+h*e,hS=h*(1-e),CH=28,cy=48,an=(a,v)=>r0?'':`<animate attributeName="${a}" values="${v}" dur="2.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;.42;1" keySplines=".5 0 .5 1;.5 0 .5 1"/>`;
+        const ch2=Math.max(.5,CH*e);
+        return `<g transform="translate(${x} 0)">
+         <rect x="13" y="${cy-CH}" width="36" height="${CH}" fill="#FFFFFF" stroke="none"/>
+         <rect x="15" y="${cy-ch2}" width="32" height="${ch2}" fill="${c}" opacity=".9"/>
+         <path d="M13 ${cy-CH} V${cy} H49 V${cy-CH}" fill="none" stroke="#8FA3B5" stroke-width="1.8" stroke-linejoin="round"/>
+         <path d="M31 ${y0-2} V${cy+4}" stroke="${c}" stroke-width="${(1.4+e*6).toFixed(1)}" stroke-linecap="round" opacity="${r0?1:.9}">${r0?'':`<animate attributeName="opacity" values=".15;1;.15" dur="2.2s" repeatCount="indefinite" keyTimes="0;.42;1"/>`}</path>
+         <rect x="0" y="${y0}" width="62" height="${h}" rx="18" fill="#FBEEEC" stroke="#B57C5C" stroke-width="1.8"/>
+         <rect x="4" y="${r0?yS:y0+4}" width="54" height="${r0?hS:h-8}" rx="14" fill="${c}">${an('y',`${y0+4};${yS};${y0+4}`)}${an('height',`${h-8};${hS};${h-8}`)}</rect>
+         <text x="31" y="${y0+h+15}" text-anchor="middle" style="font-size:12.5px;font-weight:700;fill:#1E2B38">${lab}</text><text x="31" y="${y0+h+31}" text-anchor="middle" style="font-size:12.5px;font-weight:700;fill:${c}">${sub}</text></g>`;};
+      return `<svg viewBox="0 0 240 204" class="g-pumpfig" role="img" aria-label="心室收縮時擠出血量比較：正常約 60%，此患者${has?Math.round(ef*100)+'%':'尚未填入'}">
+       <text x="120" y="12" text-anchor="middle" style="font-size:12.5px;font-weight:700;fill:#1E2B38">每次心跳，心室擠出多少血</text>${ch(22,nf,JC.g,'正常心臟','擠出約 60%')}${ch(156,ef,efc,'這位患者',has?`擠出 ${Math.round(ef*100)}%`:'尚未填入')}
+       <path d="M92 108 h56" stroke="#9FB2C2" stroke-width="2" stroke-dasharray="3 3"/><text x="120" y="102" text-anchor="middle" style="font-size:11px;fill:#5A6B7A">≦ 25% 最重</text>
+       <text x="120" y="34" text-anchor="middle" style="font-size:10px;fill:#5A6B7A">杯子＝擠出去的血</text><text x="120" y="200" text-anchor="middle" style="font-size:10px;fill:#5A6B7A">${s.tx?'心臟移植或裝心室輔助器屬獨立項目，不看 LVEF':'心室裡剩下的血越多，代表擠出去的越少'}</text>
+       ${s.tx?`<g><rect x="152" y="56" width="70" height="100" rx="20" fill="none" stroke="#2E9D5F" stroke-width="3" stroke-dasharray="6 3"/><circle cx="216" cy="150" r="9" fill="#DCE6F0" stroke="#2E7D4F" stroke-width="2"/><path d="M216 159 q0 14 14 18" fill="none" stroke="#2E7D4F" stroke-width="2.4"/><text x="188" y="52" text-anchor="middle" style="font-size:10px;font-weight:800;fill:#2E7D4F">換心／心室輔助器</text></g>`:''}</svg>`;};
+  }
+
+  /* ---------- 肺：平面也看得到 FEV1／血氧（與 3D 標籤一致），不再只有一對看起來正常的肺 ---------- */
+  if(typeof lungDraw==='function'){const _ld=lungDraw;
+    lungDraw=function(s){let o=_ld.apply(this,arguments);try{const has=!(s.fev1==null||s.fev1===''||isNaN(+s.fev1)),v=has?Math.max(0,Math.min(100,+s.fev1)):null,po=!(s.pao2==null||s.pao2===''||isNaN(+s.pao2))?+s.pao2:null;
+      if(v==null&&po==null)return o;const isF=v!=null,val=isF?v:po,nv=isF?85:90,mx=isF?100:110,col=isF?(val<60?'#C0392B':val<80?'#D9822B':'#2E9D5F'):(val<=60?'#C0392B':val<80?'#D9822B':'#2E9D5F'),W=118,x0=96;
+      const bar=(y,f,c)=>`<rect x="${x0}" y="${y}" width="${W}" height="9" rx="4.5" fill="#EEF2F5" stroke="#B7C3CE"/><rect x="${x0}" y="${y}" width="${Math.max(2,W*Math.min(1,f/mx)).toFixed(1)}" height="9" rx="4.5" fill="${c}"/>`;
+      const g=`<g><text x="150" y="203" text-anchor="middle" style="font-size:9.5px;font-weight:800;fill:#3E4A56">${isF?'用力吐氣第 1 秒吐出的量（FEV1）':'未給氧時血中的氧（PaO2）'}</text>
+        <text x="${x0-4}" y="215" text-anchor="end" style="font-size:9px;fill:#256B42;font-weight:700">正常</text>${bar(207,nv,'#2E9D5F')}<text x="${x0+W+4}" y="215" style="font-size:9px;fill:#256B42;font-weight:700">${isF?'80% 以上':'80–100'}</text>
+        <text x="${x0-4}" y="229" text-anchor="end" style="font-size:9px;fill:${col};font-weight:800">患者</text>${bar(221,val,col)}<text x="${x0+W+4}" y="229" style="font-size:9px;fill:${col};font-weight:800">${isF?val+'%':val+' mmHg'}</text></g>`;
+      o=o.replace(/<text[^>]*>移植肺<\/text>/,m=>m.replace(/y="226"/,'y="196"')).replace('<text x="212" y="206"','<text x="212" y="194"').replace(/<\/svg>$/,g+'</svg>');}catch(e){}return o;};}
+
+  /* ---------- 肝：平面肝臟移到病人右側（畫面左），移植肝在平面也標出來（與 3D 一致） ---------- */
+  if(typeof liverScene==='function'){const _ls=liverScene;
+    liverScene=function(s){let o=_ls.apply(this,arguments);try{const P='<path d="M104 96 Q150 84 198 100 Q206 116 176 124 Q134 130 110 118 Q100 108 104 96 Z" fill="';
+      o=o.replace(P,'<path transform="translate(-24 0)" d="M104 96 Q150 84 198 100 Q206 116 176 124 Q134 130 110 118 Q100 108 104 96 Z" fill="').replace(/<circle cx="(\d+)" cy="(\d+)" r="3.2" fill="#00000030"\/>/g,(m,x,y)=>`<circle cx="${x-24}" cy="${y}" r="3.2" fill="#00000030"/>`)
+        .replace('<text x="150" y="112" text-anchor="middle" style="font-size:10.5px;font-weight:700;fill:#fff">','<text x="126" y="112" text-anchor="middle" style="font-size:10.5px;font-weight:700;fill:#fff">');
+      if(s&&s.tx)o=o.replace(/(<path transform="translate\(-24 0\)" d="[^"]*" fill=")[^"]*(")/,'$1#3FB27A$2').replace(/<\/svg>/,`<text x="196" y="104" style="font-size:10.5px;font-weight:800;fill:#2E7D4F">移植肝</text></svg>`);}catch(e){}return o;};}
+
+  /* ---------- 腎：無功能的腎臟加紅虛線（與臟器圖一致）；移植腎放在右下腹（病人右側＝畫面左，與 3D 一致）；說明的左右改成病人的左右 ---------- */
+  if(typeof kidBase==='function'){const _kb=kidBase;kidBase=function(st){let o=_kb.apply(this,arguments);if(/fill="#A9B3BB" stroke="#7E4A3A"/.test(o)){o=o.replace(/fill="#A9B3BB" stroke="#7E4A3A" stroke-width="2"/g,'fill="#A9B3BB" stroke="#C0392B" stroke-width="2.4" stroke-dasharray="3 3"')+'<text x="150" y="248" text-anchor="middle" style="font-size:9.5px;font-weight:700;fill:#B02A21">灰色＋紅虛線＝腎臟還在，但沒有功能</text>';}return o;};}
+  if(typeof kidenyScenes==='function'){const _ks=kidenyScenes;kidenyScenes=function(s){const S=_ks.apply(this,arguments);try{S.forEach(c=>{if(!c)return;
+      if(typeof c.svg==='string')c.svg=c.svg.replace('<g transform="translate(204 186) scale(-1 1)">','<g transform="translate(96 186) scale(1 1)">').replace(/M184 196Q170 214 164 220/g,'M116 196Q130 214 136 220').replace('<text x="220" y="228" style="font-size:10px;font-weight:700;fill:#2E7D4F">移植腎</text>','<text x="30" y="214" style="font-size:10px;font-weight:700;fill:#2E7D4F">移植腎</text>');
+      if(typeof c.cap==='string')c.cap=c.cap.replace('左邊用紅色虛線表示沒有了，剩下的右邊腎臟繼續工作。','畫面左側（病人的右腎）用紅色虛線表示沒有了，剩下的另一側腎臟繼續工作。').replace('放在下腹部','放在下腹部（通常在右下腹）');});}catch(e){}return S;};}
+
+  /* ---------- 膀胱：萎縮、失禁、尿道狹窄在平面也標紅（與 3D 一致）；人工膀胱尿袋改到右下腹（病人右側＝畫面左，與 3D 一致） ---------- */
+  if(typeof orgSvg==='function'){const _o2=orgSvg;
+    orgSvg=function(o){let h=_o2.apply(this,arguments);o=o||{};const st=o.st||{},ex=o.ex||[];let a='';
+      if(st.bladder==='tiny')a+=`<ellipse cx="150" cy="212" rx="14" ry="10" fill="none" stroke="#C0392B" stroke-width="2.2" stroke-dasharray="3 3"/><text x="168" y="206" style="font-size:10px;font-weight:800;fill:#B02A21">萎縮：只剩 50c.c. 以下</text>`;
+      if(ex.includes('leak'))a+=`<circle cx="150" cy="226" r="6.5" fill="none" stroke="#C0392B" stroke-width="2.4" stroke-dasharray="3 2"/><text x="162" y="226" style="font-size:10px;font-weight:800;fill:#B02A21">括約肌關不緊</text>`;
+      if(ex.includes('suprapubic')){h=h.replace('<text x="132" y="244" text-anchor="end"','<text x="198" y="242"');a+=`<path d="M141 233 l6 4 l-6 4 M159 233 l-6 4 l6 4" fill="none" stroke="#C0392B" stroke-width="2.4" stroke-linecap="round"/><text x="136" y="240" text-anchor="end" style="font-size:10px;font-weight:800;fill:#B02A21">尿道狹窄</text>`;}
+      if(ex.includes('stoma'))a+=`<circle cx="203" cy="164" r="9" fill="none" stroke="#C0392B" stroke-width="2.2" stroke-dasharray="3 2"/>`;
+      if(ex.includes('urostomy'))h=h.replace('<rect x="218" y="196" width="26" height="30" rx="8"','<rect x="56" y="196" width="26" height="30" rx="8"').replace('<path d="M150 214Q190 218 218 210"','<path d="M150 214Q110 218 82 210"').replace('<text x="231" y="238" text-anchor="middle"','<text x="69" y="238" text-anchor="middle"');
+      return a?h.replace(/<\/svg>$/,a+'</svg>'):h;};}
+
+  /* ---------- 8-4 體幹骨（鎖骨、胸骨、肋骨、肩胛骨、骨盤骨）：平面也畫出被選的骨頭與變形（原本平面只有脊椎，3D 才有肋骨） ---------- */
+  function trunk108(oth){const on=n=>oth.includes(n),R='#C0392B',B='#F3ECDD',S='#A89B84';let o='';
+    const st=n=>on(n)?`fill="#F6C1B8" stroke="${R}" stroke-width="2.4"`:`fill="${B}" stroke="${S}" stroke-width="1.4"`;
+    o+=`<path d="M110 40 L94 92 L112 100 L126 50Z" ${on('肩胛骨')?`fill="#F6C1B8" stroke="${R}" stroke-width="2.2" stroke-dasharray="4 2"`:`fill="#EDE6D8" stroke="#C9BFAE" stroke-dasharray="3 3"`}/><path d="M190 40 L206 92 L188 100 L174 50Z" fill="#EDE6D8" stroke="#C9BFAE" stroke-dasharray="3 3"/>`;
+    for(let i=0;i<7;i++){const y=50+i*12,w=40+i*3,bump=on('肋骨')&&i===3;o+=`<path d="M146 ${y} Q${150-w-6} ${y-6} ${150-w} ${y+16}${bump?` l6 -7 l-2 9`:''}" fill="none" ${on('肋骨')&&i>=2&&i<=4?`stroke="${R}" stroke-width="3"`:`stroke="${S}" stroke-width="3"`}/><path d="M154 ${y} Q${150+w+6} ${y-6} ${150+w} ${y+16}" fill="none" stroke="${S}" stroke-width="3"/>`;}
+    o+=`<rect x="144" y="40" width="12" height="72" rx="4" ${st('胸骨')}/>${on('胸骨')?`<path d="M144 78 l12 -6" stroke="${R}" stroke-width="2.2"/>`:''}`;
+    o+=`<path d="M146 40 Q124 30 98 36" fill="none" stroke="${on('鎖骨')?R:S}" stroke-width="${on('鎖骨')?6:5}" stroke-linecap="round"/>${on('鎖骨')?`<path d="M120 31 l6 6" stroke="${R}" stroke-width="3"/>`:''}<path d="M154 40 Q176 30 202 36" fill="none" stroke="${S}" stroke-width="5" stroke-linecap="round"/>`;
+    o+=`<path d="M150 112 V146" stroke="#C9BFAE" stroke-width="6"/><path d="M104 150 Q100 132 122 138 Q150 150 178 138 Q200 132 196 150 Q192 182 166 188 L150 192 L134 188 Q108 182 104 150Z" ${st('骨盤骨')}/><circle cx="128" cy="166" r="9" fill="#FFFFFF" stroke="${S}"/><circle cx="172" cy="166" r="9" fill="#FFFFFF" stroke="${S}"/>${on('骨盤骨')?`<path d="M112 152 l8 8 l-4 6" fill="none" stroke="${R}" stroke-width="2.4"/>`:''}`;
+    const sel=TRUNK_B.filter(on);
+    o+=`<text x="150" y="16" text-anchor="middle" style="font-size:11px;font-weight:800;fill:#E8EEF3">體幹骨（正面）</text><text x="150" y="208" text-anchor="middle" style="font-size:10px;font-weight:700;fill:${sel.length?'#FF8A78':'#8FE3A8'}">${sel.length?sel.join('、')+'：脫衣後外觀看得出的明顯變形':'形狀正常、左右對稱'}</text><text x="150" y="222" text-anchor="middle" style="font-size:9px;fill:#9FB2C2">只有 X 光才看得到的變形不算</text>`;
+    return `<svg viewBox="0 0 300 228" class="tr108" role="img" aria-label="體幹骨示意：${sel.join('、')||'正常'}">${o}</svg>`;}
+  if(typeof GT!=='undefined'&&GT.spine&&typeof TRUNK_B!=='undefined'){const _sv=GT.spine.vis;GT.spine.vis=function(s){let h=_sv.apply(this,arguments);try{const oth=(s.oth||[]).map(String);if(oth.length||(typeof G!=='undefined'&&G&&G.id==='8-4'))h=trunk108(oth)+h;}catch(e){}return h;};}
+
+  /* ---------- 牙齒（6-10／6-11）：故事第②步原本只有側面頭部，看不到缺了哪幾顆，補上牙位圖（與勾選同步） ---------- */
+  if(typeof storyHTML==='function'&&typeof TEETH_U!=='undefined'){const _sh=storyHTML;
+    storyHTML=function(key,S){try{const st=typeof G!=='undefined'&&G&&G.t==='mouth'?G.s:null,cur=window.__m108||st,t=cur?(cur.teeth||[]).map(String):[];
+      if(key==='mouth'&&st&&(st.teeth||[]).length&&Array.isArray(S)&&S[1]&&typeof S[1].svg==='string'&&!S[1].svg.includes('teeth108')){
+        const row=(arr,y)=>arr.map((n,i)=>{const x=14+i*21+(i>7?6:0),miss=t.includes(String(n));return `<rect x="${x}" y="${y}" width="18" height="26" rx="6" fill="${miss?'#FBEBEA':'#FFFDF8'}" stroke="${miss?'#B02A21':'#B9AE9A'}" stroke-width="${miss?2:1.4}" ${miss?'stroke-dasharray="3 2"':''}/>${miss?`<path d="M${x+4} ${y+6} l10 14 M${x+14} ${y+6} l-10 14" stroke="#B02A21" stroke-width="2"/>`:''}<text x="${x+9}" y="${y+(y<50?-4:40)}" text-anchor="middle" style="font-size:8px;fill:#5A6B7A">${n}</text>`;}).join('');
+        const chart=`<p class="sh-t" style="margin:10px 0 4px">牙位圖（${t.length?`紅色 ✕＝缺損，共 ${t.length} 顆`:'牙齒完整'}）</p><svg viewBox="0 0 364 112" class="teeth108" role="img" aria-label="牙位圖：缺損 ${t.length} 顆">${row(TEETH_U,14)}${row(TEETH_L,62)}<line x1="182" y1="6" x2="182" y2="104" stroke="#9FB2C2" stroke-dasharray="2 3"/><text x="4" y="48" style="font-size:8px;fill:#5A6B7A">上</text><text x="4" y="80" style="font-size:8px;fill:#5A6B7A">下</text></svg><p class="small" style="margin:2px 0 0">附表以「意外傷害造成原生牙齒缺損」5 顆以上起算（10 顆以上為較高等級）。</p>`;
+        S[1].svg=S[1].svg.replace(/<\/div>\s*$/,chart+'</div>');}}catch(e){}return _sh.apply(this,arguments);};}
+
+  T5(()=>{if(GT.mouth){const _v=GT.mouth.vis;GT.mouth.vis=function(x){window.__m108=x;try{return _v.apply(this,arguments);}finally{window.__m108=null;}};}},'m108');
+  /* ---------- 精神、胸腹部臟器（綜合）主視覺：不用「腦波／心電圖變平」這種會被誤解為腦死、心跳停止的比喻 ----------
+     精神：四個功能燈（思考、記憶、情緒、與人相處），亮得越少越需要他人協助；最輕一級（1-5）仍有一盞會閃。
+     臟器綜合：保留呼吸、心跳，改用「體力條」（能負荷的活動量）表示，重度加點滴。神經：修正「單側收不到訊號」文字超出畫面。 */
+  if(typeof ladHero==='function'){const _lh=ladHero;
+    ladHero=function(s){if(!s||!s.cat)return _lh.apply(this,arguments);const r0=rm(),lv=s._norm?5:s.lv;
+      if(s.cat==='nerve')return _lh.apply(this,arguments).replace('<text x="22" y="86"','<text x="44" y="86"');
+      if(s.cat==='mind'){const lit=[[0,0,0,0],[1,0,0,0],[1,1,0,0],[1,1,1,0],[1,1,1,2],[1,1,1,1]][lv],nm=['思考','記憶','情緒','與人相處'],cl=lv>=4?'#EE9DB0':['#B9C2CA','#C9B9C0','#D8AFBA','#E3A6B4'][lv];
+        let o=`<circle cx="70" cy="58" r="32" fill="#F2B8C6" opacity="${lv>=4?.45:.2}"/><path d="M50 40 Q34 44 38 60 Q28 70 42 80 Q48 96 66 90 Q84 98 96 84 Q110 76 100 62 Q108 46 90 42 Q76 30 50 40Z" fill="${cl}" stroke="#7E5A6A" stroke-width="1.6"/><path d="M54 52 Q66 60 60 74 M76 46 Q80 62 92 66 M66 84 Q72 74 84 76" stroke="#7E5A6A" stroke-width="1.4" fill="none" opacity=".6"/>`;
+        lit.forEach((v,i)=>{const x=150+i*36,on=v>0,blink=v===2&&!r0;
+          o+=`<g><circle cx="${x}" cy="46" r="12" fill="${on?'#FFD27A':'#E9EDF1'}" stroke="${on?'#C99A2E':'#C0392B'}" stroke-width="${on?1.6:2}" ${on?'':'stroke-dasharray="3 2"'}>${blink?'<animate attributeName="fill" values="#FFD27A;#E9EDF1;#FFD27A" dur="2.4s" repeatCount="indefinite"/>':''}</circle>${on?`<circle cx="${x}" cy="46" r="17" fill="#FFD27A" opacity=".25"/>`:''}<text x="${x}" y="${i===3?76:74}" text-anchor="middle" style="font-size:${i===3?9:10}px;font-weight:700;fill:${on?'#5A4A1A':'#B02A21'}">${nm[i]}</text></g>`;});
+        o+=`<text x="204" y="100" text-anchor="middle" style="font-size:10.5px;fill:#5A6B7A">亮燈越少，越需要別人協助（示意）</text>`;
+        return `<svg viewBox="0 0 300 116" class="lad-hero${r0?' still':''}" role="img" aria-label="精神失能程度示意：功能燈">${o}</svg>`;}
+      if(s.cat==='organ'){let o=_lh.apply(this,arguments);const n=[0,1,2,3,4,5][lv];
+        o=o.replace(/<clipPath id="hec">[\s\S]*?<\/g>/,'').replace(/<text x="212" y="106"[^>]*>臟器功能運轉（示意）<\/text>/,'').replace('translate(236 6)','translate(146 4)');
+        let b='';for(let i=0;i<5;i++){const on=i<n,x=190+i*20;b+=`<rect x="${x}" y="46" width="16" height="26" rx="3" fill="${on?(n<=2?'#E0A030':'#3E9D63'):'#FFFFFF'}" stroke="${on?'#5A6B7A':'#C0392B'}" stroke-width="${on?1.2:1.8}" ${on?'':'stroke-dasharray="3 2"'}/>`;}
+        b+=`<rect x="186" y="42" width="104" height="34" rx="6" fill="none" stroke="#5A6B7A" stroke-width="1.6"/><rect x="290" y="52" width="5" height="14" rx="1.5" fill="#5A6B7A"/>`;
+        b+=`<text x="241" y="34" text-anchor="middle" style="font-size:10.5px;font-weight:700;fill:#1E2B38">體力（能負荷的活動量）</text>`+(lv===4?`<text x="238" y="90" text-anchor="middle" style="font-size:9.5px;font-weight:700;fill:#B02A21">工作上確有明顯阻礙</text>`:lv===0?`<text x="238" y="90" text-anchor="middle" style="font-size:9.5px;font-weight:700;fill:#B02A21">無法活動，需專人照護</text>`:'')+`<text x="212" y="108" text-anchor="middle" style="font-size:10.5px;fill:#5A6B7A">胸腹部臟器功能（示意）</text>`;
+        return o.replace(/<\/svg>$/,b+'</svg>');}
+      return _lh.apply(this,arguments);};}
+
+  /* ---------- 脊柱平面：與 3D 相同的變形位置（壓迫、滑脫、棘突切除）也畫在椎體圖上 ---------- */
+  if(typeof spineColumn==='function'&&typeof VERT!=='undefined'){const _sc=spineColumn;
+    spineColumn=function(s){let o=_sc.apply(this,arguments);try{const df=new Set((s.def||[]).map(String)),run=spRun(s.fused||[]),tgt=(df.has('h')||s.frac)?(run.length?run[0]:18):-1;if(tgt<0&&!df.has('s')&&!df.has('sp'))return o;
+        const G=[];let y=6;VERT.forEach((v,i)=>{const t=v[0],w=t==='C'?44:t==='T'?50:58,h=t==='C'?13:t==='T'?15:18,x=96-w/2+(t==='T'?Math.sin((i-7)/11*Math.PI)*-5:t==='L'?Math.sin((i-19)/4*Math.PI)*4:0);G.push([x,y,w,h]);y+=h+3;});
+        let a='';const lab=(i,t)=>{const [x,y,w,h]=G[i];a+=`<text x="${x+w*1.42+3}" y="${y+h/2+3.5}" style="font-size:9px;font-weight:800;fill:#FF8A78">${t}</text>`;};
+        if(tgt>=0){const [x,y,w,h]=G[tgt];a+=`<path d="M${x} ${y+h*.55} L${x+w} ${y} V${y+h} H${x} Z" fill="#E0705F" stroke="#B02A21" stroke-width="1.6"/><path d="M${x} ${y} H${x+w}" stroke="#FFB0A0" stroke-width="1.2" stroke-dasharray="2 2"/>`;lab(tgt,'壓迫 ≥ 50%');}
+        if(df.has('s')){const [x,y,w,h]=G[22];a+=`<rect x="${x-w*.28}" y="${y}" width="${w}" height="${h}" rx="3" fill="#E0705F" stroke="#B02A21" stroke-width="1.6"/><path d="M${x} ${y-2} V${y+h+2}" stroke="#FFB0A0" stroke-width="1.2" stroke-dasharray="2 2"/>`;lab(22,'滑脫 ≥ 25%');}
+        if(df.has('sp'))[17,18,19].forEach((i,k)=>{const [x,y,w,h]=G[i];a+=`<rect x="${x+w}" y="${y+2}" width="${w*.42}" height="${h-4}" rx="3" fill="#0F1A24" stroke="#E0453A" stroke-width="1.6" stroke-dasharray="3 2"/>`;if(k===1)lab(i,'棘突切除');});
+        o=o.replace(/(<svg viewBox="0 0 214 [^"]*" class="g-spcol"[^>]*>[\s\S]*?)(<\/svg>)/,(m,b,c)=>b+`<g class="sp108" pointer-events="none">${a}</g>`+c);}catch(e){}return o;};}
+
+  /* ---------- 1. 3D 真正的正常 ---------- */
+  const NORM3={organ:s=>Object.assign({},s,{sel:[]}),eye:s=>Object.assign({},s,{L:0,R:0,oth:[]}),ear:s=>Object.assign({},s,{R:20,L:20,aur:false}),
+    nose:s=>Object.assign({},s,{def:false,func:false}),mouth:s=>Object.assign({},s,{sw:0,snd:[],lar:false,dys:false,aph:0,taste:false,sal:false,teeth:[]}),
+    skin:s=>Object.assign({},s,{cells:[],q:0,p:0}),spine:s=>Object.assign({},s,{fused:[],rem:120,frac:false,sig:false,def:[],oth:[]}),
+    heart:s=>Object.assign({},s,{nyha:1,hosp:'none',chf:false,lvef:60,cause:false,tx:false}),
+    lung:s=>{const hp=!(s.pao2==null||s.pao2===''),hf=!(s.fev1==null||s.fev1==='');return Object.assign({},s,{support:false,help:false,ratio:null,dlco:null,vo2:null,res:'none',rad:false,tx:false},hp&&!hf?{pao2:95,fev1:null}:{pao2:null,fev1:100});},
+    liver:s=>Object.assign({},s,{c0:1,c1:1,c2:1,c3:1,c4:1,asc:'none',he:0,bleed:false,portal:false,tx:false})};
+  const FAC={organ3dBuild:'organ',eye3Build:'eye',ear3Build:'ear',nose3Build:'nose',mouth3Build:'mouth',skin3Build:'skin',spine3dBuild:'spine',heart3Build:'heart',lung3Build:'lung',liver3Build:'liver'};
+  const clone=s=>{try{return JSON.parse(JSON.stringify(s));}catch(e){return Object.assign({},s);}};
+  const wrapFac=(name,t)=>{let f;try{f=eval(name);}catch(e){return;}if(typeof f!=='function'||f._n108)return;
+    const w=function(s){const b=f.apply(this,arguments);if(typeof b==='function'&&s&&typeof s==='object'){const st=clone(s);b._nrm=()=>f.call(this,NORM3[t](clone(st)));}return b;};w._n108=1;
+    try{eval(name+'=w');}catch(e){}};
+  T5(()=>{Object.keys(FAC).forEach(n=>wrapFac(n,FAC[n]));
+    if(window.HXB){Object.keys(window.HXB).forEach(k=>{const g=window.HXB[k];if(typeof g!=='function')return;window.HXB[k]=()=>{const f=g();if(typeof f!=='function'||f._n108||!NORM3[k])return f;const w=function(s){const b=f.apply(this,arguments);if(typeof b==='function'&&s){const st=clone(s);b._nrm=()=>f(NORM3[k](clone(st)));}return b;};w._n108=1;return w;};});}
+  },'nrm108');
+
+  if(typeof T3!=='undefined'){const _mount=T3.mount;
+    T3.mount=function(box,build){if(box){box._nrmSet=null;box._rvStart=0;box.classList.remove('nrm3-on');}if(!build||typeof build._nrm!=='function')return _mount.apply(this,arguments);
+      const mk=build._nrm,wrapped=(T,sc,cam,root,c)=>{const api=build(T,sc,cam,root,c)||{};const kids=[...root.children];let nroot=null,apiN=null,cN=null;
+        try{const fog=sc.fog,bg=sc.background,hf=typeof HX!=='undefined'?HX._f:0;nroot=new T.Group();nroot.userData.nrm=1;nroot.visible=false;root.add(nroot);
+          cN=Object.assign({},c,{root:nroot,cam:cam.clone(),labs:[]});apiN=mk()(T,sc,cN.cam,nroot,cN)||{};sc.fog=fog;sc.background=bg;if(typeof HX!=='undefined')HX._f=hf;}
+        catch(e){if(nroot)root.remove(nroot);nroot=null;apiN=null;}
+        if(!nroot)return api;
+        const labsN=(apiN.labels||[]).map(([txt,v,cls])=>[txt,v,('nrm3 '+(cls||'')).trim()]);
+        const out=Object.assign({},api,{labels:(api.labels||[]).concat(labsN)});
+        const _u=api.update;out.update=function(t){const r=_u?_u.apply(api,arguments):undefined;if(!c.box._rvStart&&c.box._nrmSet)c.box._nrmSet(!!c.box._hold);if(nroot.visible&&apiN.update)try{apiN.update.call(apiN,t,cN);}catch(e){}return r;};
+        let on=false;c.box._nrmSet=v=>{v=!!v;if(v===on)return;on=v;nroot.visible=v;kids.forEach(k=>{if(v){k._nv=k.visible;k.visible=false;}else k.visible=k._nv!==undefined?k._nv:true;});c.box.classList.toggle('nrm3-on',v);};
+        return out;};
+      return _mount.call(this,box,wrapped);};}
+
+  /* 沒有揭示動畫的 3D（例如脊柱）也提供「按住看正常」 */
+  function holdBtn(box){const b=document.createElement('button');b.type='button';b.className='hb105';b.textContent='按住看正常';
+    const on=e=>{e.preventDefault();e.stopPropagation();box._hold=true;b.classList.add('on');},off=()=>{if(!box._hold)return;box._hold=false;b.classList.remove('on');};
+    b.addEventListener('pointerdown',on);b.addEventListener('pointerup',off);b.addEventListener('pointerleave',off);b.addEventListener('pointercancel',off);
+    b.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();box._hold=true;b.classList.add('on');}});b.addEventListener('keyup',e=>{if(e.key===' '||e.key==='Enter')off();});box.appendChild(b);}
+  /* 3D 角落的「正常」標籤 */
+  let q=0;const run=()=>{q=0;document.querySelectorAll('.demo-modal.open .t3-box').forEach(b=>{if(!b.querySelector(':scope > .nrm3-chip')){const c=document.createElement('span');c.className='nrm3-chip';c.textContent='正常';c.setAttribute('aria-hidden','true');b.appendChild(c);}
+      if(b._nrmSet&&b.querySelector('canvas')&&!b.querySelector('.hb105'))holdBtn(b);
+      const hb=b.querySelector('.hb105');if(hb){const t=b._nrmSet?'按住看正常':'按住隱藏紅色';if(hb.textContent!==t){hb.textContent=t;hb.setAttribute('aria-label',b._nrmSet?'按住切換成同一部位的正常狀態':'按住暫時隱藏紅色標示（此 3D 沒有正常對照）');}}});};
+  /* 平面圖本身可點選（例如脊柱椎體）時，另給一顆「按住看正常」按鈕 */
+  const run2=()=>{document.querySelectorAll('.demo-modal.open svg').forEach(svg=>{if(!svg.querySelector(':scope > .nrm107')||!svg.querySelector('[data-a]'))return;const host=svg.closest('.story-stage,.fg-stage,#gVis');if(!host||host.querySelector(':scope > .hb108'))return;
+      const b=document.createElement('button');b.type='button';b.className='hb108';b.textContent='按住看正常';b.setAttribute('aria-label','按住切換成正常的脊柱，放開回到受傷的樣子');
+      const cur=()=>[...host.querySelectorAll('svg')].find(x=>x.querySelector(':scope > .nrm107'));
+      const on=e=>{e.preventDefault();const v=cur();if(v)v.classList.add('rv-hold');b.classList.add('on');},off=()=>{host.querySelectorAll('svg.rv-hold').forEach(x=>x.classList.remove('rv-hold'));b.classList.remove('on');};
+      b.addEventListener('pointerdown',on);b.addEventListener('pointerup',off);b.addEventListener('pointerleave',off);b.addEventListener('pointercancel',off);
+      b.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter')on(e);});b.addEventListener('keyup',e=>{if(e.key===' '||e.key==='Enter')off();});host.appendChild(b);});};
+  new MutationObserver(()=>{if(!q)q=setTimeout(()=>{q=0;run();run2();},200);}).observe(document.body,{childList:true,subtree:true});
 })();
 
 </script>
