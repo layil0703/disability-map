@@ -1014,6 +1014,36 @@ svg.rv-hold .rv104{opacity:0!important}
 .hb108.on{background:#256B42;color:#fff}
 .hb108:focus-visible{outline:3px solid #F5B800;outline-offset:2px}
 
+/* v40：正常｜失能 切換、統一圖例、自動對比停止 */
+.nt109{display:flex;align-items:center;flex-wrap:wrap;gap:6px 8px;width:100%;flex:1 0 100%;grid-column:1/-1;box-sizing:border-box;margin:0 0 8px;order:-1}
+.nt109 button{font:inherit;font-size:.8rem;font-weight:800;min-height:36px;padding:4px 16px;border-radius:99px;border:1.5px solid #9AA5AE;background:#fff;color:#3E4A56;cursor:pointer}
+.nt109 button[data-nv="n"][aria-pressed="true"]{background:#256B42;border-color:#256B42;color:#fff}
+.nt109 button[data-nv="d"][aria-pressed="true"]{background:#C0392B;border-color:#C0392B;color:#fff}
+.nt109 button:focus-visible{outline:3px solid #F5B800;outline-offset:2px}
+.nt-tip{font-size:.72rem;color:var(--sub,#5A6B7A)}
+.sp-dark .nt-tip,.s80-stage.sp-dark .nt-tip{color:#C9D6E2}
+.nrmv109{display:none;position:relative}
+.story-stage:has(> .nt109.on-n) > .nrmv109,.fg-stage:has(> .nt109.on-n) > .nrmv109{display:block}
+.story-stage:has(> .nt109.on-n) > :not(.nt109):not(.nrmv109):not(.gs106):not(.lg109),.fg-stage:has(> .nt109.on-n) > :not(.nt109):not(.nrmv109):not(.gs106):not(.lg109){display:none!important}
+.nv-chip{position:absolute;left:6px;top:6px;z-index:3;padding:3px 12px;border-radius:99px;background:#256B42;color:#fff;font-size:.76rem;font-weight:800;pointer-events:none}
+.nrmv109 .t3-fb{display:block!important}
+/* 統一圖例 */
+.lg109{display:flex!important;flex-wrap:wrap;gap:4px 10px;align-items:center;font-size:.7rem;color:var(--sub,#5A6B7A);margin-top:6px;width:100%;flex:1 0 100%;grid-column:1/-1}
+.lg109 span{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.lg109 i{display:inline-block;width:16px;height:10px;border-radius:3px;flex:none;animation:none!important;box-shadow:none!important}
+.lg109 .k-red{background:#E0453A}
+.lg109 .k-dash{background:#fff;border:2px dashed #C0392B;height:6px;width:12px}
+.lg109 .k-grey{background:#A9B3BB;border:2px dashed #C0392B;height:6px;width:12px}
+.lg109 .k-or{background:#E0A21A}
+.lg109 .k-gr{background:#3E9D63}
+.sp-dark .lg109,.s80-stage .sp-dark ~ .lg109{color:var(--sub,#5A6B7A)}
+/* 自動對比停止後：紅色只保留靜態光暈 */
+svg.rv-done .dz-hot{animation:none!important;filter:drop-shadow(0 0 3px rgba(255,64,40,.75))}
+@media (prefers-reduced-motion:reduce){.nt109 button{transition:none}}
+.nt109.auto button{border-style:dashed}
+.nt109.auto .nt-tip{font-weight:700;color:#256B42}
+.nrmv109 .nv-chip{left:auto;right:6px}
+
 
 /* 對外版：提醒與聯絡 */
 .pub-note{display:flex;gap:14px;align-items:flex-start;background:var(--seal-soft);border:1px solid #EBC7C2;border-left:5px solid var(--seal);border-radius:10px;padding:12px 16px;margin:-4px 0 16px;font-size:.9rem;line-height:1.7}
@@ -5750,7 +5780,7 @@ T5(()=>{if(typeof openLld!=='function')return;const _l=openLld;openLld=function(
     const sw=HX.halo(T,0xFF5A4A,1);sw.material.opacity=0;c.sc.add(sw);
     const el=document.createElement('div');el.className='mp3d'+(S0.bird?'':' nobird');el.innerHTML=birdSVG(78,false,'這裡！');c.box.appendChild(el);let flip=false,fx=null,fy=null;
     const t0=performance.now(),_u=c.api.update;c.box._rvStart=t0;
-    c.api.update=function(t,cc){const r=_u?_u.apply(this,arguments):undefined;const k=still?.9:(((performance.now()-t0)/1000)%P)/P;
+    c.api.update=function(t,cc){const r=_u?_u.apply(this,arguments):undefined;const et=(performance.now()-t0)/1000,k=still||et>=2*P||c.box._rvStop?.9:(et%P)/P;/* v40：自動對比只播兩次，之後停在失能 */
       /* 正常→受傷 */
       const hold=!!c.box._hold,nOn=NS3?(k<.2||hold):false,grey=NS3?false:hold;if(NS3)NS3(nOn);c.box.classList.toggle('nrm3-on',nOn);
       mats.forEach(x=>{if(grey){x.m.color.copy(neutral);if(x.m.emissive){x.m.emissive.setHex(0x1A2A3A);x.m.emissiveIntensity=.2;}}
@@ -5809,14 +5839,16 @@ T5(()=>{if(typeof openLld!=='function')return;const _l=openLld;openLld=function(
     if(!rm())setTimeout(()=>{host.classList.add('sh105');setTimeout(()=>host.classList.remove('sh105'),420);},(delay||0)+380);}
 
   /* ---------- 先猜再揭曉：等級章出現前，先讓人猜（不猜 7 秒後自動揭曉） ---------- */
-  function stamp(host,id,delay){host.querySelectorAll(':scope > .st105,:scope > .gs106').forEach(e=>e.remove());clearTimeout(host._gsT);clearTimeout(host._gsIns);if(!id)return;const g=itemGrade(id);if(!g)return;
+  /* v40：同一項猜過就不再問（只記在使用者自己的瀏覽器） */
+  const GSK='dm-guessed',gsGet=()=>{try{return JSON.parse(localStorage.getItem(GSK)||'[]');}catch(e){return [];}},gsAdd=id=>{try{const a=gsGet();if(!a.includes(id)){a.push(id);localStorage.setItem(GSK,JSON.stringify(a.slice(-400)));}}catch(e){}};
+  function stamp(host,id,delay){host.querySelectorAll(':scope > .st105,:scope > .gs106').forEach(e=>e.remove());clearTimeout(host._gsT);clearTimeout(host._gsIns);if(!id)return;const g=itemGrade(id);if(!g)return;/* v42：使用者要求拿掉「先猜再揭曉」，直接蓋等級章 */slam(host,id,delay);return;
     let hsh=0;for(const ch of id)hsh=(hsh*31+ch.charCodeAt(0))>>>0;
     const cand=[g-1,g+1,g-2,g+2,g-3,g+3].filter(x=>x>=1&&x<=15);const d1=cand[hsh%2===0?0:1]!=null?cand[hsh%2===0?0:1]:cand[0];const rest=cand.filter(x=>x!==d1&&Math.abs(x-g)>=2);const d2=rest.length?rest[hsh%rest.length]:cand.find(x=>x!==d1);
     const opts=[g,d1,d2].filter((x,i,a)=>x!=null&&a.indexOf(x)===i);const ord=opts.map((x,i)=>[x,(hsh>>(i*3))&7]).sort((a,b)=>a[1]-b[1]).map(a=>a[0]);
     const box=document.createElement('div');box.className='gs106';box.setAttribute('role','group');box.setAttribute('aria-label','先猜猜看：這是第幾等級？');
     box.innerHTML=`<div class="gs-q"><b>？</b><span>先猜猜看：這是第幾等級？</span></div>${ord.map(x=>`<button type="button" data-g="${x}">第${CN9[x-1]}級</button>`).join('')}`;
     host._gsIns=setTimeout(()=>{if(host.isConnected)host.insertBefore(box,host.firstChild);},Math.max(0,(delay||0)-400));
-    const done=(pick)=>{clearTimeout(host._gsT);box.querySelectorAll('button').forEach(b=>{b.disabled=true;const v=+b.dataset.g;if(v===g)b.classList.add('ok');else if(v===pick)b.classList.add('no');});
+    const done=(pick)=>{clearTimeout(host._gsT);if(pick!=null)gsAdd(id);box.querySelectorAll('button').forEach(b=>{b.disabled=true;const v=+b.dataset.g;if(v===g)b.classList.add('ok');else if(v===pick)b.classList.add('no');});
       const fb=document.createElement('div');fb.className='gs-fb';fb.textContent=pick==null?'答案揭曉':pick===g?'猜中了！':`差 ${Math.abs(pick-g)} 級`;box.appendChild(fb);
       setTimeout(()=>{box.remove();slam(host,id,0);},pick==null?250:900);};
     box.addEventListener('click',e=>{const b=e.target.closest('button[data-g]');if(!b||b.disabled)return;e.stopPropagation();done(+b.dataset.g);});
@@ -5829,7 +5861,7 @@ T5(()=>{if(typeof openLld!=='function')return;const _l=openLld;openLld=function(
     /* 與既有動畫同步：從同一時間點重新開始 */
     try{g.querySelectorAll('animate,animateTransform').forEach(a=>{if(a.getAttribute('repeatCount')==='indefinite')a.beginElement();});svg.classList.remove('rv-on');void svg.getBoundingClientRect();svg.classList.add('rv-on');}catch(e){}}
   /* ---------- 按住看正常＋點紅色看項目 ---------- */
-  function hint(host,svg){const can=!!(svg&&svg.querySelector('.nrm107')&&!svg.querySelector('[data-a]'));let h=host.querySelector(':scope > .hold105');if(h&&h._can===can)return;if(!h){h=document.createElement('div');h.className='hold105';host.appendChild(h);}h._can=can;h.innerHTML=can?'<span class="h105-ic" aria-hidden="true">👆</span>按住圖片看<b>正常</b>，放開看<b>受傷</b>；點紅色部位看等級':'<span class="h105-ic" aria-hidden="true">👆</span>點紅色部位，看是哪一項、第幾等級';}
+  function hint(host,svg){const can=!!(svg&&svg.querySelector('.nrm107')&&!svg.querySelector('[data-a]'));let h=host.querySelector(':scope > .hold105');if(h&&h._can===can)return;if(!h){h=document.createElement('div');h.className='hold105';host.appendChild(h);}h._can=can;h.innerHTML=can?'<span class="h105-ic" aria-hidden="true">👆</span>點紅色部位看是哪一項、第幾等級；按住圖片可快速看<b>正常</b>':'<span class="h105-ic" aria-hidden="true">👆</span>點紅色部位，看是哪一項、第幾等級';}
   function tip(host,x,y,id){host.querySelectorAll('.tip105').forEach(e=>e.remove());if(!id)return;const x0=host.getBoundingClientRect(),t=document.createElement('div');t.className='tip105';
     const it=itemCat(id),nm=it?it.it[1].replace(/者。$/,'').slice(0,22)+(it.it[1].length>24?'…':''):'';
     t.innerHTML=`<b>這裡受損 →</b> <code>${id}</code> <span class="badge ${badgeCls(itemGrade(id))}">${gName(id)}</span><small>${nm}</small>`;
@@ -6067,6 +6099,7 @@ T5(()=>{if(typeof openLld!=='function')return;const _l=openLld;openLld=function(
       h+=`<rect x="${x0}" y="${y-5.5}" width="${x1-x0}" height="11" fill="url(#bnN)" stroke="#9FC3E0"/><ellipse cx="${x0}" cy="${y}" rx="15" ry="17" fill="url(#bnN)" stroke="#9FC3E0"/><circle cx="${x1}" cy="${y-8}" r="11" fill="url(#bnN)" stroke="#9FC3E0"/><circle cx="${x1}" cy="${y+8}" r="11" fill="url(#bnN)" stroke="#9FC3E0"/><line x1="${x1+10}" y1="${y}" x2="${x1+34}" y2="${y}" stroke="#9FC3E0" stroke-width="7" stroke-linecap="round" opacity=".7"/>`+(s.type==='pj'?`<rect x="70" y="${y+22}" width="128" height="6" rx="3" fill="#E9F1F8" stroke="#9FC3E0"/>`:'');});
     h+=`<text x="150" y="226" text-anchor="middle" style="font-size:11px;font-weight:700;fill:#9FE0B8">正常：${s.type==='pj'?'兩根骨都完整、筆直':'骨頭完整、筆直，沒有斷端也沒有成角'}</text>`;
     return `<svg viewBox="0 0 300 244">${h}</svg>`;}
+  window.__nrm107=()=>normalHTML();
   function normalHTML(){if(typeof G==='undefined'||!G||!GT[G.t])return null;const t=G.t,s=G.s;
     if(t==='lbone')return lboneNormal(s);if(!NORM[t])return null;
     if(t==='organ'&&typeof breastSvg==='function'&&(s.sel||[]).map(String).some(id=>id==='7-43'||id==='7-44'))return breastSvg(0);
@@ -6258,6 +6291,78 @@ T5(()=>{if(typeof openLld!=='function')return;const _l=openLld;openLld=function(
       b.addEventListener('pointerdown',on);b.addEventListener('pointerup',off);b.addEventListener('pointerleave',off);b.addEventListener('pointercancel',off);
       b.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter')on(e);});b.addEventListener('keyup',e=>{if(e.key===' '||e.key==='Enter')off();});host.appendChild(b);});};
   new MutationObserver(()=>{if(!q)q=setTimeout(()=>{q=0;run();run2();},200);}).observe(document.body,{childList:true,subtree:true});
+})();
+
+/* ================= v40：機制精簡與一致化 =================
+   1. 「正常｜失能」切換鈕：平面與 3D 共用。平面把整個圖區換成同一部位的正常樣子（含視力表、飲食卡、生活六格等 HTML），
+      3D 切到正常場景。按住圖片仍可用（快捷）。只在「② 發生了什麼」那一步出現。
+   2. 自動對比只播兩次，之後停在失能（3D 在 story104）。
+   3. 統一圖例：紅＝受損、紅虛線＝切除／缺損、灰＋紅虛線＝還在但沒功能、橘＝活動受限、綠＝正常或移植後可運作。
+   4. 補紅色標示：肝功能 B／C 級的肝臟、唾液減少的唾液腺。 */
+(function(){
+  const NVT=['organ','eye','ear','nose','mouth','skin','spine','heart','lung','liver','ladder','face','lbone'];
+  const SKIP='.nt109,.nrmv109,.gs106,.st105,.dz-leg,.lg109,.hold105,.tip105,.hb108';
+
+  /* ---------- 4. 補紅色標示 ---------- */
+  if(typeof liverScene==='function'){const _l=liverScene;liverScene=function(s){let o=_l.apply(this,arguments);try{const sc=[0,1,2,3,4].reduce((a,i)=>a+(+s['c'+i]||1),0),cls=sc>=10?'C':sc>=7?'B':'A';
+      if(cls!=='A'&&!s.tx)o=o.replace(/(<path transform="translate\(-24 0\)" d="[^"]*" fill="[^"]*") stroke="#4A2A20" stroke-opacity=".5"/,'$1 stroke="#C0392B" stroke-width="2.4" stroke-dasharray="4 3"');}catch(e){}return o;};}
+  if(typeof mouthHead==='function'){const _m=mouthHead;mouthHead=function(s){let o=_m.apply(this,arguments);try{if(s&&s.sal)o=o.replace(/(<ellipse cx="226" cy="150" rx="16" ry="22" fill="#D7D0C8") stroke="#B89630" stroke-width="1"/,'$1 stroke="#C0392B" stroke-width="2.2" stroke-dasharray="3 2"').replace(/(<ellipse cx="116" cy="244" rx="14" ry="7" fill="#D7D0C8") stroke="#B89630" stroke-width="1"/,'$1 stroke="#C0392B" stroke-width="2.2" stroke-dasharray="3 2"');}catch(e){}return o;};}
+
+  /* ---------- 3. 統一圖例 ---------- */
+  const LEG='<span><i class="k-red"></i>受損、失能</span><span><i class="k-dash"></i>切除、缺損</span><span><i class="k-grey"></i>還在但沒功能</span><span><i class="k-or"></i>活動受限</span><span><i class="k-gr"></i>正常、移植後可運作</span>';
+  function legend(stage){let l=stage.querySelector(':scope > .dz-leg');if(l&&!l.classList.contains('lg109')){l.classList.add('lg109');l.innerHTML=LEG;l.setAttribute('aria-label','圖例');}
+    if(!l){l=document.createElement('div');l.className='dz-leg lg109';l.setAttribute('aria-label','圖例');l.innerHTML=LEG;stage.appendChild(l);}}
+
+  /* ---------- 1. 正常｜失能 切換 ---------- */
+  const isStep2=stage=>{const st=stage.closest('.story');const cap=st&&st.querySelector('.story-cap');return !!(cap&&/發生了什麼|疤痕在哪裡/.test(cap.textContent));};
+  const box3=stage=>{const b=stage.querySelector('.t3-box:not([hidden])');return b&&b.querySelector('canvas')&&b.offsetParent!==null?b:null;};
+  const fig=stage=>[...stage.children].filter(c=>!c.matches(SKIP))[0]||null;
+  /* 正常版來源：臟器、眼、耳…用同一示範的正常狀態重畫；截肢、手指、足趾、關節、下肢縮短、末關節用故事第①步（本來就是正常構造） */
+  const storyKey=stage=>{const st=stage.closest('.story')||(stage.classList.contains('fg-stage')&&stage.closest('.demo-modal')?stage.closest('.demo-modal').querySelector('.story'):null);return st&&st.dataset.key;};
+  const introOK=k=>!!(k&&k!=='lbone'&&typeof ST9!=='undefined'&&ST9[k]&&ST9[k][0]&&/^①/.test(ST9[k][0].t||'')&&typeof ST9[k][0].svg==='string');
+  const useGT=stage=>typeof G!=='undefined'&&G&&stage.closest('#gModal')&&NVT.includes(G.t);
+  function buildNormal(stage){let html=null;try{if(useGT(stage))html=window.__nrm107&&window.__nrm107();else{const k=storyKey(stage);if(introOK(k))html=`<div class="story-stage">${ST9[k][0].svg}</div>`;}}catch(e){}if(!html)return null;
+    const d=document.createElement('div');d.innerHTML=html;const src=d.querySelector('.story-stage')||d;
+    src.querySelectorAll('.t3-tools,.t3-box,.dz-leg,.hold105').forEach(e=>e.remove());src.querySelectorAll('.t3-fb').forEach(e=>{e.hidden=false;e.removeAttribute('hidden');});
+    const suf='__v'+(Math.random()*1e5|0);let h=src.innerHTML.replace(/\bid="([^"]+)"/g,(a,b)=>`id="${b}${suf}"`).replace(/url\(#([^)]+)\)/g,(a,b)=>`url(#${b}${suf})`).replace(/href="#([^"]+)"/g,(a,b)=>`href="#${b}${suf}"`);
+    const w=document.createElement('div');w.className='nrmv109';w.setAttribute('inert','');w.setAttribute('aria-label','正常的樣子');w.innerHTML=`<span class="nv-chip">正常</span>${h}`;
+    w.querySelectorAll('svg').forEach(s=>{s.setAttribute('data-dz-off','');s.classList.add('dz-off');});w.querySelectorAll('[data-a]').forEach(e=>e.removeAttribute('data-a'));w.querySelectorAll('[tabindex],button,a,input,select').forEach(e=>e.setAttribute('tabindex','-1'));return w;}
+  function setView(stage,tg,v){const b3=box3(stage);tg.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.nv===v)));
+    if(b3){tg.classList.remove('on-n');b3._hold=v==='n';tg.classList.toggle('on-n3',v==='n');return;}
+    tg.classList.remove('on-n3');
+    if(v==='n'){let w=stage.querySelector(':scope > .nrmv109');if(!w||w._fig!==fig(stage)){if(w)w.remove();w=buildNormal(stage);if(!w){tg.querySelector('.nt-tip').textContent='這一步沒有正常對照';return;}w._fig=fig(stage);tg.after(w);}tg.classList.add('on-n');}
+    else tg.classList.remove('on-n');}
+  const autoOn=stage=>{const b3=box3(stage);if(b3)return !!(b3._rvStart&&!b3._rvStop&&performance.now()-b3._rvStart<16000);return !!stage.querySelector('svg.rv-on:not(.rv-user):has(> .nrm107)');};
+  function syncAuto(stage,tg){const on=autoOn(stage);if(on)setTimeout(sched,1500);if(on===!!tg._auto)return;tg._auto=on;tg.classList.toggle('auto',on);const tip=tg.querySelector('.nt-tip');
+    if(on){tg.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed','false'));tip.textContent='自動對比中：先看正常、再看失能';}
+    else{tg.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.nv===(tg.classList.contains('on-n')||tg.classList.contains('on-n3')?'n':'d'))));tip.textContent='點「正常」看同一部位沒受傷的樣子';}}
+  function stopAuto(stage){stage.querySelectorAll('svg.rv-on').forEach(svg=>{clearTimeout(svg._st109);stop2(svg,true);svg.classList.add('rv-user');});const b3=box3(stage);if(b3)b3._rvStop=true;}
+  function toggle(stage){let tg=stage.querySelector(':scope > .nt109');const f=fig(stage);
+    if(tg){if(tg._fig!==f){tg._fig=f;setView(stage,tg,'d');}syncAuto(stage,tg);const b3=box3(stage);tg.classList.toggle('t3',!!b3);tg.hidden=!!(b3&&!b3._nrmSet);if(b3&&b3._nrmSet){const hb=b3.querySelector('.hb105');if(hb)hb.style.display='none';}return;}
+    tg=document.createElement('div');tg.className='nt109';tg.setAttribute('role','group');tg.setAttribute('aria-label','切換正常與失能');tg._fig=f;
+    tg.innerHTML='<button type="button" data-nv="n" aria-pressed="false">正常</button><button type="button" data-nv="d" aria-pressed="true">失能</button><span class="nt-tip">點「正常」看同一部位沒受傷的樣子</span>';
+    stage.insertBefore(tg,f||stage.firstChild);
+    tg.addEventListener('click',e=>{const b=e.target.closest('button[data-nv]');if(!b)return;e.stopPropagation();stopAuto(stage);tg._auto=false;tg.classList.remove('auto');tg.querySelector('.nt-tip').textContent='點「正常」看同一部位沒受傷的樣子';setView(stage,tg,b.dataset.nv);});
+    syncAuto(stage,tg);}
+
+  /* ---------- 2. 平面自動對比兩輪後停止 ---------- */
+  function stop2(svg,force){if(!svg.isConnected||(!force&&svg.classList.contains('rv-user')))return;svg.classList.remove('rv-on');svg.classList.add('rv-done');const g=svg.querySelector(':scope > .rv104');if(!g)return;
+    g.querySelectorAll('animate,animateTransform').forEach(a=>{if(a.getAttribute('repeatCount')==='indefinite')a.remove();});
+    g.querySelectorAll(':scope > g[opacity="0"]').forEach(x=>{if(x.querySelector('circle[stroke="#F5B800"]'))x.setAttribute('opacity','1');});}
+
+  let q=0;const run=()=>{q=0;
+    document.querySelectorAll('.demo-modal.open svg.rv-on').forEach(svg=>{if(!svg._st109)svg._st109=setTimeout(()=>{stop2(svg);sched();},16600);});
+    document.querySelectorAll('.demo-modal.open .story-stage').forEach(stage=>{if(stage.closest('.nrmv109'))return;
+      const t=typeof G!=='undefined'&&G&&stage.closest('#gModal')?G.t:null;const step2=isStep2(stage);
+      if(step2||stage.querySelector(':scope > .dz-leg'))legend(stage);
+      if(step2&&((t&&NVT.includes(t))||introOK(storyKey(stage))))toggle(stage);});
+    /* 手指、足趾等視窗的主圖在 .fg-stage（故事區預設收起），切換鈕放在主圖上 */
+    document.querySelectorAll('.demo-modal.open .fg-stage').forEach(stage=>{if(stage.offsetParent===null||stage.closest('.nrmv109'))return;if(introOK(storyKey(stage)))toggle(stage);});};
+  const sched=()=>{if(!q)q=setTimeout(run,160);};
+  new MutationObserver(m=>{for(const r of m){if(r.addedNodes.length){sched();break;}}}).observe(document.body,{childList:true,subtree:true});
+  document.addEventListener('click',()=>setTimeout(sched,120),true);
+  /* 關閉視窗時把 3D 的「正常」狀態清掉 */
+  new MutationObserver(rs=>rs.forEach(r=>{const m=r.target;if(m.classList&&m.classList.contains('demo-modal')&&!m.classList.contains('open'))m.querySelectorAll('.t3-box').forEach(b=>{b._hold=false;});})).observe(document.documentElement,{attributes:true,attributeFilter:['class'],subtree:true});
 })();
 
 </script>
