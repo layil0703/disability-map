@@ -5685,7 +5685,10 @@ T5(()=>{if(typeof openLld!=='function')return;const _l=openLld;openLld=function(
   function renderRecent(){const p=document.getElementById('panel');if(!p)return;let w=document.getElementById('recent103');const r=LS.get('dm-recent',[]).filter(id=>itemCat(id));
     if(!r.length){if(w)w.remove();return;}
     if(!w){w=document.createElement('div');w.id='recent103';w.className='rc103';p.insertAdjacentElement('afterbegin',w);}
-    w.innerHTML=`<span class="rc-h">最近看過</span>${r.map(id=>{const g=itemGrade(id);return `<button type="button" class="rc-chip" data-kp="${id}"><code>${id}</code><span class="badge ${badgeCls(g)}">${gN(g)}</span></button>`;}).join('')}<button type="button" class="rc-clr" aria-label="清除最近看過">清除</button>`;}
+    /* v43 修正：內容沒變就不要重寫。原本每次重寫都觸發 MutationObserver → 再重寫，形成每秒 60 次的無限迴圈：
+       「最近看過」的按鈕一直被換掉，手機手指按住約 0.1 秒就點不到；整頁也一直忙著重畫而變卡。 */
+    const html=`<span class="rc-h">最近看過</span>${r.map(id=>{const g=itemGrade(id);return `<button type="button" class="rc-chip" data-kp="${id}"><code>${id}</code><span class="badge ${badgeCls(g)}">${gN(g)}</span></button>`;}).join('')}<button type="button" class="rc-clr" aria-label="清除最近看過">清除</button>`;
+    if(w._sig!==html){w._sig=html;w.innerHTML=html;}}
   const openDemo=id=>{const b=document.createElement('button');b.className='demo-btn';b.dataset.demo=id;b.hidden=true;document.body.appendChild(b);b.click();b.remove();};
   document.addEventListener('click',e=>{const s=e.target.closest('.kp-sib,.rc-chip');if(s){e.preventDefault();const id=s.dataset.kp,m=s.closest('.demo-modal');if(m){const c=m.querySelector('.demo-close');if(c)c.click();}setTimeout(()=>openDemo(id),m?60:0);return;}
     if(e.target.closest('.rc-clr')){LS.set('dm-recent',[]);renderRecent();}});
